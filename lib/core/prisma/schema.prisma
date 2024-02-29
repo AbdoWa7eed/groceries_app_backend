@@ -1,0 +1,116 @@
+generator client {
+  provider = "dart run orm"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model categories {
+  category_id Int        @id @default(autoincrement())
+  name        String     @db.VarChar(45)
+  image_url   String?    @db.VarChar(255)
+  products    products[]
+}
+
+model favorites {
+  user_id    Int
+  product_id Int
+  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_favorites_products1")
+  users      users    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_favorites_users1")
+
+  @@id([user_id, product_id])
+  @@index([product_id], map: "fk_favorites_products1_idx")
+  @@index([user_id], map: "fk_favorites_users1_idx")
+}
+
+model nutritions {
+  nutrition_id  Int       @id @default(autoincrement())
+  calories      Int       @db.SmallInt
+  protein       Int       @db.SmallInt
+  carbohydrates Int       @db.SmallInt
+  product_id    Int?
+  products      products? @relation(fields: [product_id], references: [product_id], map: "fk_nutritions_products1")
+
+  @@index([product_id], map: "fk_nutritions_products1_idx")
+}
+
+model order_items {
+  order_id   Int
+  product_id Int
+  quantity   Int      @db.SmallInt
+  price      Decimal  @db.Decimal(4, 2)
+  orders     orders   @relation(fields: [order_id], references: [order_id], onDelete: NoAction, map: "fk_order_items_orders")
+  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_order_items_products1")
+
+  @@id([order_id, product_id])
+  @@index([order_id], map: "fk_order_items_orders_idx")
+  @@index([product_id], map: "fk_order_items_products1_idx")
+}
+
+model order_status {
+  status_id Int      @id @default(autoincrement())
+  name      String   @db.VarChar(45)
+  orders    orders[]
+}
+
+model orders {
+  order_id      Int           @id @default(autoincrement())
+  order_date    DateTime?     @db.DateTime(0)
+  shipping_date DateTime?     @db.DateTime(0)
+  user_id       Int
+  status        Int
+  order_items   order_items[]
+  order_status  order_status  @relation(fields: [status], references: [status_id], onDelete: NoAction, map: "fk_orders_order_status1")
+  users         users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_orders_users1")
+
+  @@index([status], map: "fk_orders_order_status1_idx")
+  @@index([user_id], map: "fk_orders_users1_idx")
+}
+
+model products {
+  product_id          Int           @id @default(autoincrement())
+  name                String        @db.VarChar(45)
+  quantity_in_stock   Int           @db.SmallInt
+  description         String        @db.VarChar(255)
+  unit_price          Decimal       @db.Decimal(4, 2)
+  image_url           String?       @db.VarChar(255)
+  category_id         Int
+  product_details     String?       @db.Text
+  discount_percentage Decimal?      @default(0.00) @db.Decimal(5, 2)
+  favorites           favorites[]
+  nutritions          nutritions[]
+  order_items         order_items[]
+  categories          categories    @relation(fields: [category_id], references: [category_id], onDelete: NoAction, map: "fk_products_Categoires1")
+  reviews             reviews[]
+
+  @@index([category_id], map: "fk_products_Categoires1_idx")
+}
+
+model reviews {
+  review_id   Int      @id @default(autoincrement())
+  rating      Decimal  @db.Decimal(1, 1)
+  review_date DateTime @db.Date
+  user_id     Int
+  product_id  Int
+  products    products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_reviews_products1")
+  users       users    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_reviews_users1")
+
+  @@index([product_id], map: "fk_reviews_products1_idx")
+  @@index([user_id], map: "fk_reviews_users1_idx")
+}
+
+model users {
+  user_id      Int         @id @default(autoincrement())
+  user_name    String      @db.VarChar(100)
+  email        String      @unique(map: "idx_email") @db.VarChar(255)
+  password     String      @db.VarChar(255)
+  address      String?     @db.VarChar(255)
+  phone_number String?     @db.VarChar(15)
+  image_url    String?     @db.VarChar(255)
+  is_deleted   Boolean
+  favorites    favorites[]
+  orders       orders[]
+  reviews      reviews[]
+}

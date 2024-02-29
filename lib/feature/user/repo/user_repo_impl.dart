@@ -1,0 +1,61 @@
+import 'package:dartz/dartz.dart';
+import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/feature/user/data/data_source.dart';
+import 'package:groceries_app_backend/feature/user/data/mapper.dart';
+import 'package:groceries_app_backend/feature/user/model/user_model.dart';
+import 'package:groceries_app_backend/feature/user/repo/user_repo.dart';
+
+///User repo implementation
+class UserRepositoryImpl implements UserRepository {
+  ///Class's Constructor
+  const UserRepositoryImpl(this._dataSource);
+
+  ///Data Source object
+  final UserDataSource _dataSource;
+
+  @override
+  Future<Either<Failure, UserModel>> userFromCredentials({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = await _dataSource.userFromCredentials(
+        email: email,
+        password: password,
+      );
+      return Right(user.toUserModel());
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (error) {
+      return Left(Failure.unknownError());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> createUser(UserModel userModel) async {
+    try {
+      final user =
+          await _dataSource.createUser(userModel: userModel.toUserInput());
+      return Right(user.toUserModel());
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (error) {
+      return Left(Failure.unknownError());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> updateUserData(UserModel userModel) async {
+    try {
+      final user = await _dataSource.updateUserData(
+        userId: userModel.userId!,
+        usersUpdateInput: userModel.toUpdateInput(),
+      );
+      return Right(user.toUserModel());
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (error) {
+      return Left(Failure.unknownError());
+    }
+  }
+}

@@ -1,0 +1,64 @@
+// ignore_for_file: public_member_api_docs
+
+import 'dart:io';
+import 'package:groceries_app_backend/core/services/redis_service.dart';
+import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/core/utils/response_message.dart';
+import 'package:groceries_app_backend/feature/otp/model/otp_model.dart';
+
+abstract class OTPLocalDataSource {
+  Future<void> saveMessage({required OTPMessageModel messageModel});
+
+  Future<bool> verifyCode({
+    required String verificationId,
+    required String code,
+  });
+}
+
+class OTPLocalDataSourceImpl extends OTPLocalDataSource {
+  OTPLocalDataSourceImpl(this._redisService);
+
+  final RedisService _redisService;
+  @override
+  Future<void> saveMessage({required OTPMessageModel messageModel}) async {
+    final dataJson = messageModel.toJson();
+    await _redisService.save(
+      key: messageModel.verificationID,
+      valueAsJson: dataJson,
+    );
+  }
+
+  @override
+  Future<bool> verifyCode({
+    required String verificationId,
+    required String code,
+  }) async {
+    final jsonData = await _redisService.get(key: verificationId);
+
+    if (jsonData == null) {
+      throw const Failure(
+        statusCode: HttpStatus.unauthorized,
+        message: ResponseMessages.wrongMessageId,
+      );
+    }
+
+    final message = OTPMessageModel.fromJson(jsonData);
+    if (DateTime.now().compareTo(message.expireIn) <= 0) {
+      if (message.code == code) {
+        await _redisService.delete(key: verificationId);
+        return true;
+      }
+    } else {
+      await _redisService.delete(key: verificationId);
+      throw const Failure(
+        statusCode: HttpStatus.forbidden,
+        message: ResponseMessages.expiredSession,
+      );
+    }
+
+    throw const Failure(
+      statusCode: HttpStatus.unauthorized,
+      message: ResponseMessages.wrongCode,
+    );
+  }
+}
