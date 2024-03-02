@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/user/data/data_source.dart';
 import 'package:groceries_app_backend/feature/user/data/mapper.dart';
+import 'package:groceries_app_backend/feature/user/model/login_input_model.dart';
 import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 import 'package:groceries_app_backend/feature/user/repo/user_repo.dart';
 
@@ -15,13 +16,12 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, UserModel>> userFromCredentials({
-    required String email,
-    required String password,
+    required LoginInputModel loginModel,
   }) async {
     try {
       final user = await _dataSource.userFromCredentials(
-        email: email,
-        password: password,
+        email: loginModel.email,
+        password: loginModel.password,
       );
       return Right(user.toUserModel());
     } on Failure catch (failure) {

@@ -22,6 +22,22 @@ extension StringToInt on String {
   }
 }
 
+extension Validations on String? {
+  bool isValidEmail() {
+    return RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(this!);
+  }
+}
+
+extension PasswordValidations on String? {
+  bool isValidPassword() {
+    return RegExp(
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
+    ).hasMatch(this!);
+  }
+}
+
 extension EitherX<Failure, R> on Either<Failure, R> {
   R asRight() => (this as Right<Failure, R>).value;
   Failure asFailure() => (this as Left<Failure, R>).value;

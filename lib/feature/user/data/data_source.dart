@@ -20,8 +20,10 @@ abstract class UserDataSource {
 
   Future<Users> createUser({required UsersCreateInput userModel});
 
-  Future<Users> updateUserData(
-      {required int userId, required UsersUpdateInput usersUpdateInput,});
+  Future<Users> updateUserData({
+    required int userId,
+    required UsersUpdateInput usersUpdateInput,
+  });
 }
 
 ///Data Source Implementation
@@ -39,6 +41,7 @@ class UserDataSourceImpl implements UserDataSource {
     final user = await _client.users.findUnique(
       where: UsersWhereUniqueInput(email: email),
     );
+
     if (user == null) {
       throw const Failure(
         statusCode: HttpStatus.unauthorized,

@@ -34,4 +34,7 @@ abstract class ResponseMessages {
       'Un supported image format it must be either png or jpg only';
   static const String success = 'success';
   static const String invalidProductId = 'There is no product with this id';
+  static const String invalidEmailFormat = 'Invalid email address format';
+  static const String weakPassword = '''
+Your password must be minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character''';
 }

@@ -15,3 +15,4 @@ keys.json
 .env
 # Test related files
 coverage/
+.vscode

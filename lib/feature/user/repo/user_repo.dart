@@ -2,13 +2,13 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/feature/user/model/login_input_model.dart';
 import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 
 ///UserRepository
 abstract class UserRepository {
   Future<Either<Failure, UserModel>> userFromCredentials({
-    required String email,
-    required String password,
+    required LoginInputModel loginModel,
   });
 
   Future<Either<Failure, UserModel>> createUser(UserModel userModel);
