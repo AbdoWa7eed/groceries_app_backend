@@ -1431,6 +1431,7 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -1469,6 +1470,8 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<_i2.DecimalNullableFilter,
       _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
+
   final _i2.FavoritesListRelationFilter? favorites;
 
   final _i2.NutritionsListRelationFilter? nutritions;
@@ -1494,6 +1497,7 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -1749,6 +1753,7 @@ class ProductsOrderByWithRelationInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -1774,6 +1779,8 @@ class ProductsOrderByWithRelationInput
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? discountPercentage;
 
+  final _i2.SortOrder? rate;
+
   final _i2.FavoritesOrderByRelationAggregateInput? favorites;
 
   final _i2.NutritionsOrderByRelationAggregateInput? nutritions;
@@ -1795,6 +1802,7 @@ class ProductsOrderByWithRelationInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -3387,6 +3395,7 @@ class ProductsWhereUniqueInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -3425,6 +3434,8 @@ class ProductsWhereUniqueInput
   final _i1.PrismaUnion<_i2.DecimalNullableFilter,
       _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
+
   final _i2.FavoritesListRelationFilter? favorites;
 
   final _i2.NutritionsListRelationFilter? nutritions;
@@ -3450,6 +3461,7 @@ class ProductsWhereUniqueInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -3467,7 +3479,8 @@ enum ProductsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   imageUrl<String>('image_url', 'products'),
   categoryId<int>('category_id', 'products'),
   productDetails<String>('product_details', 'products'),
-  discountPercentage<_i1.Decimal>('discount_percentage', 'products');
+  discountPercentage<_i1.Decimal>('discount_percentage', 'products'),
+  rate<_i1.Decimal>('rate', 'products');
 
   const ProductsScalar(
     this.name,
@@ -3726,6 +3739,7 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -3752,6 +3766,8 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? discountPercentage;
 
+  final bool? rate;
+
   final _i1.PrismaUnion<bool, _i2.ProductsFavoritesArgs>? favorites;
 
   final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
@@ -3775,6 +3791,7 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -4176,6 +4193,7 @@ class ProductsCreateWithoutReviewsInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -4196,6 +4214,8 @@ class ProductsCreateWithoutReviewsInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
@@ -4213,6 +4233,7 @@ class ProductsCreateWithoutReviewsInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -4479,6 +4500,7 @@ class ProductsUncheckedCreateWithoutReviewsInput
     required this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -4502,6 +4524,8 @@ class ProductsUncheckedCreateWithoutReviewsInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
@@ -4519,6 +4543,7 @@ class ProductsUncheckedCreateWithoutReviewsInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -5212,6 +5237,7 @@ class ProductsCreateWithoutFavoritesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.nutritions,
     this.orderItems,
     required this.categories,
@@ -5232,6 +5258,8 @@ class ProductsCreateWithoutFavoritesInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
 
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
@@ -5249,6 +5277,7 @@ class ProductsCreateWithoutFavoritesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'nutritions': nutritions,
         'order_items': orderItems,
         'categories': categories,
@@ -5393,6 +5422,7 @@ class ProductsUncheckedCreateWithoutFavoritesInput
     required this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.nutritions,
     this.orderItems,
     this.reviews,
@@ -5416,6 +5446,8 @@ class ProductsUncheckedCreateWithoutFavoritesInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
@@ -5433,6 +5465,7 @@ class ProductsUncheckedCreateWithoutFavoritesInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
@@ -5974,6 +6007,7 @@ class ProductsCreateWithoutOrderItemsInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     required this.categories,
@@ -5994,6 +6028,8 @@ class ProductsCreateWithoutOrderItemsInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
@@ -6011,6 +6047,7 @@ class ProductsCreateWithoutOrderItemsInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'categories': categories,
@@ -6030,6 +6067,7 @@ class ProductsUncheckedCreateWithoutOrderItemsInput
     required this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.reviews,
@@ -6053,6 +6091,8 @@ class ProductsUncheckedCreateWithoutOrderItemsInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
@@ -6070,6 +6110,7 @@ class ProductsUncheckedCreateWithoutOrderItemsInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'reviews': reviews,
@@ -6427,6 +6468,7 @@ class ProductsCreateWithoutCategoriesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -6447,6 +6489,8 @@ class ProductsCreateWithoutCategoriesInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
@@ -6464,6 +6508,7 @@ class ProductsCreateWithoutCategoriesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -6482,6 +6527,7 @@ class ProductsUncheckedCreateWithoutCategoriesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -6504,6 +6550,8 @@ class ProductsUncheckedCreateWithoutCategoriesInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
@@ -6522,6 +6570,7 @@ class ProductsUncheckedCreateWithoutCategoriesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -6559,6 +6608,7 @@ class ProductsCreateManyCategoriesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final int? productId;
@@ -6577,6 +6627,8 @@ class ProductsCreateManyCategoriesInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -6587,6 +6639,7 @@ class ProductsCreateManyCategoriesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -7416,6 +7469,7 @@ class ProductsUpdateWithoutReviewsInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -7448,6 +7502,9 @@ class ProductsUpdateWithoutReviewsInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
@@ -7465,6 +7522,7 @@ class ProductsUpdateWithoutReviewsInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -7944,6 +8002,7 @@ class ProductsUncheckedUpdateWithoutReviewsInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -7979,6 +8038,9 @@ class ProductsUncheckedUpdateWithoutReviewsInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
@@ -7996,6 +8058,7 @@ class ProductsUncheckedUpdateWithoutReviewsInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -9015,6 +9078,7 @@ class ProductsUpdateWithoutFavoritesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.nutritions,
     this.orderItems,
     this.categories,
@@ -9047,6 +9111,9 @@ class ProductsUpdateWithoutFavoritesInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
 
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
@@ -9064,6 +9131,7 @@ class ProductsUpdateWithoutFavoritesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'nutritions': nutritions,
         'order_items': orderItems,
         'categories': categories,
@@ -9247,6 +9315,7 @@ class ProductsUncheckedUpdateWithoutFavoritesInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.nutritions,
     this.orderItems,
     this.reviews,
@@ -9282,6 +9351,9 @@ class ProductsUncheckedUpdateWithoutFavoritesInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
@@ -9299,6 +9371,7 @@ class ProductsUncheckedUpdateWithoutFavoritesInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
@@ -10203,6 +10276,7 @@ class ProductsUpdateWithoutOrderItemsInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.categories,
@@ -10235,6 +10309,9 @@ class ProductsUpdateWithoutOrderItemsInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
@@ -10252,6 +10329,7 @@ class ProductsUpdateWithoutOrderItemsInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'categories': categories,
@@ -10271,6 +10349,7 @@ class ProductsUncheckedUpdateWithoutOrderItemsInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.reviews,
@@ -10306,6 +10385,9 @@ class ProductsUncheckedUpdateWithoutOrderItemsInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
@@ -10323,6 +10405,7 @@ class ProductsUncheckedUpdateWithoutOrderItemsInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'reviews': reviews,
@@ -10954,6 +11037,7 @@ class ProductsUpdateWithoutCategoriesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -10986,6 +11070,9 @@ class ProductsUpdateWithoutCategoriesInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
@@ -11003,6 +11090,7 @@ class ProductsUpdateWithoutCategoriesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -11021,6 +11109,7 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -11055,6 +11144,9 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
@@ -11073,6 +11165,7 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -11138,6 +11231,7 @@ class ProductsScalarWhereInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i1.PrismaUnion<_i2.ProductsScalarWhereInput,
@@ -11169,6 +11263,8 @@ class ProductsScalarWhereInput
   final _i1.PrismaUnion<_i2.DecimalNullableFilter,
       _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -11183,6 +11279,7 @@ class ProductsScalarWhereInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -11196,6 +11293,7 @@ class ProductsUpdateManyMutationInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
@@ -11224,6 +11322,9 @@ class ProductsUpdateManyMutationInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -11233,6 +11334,7 @@ class ProductsUpdateManyMutationInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -11247,6 +11349,7 @@ class ProductsUncheckedUpdateManyWithoutCategoriesInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
@@ -11277,6 +11380,9 @@ class ProductsUncheckedUpdateManyWithoutCategoriesInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -11287,6 +11393,7 @@ class ProductsUncheckedUpdateManyWithoutCategoriesInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -13309,6 +13416,7 @@ class ProductsCreateWithoutNutritionsInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.orderItems,
     required this.categories,
@@ -13329,6 +13437,8 @@ class ProductsCreateWithoutNutritionsInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
@@ -13346,6 +13456,7 @@ class ProductsCreateWithoutNutritionsInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'order_items': orderItems,
         'categories': categories,
@@ -13365,6 +13476,7 @@ class ProductsUncheckedCreateWithoutNutritionsInput
     required this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.orderItems,
     this.reviews,
@@ -13388,6 +13500,8 @@ class ProductsUncheckedCreateWithoutNutritionsInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
@@ -13405,6 +13519,7 @@ class ProductsUncheckedCreateWithoutNutritionsInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'order_items': orderItems,
         'reviews': reviews,
@@ -13549,6 +13664,7 @@ class ProductsUpdateWithoutNutritionsInput
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.orderItems,
     this.categories,
@@ -13581,6 +13697,9 @@ class ProductsUpdateWithoutNutritionsInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
@@ -13598,6 +13717,7 @@ class ProductsUpdateWithoutNutritionsInput
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'order_items': orderItems,
         'categories': categories,
@@ -13617,6 +13737,7 @@ class ProductsUncheckedUpdateWithoutNutritionsInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.orderItems,
     this.reviews,
@@ -13652,6 +13773,9 @@ class ProductsUncheckedUpdateWithoutNutritionsInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
@@ -13669,6 +13793,7 @@ class ProductsUncheckedUpdateWithoutNutritionsInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'order_items': orderItems,
         'reviews': reviews,
@@ -18209,6 +18334,7 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -18230,6 +18356,8 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
@@ -18249,6 +18377,7 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -18269,6 +18398,7 @@ class ProductsUncheckedCreateInput
     required this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -18293,6 +18423,8 @@ class ProductsUncheckedCreateInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
@@ -18312,6 +18444,7 @@ class ProductsUncheckedCreateInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -18331,6 +18464,7 @@ class ProductsCreateManyInput
     required this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final int? productId;
@@ -18351,6 +18485,8 @@ class ProductsCreateManyInput
 
   final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -18362,6 +18498,7 @@ class ProductsCreateManyInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -18374,6 +18511,7 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.imageUrl,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -18407,6 +18545,9 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
@@ -18426,6 +18567,7 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'image_url': imageUrl,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -18446,6 +18588,7 @@ class ProductsUncheckedUpdateInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -18482,6 +18625,9 @@ class ProductsUncheckedUpdateInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
@@ -18501,6 +18647,7 @@ class ProductsUncheckedUpdateInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -18520,6 +18667,7 @@ class ProductsUncheckedUpdateManyInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
@@ -18552,6 +18700,9 @@ class ProductsUncheckedUpdateManyInput
       _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
           _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -18563,6 +18714,7 @@ class ProductsUncheckedUpdateManyInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -18577,6 +18729,7 @@ class ProductsCountAggregateOutputType {
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.$all,
   });
 
@@ -18591,6 +18744,7 @@ class ProductsCountAggregateOutputType {
         categoryId: json['category_id'],
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
+        rate: json['rate'],
         $all: json['_all'],
       );
 
@@ -18612,6 +18766,8 @@ class ProductsCountAggregateOutputType {
 
   final int? discountPercentage;
 
+  final int? rate;
+
   final int? $all;
 }
 
@@ -18622,6 +18778,7 @@ class ProductsAvgAggregateOutputType {
     this.unitPrice,
     this.categoryId,
     this.discountPercentage,
+    this.rate,
   });
 
   factory ProductsAvgAggregateOutputType.fromJson(Map json) =>
@@ -18631,6 +18788,7 @@ class ProductsAvgAggregateOutputType {
         unitPrice: json['unit_price'],
         categoryId: json['category_id'],
         discountPercentage: json['discount_percentage'],
+        rate: json['rate'],
       );
 
   final double? productId;
@@ -18642,6 +18800,8 @@ class ProductsAvgAggregateOutputType {
   final double? categoryId;
 
   final _i1.Decimal? discountPercentage;
+
+  final _i1.Decimal? rate;
 }
 
 class ProductsSumAggregateOutputType {
@@ -18651,6 +18811,7 @@ class ProductsSumAggregateOutputType {
     this.unitPrice,
     this.categoryId,
     this.discountPercentage,
+    this.rate,
   });
 
   factory ProductsSumAggregateOutputType.fromJson(Map json) =>
@@ -18660,6 +18821,7 @@ class ProductsSumAggregateOutputType {
         unitPrice: json['unit_price'],
         categoryId: json['category_id'],
         discountPercentage: json['discount_percentage'],
+        rate: json['rate'],
       );
 
   final int? productId;
@@ -18671,6 +18833,8 @@ class ProductsSumAggregateOutputType {
   final int? categoryId;
 
   final _i1.Decimal? discountPercentage;
+
+  final _i1.Decimal? rate;
 }
 
 class ProductsMinAggregateOutputType {
@@ -18684,6 +18848,7 @@ class ProductsMinAggregateOutputType {
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   factory ProductsMinAggregateOutputType.fromJson(Map json) =>
@@ -18697,6 +18862,7 @@ class ProductsMinAggregateOutputType {
         categoryId: json['category_id'],
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
+        rate: json['rate'],
       );
 
   final int? productId;
@@ -18716,6 +18882,8 @@ class ProductsMinAggregateOutputType {
   final String? productDetails;
 
   final _i1.Decimal? discountPercentage;
+
+  final _i1.Decimal? rate;
 }
 
 class ProductsMaxAggregateOutputType {
@@ -18729,6 +18897,7 @@ class ProductsMaxAggregateOutputType {
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   factory ProductsMaxAggregateOutputType.fromJson(Map json) =>
@@ -18742,6 +18911,7 @@ class ProductsMaxAggregateOutputType {
         categoryId: json['category_id'],
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
+        rate: json['rate'],
       );
 
   final int? productId;
@@ -18761,6 +18931,8 @@ class ProductsMaxAggregateOutputType {
   final String? productDetails;
 
   final _i1.Decimal? discountPercentage;
+
+  final _i1.Decimal? rate;
 }
 
 class ProductsGroupByOutputType {
@@ -18774,6 +18946,7 @@ class ProductsGroupByOutputType {
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.$count,
     this.$avg,
     this.$sum,
@@ -18792,6 +18965,7 @@ class ProductsGroupByOutputType {
         categoryId: json['category_id'],
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
+        rate: json['rate'],
         $count: json['_count'] is Map
             ? _i2.ProductsCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -18827,6 +19001,8 @@ class ProductsGroupByOutputType {
 
   final _i1.Decimal? discountPercentage;
 
+  final _i1.Decimal? rate;
+
   final _i2.ProductsCountAggregateOutputType? $count;
 
   final _i2.ProductsAvgAggregateOutputType? $avg;
@@ -18850,6 +19026,7 @@ class ProductsCountOrderByAggregateInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i2.SortOrder? productId;
@@ -18870,6 +19047,8 @@ class ProductsCountOrderByAggregateInput
 
   final _i2.SortOrder? discountPercentage;
 
+  final _i2.SortOrder? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -18881,6 +19060,7 @@ class ProductsCountOrderByAggregateInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -18892,6 +19072,7 @@ class ProductsAvgOrderByAggregateInput
     this.unitPrice,
     this.categoryId,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i2.SortOrder? productId;
@@ -18904,6 +19085,8 @@ class ProductsAvgOrderByAggregateInput
 
   final _i2.SortOrder? discountPercentage;
 
+  final _i2.SortOrder? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -18911,6 +19094,7 @@ class ProductsAvgOrderByAggregateInput
         'unit_price': unitPrice,
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -18926,6 +19110,7 @@ class ProductsMaxOrderByAggregateInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i2.SortOrder? productId;
@@ -18946,6 +19131,8 @@ class ProductsMaxOrderByAggregateInput
 
   final _i2.SortOrder? discountPercentage;
 
+  final _i2.SortOrder? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -18957,6 +19144,7 @@ class ProductsMaxOrderByAggregateInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -18972,6 +19160,7 @@ class ProductsMinOrderByAggregateInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i2.SortOrder? productId;
@@ -18992,6 +19181,8 @@ class ProductsMinOrderByAggregateInput
 
   final _i2.SortOrder? discountPercentage;
 
+  final _i2.SortOrder? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -19003,6 +19194,7 @@ class ProductsMinOrderByAggregateInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -19014,6 +19206,7 @@ class ProductsSumOrderByAggregateInput
     this.unitPrice,
     this.categoryId,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i2.SortOrder? productId;
@@ -19026,6 +19219,8 @@ class ProductsSumOrderByAggregateInput
 
   final _i2.SortOrder? discountPercentage;
 
+  final _i2.SortOrder? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -19033,6 +19228,7 @@ class ProductsSumOrderByAggregateInput
         'unit_price': unitPrice,
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -19048,6 +19244,7 @@ class ProductsOrderByWithAggregationInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.$count,
     this.$avg,
     this.$max,
@@ -19073,6 +19270,8 @@ class ProductsOrderByWithAggregationInput
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? discountPercentage;
 
+  final _i2.SortOrder? rate;
+
   final _i2.ProductsCountOrderByAggregateInput? $count;
 
   final _i2.ProductsAvgOrderByAggregateInput? $avg;
@@ -19094,6 +19293,7 @@ class ProductsOrderByWithAggregationInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
@@ -19249,6 +19449,7 @@ class ProductsScalarWhereWithAggregatesInput
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final _i1.PrismaUnion<_i2.ProductsScalarWhereWithAggregatesInput,
@@ -19281,6 +19482,8 @@ class ProductsScalarWhereWithAggregatesInput
   final _i1.PrismaUnion<_i2.DecimalNullableWithAggregatesFilter,
       _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>>? discountPercentage;
 
+  final _i1.PrismaUnion<_i2.DecimalWithAggregatesFilter, _i1.Decimal>? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -19295,6 +19498,7 @@ class ProductsScalarWhereWithAggregatesInput
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -19310,6 +19514,7 @@ class ProductsCountAggregateOutputTypeSelect
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.$all,
   });
 
@@ -19331,6 +19536,8 @@ class ProductsCountAggregateOutputTypeSelect
 
   final bool? discountPercentage;
 
+  final bool? rate;
+
   final bool? $all;
 
   @override
@@ -19344,6 +19551,7 @@ class ProductsCountAggregateOutputTypeSelect
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         '_all': $all,
       };
 }
@@ -19366,6 +19574,7 @@ class ProductsAvgAggregateOutputTypeSelect
     this.unitPrice,
     this.categoryId,
     this.discountPercentage,
+    this.rate,
   });
 
   final bool? productId;
@@ -19378,6 +19587,8 @@ class ProductsAvgAggregateOutputTypeSelect
 
   final bool? discountPercentage;
 
+  final bool? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -19385,6 +19596,7 @@ class ProductsAvgAggregateOutputTypeSelect
         'unit_price': unitPrice,
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -19406,6 +19618,7 @@ class ProductsSumAggregateOutputTypeSelect
     this.unitPrice,
     this.categoryId,
     this.discountPercentage,
+    this.rate,
   });
 
   final bool? productId;
@@ -19418,6 +19631,8 @@ class ProductsSumAggregateOutputTypeSelect
 
   final bool? discountPercentage;
 
+  final bool? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -19425,6 +19640,7 @@ class ProductsSumAggregateOutputTypeSelect
         'unit_price': unitPrice,
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -19450,6 +19666,7 @@ class ProductsMinAggregateOutputTypeSelect
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final bool? productId;
@@ -19470,6 +19687,8 @@ class ProductsMinAggregateOutputTypeSelect
 
   final bool? discountPercentage;
 
+  final bool? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -19481,6 +19700,7 @@ class ProductsMinAggregateOutputTypeSelect
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -19506,6 +19726,7 @@ class ProductsMaxAggregateOutputTypeSelect
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
   });
 
   final bool? productId;
@@ -19526,6 +19747,8 @@ class ProductsMaxAggregateOutputTypeSelect
 
   final bool? discountPercentage;
 
+  final bool? rate;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -19537,6 +19760,7 @@ class ProductsMaxAggregateOutputTypeSelect
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
       };
 }
 
@@ -19562,6 +19786,7 @@ class ProductsGroupByOutputTypeSelect
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.$count,
     this.$avg,
     this.$sum,
@@ -19587,6 +19812,8 @@ class ProductsGroupByOutputTypeSelect
 
   final bool? discountPercentage;
 
+  final bool? rate;
+
   final _i1.PrismaUnion<bool, _i2.ProductsGroupByOutputTypeCountArgs>? $count;
 
   final _i1.PrismaUnion<bool, _i2.ProductsGroupByOutputTypeAvgArgs>? $avg;
@@ -19608,6 +19835,7 @@ class ProductsGroupByOutputTypeSelect
         'category_id': categoryId,
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
+        'rate': rate,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,

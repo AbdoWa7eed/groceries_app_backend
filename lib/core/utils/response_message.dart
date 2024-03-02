@@ -11,6 +11,7 @@ abstract class ResponseMessages {
       'Your Session is expired create send a new message';
   static const String unauthorized = 'Unauthorized Access';
   static const String checkRequestBody = "Your request body isn't correct";
+  static const String queryParametersInvalid = 'Invalid query parameters type';
   static const String userAlreadyexists =
       'User with this email address already exists.';
   static const String userNotFound = 'User account not found.';
@@ -31,4 +32,6 @@ abstract class ResponseMessages {
       "Can't upload your image right now please try again later";
   static const String unSupportedImageFormat =
       'Un supported image format it must be either png or jpg only';
+  static const String success = 'success';
+  static const String invalidProductId = 'There is no product with this id';
 }

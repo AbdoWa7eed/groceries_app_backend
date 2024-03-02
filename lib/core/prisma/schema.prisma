@@ -79,6 +79,7 @@ model products {
   category_id         Int
   product_details     String?       @db.Text
   discount_percentage Decimal?      @default(0.00) @db.Decimal(5, 2)
+  rate                Decimal       @default(0.0) @db.Decimal(1, 1)
   favorites           favorites[]
   nutritions          nutritions[]
   order_items         order_items[]

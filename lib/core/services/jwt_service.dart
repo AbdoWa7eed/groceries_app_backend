@@ -19,7 +19,7 @@ class JwtService {
   }) {
     final jwt = JWT({'id': userId, 'issued at': DateTime.now().toString()});
     final token =
-        jwt.sign(SecretKey(_secret), expiresIn: const Duration(minutes: 10));
+        jwt.sign(SecretKey(_secret), expiresIn: const Duration(hours: 10));
 
     return token;
   }
@@ -31,7 +31,7 @@ class JwtService {
     final refreshSecret = _env[Constants.jwtRefreshSecret]!;
     final refreshToken = jwt.sign(
       SecretKey(refreshSecret),
-      expiresIn: const Duration(hours: 1),
+      expiresIn: const Duration(days: 1),
     );
 
     return refreshToken;

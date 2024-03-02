@@ -286,6 +286,7 @@ class Products {
     this.categoryId,
     this.productDetails,
     this.discountPercentage,
+    this.rate,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -304,6 +305,7 @@ class Products {
         categoryId: json['category_id'],
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
+        rate: json['rate'],
         favorites: (json['favorites'] as Iterable?)
             ?.map((json) => _i1.Favorites.fromJson(json)),
         nutritions: (json['nutritions'] as Iterable?)
@@ -337,6 +339,8 @@ class Products {
   final String? productDetails;
 
   final _i2.Decimal? discountPercentage;
+
+  final _i2.Decimal? rate;
 
   final Iterable<_i1.Favorites>? favorites;
 

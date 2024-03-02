@@ -16,6 +16,12 @@ extension HashStringValue on String {
   }
 }
 
+extension StringToInt on String {
+  int toInt() {
+    return int.parse(this);
+  }
+}
+
 extension EitherX<Failure, R> on Either<Failure, R> {
   R asRight() => (this as Right<Failure, R>).value;
   Failure asFailure() => (this as Left<Failure, R>).value;

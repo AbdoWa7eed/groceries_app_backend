@@ -92,3 +92,27 @@ Future<void> initStorageService() async {
     );
   }
 }
+
+void initProductsResources() {
+  if (!instance.isRegistered<ProductsRepository>()) {
+    instance
+      ..registerLazySingleton<ProductsRepository>(
+        () => ProductRepoImpl(instance<ProductsDataSource>()),
+      )
+      ..registerLazySingleton<ProductsDataSource>(
+        () => ProductsDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}
+
+void initCategoiriesResources() {
+  if (!instance.isRegistered<CategoriesRepository>()) {
+    instance
+      ..registerLazySingleton<CategoriesRepository>(
+        () => CategoriesRepoImpl(instance<CategoiresDataSource>()),
+      )
+      ..registerLazySingleton<CategoiresDataSource>(
+        () => CategoiresDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}

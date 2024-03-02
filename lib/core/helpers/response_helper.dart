@@ -6,11 +6,20 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 
 abstract class ResponseHelper {
-  static Response ok({
-    required String message,
-    dynamic data,
-  }) {
+  static Response ok(
+      {String message = ResponseMessages.success, dynamic data,}) {
     return _json(statusCode: HttpStatus.ok, message: message, data: data);
+  }
+
+  static Response okWithListItems({
+    required List<dynamic> items,
+    String message = ResponseMessages.success,
+  }) {
+    return _json(
+      statusCode: HttpStatus.ok,
+      message: message,
+      data: {'itemCount': items.length, 'items': items},
+    );
   }
 
   static Response created({
