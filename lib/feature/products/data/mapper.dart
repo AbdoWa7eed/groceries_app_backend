@@ -68,6 +68,13 @@ extension ProductSearchInputMapper on ProductSearchInput? {
     return ProductsWhereInput(
       categoryId:
           this?.categoryId != null ? PrismaUnion.$2(this!.categoryId!) : null,
+      categories: this?.categoryName != null
+          ? PrismaUnion.$2(
+              CategoriesWhereInput(
+                name: PrismaUnion.$2(this!.categoryName!),
+              ),
+            )
+          : null,
       OR: this?.searchText != null
           ? <ProductsWhereInput>[
               ProductsWhereInput(

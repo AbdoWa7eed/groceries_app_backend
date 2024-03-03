@@ -12,6 +12,7 @@ class ProductSearchInput {
     this.skip = 0,
     this.categoryId,
     this.searchText,
+    this.categoryName,
   });
 
   /// Creates a [ProductSearchInput] from a JSON map.
@@ -31,4 +32,8 @@ class ProductSearchInput {
   /// The search text to filter products by name or description. If null,
   /// no search filter is applied.
   final String? searchText;
+
+  /// The search text to filter products by name or description. If null,
+  /// no search filter is applied.
+  final String? categoryName;
 }

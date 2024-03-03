@@ -12,4 +12,5 @@ ProductSearchInput _$ProductSearchInputFromJson(Map<String, dynamic> json) =>
       skip: (json['skip'] as String?)?.toInt() ?? 0,
       categoryId: (json['categoryId'] as String?)?.toInt(),
       searchText: json['searchText'] as String?,
+      categoryName: json['categoryName'] as String?,
     );
