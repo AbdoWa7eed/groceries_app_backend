@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:groceries_app_backend/core/models/products/product_model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
 import 'package:groceries_app_backend/feature/categories/data/mapper.dart';
 import 'package:groceries_app_backend/feature/products/model/nutritions/nutritions_model.dart';
-import 'package:groceries_app_backend/feature/products/model/products/product_model.dart';
 import 'package:groceries_app_backend/feature/products/model/reviews/reviews_model.dart';
 import 'package:groceries_app_backend/feature/products/model/search/product_search_input.dart';
 import 'package:orm/orm.dart';
@@ -23,19 +23,6 @@ extension ProductMapper on Products {
       reviews: reviews?.map((e) => e.toReviewModel()).toList(),
       nutritions: nutritions?.map((e) => e.toNutritionModel()).toList(),
       productDetails: productDetails,
-      discountPrecentage: discountPercentage?.toDouble(),
-    );
-  }
-
-  ProductModel toSimpleProductModel() {
-    return ProductModel(
-      productId: productId,
-      name: name,
-      rate: rate?.toDouble(),
-      quantityInStock: quantityInStock,
-      description: description,
-      unitPrice: unitPrice?.toDouble(),
-      imageUrl: imageUrl,
       discountPrecentage: discountPercentage?.toDouble(),
     );
   }

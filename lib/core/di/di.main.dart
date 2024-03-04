@@ -116,3 +116,15 @@ void initCategoiriesResources() {
       );
   }
 }
+
+void initFavoritesResources() {
+  if (!instance.isRegistered<FavoritesRepository>()) {
+    instance
+      ..registerLazySingleton<FavoritesRepository>(
+        () => FavoritesRepositoryImpl(instance<FavoriteDataSource>()),
+      )
+      ..registerLazySingleton<FavoriteDataSource>(
+        () => FavoriteDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}

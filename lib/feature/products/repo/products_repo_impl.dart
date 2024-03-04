@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:dartz/dartz.dart';
+import 'package:groceries_app_backend/core/models/mapper/mapper.dart';
+import 'package:groceries_app_backend/core/models/products/product_model.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/products/data/data_source.dart';
 import 'package:groceries_app_backend/feature/products/data/mapper.dart';
-import 'package:groceries_app_backend/feature/products/model/products/product_model.dart';
 import 'package:groceries_app_backend/feature/products/model/search/product_search_input.dart';
 import 'package:groceries_app_backend/feature/products/repo/products_repo.dart';
 

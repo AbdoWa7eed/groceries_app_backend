@@ -34,6 +34,15 @@ abstract class ResponseMessages {
       'Un supported image format it must be either png or jpg only';
   static const String success = 'success';
   static const String invalidProductId = 'There is no product with this id';
+  static const String favoriteNotExists = "This favorite item isn't exists";
+  static const String favoriteAlreadyAdded =
+      'This item has already added before';
+  static const String addedToFavorite =
+      'Product added to favorites successfully';
+  static const String removedFromFavorite =
+      'Product removed from favorites successfully';
+  static const String checkProductId =
+      'Please make sure that your product id is valid';
   static const String invalidEmailFormat = 'Invalid email address format';
   static const String weakPassword = '''
 Your password must be minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character''';

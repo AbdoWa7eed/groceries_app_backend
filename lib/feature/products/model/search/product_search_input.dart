@@ -33,7 +33,7 @@ class ProductSearchInput {
   /// no search filter is applied.
   final String? searchText;
 
-  /// The search text to filter products by name or description. If null,
+  /// The search text to filter products by category name. If null,
   /// no search filter is applied.
   final String? categoryName;
 }
