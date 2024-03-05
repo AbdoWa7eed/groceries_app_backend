@@ -128,3 +128,15 @@ void initFavoritesResources() {
       );
   }
 }
+
+void initBannersResources() {
+  if (!instance.isRegistered<BannersRepository>()) {
+    instance
+      ..registerLazySingleton<BannersRepository>(
+        () => BannersRepositoryImpl(instance<BannersDataSource>()),
+      )
+      ..registerLazySingleton<BannersDataSource>(
+        () => BannersDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}

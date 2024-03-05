@@ -12,12 +12,12 @@ Future<Response> onRequest(RequestContext context) {
 
 Future<Response> _getResponse(RequestContext context) async {
   return switch (context.request.method) {
-    HttpMethod.get => await _getProducts(context),
+    HttpMethod.get => await _getCategories(context),
     _ => ResponseHelper.methodNotAllowed(),
   };
 }
 
-Future<Response> _getProducts(RequestContext context) async {
+Future<Response> _getCategories(RequestContext context) async {
   try {
     final params = context.request.uri.queryParameters;
     final categoryRepo = instance<CategoriesRepository>();

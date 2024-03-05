@@ -5,6 +5,22 @@ import 'package:orm/orm.dart' as _i2;
 import 'model.dart' as _i1;
 import 'prisma.dart' as _i3;
 
+class Banners {
+  const Banners({
+    this.bannerId,
+    this.imageUrl,
+  });
+
+  factory Banners.fromJson(Map json) => Banners(
+        bannerId: json['banner_id'],
+        imageUrl: json['image_url'],
+      );
+
+  final int? bannerId;
+
+  final String? imageUrl;
+}
+
 class OrderItems {
   const OrderItems({
     this.orderId,
@@ -384,4 +400,20 @@ class Categories {
   final Iterable<_i1.Products>? products;
 
   final _i3.CategoriesCountOutputType? $count;
+}
+
+class PaymentMethods {
+  const PaymentMethods({
+    this.paymentId,
+    this.methodName,
+  });
+
+  factory PaymentMethods.fromJson(Map json) => PaymentMethods(
+        paymentId: json['payment_id'],
+        methodName: json['method_name'],
+      );
+
+  final int? paymentId;
+
+  final String? methodName;
 }

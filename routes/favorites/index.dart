@@ -45,8 +45,7 @@ const _productKey = 'productId';
 Future<Response> _addFavorite(RequestContext context) async {
   try {
     final favRepo = instance<FavoritesRepository>();
-    final jsonData = await context.request.json() as Map<String, dynamic>;
-    final productId = jsonData[_productKey] as int;
+    final productId = await _getProductIdFromJson(context);
     final favoriteInput = FavoriteInputModel(
       userId: context.read<int>(),
       productId: productId,
@@ -71,8 +70,7 @@ Future<Response> _addFavorite(RequestContext context) async {
 Future<Response> _removeFavorite(RequestContext context) async {
   try {
     final favRepo = instance<FavoritesRepository>();
-    final jsonData = await context.request.json() as Map<String, dynamic>;
-    final productId = jsonData[_productKey] as int;
+    final productId = await _getProductIdFromJson(context);
     final favoriteInput = FavoriteInputModel(
       userId: context.read<int>(),
       productId: productId,
@@ -92,4 +90,9 @@ Future<Response> _removeFavorite(RequestContext context) async {
       message: ResponseMessages.checkProductId,
     );
   }
+}
+
+Future<int> _getProductIdFromJson(RequestContext context) async {
+  final jsonData = await context.request.json() as Map<String, dynamic>;
+  return jsonData[_productKey] as int;
 }

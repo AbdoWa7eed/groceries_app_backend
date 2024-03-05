@@ -13,6 +13,7 @@ build/
 .dart_frog
 keys.json
 .env
+prisma-query-engine
 # Test related files
 coverage/
 .vscode
