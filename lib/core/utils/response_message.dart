@@ -43,6 +43,13 @@ abstract class ResponseMessages {
       'Product removed from favorites successfully';
   static const String checkProductId =
       'Please make sure that your product id is valid';
+  static const String removedFromCart =
+      'Product removed from cart successfully';
+  static const String addedToCart = 'Product added to cart successfully';
+  static const String cartItemUpdated = 'Your quantity has been updated';
+  static const String cartItemAlreadyAdded = 'Item already added before';
+  static const String invalidCartItem = "Cart item isn't exists";
+  static const String outOfStock = 'This product is out of stock';
   static const String invalidEmailFormat = 'Invalid email address format';
   static const String weakPassword = '''
 Your password must be minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character''';

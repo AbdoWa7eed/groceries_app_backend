@@ -10,7 +10,7 @@ class CategorySearchInput {
 
   /// Creates a new instance of [CategorySearchInput] from map.
   factory CategorySearchInput.fromJson(Map<String, dynamic> json) =>
-      _$ProductSearchInputFromJson(json);
+      _$CategorySearchInputFromJson(json);
 
   /// The number of products to retrieve. if null all data retrieved.
   final int? size;

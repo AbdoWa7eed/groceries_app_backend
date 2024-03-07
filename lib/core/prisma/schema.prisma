@@ -45,7 +45,6 @@ model order_items {
   order_id   Int
   product_id Int
   quantity   Int      @db.SmallInt
-  price      Decimal  @db.Decimal(4, 2)
   orders     orders   @relation(fields: [order_id], references: [order_id], onDelete: NoAction, map: "fk_order_items_orders")
   products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_order_items_products1")
 
@@ -61,22 +60,27 @@ model order_status {
 }
 
 model orders {
-  order_id      Int           @id @default(autoincrement())
-  order_date    DateTime?     @db.DateTime(0)
-  shipping_date DateTime?     @db.DateTime(0)
-  user_id       Int
-  status        Int
-  order_items   order_items[]
-  order_status  order_status  @relation(fields: [status], references: [status_id], onDelete: NoAction, map: "fk_orders_order_status1")
-  users         users         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_orders_users1")
+  order_id          Int             @id @default(autoincrement())
+  order_date        DateTime        @db.DateTime(0)
+  shipping_date     DateTime?       @db.DateTime(0)
+  user_id           Int
+  status            Int
+  payment_method_id Int
+  total_price       Decimal         @db.Decimal(4, 2)
+  order_items       order_items[]
+  order_status      order_status    @relation(fields: [status], references: [status_id], onDelete: NoAction, map: "fk_orders_order_status1")
+  payment_methods   payment_methods @relation(fields: [payment_method_id], references: [payment_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_method")
+  users             users           @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_orders_users1")
 
   @@index([status], map: "fk_orders_order_status1_idx")
   @@index([user_id], map: "fk_orders_users1_idx")
+  @@index([payment_method_id], map: "fk_orders_payment_methods1_idx")
 }
 
 model payment_methods {
-  payment_id  Int    @id @default(autoincrement())
-  method_name String @db.VarChar(45)
+  payment_id  Int      @id @default(autoincrement())
+  method_name String   @db.VarChar(45)
+  orders      orders[]
 }
 
 model products {
@@ -90,6 +94,7 @@ model products {
   product_details     String?       @db.Text
   discount_percentage Decimal?      @default(0.00) @db.Decimal(5, 2)
   rate                Decimal       @default(0.0) @db.Decimal(1, 1)
+  cart_items          cart_items[]
   favorites           favorites[]
   nutritions          nutritions[]
   order_items         order_items[]
@@ -121,7 +126,29 @@ model users {
   phone_number String?     @unique(map: "phone_number_UNIQUE") @db.VarChar(15)
   image_url    String?     @db.VarChar(255)
   is_deleted   Boolean
+  carts        carts?
   favorites    favorites[]
   orders       orders[]
   reviews      reviews[]
+}
+
+model cart_items {
+  quantity   Int
+  cart_id    Int
+  product_id Int
+  carts      carts    @relation(fields: [cart_id], references: [cart_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_carts1")
+  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_products1")
+
+  @@id([cart_id, product_id])
+  @@index([cart_id], map: "fk_cart_items_carts1_idx")
+  @@index([product_id], map: "fk_cart_items_products1_idx")
+}
+
+model carts {
+  cart_id    Int          @id @default(autoincrement())
+  user_id    Int          @unique(map: "user_id_UNIQUE")
+  cart_items cart_items[]
+  users      users        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_carts_users1")
+
+  @@index([user_id], map: "fk_carts_users1_idx")
 }

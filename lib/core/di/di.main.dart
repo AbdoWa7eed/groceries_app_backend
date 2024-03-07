@@ -140,3 +140,15 @@ void initBannersResources() {
       );
   }
 }
+
+void initCartResources() {
+  if (!instance.isRegistered<CartRepository>()) {
+    instance
+      ..registerLazySingleton<CartRepository>(
+        () => CartRepositoryImpl(instance<CartDataSource>()),
+      )
+      ..registerLazySingleton<CartDataSource>(
+        () => CartDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}

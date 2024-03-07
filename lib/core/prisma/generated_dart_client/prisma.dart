@@ -1321,6 +1321,15 @@ class OrderStatusCountOutputType {
   final int? orders;
 }
 
+class PaymentMethodsCountOutputType {
+  const PaymentMethodsCountOutputType({this.orders});
+
+  factory PaymentMethodsCountOutputType.fromJson(Map json) =>
+      PaymentMethodsCountOutputType(orders: json['orders']);
+
+  final int? orders;
+}
+
 class OrdersCountOutputType {
   const OrdersCountOutputType({this.orderItems});
 
@@ -1350,8 +1359,18 @@ class UsersCountOutputType {
   final int? reviews;
 }
 
+class CartsCountOutputType {
+  const CartsCountOutputType({this.cartItems});
+
+  factory CartsCountOutputType.fromJson(Map json) =>
+      CartsCountOutputType(cartItems: json['cart_items']);
+
+  final int? cartItems;
+}
+
 class ProductsCountOutputType {
   const ProductsCountOutputType({
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -1359,11 +1378,14 @@ class ProductsCountOutputType {
   });
 
   factory ProductsCountOutputType.fromJson(Map json) => ProductsCountOutputType(
+        cartItems: json['cart_items'],
         favorites: json['favorites'],
         nutritions: json['nutritions'],
         orderItems: json['order_items'],
         reviews: json['reviews'],
       );
+
+  final int? cartItems;
 
   final int? favorites;
 
@@ -1665,24 +1687,6 @@ class DecimalNullableFilter
       };
 }
 
-class ProductsRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  final _i2.ProductsWhereInput? $is;
-
-  final _i2.ProductsWhereInput? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'is': $is,
-        'isNot': isNot,
-      };
-}
-
 class NestedBoolFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NestedBoolFilter({
     this.equals,
@@ -1713,6 +1717,189 @@ class BoolFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
   @override
   Map<String, dynamic> toJson() => {
         'equals': equals,
+        'not': not,
+      };
+}
+
+class CartsNullableRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsNullableRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>? $is;
+
+  final _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
+class ProductsRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.ProductsWhereInput? $is;
+
+  final _i2.ProductsWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
+class FavoritesWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.userId,
+    this.productId,
+    this.products,
+    this.users,
+  });
+
+  final _i1
+      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
+      AND;
+
+  final Iterable<_i2.FavoritesWhereInput>? OR;
+
+  final _i1
+      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
+
+  final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'user_id': userId,
+        'product_id': productId,
+        'products': products,
+        'users': users,
+      };
+}
+
+class FavoritesListRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesListRelationFilter({
+    this.every,
+    this.some,
+    this.none,
+  });
+
+  final _i2.FavoritesWhereInput? every;
+
+  final _i2.FavoritesWhereInput? some;
+
+  final _i2.FavoritesWhereInput? none;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'every': every,
+        'some': some,
+        'none': none,
+      };
+}
+
+class NestedDateTimeFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedDateTimeFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
+
+  final Iterable<DateTime>? $in;
+
+  final Iterable<DateTime>? notIn;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
+
+  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeFilter>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+      };
+}
+
+class DateTimeFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DateTimeFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
+
+  final Iterable<DateTime>? $in;
+
+  final Iterable<DateTime>? notIn;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
+
+  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeFilter>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
         'not': not,
       };
 }
@@ -1832,7 +2019,6 @@ class OrderItemsWhereInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.orders,
     this.products,
   });
@@ -1851,8 +2037,6 @@ class OrderItemsWhereInput
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
 
-  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? price;
-
   final _i1.PrismaUnion<_i2.OrdersRelationFilter, _i2.OrdersWhereInput>? orders;
 
   final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
@@ -1866,7 +2050,6 @@ class OrderItemsWhereInput
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
         'orders': orders,
         'products': products,
       };
@@ -1948,6 +2131,60 @@ class OrderStatusRelationFilter
       };
 }
 
+class PaymentMethodsWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.paymentId,
+    this.methodName,
+    this.orders,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
+      Iterable<_i2.PaymentMethodsWhereInput>>? AND;
+
+  final Iterable<_i2.PaymentMethodsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
+      Iterable<_i2.PaymentMethodsWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentId;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? methodName;
+
+  final _i2.OrdersListRelationFilter? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'payment_id': paymentId,
+        'method_name': methodName,
+        'orders': orders,
+      };
+}
+
+class PaymentMethodsRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.PaymentMethodsWhereInput? $is;
+
+  final _i2.PaymentMethodsWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
 class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersWhereInput({
     this.AND,
@@ -1958,8 +2195,11 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.orderItems,
     this.orderStatus,
+    this.paymentMethods,
     this.users,
   });
 
@@ -1973,8 +2213,7 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? orderId;
 
-  final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
-      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? orderDate;
 
   final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
       _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
@@ -1983,11 +2222,18 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? status;
 
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? totalPrice;
+
   final _i2.OrderItemsListRelationFilter? orderItems;
 
   final _i1
       .PrismaUnion<_i2.OrderStatusRelationFilter, _i2.OrderStatusWhereInput>?
       orderStatus;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsRelationFilter,
+      _i2.PaymentMethodsWhereInput>? paymentMethods;
 
   final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
 
@@ -2001,8 +2247,11 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
+        'payment_methods': paymentMethods,
         'users': users,
       };
 }
@@ -2026,89 +2275,6 @@ class OrdersListRelationFilter
         'every': every,
         'some': some,
         'none': none,
-      };
-}
-
-class NestedDateTimeFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedDateTimeFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
-
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
-
-  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeFilter>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-      };
-}
-
-class DateTimeFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DateTimeFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
-
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
-
-  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeFilter>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
       };
 }
 
@@ -2199,6 +2365,7 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.carts,
     this.favorites,
     this.orders,
     this.reviews,
@@ -2231,6 +2398,9 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.BoolFilter, bool>? isDeleted;
 
+  final _i1.PrismaUnion<_i2.CartsNullableRelationFilter,
+      _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>>? carts;
+
   final _i2.FavoritesListRelationFilter? favorites;
 
   final _i2.OrdersListRelationFilter? orders;
@@ -2250,6 +2420,7 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -2273,33 +2444,30 @@ class UsersRelationFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class FavoritesWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesWhereInput({
+class CartsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsWhereInput({
     this.AND,
     this.OR,
     this.NOT,
+    this.cartId,
     this.userId,
-    this.productId,
-    this.products,
+    this.cartItems,
     this.users,
   });
 
-  final _i1
-      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
+  final _i1.PrismaUnion<_i2.CartsWhereInput, Iterable<_i2.CartsWhereInput>>?
       AND;
 
-  final Iterable<_i2.FavoritesWhereInput>? OR;
+  final Iterable<_i2.CartsWhereInput>? OR;
 
-  final _i1
-      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
+  final _i1.PrismaUnion<_i2.CartsWhereInput, Iterable<_i2.CartsWhereInput>>?
       NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
-      products;
+  final _i2.CartItemsListRelationFilter? cartItems;
 
   final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
 
@@ -2308,26 +2476,89 @@ class FavoritesWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
+        'cart_id': cartId,
         'user_id': userId,
-        'product_id': productId,
-        'products': products,
+        'cart_items': cartItems,
         'users': users,
       };
 }
 
-class FavoritesListRelationFilter
+class CartsRelationFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.CartsWhereInput? $is;
+
+  final _i2.CartsWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
+class CartItemsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.carts,
+    this.products,
+  });
+
+  final _i1
+      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
+      AND;
+
+  final Iterable<_i2.CartItemsWhereInput>? OR;
+
+  final _i1
+      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.CartsRelationFilter, _i2.CartsWhereInput>? carts;
+
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        'carts': carts,
+        'products': products,
+      };
+}
+
+class CartItemsListRelationFilter
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesListRelationFilter({
+  const CartItemsListRelationFilter({
     this.every,
     this.some,
     this.none,
   });
 
-  final _i2.FavoritesWhereInput? every;
+  final _i2.CartItemsWhereInput? every;
 
-  final _i2.FavoritesWhereInput? some;
+  final _i2.CartItemsWhereInput? some;
 
-  final _i2.FavoritesWhereInput? none;
+  final _i2.CartItemsWhereInput? none;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -2550,6 +2781,7 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -2590,6 +2822,8 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
 
+  final _i2.CartItemsListRelationFilter? cartItems;
+
   final _i2.FavoritesListRelationFilter? favorites;
 
   final _i2.NutritionsListRelationFilter? nutritions;
@@ -2616,6 +2850,7 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -2728,22 +2963,14 @@ class CategoriesWhereUniqueInput
       };
 }
 
-class FavoritesProductsArgs
+class CartItemsOrderByRelationAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesProductsArgs({
-    this.select,
-    this.include,
-  });
+  const CartItemsOrderByRelationAggregateInput({this.$count});
 
-  final _i2.ProductsSelect? select;
-
-  final _i2.ProductsInclude? include;
+  final _i2.SortOrder? $count;
 
   @override
-  Map<String, dynamic> toJson() => {
-        'select': select,
-        'include': include,
-      };
+  Map<String, dynamic> toJson() => {'_count': $count};
 }
 
 enum NullsOrder implements _i1.PrismaEnum {
@@ -2781,6 +3008,110 @@ class FavoritesOrderByRelationAggregateInput
 
   @override
   Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class OrdersOrderByRelationAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersOrderByRelationAggregateInput({this.$count});
+
+  final _i2.SortOrder? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class ReviewsOrderByRelationAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsOrderByRelationAggregateInput({this.$count});
+
+  final _i2.SortOrder? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class UsersOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersOrderByWithRelationInput({
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final _i2.SortOrder? userId;
+
+  final _i2.SortOrder? userName;
+
+  final _i2.SortOrder? email;
+
+  final _i2.SortOrder? password;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? address;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? phoneNumber;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
+
+  final _i2.SortOrder? isDeleted;
+
+  final _i2.CartsOrderByWithRelationInput? carts;
+
+  final _i2.FavoritesOrderByRelationAggregateInput? favorites;
+
+  final _i2.OrdersOrderByRelationAggregateInput? orders;
+
+  final _i2.ReviewsOrderByRelationAggregateInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class CartsOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsOrderByWithRelationInput({
+    this.cartId,
+    this.userId,
+    this.cartItems,
+    this.users,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  final _i2.CartItemsOrderByRelationAggregateInput? cartItems;
+
+  final _i2.UsersOrderByWithRelationInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        'cart_items': cartItems,
+        'users': users,
+      };
 }
 
 class NutritionsOrderByRelationAggregateInput
@@ -2839,16 +3170,6 @@ class CategoriesOrderByWithRelationInput
       };
 }
 
-class ReviewsOrderByRelationAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsOrderByRelationAggregateInput({this.$count});
-
-  final _i2.SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {'_count': $count};
-}
-
 class ProductsOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ProductsOrderByWithRelationInput({
@@ -2862,6 +3183,7 @@ class ProductsOrderByWithRelationInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -2889,6 +3211,8 @@ class ProductsOrderByWithRelationInput
 
   final _i2.SortOrder? rate;
 
+  final _i2.CartItemsOrderByRelationAggregateInput? cartItems;
+
   final _i2.FavoritesOrderByRelationAggregateInput? favorites;
 
   final _i2.NutritionsOrderByRelationAggregateInput? nutritions;
@@ -2911,6 +3235,7 @@ class ProductsOrderByWithRelationInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -2919,67 +3244,245 @@ class ProductsOrderByWithRelationInput
       };
 }
 
-class OrdersOrderByRelationAggregateInput
+class CartItemsOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersOrderByRelationAggregateInput({this.$count});
-
-  final _i2.SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {'_count': $count};
-}
-
-class UsersOrderByWithRelationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersOrderByWithRelationInput({
-    this.userId,
-    this.userName,
-    this.email,
-    this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    this.isDeleted,
-    this.favorites,
-    this.orders,
-    this.reviews,
+  const CartItemsOrderByWithRelationInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.carts,
+    this.products,
   });
 
-  final _i2.SortOrder? userId;
+  final _i2.SortOrder? quantity;
 
-  final _i2.SortOrder? userName;
+  final _i2.SortOrder? cartId;
 
-  final _i2.SortOrder? email;
+  final _i2.SortOrder? productId;
 
-  final _i2.SortOrder? password;
+  final _i2.CartsOrderByWithRelationInput? carts;
 
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? address;
-
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? phoneNumber;
-
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
-
-  final _i2.SortOrder? isDeleted;
-
-  final _i2.FavoritesOrderByRelationAggregateInput? favorites;
-
-  final _i2.OrdersOrderByRelationAggregateInput? orders;
-
-  final _i2.ReviewsOrderByRelationAggregateInput? reviews;
+  final _i2.ProductsOrderByWithRelationInput? products;
 
   @override
   Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'orders': orders,
-        'reviews': reviews,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        'carts': carts,
+        'products': products,
+      };
+}
+
+class CartItemsCartIdProductIdCompoundUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCartIdProductIdCompoundUniqueInput({
+    required this.cartId,
+    required this.productId,
+  });
+
+  final int cartId;
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsWhereUniqueInput({
+    this.cartIdProductId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.carts,
+    this.products,
+  });
+
+  final _i2.CartItemsCartIdProductIdCompoundUniqueInput? cartIdProductId;
+
+  final _i1
+      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
+      AND;
+
+  final Iterable<_i2.CartItemsWhereInput>? OR;
+
+  final _i1
+      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.CartsRelationFilter, _i2.CartsWhereInput>? carts;
+
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id_product_id': cartIdProductId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        'carts': carts,
+        'products': products,
+      };
+}
+
+enum CartItemsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  quantity<int>('quantity', 'cart_items'),
+  cartId<int>('cart_id', 'cart_items'),
+  productId<int>('product_id', 'cart_items');
+
+  const CartItemsScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
+class CartsCartItemsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCartItemsArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.CartItemsWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.CartItemsOrderByWithRelationInput>,
+      _i2.CartItemsOrderByWithRelationInput>? orderBy;
+
+  final _i2.CartItemsWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalar, Iterable<_i2.CartItemsScalar>>?
+      distinct;
+
+  final _i2.CartItemsSelect? select;
+
+  final _i2.CartItemsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
+      };
+}
+
+class UsersCartsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCartsArgs({
+    this.where,
+    this.select,
+    this.include,
+  });
+
+  final _i2.CartsWhereInput? where;
+
+  final _i2.CartsSelect? select;
+
+  final _i2.CartsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'select': select,
+        'include': include,
+      };
+}
+
+class ProductsCartItemsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCartItemsArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.CartItemsWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.CartItemsOrderByWithRelationInput>,
+      _i2.CartItemsOrderByWithRelationInput>? orderBy;
+
+  final _i2.CartItemsWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalar, Iterable<_i2.CartItemsScalar>>?
+      distinct;
+
+  final _i2.CartItemsSelect? select;
+
+  final _i2.CartItemsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
+      };
+}
+
+class FavoritesProductsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesProductsArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.ProductsSelect? select;
+
+  final _i2.ProductsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
       };
 }
 
@@ -3208,6 +3711,28 @@ class OrderStatusOrderByWithRelationInput
       };
 }
 
+class PaymentMethodsOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsOrderByWithRelationInput({
+    this.paymentId,
+    this.methodName,
+    this.orders,
+  });
+
+  final _i2.SortOrder? paymentId;
+
+  final _i2.SortOrder? methodName;
+
+  final _i2.OrdersOrderByRelationAggregateInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_id': paymentId,
+        'method_name': methodName,
+        'orders': orders,
+      };
+}
+
 class OrdersOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersOrderByWithRelationInput({
@@ -3216,14 +3741,17 @@ class OrdersOrderByWithRelationInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.orderItems,
     this.orderStatus,
+    this.paymentMethods,
     this.users,
   });
 
   final _i2.SortOrder? orderId;
 
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? orderDate;
+  final _i2.SortOrder? orderDate;
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? shippingDate;
 
@@ -3231,9 +3759,15 @@ class OrdersOrderByWithRelationInput
 
   final _i2.SortOrder? status;
 
+  final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? totalPrice;
+
   final _i2.OrderItemsOrderByRelationAggregateInput? orderItems;
 
   final _i2.OrderStatusOrderByWithRelationInput? orderStatus;
+
+  final _i2.PaymentMethodsOrderByWithRelationInput? paymentMethods;
 
   final _i2.UsersOrderByWithRelationInput? users;
 
@@ -3244,8 +3778,11 @@ class OrdersOrderByWithRelationInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
+        'payment_methods': paymentMethods,
         'users': users,
       };
 }
@@ -3256,7 +3793,6 @@ class OrderItemsOrderByWithRelationInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.orders,
     this.products,
   });
@@ -3267,8 +3803,6 @@ class OrderItemsOrderByWithRelationInput
 
   final _i2.SortOrder? quantity;
 
-  final _i2.SortOrder? price;
-
   final _i2.OrdersOrderByWithRelationInput? orders;
 
   final _i2.ProductsOrderByWithRelationInput? products;
@@ -3278,7 +3812,6 @@ class OrderItemsOrderByWithRelationInput
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
         'orders': orders,
         'products': products,
       };
@@ -3312,7 +3845,6 @@ class OrderItemsWhereUniqueInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.orders,
     this.products,
   });
@@ -3333,8 +3865,6 @@ class OrderItemsWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
 
-  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? price;
-
   final _i1.PrismaUnion<_i2.OrdersRelationFilter, _i2.OrdersWhereInput>? orders;
 
   final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
@@ -3349,7 +3879,6 @@ class OrderItemsWhereUniqueInput
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
         'orders': orders,
         'products': products,
       };
@@ -3358,8 +3887,7 @@ class OrderItemsWhereUniqueInput
 enum OrderItemsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   orderId<int>('order_id', 'order_items'),
   productId<int>('product_id', 'order_items'),
-  quantity<int>('quantity', 'order_items'),
-  price<_i1.Decimal>('price', 'order_items');
+  quantity<int>('quantity', 'order_items');
 
   const OrderItemsScalar(
     this.name,
@@ -3428,8 +3956,11 @@ class OrdersWhereUniqueInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.orderItems,
     this.orderStatus,
+    this.paymentMethods,
     this.users,
   });
 
@@ -3443,8 +3974,7 @@ class OrdersWhereUniqueInput
   final _i1.PrismaUnion<_i2.OrdersWhereInput, Iterable<_i2.OrdersWhereInput>>?
       NOT;
 
-  final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
-      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? orderDate;
 
   final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
       _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
@@ -3453,11 +3983,18 @@ class OrdersWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? status;
 
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? totalPrice;
+
   final _i2.OrderItemsListRelationFilter? orderItems;
 
   final _i1
       .PrismaUnion<_i2.OrderStatusRelationFilter, _i2.OrderStatusWhereInput>?
       orderStatus;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsRelationFilter,
+      _i2.PaymentMethodsWhereInput>? paymentMethods;
 
   final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
 
@@ -3471,8 +4008,11 @@ class OrdersWhereUniqueInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
+        'payment_methods': paymentMethods,
         'users': users,
       };
 }
@@ -3482,7 +4022,9 @@ enum OrdersScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   orderDate<DateTime>('order_date', 'orders'),
   shippingDate<DateTime>('shipping_date', 'orders'),
   userId<int>('user_id', 'orders'),
-  status<int>('status', 'orders');
+  status<int>('status', 'orders'),
+  paymentMethodId<int>('payment_method_id', 'orders'),
+  totalPrice<_i1.Decimal>('total_price', 'orders');
 
   const OrdersScalar(
     this.name,
@@ -3616,6 +4158,282 @@ class OrdersOrderStatusArgs
   Map<String, dynamic> toJson() => {
         'select': select,
         'include': include,
+      };
+}
+
+class PaymentMethodsOrdersArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsOrdersArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.OrdersWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.OrdersOrderByWithRelationInput>,
+      _i2.OrdersOrderByWithRelationInput>? orderBy;
+
+  final _i2.OrdersWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.OrdersScalar, Iterable<_i2.OrdersScalar>>? distinct;
+
+  final _i2.OrdersSelect? select;
+
+  final _i2.OrdersInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
+      };
+}
+
+class PaymentMethodsCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsCountOutputTypeSelect({this.orders});
+
+  final bool? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {'orders': orders};
+}
+
+class PaymentMethodsCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsCountArgs({this.select});
+
+  final _i2.PaymentMethodsCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class PaymentMethodsSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsSelect({
+    this.paymentId,
+    this.methodName,
+    this.orders,
+    this.$count,
+  });
+
+  final bool? paymentId;
+
+  final bool? methodName;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentMethodsOrdersArgs>? orders;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentMethodsCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_id': paymentId,
+        'method_name': methodName,
+        'orders': orders,
+        '_count': $count,
+      };
+}
+
+class PaymentMethodsInclude
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsInclude({
+    this.orders,
+    this.$count,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.PaymentMethodsOrdersArgs>? orders;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentMethodsCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'orders': orders,
+        '_count': $count,
+      };
+}
+
+class OrdersPaymentMethodsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersPaymentMethodsArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.PaymentMethodsSelect? select;
+
+  final _i2.PaymentMethodsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class OrdersUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUsersArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.UsersSelect? select;
+
+  final _i2.UsersInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class OrdersCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCountOutputTypeSelect({this.orderItems});
+
+  final bool? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {'order_items': orderItems};
+}
+
+class OrdersCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCountArgs({this.select});
+
+  final _i2.OrdersCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class OrdersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersInclude({
+    this.orderItems,
+    this.orderStatus,
+    this.paymentMethods,
+    this.users,
+    this.$count,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+        'users': users,
+        '_count': $count,
+      };
+}
+
+class OrderItemsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsSelect({
+    this.orderId,
+    this.productId,
+    this.quantity,
+    this.orders,
+    this.products,
+  });
+
+  final bool? orderId;
+
+  final bool? productId;
+
+  final bool? quantity;
+
+  final _i1.PrismaUnion<bool, _i2.OrderItemsOrdersArgs>? orders;
+
+  final _i1.PrismaUnion<bool, _i2.OrderItemsProductsArgs>? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+        'orders': orders,
+        'products': products,
+      };
+}
+
+class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersSelect({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.userId,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+    this.orderItems,
+    this.orderStatus,
+    this.paymentMethods,
+    this.users,
+    this.$count,
+  });
+
+  final bool? orderId;
+
+  final bool? orderDate;
+
+  final bool? shippingDate;
+
+  final bool? userId;
+
+  final bool? status;
+
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+        'users': users,
+        '_count': $count,
       };
 }
 
@@ -3935,11 +4753,14 @@ class UsersCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
 
 class UsersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersInclude({
+    this.carts,
     this.favorites,
     this.orders,
     this.reviews,
     this.$count,
   });
+
+  final _i1.PrismaUnion<bool, _i2.UsersCartsArgs>? carts;
 
   final _i1.PrismaUnion<bool, _i2.UsersFavoritesArgs>? favorites;
 
@@ -3951,202 +4772,7 @@ class UsersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   @override
   Map<String, dynamic> toJson() => {
-        'favorites': favorites,
-        'orders': orders,
-        'reviews': reviews,
-        '_count': $count,
-      };
-}
-
-class OrdersUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUsersArgs({
-    this.select,
-    this.include,
-  });
-
-  final _i2.UsersSelect? select;
-
-  final _i2.UsersInclude? include;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'select': select,
-        'include': include,
-      };
-}
-
-class OrdersCountOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCountOutputTypeSelect({this.orderItems});
-
-  final bool? orderItems;
-
-  @override
-  Map<String, dynamic> toJson() => {'order_items': orderItems};
-}
-
-class OrdersCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCountArgs({this.select});
-
-  final _i2.OrdersCountOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class OrdersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersInclude({
-    this.orderItems,
-    this.orderStatus,
-    this.users,
-    this.$count,
-  });
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_items': orderItems,
-        'order_status': orderStatus,
-        'users': users,
-        '_count': $count,
-      };
-}
-
-class OrderItemsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsSelect({
-    this.orderId,
-    this.productId,
-    this.quantity,
-    this.price,
-    this.orders,
-    this.products,
-  });
-
-  final bool? orderId;
-
-  final bool? productId;
-
-  final bool? quantity;
-
-  final bool? price;
-
-  final _i1.PrismaUnion<bool, _i2.OrderItemsOrdersArgs>? orders;
-
-  final _i1.PrismaUnion<bool, _i2.OrderItemsProductsArgs>? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'product_id': productId,
-        'quantity': quantity,
-        'price': price,
-        'orders': orders,
-        'products': products,
-      };
-}
-
-class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersSelect({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    this.userId,
-    this.status,
-    this.orderItems,
-    this.orderStatus,
-    this.users,
-    this.$count,
-  });
-
-  final bool? orderId;
-
-  final bool? orderDate;
-
-  final bool? shippingDate;
-
-  final bool? userId;
-
-  final bool? status;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'user_id': userId,
-        'status': status,
-        'order_items': orderItems,
-        'order_status': orderStatus,
-        'users': users,
-        '_count': $count,
-      };
-}
-
-class UsersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersSelect({
-    this.userId,
-    this.userName,
-    this.email,
-    this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    this.isDeleted,
-    this.favorites,
-    this.orders,
-    this.reviews,
-    this.$count,
-  });
-
-  final bool? userId;
-
-  final bool? userName;
-
-  final bool? email;
-
-  final bool? password;
-
-  final bool? address;
-
-  final bool? phoneNumber;
-
-  final bool? imageUrl;
-
-  final bool? isDeleted;
-
-  final _i1.PrismaUnion<bool, _i2.UsersFavoritesArgs>? favorites;
-
-  final _i1.PrismaUnion<bool, _i2.UsersOrdersArgs>? orders;
-
-  final _i1.PrismaUnion<bool, _i2.UsersReviewsArgs>? reviews;
-
-  final _i1.PrismaUnion<bool, _i2.UsersCountArgs>? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
+        'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -4504,6 +5130,7 @@ class ProductsWhereUniqueInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -4544,6 +5171,8 @@ class ProductsWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
 
+  final _i2.CartItemsListRelationFilter? cartItems;
+
   final _i2.FavoritesListRelationFilter? favorites;
 
   final _i2.NutritionsListRelationFilter? nutritions;
@@ -4570,6 +5199,7 @@ class ProductsWhereUniqueInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -4746,11 +5376,14 @@ class ProductsReviewsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
 class ProductsCountOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ProductsCountOutputTypeSelect({
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
     this.reviews,
   });
+
+  final bool? cartItems;
 
   final bool? favorites;
 
@@ -4762,6 +5395,7 @@ class ProductsCountOutputTypeSelect
 
   @override
   Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -4780,6 +5414,7 @@ class ProductsCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
 
 class ProductsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ProductsInclude({
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -4787,6 +5422,8 @@ class ProductsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.reviews,
     this.$count,
   });
+
+  final _i1.PrismaUnion<bool, _i2.ProductsCartItemsArgs>? cartItems;
 
   final _i1.PrismaUnion<bool, _i2.ProductsFavoritesArgs>? favorites;
 
@@ -4802,6 +5439,7 @@ class ProductsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   @override
   Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -4836,6 +5474,234 @@ class FavoritesSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
+class UsersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersSelect({
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+    this.$count,
+  });
+
+  final bool? userId;
+
+  final bool? userName;
+
+  final bool? email;
+
+  final bool? password;
+
+  final bool? address;
+
+  final bool? phoneNumber;
+
+  final bool? imageUrl;
+
+  final bool? isDeleted;
+
+  final _i1.PrismaUnion<bool, _i2.UsersCartsArgs>? carts;
+
+  final _i1.PrismaUnion<bool, _i2.UsersFavoritesArgs>? favorites;
+
+  final _i1.PrismaUnion<bool, _i2.UsersOrdersArgs>? orders;
+
+  final _i1.PrismaUnion<bool, _i2.UsersReviewsArgs>? reviews;
+
+  final _i1.PrismaUnion<bool, _i2.UsersCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+        '_count': $count,
+      };
+}
+
+class CartsUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUsersArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.UsersSelect? select;
+
+  final _i2.UsersInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class CartsCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCountOutputTypeSelect({this.cartItems});
+
+  final bool? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {'cart_items': cartItems};
+}
+
+class CartsCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCountArgs({this.select});
+
+  final _i2.CartsCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsInclude({
+    this.cartItems,
+    this.users,
+    this.$count,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.CartsCartItemsArgs>? cartItems;
+
+  final _i1.PrismaUnion<bool, _i2.CartsUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.CartsCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
+        'users': users,
+        '_count': $count,
+      };
+}
+
+class CartItemsCartsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCartsArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.CartsSelect? select;
+
+  final _i2.CartsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class CartItemsProductsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsProductsArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.ProductsSelect? select;
+
+  final _i2.ProductsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class CartItemsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsInclude({
+    this.carts,
+    this.products,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsCartsArgs>? carts;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsProductsArgs>? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'carts': carts,
+        'products': products,
+      };
+}
+
+class CartsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsSelect({
+    this.cartId,
+    this.userId,
+    this.cartItems,
+    this.users,
+    this.$count,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  final _i1.PrismaUnion<bool, _i2.CartsCartItemsArgs>? cartItems;
+
+  final _i1.PrismaUnion<bool, _i2.CartsUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.CartsCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        'cart_items': cartItems,
+        'users': users,
+        '_count': $count,
+      };
+}
+
+class CartItemsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.carts,
+    this.products,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsCartsArgs>? carts;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsProductsArgs>? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        'carts': carts,
+        'products': products,
+      };
+}
+
 class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ProductsSelect({
     this.productId,
@@ -4848,6 +5714,7 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -4876,6 +5743,8 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? rate;
 
+  final _i1.PrismaUnion<bool, _i2.ProductsCartItemsArgs>? cartItems;
+
   final _i1.PrismaUnion<bool, _i2.ProductsFavoritesArgs>? favorites;
 
   final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
@@ -4900,6 +5769,7 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -5103,88 +5973,6 @@ class NutritionsCreateNestedManyWithoutProductsInput
       };
 }
 
-class CategoriesCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesCreateWithoutProductsInput({
-    required this.name,
-    this.imageUrl,
-  });
-
-  final String name;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'image_url': imageUrl,
-      };
-}
-
-class CategoriesUncheckedCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesUncheckedCreateWithoutProductsInput({
-    this.categoryId,
-    required this.name,
-    this.imageUrl,
-  });
-
-  final int? categoryId;
-
-  final String name;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'category_id': categoryId,
-        'name': name,
-        'image_url': imageUrl,
-      };
-}
-
-class CategoriesCreateOrConnectWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesCreateOrConnectWithoutProductsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.CategoriesWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.CategoriesCreateWithoutProductsInput,
-      _i2.CategoriesUncheckedCreateWithoutProductsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class CategoriesCreateNestedOneWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesCreateNestedOneWithoutProductsInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.CategoriesCreateWithoutProductsInput,
-      _i2.CategoriesUncheckedCreateWithoutProductsInput>? create;
-
-  final _i2.CategoriesCreateOrConnectWithoutProductsInput? connectOrCreate;
-
-  final _i2.CategoriesWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
 class OrderStatusCreateWithoutOrdersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderStatusCreateWithoutOrdersInput({required this.name});
@@ -5291,9 +6079,1117 @@ class OrderStatusCreateNestedOneWithoutOrdersInput
       };
 }
 
-class ProductsCreateWithoutReviewsInput
+class PaymentMethodsCreateWithoutOrdersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateWithoutReviewsInput({
+  const PaymentMethodsCreateWithoutOrdersInput({required this.methodName});
+
+  final String methodName;
+
+  @override
+  Map<String, dynamic> toJson() => {'method_name': methodName};
+}
+
+class PaymentMethodsUncheckedCreateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsUncheckedCreateWithoutOrdersInput({
+    this.paymentId,
+    required this.methodName,
+  });
+
+  final int? paymentId;
+
+  final String methodName;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_id': paymentId,
+        'method_name': methodName,
+      };
+}
+
+class PaymentMethodsWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsWhereUniqueInput({
+    this.paymentId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.methodName,
+    this.orders,
+  });
+
+  final int? paymentId;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
+      Iterable<_i2.PaymentMethodsWhereInput>>? AND;
+
+  final Iterable<_i2.PaymentMethodsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
+      Iterable<_i2.PaymentMethodsWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? methodName;
+
+  final _i2.OrdersListRelationFilter? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_id': paymentId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'method_name': methodName,
+        'orders': orders,
+      };
+}
+
+class PaymentMethodsCreateOrConnectWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsCreateOrConnectWithoutOrdersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.PaymentMethodsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsCreateWithoutOrdersInput,
+      _i2.PaymentMethodsUncheckedCreateWithoutOrdersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class PaymentMethodsCreateNestedOneWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsCreateNestedOneWithoutOrdersInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsCreateWithoutOrdersInput,
+      _i2.PaymentMethodsUncheckedCreateWithoutOrdersInput>? create;
+
+  final _i2.PaymentMethodsCreateOrConnectWithoutOrdersInput? connectOrCreate;
+
+  final _i2.PaymentMethodsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class CategoriesCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesCreateWithoutProductsInput({
+    required this.name,
+    this.imageUrl,
+  });
+
+  final String name;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'image_url': imageUrl,
+      };
+}
+
+class CategoriesUncheckedCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesUncheckedCreateWithoutProductsInput({
+    this.categoryId,
+    required this.name,
+    this.imageUrl,
+  });
+
+  final int? categoryId;
+
+  final String name;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+      };
+}
+
+class CategoriesCreateOrConnectWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesCreateOrConnectWithoutProductsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.CategoriesWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CategoriesCreateWithoutProductsInput,
+      _i2.CategoriesUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class CategoriesCreateNestedOneWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesCreateNestedOneWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.CategoriesCreateWithoutProductsInput,
+      _i2.CategoriesUncheckedCreateWithoutProductsInput>? create;
+
+  final _i2.CategoriesCreateOrConnectWithoutProductsInput? connectOrCreate;
+
+  final _i2.CategoriesWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class UsersCreateWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateWithoutReviewsInput({
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    required this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+  });
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool isDeleted;
+
+  final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
+
+  final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+      };
+}
+
+class CartItemsUncheckedCreateWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedCreateWithoutCartsInput({
+    required this.quantity,
+    required this.productId,
+  });
+
+  final int quantity;
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'product_id': productId,
+      };
+}
+
+class CartItemsCreateOrConnectWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateOrConnectWithoutCartsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutCartsInput,
+      _i2.CartItemsUncheckedCreateWithoutCartsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class CartItemsCreateManyCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateManyCartsInput({
+    required this.quantity,
+    required this.productId,
+  });
+
+  final int quantity;
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'product_id': productId,
+      };
+}
+
+class CartItemsCreateManyCartsInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateManyCartsInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateManyCartsInput,
+      Iterable<_i2.CartItemsCreateManyCartsInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class CartItemsUncheckedCreateNestedManyWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedCreateNestedManyWithoutCartsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutCartsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutCartsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutCartsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutCartsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutCartsInput,
+      Iterable<_i2.CartItemsCreateOrConnectWithoutCartsInput>>? connectOrCreate;
+
+  final _i2.CartItemsCreateManyCartsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class CartsUncheckedCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedCreateWithoutUsersInput({
+    this.cartId,
+    this.cartItems,
+  });
+
+  final int? cartId;
+
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutCartsInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'cart_items': cartItems,
+      };
+}
+
+class CartsWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsWhereUniqueInput({
+    this.cartId,
+    this.userId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.cartItems,
+    this.users,
+  });
+
+  final int? cartId;
+
+  final int? userId;
+
+  final _i1.PrismaUnion<_i2.CartsWhereInput, Iterable<_i2.CartsWhereInput>>?
+      AND;
+
+  final Iterable<_i2.CartsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CartsWhereInput, Iterable<_i2.CartsWhereInput>>?
+      NOT;
+
+  final _i2.CartItemsListRelationFilter? cartItems;
+
+  final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'cart_items': cartItems,
+        'users': users,
+      };
+}
+
+class CartsCreateOrConnectWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateOrConnectWithoutUsersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.CartsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutUsersInput,
+      _i2.CartsUncheckedCreateWithoutUsersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class CartsUncheckedCreateNestedOneWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedCreateNestedOneWithoutUsersInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutUsersInput,
+      _i2.CartsUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.CartsCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.CartsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class FavoritesUncheckedCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUncheckedCreateWithoutUsersInput({required this.productId});
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {'product_id': productId};
+}
+
+class FavoritesCreateOrConnectWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesCreateOrConnectWithoutUsersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.FavoritesWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.FavoritesCreateWithoutUsersInput,
+      _i2.FavoritesUncheckedCreateWithoutUsersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class FavoritesCreateManyUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesCreateManyUsersInput({required this.productId});
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {'product_id': productId};
+}
+
+class FavoritesCreateManyUsersInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesCreateManyUsersInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.FavoritesCreateManyUsersInput,
+      Iterable<_i2.FavoritesCreateManyUsersInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class FavoritesUncheckedCreateNestedManyWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUncheckedCreateNestedManyWithoutUsersInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.FavoritesCreateWithoutUsersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
+              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
+                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class OrderItemsUncheckedCreateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUncheckedCreateWithoutOrdersInput({
+    required this.productId,
+    required this.quantity,
+  });
+
+  final int productId;
+
+  final int quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'quantity': quantity,
+      };
+}
+
+class OrderItemsCreateOrConnectWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsCreateOrConnectWithoutOrdersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.OrderItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateWithoutOrdersInput,
+      _i2.OrderItemsUncheckedCreateWithoutOrdersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class OrderItemsCreateManyOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsCreateManyOrdersInput({
+    required this.productId,
+    required this.quantity,
+  });
+
+  final int productId;
+
+  final int quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'quantity': quantity,
+      };
+}
+
+class OrderItemsCreateManyOrdersInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsCreateManyOrdersInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateManyOrdersInput,
+      Iterable<_i2.OrderItemsCreateManyOrdersInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class OrderItemsUncheckedCreateNestedManyWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUncheckedCreateNestedManyWithoutOrdersInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrderItemsCreateWithoutOrdersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
+              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
+                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
+          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
+      connectOrCreate;
+
+  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class OrdersUncheckedCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedCreateWithoutUsersInput({
+    this.orderId,
+    required this.orderDate,
+    this.shippingDate,
+    required this.status,
+    required this.paymentMethodId,
+    required this.totalPrice,
+    this.orderItems,
+  });
+
+  final int? orderId;
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final int status;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
+
+  final _i2.OrderItemsUncheckedCreateNestedManyWithoutOrdersInput? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+      };
+}
+
+class OrdersCreateOrConnectWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateOrConnectWithoutUsersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutUsersInput,
+      _i2.OrdersUncheckedCreateWithoutUsersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class OrdersCreateManyUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateManyUsersInput({
+    this.orderId,
+    required this.orderDate,
+    this.shippingDate,
+    required this.status,
+    required this.paymentMethodId,
+    required this.totalPrice,
+  });
+
+  final int? orderId;
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final int status;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersCreateManyUsersInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateManyUsersInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.OrdersCreateManyUsersInput,
+      Iterable<_i2.OrdersCreateManyUsersInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class OrdersUncheckedCreateNestedManyWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedCreateNestedManyWithoutUsersInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.OrdersCreateWithoutUsersInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.OrdersCreateWithoutUsersInput>,
+          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
+              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class UsersUncheckedCreateWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedCreateWithoutReviewsInput({
+    this.userId,
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    required this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+  });
+
+  final int? userId;
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool isDeleted;
+
+  final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
+
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+      };
+}
+
+class UsersWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersWhereUniqueInput({
+    this.userId,
+    this.email,
+    this.phoneNumber,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.userName,
+    this.password,
+    this.address,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final int? userId;
+
+  final String? email;
+
+  final String? phoneNumber;
+
+  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
+      AND;
+
+  final Iterable<_i2.UsersWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? userName;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? password;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<_i2.BoolFilter, bool>? isDeleted;
+
+  final _i1.PrismaUnion<_i2.CartsNullableRelationFilter,
+      _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>>? carts;
+
+  final _i2.FavoritesListRelationFilter? favorites;
+
+  final _i2.OrdersListRelationFilter? orders;
+
+  final _i2.ReviewsListRelationFilter? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'email': email,
+        'phone_number': phoneNumber,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'user_name': userName,
+        'password': password,
+        'address': address,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class UsersCreateOrConnectWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateOrConnectWithoutReviewsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.UsersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
+      _i2.UsersUncheckedCreateWithoutReviewsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class UsersCreateNestedOneWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateNestedOneWithoutReviewsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
+      _i2.UsersUncheckedCreateWithoutReviewsInput>? create;
+
+  final _i2.UsersCreateOrConnectWithoutReviewsInput? connectOrCreate;
+
+  final _i2.UsersWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class ReviewsCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsCreateWithoutProductsInput({
+    required this.rating,
+    required this.reviewDate,
+    required this.users,
+  });
+
+  final _i1.Decimal rating;
+
+  final DateTime reviewDate;
+
+  final _i2.UsersCreateNestedOneWithoutReviewsInput users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'rating': rating,
+        'review_date': reviewDate,
+        'users': users,
+      };
+}
+
+class ReviewsUncheckedCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUncheckedCreateWithoutProductsInput({
+    this.reviewId,
+    required this.rating,
+    required this.reviewDate,
+    required this.userId,
+  });
+
+  final int? reviewId;
+
+  final _i1.Decimal rating;
+
+  final DateTime reviewDate;
+
+  final int userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate,
+        'user_id': userId,
+      };
+}
+
+class ReviewsCreateOrConnectWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsCreateOrConnectWithoutProductsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.ReviewsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutProductsInput,
+      _i2.ReviewsUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class ReviewsCreateManyProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsCreateManyProductsInput({
+    this.reviewId,
+    required this.rating,
+    required this.reviewDate,
+    required this.userId,
+  });
+
+  final int? reviewId;
+
+  final _i1.Decimal rating;
+
+  final DateTime reviewDate;
+
+  final int userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate,
+        'user_id': userId,
+      };
+}
+
+class ReviewsCreateManyProductsInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsCreateManyProductsInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.ReviewsCreateManyProductsInput,
+      Iterable<_i2.ReviewsCreateManyProductsInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class ReviewsCreateNestedManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsCreateNestedManyWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.ReviewsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class ProductsCreateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateWithoutOrderItemsInput({
     required this.name,
     required this.quantityInStock,
     required this.description,
@@ -5302,10 +7198,11 @@ class ProductsCreateWithoutReviewsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
-    this.orderItems,
     required this.categories,
+    this.reviews,
   });
 
   final String name;
@@ -5324,13 +7221,15 @@ class ProductsCreateWithoutReviewsInput
 
   final _i1.Decimal? rate;
 
+  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
 
-  final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
-
   final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
+
+  final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -5342,10 +7241,120 @@ class ProductsCreateWithoutReviewsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
-        'order_items': orderItems,
         'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class CartItemsUncheckedCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedCreateWithoutProductsInput({
+    required this.quantity,
+    required this.cartId,
+  });
+
+  final int quantity;
+
+  final int cartId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+      };
+}
+
+class CartItemsCreateOrConnectWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateOrConnectWithoutProductsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutProductsInput,
+      _i2.CartItemsUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class CartItemsCreateManyProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateManyProductsInput({
+    required this.quantity,
+    required this.cartId,
+  });
+
+  final int quantity;
+
+  final int cartId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+      };
+}
+
+class CartItemsCreateManyProductsInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateManyProductsInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateManyProductsInput,
+      Iterable<_i2.CartItemsCreateManyProductsInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class CartItemsUncheckedCreateNestedManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedCreateNestedManyWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
       };
 }
 
@@ -5478,25 +7487,346 @@ class NutritionsUncheckedCreateNestedManyWithoutProductsInput
       };
 }
 
+class ReviewsUncheckedCreateNestedManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUncheckedCreateNestedManyWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.ReviewsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class ProductsUncheckedCreateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedCreateWithoutOrderItemsInput({
+    this.productId,
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    required this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.reviews,
+  });
+
+  final int? productId;
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final int categoryId;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
+
+  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'reviews': reviews,
+      };
+}
+
+class ProductsCreateOrConnectWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateOrConnectWithoutOrderItemsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.ProductsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
+      _i2.ProductsUncheckedCreateWithoutOrderItemsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class ProductsCreateNestedOneWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateNestedOneWithoutOrderItemsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
+      _i2.ProductsUncheckedCreateWithoutOrderItemsInput>? create;
+
+  final _i2.ProductsCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
+
+  final _i2.ProductsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class OrderItemsCreateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsCreateWithoutOrdersInput({
+    required this.quantity,
+    required this.products,
+  });
+
+  final int quantity;
+
+  final _i2.ProductsCreateNestedOneWithoutOrderItemsInput products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'products': products,
+      };
+}
+
+class OrderItemsCreateNestedManyWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsCreateNestedManyWithoutOrdersInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrderItemsCreateWithoutOrdersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
+              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
+                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
+          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
+      connectOrCreate;
+
+  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class OrdersCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateWithoutUsersInput({
+    required this.orderDate,
+    this.shippingDate,
+    required this.totalPrice,
+    this.orderItems,
+    required this.orderStatus,
+    required this.paymentMethods,
+  });
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final _i1.Decimal totalPrice;
+
+  final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
+
+  final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
+
+  final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+      };
+}
+
+class OrdersCreateNestedManyWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateNestedManyWithoutUsersInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.OrdersCreateWithoutUsersInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.OrdersCreateWithoutUsersInput>,
+          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
+              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class ProductsCreateWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateWithoutReviewsInput({
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    required this.categories,
+  });
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
+
+  final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
+
+  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+      };
+}
+
 class OrderItemsUncheckedCreateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderItemsUncheckedCreateWithoutProductsInput({
     required this.orderId,
     required this.quantity,
-    required this.price,
   });
 
   final int orderId;
 
   final int quantity;
 
-  final _i1.Decimal price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -5524,20 +7854,16 @@ class OrderItemsCreateManyProductsInput
   const OrderItemsCreateManyProductsInput({
     required this.orderId,
     required this.quantity,
-    required this.price,
   });
 
   final int orderId;
 
   final int quantity;
 
-  final _i1.Decimal price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -5609,6 +7935,7 @@ class ProductsUncheckedCreateWithoutReviewsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -5634,6 +7961,8 @@ class ProductsUncheckedCreateWithoutReviewsInput
 
   final _i1.Decimal? rate;
 
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
@@ -5652,6 +7981,7 @@ class ProductsUncheckedCreateWithoutReviewsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -5845,9 +8175,9 @@ class ReviewsCreateNestedManyWithoutUsersInput
       };
 }
 
-class UsersCreateWithoutOrdersInput
+class UsersCreateWithoutFavoritesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateWithoutOrdersInput({
+  const UsersCreateWithoutFavoritesInput({
     required this.userName,
     required this.email,
     required this.password,
@@ -5855,7 +8185,8 @@ class UsersCreateWithoutOrdersInput
     this.phoneNumber,
     this.imageUrl,
     required this.isDeleted,
-    this.favorites,
+    this.carts,
+    this.orders,
     this.reviews,
   });
 
@@ -5873,7 +8204,9 @@ class UsersCreateWithoutOrdersInput
 
   final bool isDeleted;
 
-  final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
+  final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
+
+  final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
 
   final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
 
@@ -5886,100 +8219,9 @@ class UsersCreateWithoutOrdersInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
-        'favorites': favorites,
+        'carts': carts,
+        'orders': orders,
         'reviews': reviews,
-      };
-}
-
-class FavoritesUncheckedCreateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUncheckedCreateWithoutUsersInput({required this.productId});
-
-  final int productId;
-
-  @override
-  Map<String, dynamic> toJson() => {'product_id': productId};
-}
-
-class FavoritesCreateOrConnectWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesCreateOrConnectWithoutUsersInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.FavoritesWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.FavoritesCreateWithoutUsersInput,
-      _i2.FavoritesUncheckedCreateWithoutUsersInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class FavoritesCreateManyUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesCreateManyUsersInput({required this.productId});
-
-  final int productId;
-
-  @override
-  Map<String, dynamic> toJson() => {'product_id': productId};
-}
-
-class FavoritesCreateManyUsersInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesCreateManyUsersInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.FavoritesCreateManyUsersInput,
-      Iterable<_i2.FavoritesCreateManyUsersInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class FavoritesUncheckedCreateNestedManyWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUncheckedCreateNestedManyWithoutUsersInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.FavoritesCreateWithoutUsersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
-              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
-                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
       };
 }
 
@@ -6016,1418 +8258,6 @@ class ReviewsUncheckedCreateNestedManyWithoutUsersInput
       };
 }
 
-class UsersUncheckedCreateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUncheckedCreateWithoutOrdersInput({
-    this.userId,
-    required this.userName,
-    required this.email,
-    required this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    required this.isDeleted,
-    this.favorites,
-    this.reviews,
-  });
-
-  final int? userId;
-
-  final String userName;
-
-  final String email;
-
-  final String password;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final bool isDeleted;
-
-  final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
-
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'reviews': reviews,
-      };
-}
-
-class UsersWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersWhereUniqueInput({
-    this.userId,
-    this.email,
-    this.phoneNumber,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.userName,
-    this.password,
-    this.address,
-    this.imageUrl,
-    this.isDeleted,
-    this.favorites,
-    this.orders,
-    this.reviews,
-  });
-
-  final int? userId;
-
-  final String? email;
-
-  final String? phoneNumber;
-
-  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
-      AND;
-
-  final Iterable<_i2.UsersWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
-      NOT;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? userName;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? password;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? address;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<_i2.BoolFilter, bool>? isDeleted;
-
-  final _i2.FavoritesListRelationFilter? favorites;
-
-  final _i2.OrdersListRelationFilter? orders;
-
-  final _i2.ReviewsListRelationFilter? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'email': email,
-        'phone_number': phoneNumber,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'user_name': userName,
-        'password': password,
-        'address': address,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'orders': orders,
-        'reviews': reviews,
-      };
-}
-
-class UsersCreateOrConnectWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateOrConnectWithoutOrdersInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.UsersWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
-      _i2.UsersUncheckedCreateWithoutOrdersInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class UsersCreateNestedOneWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateNestedOneWithoutOrdersInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
-      _i2.UsersUncheckedCreateWithoutOrdersInput>? create;
-
-  final _i2.UsersCreateOrConnectWithoutOrdersInput? connectOrCreate;
-
-  final _i2.UsersWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
-class OrdersCreateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateWithoutOrderItemsInput({
-    this.orderDate,
-    this.shippingDate,
-    required this.orderStatus,
-    required this.users,
-  });
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
-
-  final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
-
-  final _i2.UsersCreateNestedOneWithoutOrdersInput users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'order_status': orderStatus,
-        'users': users,
-      };
-}
-
-class OrdersUncheckedCreateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUncheckedCreateWithoutOrderItemsInput({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    required this.userId,
-    required this.status,
-  });
-
-  final int? orderId;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
-
-  final int userId;
-
-  final int status;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'user_id': userId,
-        'status': status,
-      };
-}
-
-class OrdersCreateOrConnectWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateOrConnectWithoutOrderItemsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.OrdersWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
-      _i2.OrdersUncheckedCreateWithoutOrderItemsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class OrdersCreateNestedOneWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateNestedOneWithoutOrderItemsInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
-      _i2.OrdersUncheckedCreateWithoutOrderItemsInput>? create;
-
-  final _i2.OrdersCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
-
-  final _i2.OrdersWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
-class OrderItemsCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsCreateWithoutProductsInput({
-    required this.quantity,
-    required this.price,
-    required this.orders,
-  });
-
-  final int quantity;
-
-  final _i1.Decimal price;
-
-  final _i2.OrdersCreateNestedOneWithoutOrderItemsInput orders;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'price': price,
-        'orders': orders,
-      };
-}
-
-class OrderItemsCreateNestedManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsCreateNestedManyWithoutProductsInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.OrderItemsCreateWithoutProductsInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.OrderItemsCreateWithoutProductsInput>,
-          _i1.PrismaUnion<
-              _i2.OrderItemsUncheckedCreateWithoutProductsInput,
-              Iterable<
-                  _i2.OrderItemsUncheckedCreateWithoutProductsInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.OrderItemsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i2.OrderItemsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class ProductsCreateWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateWithoutFavoritesInput({
-    required this.name,
-    required this.quantityInStock,
-    required this.description,
-    required this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.nutritions,
-    this.orderItems,
-    required this.categories,
-    this.reviews,
-  });
-
-  final String name;
-
-  final int quantityInStock;
-
-  final String description;
-
-  final _i1.Decimal unitPrice;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
-
-  final _i1.Decimal? rate;
-
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
-  final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
-
-  final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
-
-  final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'categories': categories,
-        'reviews': reviews,
-      };
-}
-
-class ReviewsUncheckedCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedCreateWithoutProductsInput({
-    this.reviewId,
-    required this.rating,
-    required this.reviewDate,
-    required this.userId,
-  });
-
-  final int? reviewId;
-
-  final _i1.Decimal rating;
-
-  final DateTime reviewDate;
-
-  final int userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'user_id': userId,
-      };
-}
-
-class ReviewsCreateOrConnectWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateOrConnectWithoutProductsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.ReviewsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutProductsInput,
-      _i2.ReviewsUncheckedCreateWithoutProductsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class ReviewsCreateManyProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateManyProductsInput({
-    this.reviewId,
-    required this.rating,
-    required this.reviewDate,
-    required this.userId,
-  });
-
-  final int? reviewId;
-
-  final _i1.Decimal rating;
-
-  final DateTime reviewDate;
-
-  final int userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'user_id': userId,
-      };
-}
-
-class ReviewsCreateManyProductsInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateManyProductsInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateManyProductsInput,
-      Iterable<_i2.ReviewsCreateManyProductsInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class ReviewsUncheckedCreateNestedManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedCreateNestedManyWithoutProductsInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.ReviewsCreateWithoutProductsInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
-              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
-                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class ProductsUncheckedCreateWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUncheckedCreateWithoutFavoritesInput({
-    this.productId,
-    required this.name,
-    required this.quantityInStock,
-    required this.description,
-    required this.unitPrice,
-    this.imageUrl,
-    required this.categoryId,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.nutritions,
-    this.orderItems,
-    this.reviews,
-  });
-
-  final int? productId;
-
-  final String name;
-
-  final int quantityInStock;
-
-  final String description;
-
-  final _i1.Decimal unitPrice;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final int categoryId;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
-
-  final _i1.Decimal? rate;
-
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
-
-  final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
-
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'category_id': categoryId,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'reviews': reviews,
-      };
-}
-
-class ProductsCreateOrConnectWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateOrConnectWithoutFavoritesInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.ProductsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
-      _i2.ProductsUncheckedCreateWithoutFavoritesInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class ProductsCreateNestedOneWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateNestedOneWithoutFavoritesInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
-      _i2.ProductsUncheckedCreateWithoutFavoritesInput>? create;
-
-  final _i2.ProductsCreateOrConnectWithoutFavoritesInput? connectOrCreate;
-
-  final _i2.ProductsWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
-class FavoritesCreateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesCreateWithoutUsersInput({required this.products});
-
-  final _i2.ProductsCreateNestedOneWithoutFavoritesInput products;
-
-  @override
-  Map<String, dynamic> toJson() => {'products': products};
-}
-
-class FavoritesCreateNestedManyWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesCreateNestedManyWithoutUsersInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.FavoritesCreateWithoutUsersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
-              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
-                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class UsersCreateWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateWithoutReviewsInput({
-    required this.userName,
-    required this.email,
-    required this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    required this.isDeleted,
-    this.favorites,
-    this.orders,
-  });
-
-  final String userName;
-
-  final String email;
-
-  final String password;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final bool isDeleted;
-
-  final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
-
-  final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'orders': orders,
-      };
-}
-
-class OrderItemsUncheckedCreateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUncheckedCreateWithoutOrdersInput({
-    required this.productId,
-    required this.quantity,
-    required this.price,
-  });
-
-  final int productId;
-
-  final int quantity;
-
-  final _i1.Decimal price;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'quantity': quantity,
-        'price': price,
-      };
-}
-
-class OrderItemsCreateOrConnectWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsCreateOrConnectWithoutOrdersInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.OrderItemsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateWithoutOrdersInput,
-      _i2.OrderItemsUncheckedCreateWithoutOrdersInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class OrderItemsCreateManyOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsCreateManyOrdersInput({
-    required this.productId,
-    required this.quantity,
-    required this.price,
-  });
-
-  final int productId;
-
-  final int quantity;
-
-  final _i1.Decimal price;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'quantity': quantity,
-        'price': price,
-      };
-}
-
-class OrderItemsCreateManyOrdersInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsCreateManyOrdersInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateManyOrdersInput,
-      Iterable<_i2.OrderItemsCreateManyOrdersInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class OrderItemsUncheckedCreateNestedManyWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUncheckedCreateNestedManyWithoutOrdersInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.OrderItemsCreateWithoutOrdersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
-              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
-                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
-          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
-      connectOrCreate;
-
-  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class OrdersUncheckedCreateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUncheckedCreateWithoutUsersInput({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    required this.status,
-    this.orderItems,
-  });
-
-  final int? orderId;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
-
-  final int status;
-
-  final _i2.OrderItemsUncheckedCreateNestedManyWithoutOrdersInput? orderItems;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'status': status,
-        'order_items': orderItems,
-      };
-}
-
-class OrdersCreateOrConnectWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateOrConnectWithoutUsersInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.OrdersWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateWithoutUsersInput,
-      _i2.OrdersUncheckedCreateWithoutUsersInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class OrdersCreateManyUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateManyUsersInput({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    required this.status,
-  });
-
-  final int? orderId;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
-
-  final int status;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'status': status,
-      };
-}
-
-class OrdersCreateManyUsersInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateManyUsersInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.OrdersCreateManyUsersInput,
-      Iterable<_i2.OrdersCreateManyUsersInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class OrdersUncheckedCreateNestedManyWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUncheckedCreateNestedManyWithoutUsersInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.OrdersCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.OrdersCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class UsersUncheckedCreateWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUncheckedCreateWithoutReviewsInput({
-    this.userId,
-    required this.userName,
-    required this.email,
-    required this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    required this.isDeleted,
-    this.favorites,
-    this.orders,
-  });
-
-  final int? userId;
-
-  final String userName;
-
-  final String email;
-
-  final String password;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final bool isDeleted;
-
-  final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
-
-  final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'orders': orders,
-      };
-}
-
-class UsersCreateOrConnectWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateOrConnectWithoutReviewsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.UsersWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
-      _i2.UsersUncheckedCreateWithoutReviewsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class UsersCreateNestedOneWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateNestedOneWithoutReviewsInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
-      _i2.UsersUncheckedCreateWithoutReviewsInput>? create;
-
-  final _i2.UsersCreateOrConnectWithoutReviewsInput? connectOrCreate;
-
-  final _i2.UsersWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
-class ReviewsCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateWithoutProductsInput({
-    required this.rating,
-    required this.reviewDate,
-    required this.users,
-  });
-
-  final _i1.Decimal rating;
-
-  final DateTime reviewDate;
-
-  final _i2.UsersCreateNestedOneWithoutReviewsInput users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'rating': rating,
-        'review_date': reviewDate,
-        'users': users,
-      };
-}
-
-class ReviewsCreateNestedManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateNestedManyWithoutProductsInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.ReviewsCreateWithoutProductsInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
-              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
-                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class ProductsCreateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateWithoutOrderItemsInput({
-    required this.name,
-    required this.quantityInStock,
-    required this.description,
-    required this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.favorites,
-    this.nutritions,
-    required this.categories,
-    this.reviews,
-  });
-
-  final String name;
-
-  final int quantityInStock;
-
-  final String description;
-
-  final _i1.Decimal unitPrice;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
-
-  final _i1.Decimal? rate;
-
-  final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
-  final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
-
-  final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'categories': categories,
-        'reviews': reviews,
-      };
-}
-
-class ProductsUncheckedCreateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUncheckedCreateWithoutOrderItemsInput({
-    this.productId,
-    required this.name,
-    required this.quantityInStock,
-    required this.description,
-    required this.unitPrice,
-    this.imageUrl,
-    required this.categoryId,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.favorites,
-    this.nutritions,
-    this.reviews,
-  });
-
-  final int? productId;
-
-  final String name;
-
-  final int quantityInStock;
-
-  final String description;
-
-  final _i1.Decimal unitPrice;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final int categoryId;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
-
-  final _i1.Decimal? rate;
-
-  final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
-
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'category_id': categoryId,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'reviews': reviews,
-      };
-}
-
-class ProductsCreateOrConnectWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateOrConnectWithoutOrderItemsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.ProductsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
-      _i2.ProductsUncheckedCreateWithoutOrderItemsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class ProductsCreateNestedOneWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateNestedOneWithoutOrderItemsInput({
-    this.create,
-    this.connectOrCreate,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
-      _i2.ProductsUncheckedCreateWithoutOrderItemsInput>? create;
-
-  final _i2.ProductsCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
-
-  final _i2.ProductsWhereUniqueInput? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'connect': connect,
-      };
-}
-
-class OrderItemsCreateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsCreateWithoutOrdersInput({
-    required this.quantity,
-    required this.price,
-    required this.products,
-  });
-
-  final int quantity;
-
-  final _i1.Decimal price;
-
-  final _i2.ProductsCreateNestedOneWithoutOrderItemsInput products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'price': price,
-        'products': products,
-      };
-}
-
-class OrderItemsCreateNestedManyWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsCreateNestedManyWithoutOrdersInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.OrderItemsCreateWithoutOrdersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
-              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
-                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
-          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
-      connectOrCreate;
-
-  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class OrdersCreateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateWithoutUsersInput({
-    this.orderDate,
-    this.shippingDate,
-    this.orderItems,
-    required this.orderStatus,
-  });
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
-
-  final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
-
-  final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'order_items': orderItems,
-        'order_status': orderStatus,
-      };
-}
-
-class OrdersCreateNestedManyWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCreateNestedManyWithoutUsersInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.OrdersCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.OrdersCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class UsersCreateWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateWithoutFavoritesInput({
-    required this.userName,
-    required this.email,
-    required this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    required this.isDeleted,
-    this.orders,
-    this.reviews,
-  });
-
-  final String userName;
-
-  final String email;
-
-  final String password;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final bool isDeleted;
-
-  final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
-
-  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'orders': orders,
-        'reviews': reviews,
-      };
-}
-
 class UsersUncheckedCreateWithoutFavoritesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersUncheckedCreateWithoutFavoritesInput({
@@ -7439,6 +8269,7 @@ class UsersUncheckedCreateWithoutFavoritesInput
     this.phoneNumber,
     this.imageUrl,
     required this.isDeleted,
+    this.carts,
     this.orders,
     this.reviews,
   });
@@ -7459,6 +8290,8 @@ class UsersUncheckedCreateWithoutFavoritesInput
 
   final bool isDeleted;
 
+  final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
+
   final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
 
   final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
@@ -7473,6 +8306,7 @@ class UsersUncheckedCreateWithoutFavoritesInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'carts': carts,
         'orders': orders,
         'reviews': reviews,
       };
@@ -7565,9 +8399,9 @@ class FavoritesCreateNestedManyWithoutProductsInput
       };
 }
 
-class ProductsCreateWithoutCategoriesInput
+class ProductsCreateWithoutCartItemsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateWithoutCategoriesInput({
+  const ProductsCreateWithoutCartItemsInput({
     required this.name,
     required this.quantityInStock,
     required this.description,
@@ -7579,6 +8413,7 @@ class ProductsCreateWithoutCategoriesInput
     this.favorites,
     this.nutritions,
     this.orderItems,
+    required this.categories,
     this.reviews,
   });
 
@@ -7604,6 +8439,8 @@ class ProductsCreateWithoutCategoriesInput
 
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
 
+  final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
+
   final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
 
   @override
@@ -7616,6 +8453,1059 @@ class ProductsCreateWithoutCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUncheckedCreateWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedCreateWithoutCartItemsInput({
+    this.productId,
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    required this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final int? productId;
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final int categoryId;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
+
+  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'reviews': reviews,
+      };
+}
+
+class ProductsCreateOrConnectWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateOrConnectWithoutCartItemsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.ProductsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutCartItemsInput,
+      _i2.ProductsUncheckedCreateWithoutCartItemsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class ProductsCreateNestedOneWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateNestedOneWithoutCartItemsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutCartItemsInput,
+      _i2.ProductsUncheckedCreateWithoutCartItemsInput>? create;
+
+  final _i2.ProductsCreateOrConnectWithoutCartItemsInput? connectOrCreate;
+
+  final _i2.ProductsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class CartItemsCreateWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateWithoutCartsInput({
+    required this.quantity,
+    required this.products,
+  });
+
+  final int quantity;
+
+  final _i2.ProductsCreateNestedOneWithoutCartItemsInput products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'products': products,
+      };
+}
+
+class CartItemsCreateNestedManyWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateNestedManyWithoutCartsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutCartsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutCartsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutCartsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutCartsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutCartsInput,
+      Iterable<_i2.CartItemsCreateOrConnectWithoutCartsInput>>? connectOrCreate;
+
+  final _i2.CartItemsCreateManyCartsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class CartsCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateWithoutUsersInput({this.cartItems});
+
+  final _i2.CartItemsCreateNestedManyWithoutCartsInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {'cart_items': cartItems};
+}
+
+class CartsCreateNestedOneWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateNestedOneWithoutUsersInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutUsersInput,
+      _i2.CartsUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.CartsCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.CartsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class UsersCreateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateWithoutOrdersInput({
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    required this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.reviews,
+  });
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool isDeleted;
+
+  final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
+
+  final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'reviews': reviews,
+      };
+}
+
+class UsersUncheckedCreateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedCreateWithoutOrdersInput({
+    this.userId,
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    required this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.reviews,
+  });
+
+  final int? userId;
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool isDeleted;
+
+  final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
+
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'reviews': reviews,
+      };
+}
+
+class UsersCreateOrConnectWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateOrConnectWithoutOrdersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.UsersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
+      _i2.UsersUncheckedCreateWithoutOrdersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class UsersCreateNestedOneWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateNestedOneWithoutOrdersInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
+      _i2.UsersUncheckedCreateWithoutOrdersInput>? create;
+
+  final _i2.UsersCreateOrConnectWithoutOrdersInput? connectOrCreate;
+
+  final _i2.UsersWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class OrdersCreateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateWithoutOrderItemsInput({
+    required this.orderDate,
+    this.shippingDate,
+    required this.totalPrice,
+    required this.orderStatus,
+    required this.paymentMethods,
+    required this.users,
+  });
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final _i1.Decimal totalPrice;
+
+  final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
+
+  final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
+
+  final _i2.UsersCreateNestedOneWithoutOrdersInput users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'total_price': totalPrice,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+        'users': users,
+      };
+}
+
+class OrdersUncheckedCreateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedCreateWithoutOrderItemsInput({
+    this.orderId,
+    required this.orderDate,
+    this.shippingDate,
+    required this.userId,
+    required this.status,
+    required this.paymentMethodId,
+    required this.totalPrice,
+  });
+
+  final int? orderId;
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final int userId;
+
+  final int status;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersCreateOrConnectWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateOrConnectWithoutOrderItemsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
+      _i2.OrdersUncheckedCreateWithoutOrderItemsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class OrdersCreateNestedOneWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateNestedOneWithoutOrderItemsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
+      _i2.OrdersUncheckedCreateWithoutOrderItemsInput>? create;
+
+  final _i2.OrdersCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
+
+  final _i2.OrdersWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class OrderItemsCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsCreateWithoutProductsInput({
+    required this.quantity,
+    required this.orders,
+  });
+
+  final int quantity;
+
+  final _i2.OrdersCreateNestedOneWithoutOrderItemsInput orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'orders': orders,
+      };
+}
+
+class OrderItemsCreateNestedManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsCreateNestedManyWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.OrderItemsCreateWithoutProductsInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.OrderItemsCreateWithoutProductsInput>,
+          _i1.PrismaUnion<
+              _i2.OrderItemsUncheckedCreateWithoutProductsInput,
+              Iterable<
+                  _i2.OrderItemsUncheckedCreateWithoutProductsInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.OrderItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i2.OrderItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class ProductsCreateWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateWithoutFavoritesInput({
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.nutritions,
+    this.orderItems,
+    required this.categories,
+    this.reviews,
+  });
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
+
+  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
+
+  final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUncheckedCreateWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedCreateWithoutFavoritesInput({
+    this.productId,
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    required this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final int? productId;
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final int categoryId;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+
+  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'reviews': reviews,
+      };
+}
+
+class ProductsCreateOrConnectWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateOrConnectWithoutFavoritesInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.ProductsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
+      _i2.ProductsUncheckedCreateWithoutFavoritesInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class ProductsCreateNestedOneWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateNestedOneWithoutFavoritesInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
+      _i2.ProductsUncheckedCreateWithoutFavoritesInput>? create;
+
+  final _i2.ProductsCreateOrConnectWithoutFavoritesInput? connectOrCreate;
+
+  final _i2.ProductsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class FavoritesCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesCreateWithoutUsersInput({required this.products});
+
+  final _i2.ProductsCreateNestedOneWithoutFavoritesInput products;
+
+  @override
+  Map<String, dynamic> toJson() => {'products': products};
+}
+
+class FavoritesCreateNestedManyWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesCreateNestedManyWithoutUsersInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.FavoritesCreateWithoutUsersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
+              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
+                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class UsersCreateWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateWithoutCartsInput({
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    required this.isDeleted,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool isDeleted;
+
+  final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
+
+  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class UsersUncheckedCreateWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedCreateWithoutCartsInput({
+    this.userId,
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    required this.isDeleted,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final int? userId;
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool isDeleted;
+
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
+
+  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class UsersCreateOrConnectWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateOrConnectWithoutCartsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.UsersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutCartsInput,
+      _i2.UsersUncheckedCreateWithoutCartsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class UsersCreateNestedOneWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateNestedOneWithoutCartsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutCartsInput,
+      _i2.UsersUncheckedCreateWithoutCartsInput>? create;
+
+  final _i2.UsersCreateOrConnectWithoutCartsInput? connectOrCreate;
+
+  final _i2.UsersWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class CartsCreateWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateWithoutCartItemsInput({required this.users});
+
+  final _i2.UsersCreateNestedOneWithoutCartsInput users;
+
+  @override
+  Map<String, dynamic> toJson() => {'users': users};
+}
+
+class CartsUncheckedCreateWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedCreateWithoutCartItemsInput({
+    this.cartId,
+    required this.userId,
+  });
+
+  final int? cartId;
+
+  final int userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsCreateOrConnectWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateOrConnectWithoutCartItemsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.CartsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutCartItemsInput,
+      _i2.CartsUncheckedCreateWithoutCartItemsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class CartsCreateNestedOneWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateNestedOneWithoutCartItemsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutCartItemsInput,
+      _i2.CartsUncheckedCreateWithoutCartItemsInput>? create;
+
+  final _i2.CartsCreateOrConnectWithoutCartItemsInput? connectOrCreate;
+
+  final _i2.CartsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class CartItemsCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateWithoutProductsInput({
+    required this.quantity,
+    required this.carts,
+  });
+
+  final int quantity;
+
+  final _i2.CartsCreateNestedOneWithoutCartItemsInput carts;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'carts': carts,
+      };
+}
+
+class CartItemsCreateNestedManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateNestedManyWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class ProductsCreateWithoutCategoriesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateWithoutCategoriesInput({
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
+
+  final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
+
+  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -7635,6 +9525,7 @@ class ProductsUncheckedCreateWithoutCategoriesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -7659,6 +9550,8 @@ class ProductsUncheckedCreateWithoutCategoriesInput
 
   final _i1.Decimal? rate;
 
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
@@ -7678,6 +9571,7 @@ class ProductsUncheckedCreateWithoutCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -7991,16 +9885,6 @@ class BoolFieldUpdateOperationsInput
   Map<String, dynamic> toJson() => {'set': set};
 }
 
-class NullableDateTimeFieldUpdateOperationsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NullableDateTimeFieldUpdateOperationsInput({this.set});
-
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? set;
-
-  @override
-  Map<String, dynamic> toJson() => {'set': set};
-}
-
 class NutritionsUpdateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NutritionsUpdateWithoutProductsInput({
@@ -8279,6 +10163,238 @@ class NutritionsUpdateManyWithoutProductsNestedInput
       };
 }
 
+class DateTimeFieldUpdateOperationsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DateTimeFieldUpdateOperationsInput({this.set});
+
+  final DateTime? set;
+
+  @override
+  Map<String, dynamic> toJson() => {'set': set};
+}
+
+class NullableDateTimeFieldUpdateOperationsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NullableDateTimeFieldUpdateOperationsInput({this.set});
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? set;
+
+  @override
+  Map<String, dynamic> toJson() => {'set': set};
+}
+
+class OrderStatusUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderStatusUpdateWithoutOrdersInput({this.name});
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  @override
+  Map<String, dynamic> toJson() => {'name': name};
+}
+
+class OrderStatusUncheckedUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderStatusUncheckedUpdateWithoutOrdersInput({
+    this.statusId,
+    this.name,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? statusId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'status_id': statusId,
+        'name': name,
+      };
+}
+
+class OrderStatusUpsertWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderStatusUpsertWithoutOrdersInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.OrderStatusUpdateWithoutOrdersInput,
+      _i2.OrderStatusUncheckedUpdateWithoutOrdersInput> update;
+
+  final _i1.PrismaUnion<_i2.OrderStatusCreateWithoutOrdersInput,
+      _i2.OrderStatusUncheckedCreateWithoutOrdersInput> create;
+
+  final _i2.OrderStatusWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class OrderStatusUpdateToOneWithWhereWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderStatusUpdateToOneWithWhereWithoutOrdersInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.OrderStatusWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.OrderStatusUpdateWithoutOrdersInput,
+      _i2.OrderStatusUncheckedUpdateWithoutOrdersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrderStatusUpdateOneRequiredWithoutOrdersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderStatusUpdateOneRequiredWithoutOrdersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.OrderStatusCreateWithoutOrdersInput,
+      _i2.OrderStatusUncheckedCreateWithoutOrdersInput>? create;
+
+  final _i2.OrderStatusCreateOrConnectWithoutOrdersInput? connectOrCreate;
+
+  final _i2.OrderStatusUpsertWithoutOrdersInput? upsert;
+
+  final _i2.OrderStatusWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.OrderStatusUpdateToOneWithWhereWithoutOrdersInput,
+      _i1.PrismaUnion<_i2.OrderStatusUpdateWithoutOrdersInput,
+          _i2.OrderStatusUncheckedUpdateWithoutOrdersInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class PaymentMethodsUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsUpdateWithoutOrdersInput({this.methodName});
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      methodName;
+
+  @override
+  Map<String, dynamic> toJson() => {'method_name': methodName};
+}
+
+class PaymentMethodsUncheckedUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsUncheckedUpdateWithoutOrdersInput({
+    this.paymentId,
+    this.methodName,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? paymentId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      methodName;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_id': paymentId,
+        'method_name': methodName,
+      };
+}
+
+class PaymentMethodsUpsertWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsUpsertWithoutOrdersInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsUpdateWithoutOrdersInput,
+      _i2.PaymentMethodsUncheckedUpdateWithoutOrdersInput> update;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsCreateWithoutOrdersInput,
+      _i2.PaymentMethodsUncheckedCreateWithoutOrdersInput> create;
+
+  final _i2.PaymentMethodsWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class PaymentMethodsUpdateToOneWithWhereWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsUpdateToOneWithWhereWithoutOrdersInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.PaymentMethodsWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsUpdateWithoutOrdersInput,
+      _i2.PaymentMethodsUncheckedUpdateWithoutOrdersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentMethodsCreateWithoutOrdersInput,
+      _i2.PaymentMethodsUncheckedCreateWithoutOrdersInput>? create;
+
+  final _i2.PaymentMethodsCreateOrConnectWithoutOrdersInput? connectOrCreate;
+
+  final _i2.PaymentMethodsUpsertWithoutOrdersInput? upsert;
+
+  final _i2.PaymentMethodsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.PaymentMethodsUpdateToOneWithWhereWithoutOrdersInput,
+      _i1.PrismaUnion<_i2.PaymentMethodsUpdateWithoutOrdersInput,
+          _i2.PaymentMethodsUncheckedUpdateWithoutOrdersInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
 class CategoriesUpdateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const CategoriesUpdateWithoutProductsInput({
@@ -8402,79 +10518,94 @@ class CategoriesUpdateOneRequiredWithoutProductsNestedInput
       };
 }
 
-class DateTimeFieldUpdateOperationsInput
+class UsersUpdateWithoutReviewsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DateTimeFieldUpdateOperationsInput({this.set});
-
-  final DateTime? set;
-
-  @override
-  Map<String, dynamic> toJson() => {'set': set};
-}
-
-class OrderStatusUpdateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderStatusUpdateWithoutOrdersInput({this.name});
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  @override
-  Map<String, dynamic> toJson() => {'name': name};
-}
-
-class OrderStatusUncheckedUpdateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderStatusUncheckedUpdateWithoutOrdersInput({
-    this.statusId,
-    this.name,
+  const UsersUpdateWithoutReviewsInput({
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
   });
 
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? statusId;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
 
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i2.CartsUpdateOneWithoutUsersNestedInput? carts;
+
+  final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
 
   @override
   Map<String, dynamic> toJson() => {
-        'status_id': statusId,
-        'name': name,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
       };
 }
 
-class OrderStatusUpsertWithoutOrdersInput
+class CartItemsUncheckedUpdateWithoutCartsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderStatusUpsertWithoutOrdersInput({
-    required this.update,
-    required this.create,
-    this.where,
+  const CartItemsUncheckedUpdateWithoutCartsInput({
+    this.quantity,
+    this.productId,
   });
 
-  final _i1.PrismaUnion<_i2.OrderStatusUpdateWithoutOrdersInput,
-      _i2.OrderStatusUncheckedUpdateWithoutOrdersInput> update;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
 
-  final _i1.PrismaUnion<_i2.OrderStatusCreateWithoutOrdersInput,
-      _i2.OrderStatusUncheckedCreateWithoutOrdersInput> create;
-
-  final _i2.OrderStatusWhereInput? where;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
 
   @override
   Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
+        'quantity': quantity,
+        'product_id': productId,
       };
 }
 
-class OrderStatusUpdateToOneWithWhereWithoutOrdersInput
+class CartItemsUpdateWithWhereUniqueWithoutCartsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderStatusUpdateToOneWithWhereWithoutOrdersInput({
-    this.where,
+  const CartItemsUpdateWithWhereUniqueWithoutCartsInput({
+    required this.where,
     required this.data,
   });
 
-  final _i2.OrderStatusWhereInput? where;
+  final _i2.CartItemsWhereUniqueInput where;
 
-  final _i1.PrismaUnion<_i2.OrderStatusUpdateWithoutOrdersInput,
-      _i2.OrderStatusUncheckedUpdateWithoutOrdersInput> data;
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutCartsInput,
+      _i2.CartItemsUncheckedUpdateWithoutCartsInput> data;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -8483,132 +10614,258 @@ class OrderStatusUpdateToOneWithWhereWithoutOrdersInput
       };
 }
 
-class OrderStatusUpdateOneRequiredWithoutOrdersNestedInput
+class CartItemsScalarWhereInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderStatusUpdateOneRequiredWithoutOrdersNestedInput({
+  const CartItemsScalarWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? AND;
+
+  final Iterable<_i2.CartItemsScalarWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyMutationInput({this.quantity});
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {'quantity': quantity};
+}
+
+class CartItemsUncheckedUpdateManyWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateManyWithoutCartsInput({
+    this.quantity,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'product_id': productId,
+      };
+}
+
+class CartItemsUpdateManyWithWhereWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyWithWhereWithoutCartsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.CartItemsScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyMutationInput,
+      _i2.CartItemsUncheckedUpdateManyWithoutCartsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class CartItemsUncheckedUpdateManyWithoutCartsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateManyWithoutCartsNestedInput({
     this.create,
     this.connectOrCreate,
     this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
     this.connect,
     this.update,
+    this.updateMany,
+    this.deleteMany,
   });
 
-  final _i1.PrismaUnion<_i2.OrderStatusCreateWithoutOrdersInput,
-      _i2.OrderStatusUncheckedCreateWithoutOrdersInput>? create;
-
-  final _i2.OrderStatusCreateOrConnectWithoutOrdersInput? connectOrCreate;
-
-  final _i2.OrderStatusUpsertWithoutOrdersInput? upsert;
-
-  final _i2.OrderStatusWhereUniqueInput? connect;
-
   final _i1.PrismaUnion<
-      _i2.OrderStatusUpdateToOneWithWhereWithoutOrdersInput,
-      _i1.PrismaUnion<_i2.OrderStatusUpdateWithoutOrdersInput,
-          _i2.OrderStatusUncheckedUpdateWithoutOrdersInput>>? update;
+          _i2.CartItemsCreateWithoutCartsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutCartsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutCartsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutCartsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutCartsInput,
+      Iterable<_i2.CartItemsCreateOrConnectWithoutCartsInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpsertWithWhereUniqueWithoutCartsInput,
+      Iterable<_i2.CartItemsUpsertWithWhereUniqueWithoutCartsInput>>? upsert;
+
+  final _i2.CartItemsCreateManyCartsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithWhereUniqueWithoutCartsInput,
+      Iterable<_i2.CartItemsUpdateWithWhereUniqueWithoutCartsInput>>? update;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyWithWhereWithoutCartsInput,
+      Iterable<_i2.CartItemsUpdateManyWithWhereWithoutCartsInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? deleteMany;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
         'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class CartsUncheckedUpdateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedUpdateWithoutUsersInput({
+    this.cartId,
+    this.cartItems,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i2.CartItemsUncheckedUpdateManyWithoutCartsNestedInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'cart_items': cartItems,
+      };
+}
+
+class CartsUpdateToOneWithWhereWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateToOneWithWhereWithoutUsersInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.CartsWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.CartsUpdateWithoutUsersInput,
+      _i2.CartsUncheckedUpdateWithoutUsersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class CartsUncheckedUpdateOneWithoutUsersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedUpdateOneWithoutUsersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutUsersInput,
+      _i2.CartsUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.CartsCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.CartsUpsertWithoutUsersInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.CartsWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.CartsWhereInput>? delete;
+
+  final _i2.CartsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.CartsUpdateToOneWithWhereWithoutUsersInput,
+      _i1.PrismaUnion<_i2.CartsUpdateWithoutUsersInput,
+          _i2.CartsUncheckedUpdateWithoutUsersInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'disconnect': disconnect,
+        'delete': delete,
         'connect': connect,
         'update': update,
       };
 }
 
-class ProductsUpdateWithoutReviewsInput
+class FavoritesUncheckedUpdateWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateWithoutReviewsInput({
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.favorites,
-    this.nutritions,
-    this.orderItems,
-    this.categories,
-  });
+  const FavoritesUncheckedUpdateWithoutUsersInput({this.productId});
 
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
-      quantityInStock;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      description;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      unitPrice;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? productDetails;
-
-  final _i1.PrismaUnion<
-      _i1.Decimal,
-      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? discountPercentage;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rate;
-
-  final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
-
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
-  final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
-
-  final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
 
   @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'categories': categories,
-      };
+  Map<String, dynamic> toJson() => {'product_id': productId};
 }
 
-class FavoritesUncheckedUpdateWithoutProductsInput
+class FavoritesUpdateWithWhereUniqueWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUncheckedUpdateWithoutProductsInput({this.userId});
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {'user_id': userId};
-}
-
-class FavoritesUpdateWithWhereUniqueWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUpdateWithWhereUniqueWithoutProductsInput({
+  const FavoritesUpdateWithWhereUniqueWithoutUsersInput({
     required this.where,
     required this.data,
   });
 
   final _i2.FavoritesWhereUniqueInput where;
 
-  final _i1.PrismaUnion<_i2.FavoritesUpdateWithoutProductsInput,
-      _i2.FavoritesUncheckedUpdateWithoutProductsInput> data;
+  final _i1.PrismaUnion<_i2.FavoritesUpdateWithoutUsersInput,
+      _i2.FavoritesUncheckedUpdateWithoutUsersInput> data;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -8655,6 +10912,1230 @@ class FavoritesUpdateManyMutationInput
 
   @override
   Map<String, dynamic> toJson() => {};
+}
+
+class FavoritesUncheckedUpdateManyWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUncheckedUpdateManyWithoutUsersInput({this.productId});
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {'product_id': productId};
+}
+
+class FavoritesUpdateManyWithWhereWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUpdateManyWithWhereWithoutUsersInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.FavoritesScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpdateManyMutationInput,
+      _i2.FavoritesUncheckedUpdateManyWithoutUsersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class FavoritesUncheckedUpdateManyWithoutUsersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUncheckedUpdateManyWithoutUsersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.FavoritesCreateWithoutUsersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
+              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
+                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
+
+  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput>>? update;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput,
+      Iterable<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.FavoritesScalarWhereInput,
+      Iterable<_i2.FavoritesScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class OrderItemsUncheckedUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUncheckedUpdateWithoutOrdersInput({
+    this.productId,
+    this.quantity,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'quantity': quantity,
+      };
+}
+
+class OrderItemsUpdateWithWhereUniqueWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpdateWithWhereUniqueWithoutOrdersInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrderItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithoutOrdersInput,
+      _i2.OrderItemsUncheckedUpdateWithoutOrdersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrderItemsScalarWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsScalarWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.orderId,
+    this.productId,
+    this.quantity,
+  });
+
+  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
+      Iterable<_i2.OrderItemsScalarWhereInput>>? AND;
+
+  final Iterable<_i2.OrderItemsScalarWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
+      Iterable<_i2.OrderItemsScalarWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? orderId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+      };
+}
+
+class OrderItemsUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpdateManyMutationInput({this.quantity});
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {'quantity': quantity};
+}
+
+class OrderItemsUncheckedUpdateManyWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUncheckedUpdateManyWithoutOrdersInput({
+    this.productId,
+    this.quantity,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'quantity': quantity,
+      };
+}
+
+class OrderItemsUpdateManyWithWhereWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpdateManyWithWhereWithoutOrdersInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrderItemsScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyMutationInput,
+      _i2.OrderItemsUncheckedUpdateManyWithoutOrdersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrderItemsCreateWithoutOrdersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
+              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
+                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
+          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput,
+      Iterable<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput>>? upsert;
+
+  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput,
+      Iterable<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput>>? update;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput,
+          Iterable<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
+      Iterable<_i2.OrderItemsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class OrdersUncheckedUpdateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateWithoutUsersInput({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+    this.orderItems,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  final _i2.OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+      };
+}
+
+class OrdersUpdateWithWhereUniqueWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateWithWhereUniqueWithoutUsersInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutUsersInput,
+      _i2.OrdersUncheckedUpdateWithoutUsersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrdersScalarWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersScalarWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.userId,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+  });
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? AND;
+
+  final Iterable<_i2.OrdersScalarWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? orderId;
+
+  final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? orderDate;
+
+  final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
+      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? status;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateManyMutationInput({
+    this.orderDate,
+    this.shippingDate,
+    this.totalPrice,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersUncheckedUpdateManyWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateManyWithoutUsersInput({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersUpdateManyWithWhereWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateManyWithWhereWithoutUsersInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrdersScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyMutationInput,
+      _i2.OrdersUncheckedUpdateManyWithoutUsersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrdersUncheckedUpdateManyWithoutUsersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateManyWithoutUsersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.OrdersCreateWithoutUsersInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.OrdersCreateWithoutUsersInput>,
+          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
+              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
+
+  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput>>? update;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutUsersInput,
+      Iterable<_i2.OrdersUpdateManyWithWhereWithoutUsersInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class UsersUncheckedUpdateWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedUpdateWithoutReviewsInput({
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
+
+  final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+      };
+}
+
+class UsersUpsertWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpsertWithoutReviewsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutReviewsInput,
+      _i2.UsersUncheckedUpdateWithoutReviewsInput> update;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
+      _i2.UsersUncheckedCreateWithoutReviewsInput> create;
+
+  final _i2.UsersWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class UsersUpdateToOneWithWhereWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateToOneWithWhereWithoutReviewsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.UsersWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutReviewsInput,
+      _i2.UsersUncheckedUpdateWithoutReviewsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class UsersUpdateOneRequiredWithoutReviewsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateOneRequiredWithoutReviewsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
+      _i2.UsersUncheckedCreateWithoutReviewsInput>? create;
+
+  final _i2.UsersCreateOrConnectWithoutReviewsInput? connectOrCreate;
+
+  final _i2.UsersUpsertWithoutReviewsInput? upsert;
+
+  final _i2.UsersWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.UsersUpdateToOneWithWhereWithoutReviewsInput,
+      _i1.PrismaUnion<_i2.UsersUpdateWithoutReviewsInput,
+          _i2.UsersUncheckedUpdateWithoutReviewsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class ReviewsUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUpdateWithoutProductsInput({
+    this.rating,
+    this.reviewDate,
+    this.users,
+  });
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rating;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      reviewDate;
+
+  final _i2.UsersUpdateOneRequiredWithoutReviewsNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'rating': rating,
+        'review_date': reviewDate,
+        'users': users,
+      };
+}
+
+class ReviewsUncheckedUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUncheckedUpdateWithoutProductsInput({
+    this.reviewId,
+    this.rating,
+    this.reviewDate,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rating;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      reviewDate;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate,
+        'user_id': userId,
+      };
+}
+
+class ReviewsUpsertWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUpsertWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.ReviewsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpdateWithoutProductsInput,
+      _i2.ReviewsUncheckedUpdateWithoutProductsInput> update;
+
+  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutProductsInput,
+      _i2.ReviewsUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class ReviewsUpdateWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUpdateWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.ReviewsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpdateWithoutProductsInput,
+      _i2.ReviewsUncheckedUpdateWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class ReviewsScalarWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsScalarWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.reviewId,
+    this.rating,
+    this.reviewDate,
+    this.userId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
+      Iterable<_i2.ReviewsScalarWhereInput>>? AND;
+
+  final Iterable<_i2.ReviewsScalarWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
+      Iterable<_i2.ReviewsScalarWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? reviewId;
+
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rating;
+
+  final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? reviewDate;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate,
+        'user_id': userId,
+        'product_id': productId,
+      };
+}
+
+class ReviewsUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUpdateManyMutationInput({
+    this.rating,
+    this.reviewDate,
+  });
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rating;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      reviewDate;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'rating': rating,
+        'review_date': reviewDate,
+      };
+}
+
+class ReviewsUncheckedUpdateManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUncheckedUpdateManyWithoutProductsInput({
+    this.reviewId,
+    this.rating,
+    this.reviewDate,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rating;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      reviewDate;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate,
+        'user_id': userId,
+      };
+}
+
+class ReviewsUpdateManyWithWhereWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUpdateManyWithWhereWithoutProductsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.ReviewsScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpdateManyMutationInput,
+      _i2.ReviewsUncheckedUpdateManyWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class ReviewsUpdateManyWithoutProductsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUpdateManyWithoutProductsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.ReviewsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
+
+  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput>>? update;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput,
+      Iterable<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
+      Iterable<_i2.ReviewsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class ProductsUpdateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateWithoutOrderItemsInput({
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.categories,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  final _i2.CartItemsUpdateManyWithoutProductsNestedInput? cartItems;
+
+  final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
+
+  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
+
+  final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
+
+  final _i2.ReviewsUpdateManyWithoutProductsNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class CartItemsUncheckedUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateWithoutProductsInput({
+    this.quantity,
+    this.cartId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+      };
+}
+
+class CartItemsUpdateWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutProductsInput,
+      _i2.CartItemsUncheckedUpdateWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class CartItemsUncheckedUpdateManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateManyWithoutProductsInput({
+    this.quantity,
+    this.cartId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+      };
+}
+
+class CartItemsUpdateManyWithWhereWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyWithWhereWithoutProductsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.CartItemsScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyMutationInput,
+      _i2.CartItemsUncheckedUpdateManyWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class CartItemsUncheckedUpdateManyWithoutProductsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateManyWithoutProductsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
+
+  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput>>? update;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput,
+          Iterable<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class FavoritesUncheckedUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUncheckedUpdateWithoutProductsInput({this.userId});
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {'user_id': userId};
+}
+
+class FavoritesUpdateWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUpdateWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.FavoritesWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpdateWithoutProductsInput,
+      _i2.FavoritesUncheckedUpdateWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
 }
 
 class FavoritesUncheckedUpdateManyWithoutProductsInput
@@ -8831,26 +12312,567 @@ class NutritionsUncheckedUpdateManyWithoutProductsNestedInput
       };
 }
 
+class ReviewsUncheckedUpdateManyWithoutProductsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUncheckedUpdateManyWithoutProductsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.ReviewsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
+
+  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
+      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput>>? update;
+
+  final _i1.PrismaUnion<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput,
+      Iterable<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
+      Iterable<_i2.ReviewsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class ProductsUncheckedUpdateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedUpdateWithoutOrderItemsInput({
+    this.productId,
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? categoryId;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
+
+  final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
+
+  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
+
+  final _i2.ReviewsUncheckedUpdateManyWithoutProductsNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUpsertWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpsertWithoutOrderItemsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutOrderItemsInput,
+      _i2.ProductsUncheckedUpdateWithoutOrderItemsInput> update;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
+      _i2.ProductsUncheckedCreateWithoutOrderItemsInput> create;
+
+  final _i2.ProductsWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class ProductsUpdateToOneWithWhereWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateToOneWithWhereWithoutOrderItemsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.ProductsWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutOrderItemsInput,
+      _i2.ProductsUncheckedUpdateWithoutOrderItemsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class ProductsUpdateOneRequiredWithoutOrderItemsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateOneRequiredWithoutOrderItemsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
+      _i2.ProductsUncheckedCreateWithoutOrderItemsInput>? create;
+
+  final _i2.ProductsCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
+
+  final _i2.ProductsUpsertWithoutOrderItemsInput? upsert;
+
+  final _i2.ProductsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.ProductsUpdateToOneWithWhereWithoutOrderItemsInput,
+      _i1.PrismaUnion<_i2.ProductsUpdateWithoutOrderItemsInput,
+          _i2.ProductsUncheckedUpdateWithoutOrderItemsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class OrderItemsUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpdateWithoutOrdersInput({
+    this.quantity,
+    this.products,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i2.ProductsUpdateOneRequiredWithoutOrderItemsNestedInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'products': products,
+      };
+}
+
+class OrderItemsUpsertWithWhereUniqueWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpsertWithWhereUniqueWithoutOrdersInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.OrderItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithoutOrdersInput,
+      _i2.OrderItemsUncheckedUpdateWithoutOrdersInput> update;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateWithoutOrdersInput,
+      _i2.OrderItemsUncheckedCreateWithoutOrdersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class OrderItemsUpdateManyWithoutOrdersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpdateManyWithoutOrdersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrderItemsCreateWithoutOrdersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
+              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
+                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
+          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput,
+      Iterable<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput>>? upsert;
+
+  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput,
+      Iterable<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput>>? update;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput,
+          Iterable<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
+      Iterable<_i2.OrderItemsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class OrdersUpdateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateWithoutUsersInput({
+    this.orderDate,
+    this.shippingDate,
+    this.totalPrice,
+    this.orderItems,
+    this.orderStatus,
+    this.paymentMethods,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  final _i2.OrderItemsUpdateManyWithoutOrdersNestedInput? orderItems;
+
+  final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
+
+  final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentMethods;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+      };
+}
+
+class OrdersUpsertWithWhereUniqueWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpsertWithWhereUniqueWithoutUsersInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutUsersInput,
+      _i2.OrdersUncheckedUpdateWithoutUsersInput> update;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutUsersInput,
+      _i2.OrdersUncheckedCreateWithoutUsersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class OrdersUpdateManyWithoutUsersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateManyWithoutUsersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.OrdersCreateWithoutUsersInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.OrdersCreateWithoutUsersInput>,
+          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
+              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
+
+  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput>>? update;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutUsersInput,
+      Iterable<_i2.OrdersUpdateManyWithWhereWithoutUsersInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class ProductsUpdateWithoutReviewsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateWithoutReviewsInput({
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.categories,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  final _i2.CartItemsUpdateManyWithoutProductsNestedInput? cartItems;
+
+  final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
+
+  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
+
+  final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+      };
+}
+
 class OrderItemsUncheckedUpdateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderItemsUncheckedUpdateWithoutProductsInput({
     this.orderId,
     this.quantity,
-    this.price,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
 
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -8873,85 +12895,21 @@ class OrderItemsUpdateWithWhereUniqueWithoutProductsInput
       };
 }
 
-class OrderItemsScalarWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.orderId,
-    this.productId,
-    this.quantity,
-    this.price,
-  });
-
-  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
-      Iterable<_i2.OrderItemsScalarWhereInput>>? AND;
-
-  final Iterable<_i2.OrderItemsScalarWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
-      Iterable<_i2.OrderItemsScalarWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? orderId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
-
-  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? price;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'order_id': orderId,
-        'product_id': productId,
-        'quantity': quantity,
-        'price': price,
-      };
-}
-
-class OrderItemsUpdateManyMutationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpdateManyMutationInput({
-    this.quantity,
-    this.price,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'price': price,
-      };
-}
-
 class OrderItemsUncheckedUpdateManyWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderItemsUncheckedUpdateManyWithoutProductsInput({
     this.orderId,
     this.quantity,
-    this.price,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
 
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -9061,6 +13019,7 @@ class ProductsUncheckedUpdateWithoutReviewsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -9099,6 +13058,8 @@ class ProductsUncheckedUpdateWithoutReviewsInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
@@ -9117,6 +13078,7 @@ class ProductsUncheckedUpdateWithoutReviewsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -9295,70 +13257,6 @@ class ReviewsUpdateWithWhereUniqueWithoutUsersInput
       };
 }
 
-class ReviewsScalarWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.reviewId,
-    this.rating,
-    this.reviewDate,
-    this.userId,
-    this.productId,
-  });
-
-  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
-      Iterable<_i2.ReviewsScalarWhereInput>>? AND;
-
-  final Iterable<_i2.ReviewsScalarWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
-      Iterable<_i2.ReviewsScalarWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? reviewId;
-
-  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rating;
-
-  final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? reviewDate;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'user_id': userId,
-        'product_id': productId,
-      };
-}
-
-class ReviewsUpdateManyMutationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateManyMutationInput({
-    this.rating,
-    this.reviewDate,
-  });
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rating;
-
-  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
-      reviewDate;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'rating': rating,
-        'review_date': reviewDate,
-      };
-}
-
 class ReviewsUncheckedUpdateManyWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedUpdateManyWithoutUsersInput({
@@ -9474,9 +13372,9 @@ class ReviewsUpdateManyWithoutUsersNestedInput
       };
 }
 
-class UsersUpdateWithoutOrdersInput
+class UsersUpdateWithoutFavoritesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateWithoutOrdersInput({
+  const UsersUpdateWithoutFavoritesInput({
     this.userName,
     this.email,
     this.password,
@@ -9484,7 +13382,8 @@ class UsersUpdateWithoutOrdersInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
-    this.favorites,
+    this.carts,
+    this.orders,
     this.reviews,
   });
 
@@ -9511,7 +13410,9 @@ class UsersUpdateWithoutOrdersInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
-  final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
+  final _i2.CartsUpdateOneWithoutUsersNestedInput? carts;
+
+  final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
 
   final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
 
@@ -9524,135 +13425,9 @@ class UsersUpdateWithoutOrdersInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
-        'favorites': favorites,
+        'carts': carts,
+        'orders': orders,
         'reviews': reviews,
-      };
-}
-
-class FavoritesUncheckedUpdateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUncheckedUpdateWithoutUsersInput({this.productId});
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {'product_id': productId};
-}
-
-class FavoritesUpdateWithWhereUniqueWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUpdateWithWhereUniqueWithoutUsersInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.FavoritesWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpdateWithoutUsersInput,
-      _i2.FavoritesUncheckedUpdateWithoutUsersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class FavoritesUncheckedUpdateManyWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUncheckedUpdateManyWithoutUsersInput({this.productId});
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {'product_id': productId};
-}
-
-class FavoritesUpdateManyWithWhereWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUpdateManyWithWhereWithoutUsersInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.FavoritesScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpdateManyMutationInput,
-      _i2.FavoritesUncheckedUpdateManyWithoutUsersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class FavoritesUncheckedUpdateManyWithoutUsersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUncheckedUpdateManyWithoutUsersNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.FavoritesCreateWithoutUsersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
-              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
-                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
-
-  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput,
-      Iterable<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.FavoritesScalarWhereInput,
-      Iterable<_i2.FavoritesScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
       };
 }
 
@@ -9724,2126 +13499,6 @@ class ReviewsUncheckedUpdateManyWithoutUsersNestedInput
       };
 }
 
-class UsersUncheckedUpdateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUncheckedUpdateWithoutOrdersInput({
-    this.userId,
-    this.userName,
-    this.email,
-    this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    this.isDeleted,
-    this.favorites,
-    this.reviews,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? address;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? phoneNumber;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
-
-  final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
-
-  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'reviews': reviews,
-      };
-}
-
-class UsersUpsertWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpsertWithoutOrdersInput({
-    required this.update,
-    required this.create,
-    this.where,
-  });
-
-  final _i1.PrismaUnion<_i2.UsersUpdateWithoutOrdersInput,
-      _i2.UsersUncheckedUpdateWithoutOrdersInput> update;
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
-      _i2.UsersUncheckedCreateWithoutOrdersInput> create;
-
-  final _i2.UsersWhereInput? where;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
-      };
-}
-
-class UsersUpdateToOneWithWhereWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateToOneWithWhereWithoutOrdersInput({
-    this.where,
-    required this.data,
-  });
-
-  final _i2.UsersWhereInput? where;
-
-  final _i1.PrismaUnion<_i2.UsersUpdateWithoutOrdersInput,
-      _i2.UsersUncheckedUpdateWithoutOrdersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class UsersUpdateOneRequiredWithoutOrdersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateOneRequiredWithoutOrdersNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.connect,
-    this.update,
-  });
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
-      _i2.UsersUncheckedCreateWithoutOrdersInput>? create;
-
-  final _i2.UsersCreateOrConnectWithoutOrdersInput? connectOrCreate;
-
-  final _i2.UsersUpsertWithoutOrdersInput? upsert;
-
-  final _i2.UsersWhereUniqueInput? connect;
-
-  final _i1.PrismaUnion<
-      _i2.UsersUpdateToOneWithWhereWithoutOrdersInput,
-      _i1.PrismaUnion<_i2.UsersUpdateWithoutOrdersInput,
-          _i2.UsersUncheckedUpdateWithoutOrdersInput>>? update;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'connect': connect,
-        'update': update,
-      };
-}
-
-class OrdersUpdateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateWithoutOrderItemsInput({
-    this.orderDate,
-    this.shippingDate,
-    this.orderStatus,
-    this.users,
-  });
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? shippingDate;
-
-  final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
-
-  final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'order_status': orderStatus,
-        'users': users,
-      };
-}
-
-class OrdersUncheckedUpdateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUncheckedUpdateWithoutOrderItemsInput({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    this.userId,
-    this.status,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? shippingDate;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'user_id': userId,
-        'status': status,
-      };
-}
-
-class OrdersUpsertWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpsertWithoutOrderItemsInput({
-    required this.update,
-    required this.create,
-    this.where,
-  });
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutOrderItemsInput,
-      _i2.OrdersUncheckedUpdateWithoutOrderItemsInput> update;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
-      _i2.OrdersUncheckedCreateWithoutOrderItemsInput> create;
-
-  final _i2.OrdersWhereInput? where;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
-      };
-}
-
-class OrdersUpdateToOneWithWhereWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateToOneWithWhereWithoutOrderItemsInput({
-    this.where,
-    required this.data,
-  });
-
-  final _i2.OrdersWhereInput? where;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutOrderItemsInput,
-      _i2.OrdersUncheckedUpdateWithoutOrderItemsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class OrdersUpdateOneRequiredWithoutOrderItemsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateOneRequiredWithoutOrderItemsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.connect,
-    this.update,
-  });
-
-  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
-      _i2.OrdersUncheckedCreateWithoutOrderItemsInput>? create;
-
-  final _i2.OrdersCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
-
-  final _i2.OrdersUpsertWithoutOrderItemsInput? upsert;
-
-  final _i2.OrdersWhereUniqueInput? connect;
-
-  final _i1.PrismaUnion<
-      _i2.OrdersUpdateToOneWithWhereWithoutOrderItemsInput,
-      _i1.PrismaUnion<_i2.OrdersUpdateWithoutOrderItemsInput,
-          _i2.OrdersUncheckedUpdateWithoutOrderItemsInput>>? update;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'connect': connect,
-        'update': update,
-      };
-}
-
-class OrderItemsUpdateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpdateWithoutProductsInput({
-    this.quantity,
-    this.price,
-    this.orders,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
-  final _i2.OrdersUpdateOneRequiredWithoutOrderItemsNestedInput? orders;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'price': price,
-        'orders': orders,
-      };
-}
-
-class OrderItemsUpsertWithWhereUniqueWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpsertWithWhereUniqueWithoutProductsInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  final _i2.OrderItemsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithoutProductsInput,
-      _i2.OrderItemsUncheckedUpdateWithoutProductsInput> update;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateWithoutProductsInput,
-      _i2.OrderItemsUncheckedCreateWithoutProductsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'update': update,
-        'create': create,
-      };
-}
-
-class OrderItemsUpdateManyWithoutProductsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpdateManyWithoutProductsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.OrderItemsCreateWithoutProductsInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.OrderItemsCreateWithoutProductsInput>,
-          _i1.PrismaUnion<
-              _i2.OrderItemsUncheckedCreateWithoutProductsInput,
-              Iterable<
-                  _i2.OrderItemsUncheckedCreateWithoutProductsInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.OrderItemsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpsertWithWhereUniqueWithoutProductsInput,
-          Iterable<_i2.OrderItemsUpsertWithWhereUniqueWithoutProductsInput>>?
-      upsert;
-
-  final _i2.OrderItemsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithWhereUniqueWithoutProductsInput,
-          Iterable<_i2.OrderItemsUpdateWithWhereUniqueWithoutProductsInput>>?
-      update;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyWithWhereWithoutProductsInput,
-          Iterable<_i2.OrderItemsUpdateManyWithWhereWithoutProductsInput>>?
-      updateMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
-      Iterable<_i2.OrderItemsScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class ProductsUpdateWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateWithoutFavoritesInput({
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.nutritions,
-    this.orderItems,
-    this.categories,
-    this.reviews,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
-      quantityInStock;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      description;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      unitPrice;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? productDetails;
-
-  final _i1.PrismaUnion<
-      _i1.Decimal,
-      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? discountPercentage;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rate;
-
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
-  final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
-
-  final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
-
-  final _i2.ReviewsUpdateManyWithoutProductsNestedInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'categories': categories,
-        'reviews': reviews,
-      };
-}
-
-class ReviewsUncheckedUpdateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedUpdateWithoutProductsInput({
-    this.reviewId,
-    this.rating,
-    this.reviewDate,
-    this.userId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rating;
-
-  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
-      reviewDate;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'user_id': userId,
-      };
-}
-
-class ReviewsUpdateWithWhereUniqueWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateWithWhereUniqueWithoutProductsInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.ReviewsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateWithoutProductsInput,
-      _i2.ReviewsUncheckedUpdateWithoutProductsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class ReviewsUncheckedUpdateManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedUpdateManyWithoutProductsInput({
-    this.reviewId,
-    this.rating,
-    this.reviewDate,
-    this.userId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rating;
-
-  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
-      reviewDate;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'user_id': userId,
-      };
-}
-
-class ReviewsUpdateManyWithWhereWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateManyWithWhereWithoutProductsInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.ReviewsScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateManyMutationInput,
-      _i2.ReviewsUncheckedUpdateManyWithoutProductsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class ReviewsUncheckedUpdateManyWithoutProductsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedUpdateManyWithoutProductsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.ReviewsCreateWithoutProductsInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
-              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
-                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput,
-      Iterable<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
-
-  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput,
-      Iterable<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput>>? update;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput,
-      Iterable<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
-      Iterable<_i2.ReviewsScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class ProductsUncheckedUpdateWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUncheckedUpdateWithoutFavoritesInput({
-    this.productId,
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.categoryId,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.nutritions,
-    this.orderItems,
-    this.reviews,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
-      quantityInStock;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      description;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      unitPrice;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? categoryId;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? productDetails;
-
-  final _i1.PrismaUnion<
-      _i1.Decimal,
-      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? discountPercentage;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rate;
-
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
-
-  final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
-
-  final _i2.ReviewsUncheckedUpdateManyWithoutProductsNestedInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'category_id': categoryId,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'reviews': reviews,
-      };
-}
-
-class ProductsUpsertWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpsertWithoutFavoritesInput({
-    required this.update,
-    required this.create,
-    this.where,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutFavoritesInput,
-      _i2.ProductsUncheckedUpdateWithoutFavoritesInput> update;
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
-      _i2.ProductsUncheckedCreateWithoutFavoritesInput> create;
-
-  final _i2.ProductsWhereInput? where;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
-      };
-}
-
-class ProductsUpdateToOneWithWhereWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateToOneWithWhereWithoutFavoritesInput({
-    this.where,
-    required this.data,
-  });
-
-  final _i2.ProductsWhereInput? where;
-
-  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutFavoritesInput,
-      _i2.ProductsUncheckedUpdateWithoutFavoritesInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class ProductsUpdateOneRequiredWithoutFavoritesNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateOneRequiredWithoutFavoritesNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.connect,
-    this.update,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
-      _i2.ProductsUncheckedCreateWithoutFavoritesInput>? create;
-
-  final _i2.ProductsCreateOrConnectWithoutFavoritesInput? connectOrCreate;
-
-  final _i2.ProductsUpsertWithoutFavoritesInput? upsert;
-
-  final _i2.ProductsWhereUniqueInput? connect;
-
-  final _i1.PrismaUnion<
-      _i2.ProductsUpdateToOneWithWhereWithoutFavoritesInput,
-      _i1.PrismaUnion<_i2.ProductsUpdateWithoutFavoritesInput,
-          _i2.ProductsUncheckedUpdateWithoutFavoritesInput>>? update;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'connect': connect,
-        'update': update,
-      };
-}
-
-class FavoritesUpdateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUpdateWithoutUsersInput({this.products});
-
-  final _i2.ProductsUpdateOneRequiredWithoutFavoritesNestedInput? products;
-
-  @override
-  Map<String, dynamic> toJson() => {'products': products};
-}
-
-class FavoritesUpsertWithWhereUniqueWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUpsertWithWhereUniqueWithoutUsersInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  final _i2.FavoritesWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpdateWithoutUsersInput,
-      _i2.FavoritesUncheckedUpdateWithoutUsersInput> update;
-
-  final _i1.PrismaUnion<_i2.FavoritesCreateWithoutUsersInput,
-      _i2.FavoritesUncheckedCreateWithoutUsersInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'update': update,
-        'create': create,
-      };
-}
-
-class FavoritesUpdateManyWithoutUsersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUpdateManyWithoutUsersNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.FavoritesCreateWithoutUsersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
-              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
-                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
-
-  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
-      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput,
-      Iterable<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.FavoritesScalarWhereInput,
-      Iterable<_i2.FavoritesScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class UsersUpdateWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateWithoutReviewsInput({
-    this.userName,
-    this.email,
-    this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    this.isDeleted,
-    this.favorites,
-    this.orders,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? address;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? phoneNumber;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
-
-  final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
-
-  final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'orders': orders,
-      };
-}
-
-class OrderItemsUncheckedUpdateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUncheckedUpdateWithoutOrdersInput({
-    this.productId,
-    this.quantity,
-    this.price,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'quantity': quantity,
-        'price': price,
-      };
-}
-
-class OrderItemsUpdateWithWhereUniqueWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpdateWithWhereUniqueWithoutOrdersInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.OrderItemsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithoutOrdersInput,
-      _i2.OrderItemsUncheckedUpdateWithoutOrdersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class OrderItemsUncheckedUpdateManyWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUncheckedUpdateManyWithoutOrdersInput({
-    this.productId,
-    this.quantity,
-    this.price,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'quantity': quantity,
-        'price': price,
-      };
-}
-
-class OrderItemsUpdateManyWithWhereWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpdateManyWithWhereWithoutOrdersInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.OrderItemsScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyMutationInput,
-      _i2.OrderItemsUncheckedUpdateManyWithoutOrdersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.OrderItemsCreateWithoutOrdersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
-              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
-                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
-          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
-      connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput,
-      Iterable<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput>>? upsert;
-
-  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput,
-      Iterable<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput,
-          Iterable<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput>>?
-      updateMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
-      Iterable<_i2.OrderItemsScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class OrdersUncheckedUpdateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUncheckedUpdateWithoutUsersInput({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    this.status,
-    this.orderItems,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? shippingDate;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
-
-  final _i2.OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput? orderItems;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'status': status,
-        'order_items': orderItems,
-      };
-}
-
-class OrdersUpdateWithWhereUniqueWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateWithWhereUniqueWithoutUsersInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.OrdersWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutUsersInput,
-      _i2.OrdersUncheckedUpdateWithoutUsersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class OrdersScalarWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    this.userId,
-    this.status,
-  });
-
-  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
-      Iterable<_i2.OrdersScalarWhereInput>>? AND;
-
-  final Iterable<_i2.OrdersScalarWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
-      Iterable<_i2.OrdersScalarWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? orderId;
-
-  final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
-      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? orderDate;
-
-  final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
-      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? status;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'user_id': userId,
-        'status': status,
-      };
-}
-
-class OrdersUpdateManyMutationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateManyMutationInput({
-    this.orderDate,
-    this.shippingDate,
-  });
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? shippingDate;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-      };
-}
-
-class OrdersUncheckedUpdateManyWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUncheckedUpdateManyWithoutUsersInput({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    this.status,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? shippingDate;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'status': status,
-      };
-}
-
-class OrdersUpdateManyWithWhereWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateManyWithWhereWithoutUsersInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.OrdersScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateManyMutationInput,
-      _i2.OrdersUncheckedUpdateManyWithoutUsersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class OrdersUncheckedUpdateManyWithoutUsersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUncheckedUpdateManyWithoutUsersNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.OrdersCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.OrdersCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
-
-  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutUsersInput,
-      Iterable<_i2.OrdersUpdateManyWithWhereWithoutUsersInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
-      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class UsersUncheckedUpdateWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUncheckedUpdateWithoutReviewsInput({
-    this.userId,
-    this.userName,
-    this.email,
-    this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    this.isDeleted,
-    this.favorites,
-    this.orders,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? address;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? phoneNumber;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
-
-  final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
-
-  final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'favorites': favorites,
-        'orders': orders,
-      };
-}
-
-class UsersUpsertWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpsertWithoutReviewsInput({
-    required this.update,
-    required this.create,
-    this.where,
-  });
-
-  final _i1.PrismaUnion<_i2.UsersUpdateWithoutReviewsInput,
-      _i2.UsersUncheckedUpdateWithoutReviewsInput> update;
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
-      _i2.UsersUncheckedCreateWithoutReviewsInput> create;
-
-  final _i2.UsersWhereInput? where;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
-      };
-}
-
-class UsersUpdateToOneWithWhereWithoutReviewsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateToOneWithWhereWithoutReviewsInput({
-    this.where,
-    required this.data,
-  });
-
-  final _i2.UsersWhereInput? where;
-
-  final _i1.PrismaUnion<_i2.UsersUpdateWithoutReviewsInput,
-      _i2.UsersUncheckedUpdateWithoutReviewsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class UsersUpdateOneRequiredWithoutReviewsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateOneRequiredWithoutReviewsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.connect,
-    this.update,
-  });
-
-  final _i1.PrismaUnion<_i2.UsersCreateWithoutReviewsInput,
-      _i2.UsersUncheckedCreateWithoutReviewsInput>? create;
-
-  final _i2.UsersCreateOrConnectWithoutReviewsInput? connectOrCreate;
-
-  final _i2.UsersUpsertWithoutReviewsInput? upsert;
-
-  final _i2.UsersWhereUniqueInput? connect;
-
-  final _i1.PrismaUnion<
-      _i2.UsersUpdateToOneWithWhereWithoutReviewsInput,
-      _i1.PrismaUnion<_i2.UsersUpdateWithoutReviewsInput,
-          _i2.UsersUncheckedUpdateWithoutReviewsInput>>? update;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'connect': connect,
-        'update': update,
-      };
-}
-
-class ReviewsUpdateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateWithoutProductsInput({
-    this.rating,
-    this.reviewDate,
-    this.users,
-  });
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rating;
-
-  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
-      reviewDate;
-
-  final _i2.UsersUpdateOneRequiredWithoutReviewsNestedInput? users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'rating': rating,
-        'review_date': reviewDate,
-        'users': users,
-      };
-}
-
-class ReviewsUpsertWithWhereUniqueWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpsertWithWhereUniqueWithoutProductsInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  final _i2.ReviewsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateWithoutProductsInput,
-      _i2.ReviewsUncheckedUpdateWithoutProductsInput> update;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutProductsInput,
-      _i2.ReviewsUncheckedCreateWithoutProductsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'update': update,
-        'create': create,
-      };
-}
-
-class ReviewsUpdateManyWithoutProductsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateManyWithoutProductsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.ReviewsCreateWithoutProductsInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.ReviewsCreateWithoutProductsInput>,
-              _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutProductsInput,
-                  Iterable<_i2.ReviewsUncheckedCreateWithoutProductsInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.ReviewsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput,
-      Iterable<_i2.ReviewsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
-
-  final _i2.ReviewsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput,
-      Iterable<_i2.ReviewsUpdateWithWhereUniqueWithoutProductsInput>>? update;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput,
-      Iterable<_i2.ReviewsUpdateManyWithWhereWithoutProductsInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
-      Iterable<_i2.ReviewsScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class ProductsUpdateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateWithoutOrderItemsInput({
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.favorites,
-    this.nutritions,
-    this.categories,
-    this.reviews,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
-      quantityInStock;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      description;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      unitPrice;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? productDetails;
-
-  final _i1.PrismaUnion<
-      _i1.Decimal,
-      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? discountPercentage;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rate;
-
-  final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
-
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
-  final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
-
-  final _i2.ReviewsUpdateManyWithoutProductsNestedInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'categories': categories,
-        'reviews': reviews,
-      };
-}
-
-class ProductsUncheckedUpdateWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUncheckedUpdateWithoutOrderItemsInput({
-    this.productId,
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.categoryId,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.favorites,
-    this.nutritions,
-    this.reviews,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
-      quantityInStock;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
-      description;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      unitPrice;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? categoryId;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? productDetails;
-
-  final _i1.PrismaUnion<
-      _i1.Decimal,
-      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? discountPercentage;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rate;
-
-  final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
-
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
-
-  final _i2.ReviewsUncheckedUpdateManyWithoutProductsNestedInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'category_id': categoryId,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'reviews': reviews,
-      };
-}
-
-class ProductsUpsertWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpsertWithoutOrderItemsInput({
-    required this.update,
-    required this.create,
-    this.where,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutOrderItemsInput,
-      _i2.ProductsUncheckedUpdateWithoutOrderItemsInput> update;
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
-      _i2.ProductsUncheckedCreateWithoutOrderItemsInput> create;
-
-  final _i2.ProductsWhereInput? where;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'update': update,
-        'create': create,
-        'where': where,
-      };
-}
-
-class ProductsUpdateToOneWithWhereWithoutOrderItemsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateToOneWithWhereWithoutOrderItemsInput({
-    this.where,
-    required this.data,
-  });
-
-  final _i2.ProductsWhereInput? where;
-
-  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutOrderItemsInput,
-      _i2.ProductsUncheckedUpdateWithoutOrderItemsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class ProductsUpdateOneRequiredWithoutOrderItemsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateOneRequiredWithoutOrderItemsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.connect,
-    this.update,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutOrderItemsInput,
-      _i2.ProductsUncheckedCreateWithoutOrderItemsInput>? create;
-
-  final _i2.ProductsCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
-
-  final _i2.ProductsUpsertWithoutOrderItemsInput? upsert;
-
-  final _i2.ProductsWhereUniqueInput? connect;
-
-  final _i1.PrismaUnion<
-      _i2.ProductsUpdateToOneWithWhereWithoutOrderItemsInput,
-      _i1.PrismaUnion<_i2.ProductsUpdateWithoutOrderItemsInput,
-          _i2.ProductsUncheckedUpdateWithoutOrderItemsInput>>? update;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'connect': connect,
-        'update': update,
-      };
-}
-
-class OrderItemsUpdateWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpdateWithoutOrdersInput({
-    this.quantity,
-    this.price,
-    this.products,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
-  final _i2.ProductsUpdateOneRequiredWithoutOrderItemsNestedInput? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'price': price,
-        'products': products,
-      };
-}
-
-class OrderItemsUpsertWithWhereUniqueWithoutOrdersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpsertWithWhereUniqueWithoutOrdersInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  final _i2.OrderItemsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithoutOrdersInput,
-      _i2.OrderItemsUncheckedUpdateWithoutOrdersInput> update;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateWithoutOrdersInput,
-      _i2.OrderItemsUncheckedCreateWithoutOrdersInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'update': update,
-        'create': create,
-      };
-}
-
-class OrderItemsUpdateManyWithoutOrdersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsUpdateManyWithoutOrdersNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.OrderItemsCreateWithoutOrdersInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.OrderItemsCreateWithoutOrdersInput>,
-              _i1.PrismaUnion<_i2.OrderItemsUncheckedCreateWithoutOrdersInput,
-                  Iterable<_i2.OrderItemsUncheckedCreateWithoutOrdersInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutOrdersInput,
-          Iterable<_i2.OrderItemsCreateOrConnectWithoutOrdersInput>>?
-      connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput,
-      Iterable<_i2.OrderItemsUpsertWithWhereUniqueWithoutOrdersInput>>? upsert;
-
-  final _i2.OrderItemsCreateManyOrdersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
-      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput,
-      Iterable<_i2.OrderItemsUpdateWithWhereUniqueWithoutOrdersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput,
-          Iterable<_i2.OrderItemsUpdateManyWithWhereWithoutOrdersInput>>?
-      updateMany;
-
-  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
-      Iterable<_i2.OrderItemsScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class OrdersUpdateWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateWithoutUsersInput({
-    this.orderDate,
-    this.shippingDate,
-    this.orderItems,
-    this.orderStatus,
-  });
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
-
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? shippingDate;
-
-  final _i2.OrderItemsUpdateManyWithoutOrdersNestedInput? orderItems;
-
-  final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'order_items': orderItems,
-        'order_status': orderStatus,
-      };
-}
-
-class OrdersUpsertWithWhereUniqueWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpsertWithWhereUniqueWithoutUsersInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  final _i2.OrdersWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutUsersInput,
-      _i2.OrdersUncheckedUpdateWithoutUsersInput> update;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateWithoutUsersInput,
-      _i2.OrdersUncheckedCreateWithoutUsersInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'update': update,
-        'create': create,
-      };
-}
-
-class OrdersUpdateManyWithoutUsersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUpdateManyWithoutUsersNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.OrdersCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.OrdersCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.OrdersUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.OrdersUncheckedCreateWithoutUsersInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.OrdersCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
-
-  final _i2.OrdersCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
-      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutUsersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutUsersInput,
-      Iterable<_i2.OrdersUpdateManyWithWhereWithoutUsersInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
-      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
-class UsersUpdateWithoutFavoritesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateWithoutFavoritesInput({
-    this.userName,
-    this.email,
-    this.password,
-    this.address,
-    this.phoneNumber,
-    this.imageUrl,
-    this.isDeleted,
-    this.orders,
-    this.reviews,
-  });
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
-
-  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? address;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? phoneNumber;
-
-  final _i1.PrismaUnion<
-      String,
-      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
-
-  final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
-
-  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_name': userName,
-        'email': email,
-        'password': password,
-        'address': address,
-        'phone_number': phoneNumber,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'orders': orders,
-        'reviews': reviews,
-      };
-}
-
 class UsersUncheckedUpdateWithoutFavoritesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersUncheckedUpdateWithoutFavoritesInput({
@@ -11855,6 +13510,7 @@ class UsersUncheckedUpdateWithoutFavoritesInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.carts,
     this.orders,
     this.reviews,
   });
@@ -11884,6 +13540,8 @@ class UsersUncheckedUpdateWithoutFavoritesInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
+  final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
+
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
 
   final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
@@ -11898,6 +13556,7 @@ class UsersUncheckedUpdateWithoutFavoritesInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'carts': carts,
         'orders': orders,
         'reviews': reviews,
       };
@@ -12085,9 +13744,9 @@ class FavoritesUpdateManyWithoutProductsNestedInput
       };
 }
 
-class ProductsUpdateWithoutCategoriesInput
+class ProductsUpdateWithoutCartItemsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateWithoutCategoriesInput({
+  const ProductsUpdateWithoutCartItemsInput({
     this.name,
     this.quantityInStock,
     this.description,
@@ -12099,6 +13758,7 @@ class ProductsUpdateWithoutCategoriesInput
     this.favorites,
     this.nutritions,
     this.orderItems,
+    this.categories,
     this.reviews,
   });
 
@@ -12137,6 +13797,8 @@ class ProductsUpdateWithoutCategoriesInput
 
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
 
+  final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
+
   final _i2.ReviewsUpdateManyWithoutProductsNestedInput? reviews;
 
   @override
@@ -12149,6 +13811,1652 @@ class ProductsUpdateWithoutCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUncheckedUpdateWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedUpdateWithoutCartItemsInput({
+    this.productId,
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? categoryId;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
+
+  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
+
+  final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.ReviewsUncheckedUpdateManyWithoutProductsNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUpsertWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpsertWithoutCartItemsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutCartItemsInput,
+      _i2.ProductsUncheckedUpdateWithoutCartItemsInput> update;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutCartItemsInput,
+      _i2.ProductsUncheckedCreateWithoutCartItemsInput> create;
+
+  final _i2.ProductsWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class ProductsUpdateToOneWithWhereWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateToOneWithWhereWithoutCartItemsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.ProductsWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutCartItemsInput,
+      _i2.ProductsUncheckedUpdateWithoutCartItemsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class ProductsUpdateOneRequiredWithoutCartItemsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateOneRequiredWithoutCartItemsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutCartItemsInput,
+      _i2.ProductsUncheckedCreateWithoutCartItemsInput>? create;
+
+  final _i2.ProductsCreateOrConnectWithoutCartItemsInput? connectOrCreate;
+
+  final _i2.ProductsUpsertWithoutCartItemsInput? upsert;
+
+  final _i2.ProductsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.ProductsUpdateToOneWithWhereWithoutCartItemsInput,
+      _i1.PrismaUnion<_i2.ProductsUpdateWithoutCartItemsInput,
+          _i2.ProductsUncheckedUpdateWithoutCartItemsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class CartItemsUpdateWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateWithoutCartsInput({
+    this.quantity,
+    this.products,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i2.ProductsUpdateOneRequiredWithoutCartItemsNestedInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'products': products,
+      };
+}
+
+class CartItemsUpsertWithWhereUniqueWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpsertWithWhereUniqueWithoutCartsInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutCartsInput,
+      _i2.CartItemsUncheckedUpdateWithoutCartsInput> update;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutCartsInput,
+      _i2.CartItemsUncheckedCreateWithoutCartsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class CartItemsUpdateManyWithoutCartsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyWithoutCartsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutCartsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutCartsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutCartsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutCartsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutCartsInput,
+      Iterable<_i2.CartItemsCreateOrConnectWithoutCartsInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpsertWithWhereUniqueWithoutCartsInput,
+      Iterable<_i2.CartItemsUpsertWithWhereUniqueWithoutCartsInput>>? upsert;
+
+  final _i2.CartItemsCreateManyCartsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithWhereUniqueWithoutCartsInput,
+      Iterable<_i2.CartItemsUpdateWithWhereUniqueWithoutCartsInput>>? update;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyWithWhereWithoutCartsInput,
+      Iterable<_i2.CartItemsUpdateManyWithWhereWithoutCartsInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class CartsUpdateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateWithoutUsersInput({this.cartItems});
+
+  final _i2.CartItemsUpdateManyWithoutCartsNestedInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {'cart_items': cartItems};
+}
+
+class CartsUpsertWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpsertWithoutUsersInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsUpdateWithoutUsersInput,
+      _i2.CartsUncheckedUpdateWithoutUsersInput> update;
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutUsersInput,
+      _i2.CartsUncheckedCreateWithoutUsersInput> create;
+
+  final _i2.CartsWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class CartsUpdateOneWithoutUsersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateOneWithoutUsersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutUsersInput,
+      _i2.CartsUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.CartsCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.CartsUpsertWithoutUsersInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.CartsWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.CartsWhereInput>? delete;
+
+  final _i2.CartsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.CartsUpdateToOneWithWhereWithoutUsersInput,
+      _i1.PrismaUnion<_i2.CartsUpdateWithoutUsersInput,
+          _i2.CartsUncheckedUpdateWithoutUsersInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class UsersUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateWithoutOrdersInput({
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i2.CartsUpdateOneWithoutUsersNestedInput? carts;
+
+  final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'reviews': reviews,
+      };
+}
+
+class UsersUncheckedUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedUpdateWithoutOrdersInput({
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
+
+  final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'reviews': reviews,
+      };
+}
+
+class UsersUpsertWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpsertWithoutOrdersInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutOrdersInput,
+      _i2.UsersUncheckedUpdateWithoutOrdersInput> update;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
+      _i2.UsersUncheckedCreateWithoutOrdersInput> create;
+
+  final _i2.UsersWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class UsersUpdateToOneWithWhereWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateToOneWithWhereWithoutOrdersInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.UsersWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutOrdersInput,
+      _i2.UsersUncheckedUpdateWithoutOrdersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class UsersUpdateOneRequiredWithoutOrdersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateOneRequiredWithoutOrdersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutOrdersInput,
+      _i2.UsersUncheckedCreateWithoutOrdersInput>? create;
+
+  final _i2.UsersCreateOrConnectWithoutOrdersInput? connectOrCreate;
+
+  final _i2.UsersUpsertWithoutOrdersInput? upsert;
+
+  final _i2.UsersWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.UsersUpdateToOneWithWhereWithoutOrdersInput,
+      _i1.PrismaUnion<_i2.UsersUpdateWithoutOrdersInput,
+          _i2.UsersUncheckedUpdateWithoutOrdersInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class OrdersUpdateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateWithoutOrderItemsInput({
+    this.orderDate,
+    this.shippingDate,
+    this.totalPrice,
+    this.orderStatus,
+    this.paymentMethods,
+    this.users,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
+
+  final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentMethods;
+
+  final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'total_price': totalPrice,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+        'users': users,
+      };
+}
+
+class OrdersUncheckedUpdateWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateWithoutOrderItemsInput({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.userId,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersUpsertWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpsertWithoutOrderItemsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutOrderItemsInput,
+      _i2.OrdersUncheckedUpdateWithoutOrderItemsInput> update;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
+      _i2.OrdersUncheckedCreateWithoutOrderItemsInput> create;
+
+  final _i2.OrdersWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class OrdersUpdateToOneWithWhereWithoutOrderItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateToOneWithWhereWithoutOrderItemsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.OrdersWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutOrderItemsInput,
+      _i2.OrdersUncheckedUpdateWithoutOrderItemsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrdersUpdateOneRequiredWithoutOrderItemsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateOneRequiredWithoutOrderItemsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutOrderItemsInput,
+      _i2.OrdersUncheckedCreateWithoutOrderItemsInput>? create;
+
+  final _i2.OrdersCreateOrConnectWithoutOrderItemsInput? connectOrCreate;
+
+  final _i2.OrdersUpsertWithoutOrderItemsInput? upsert;
+
+  final _i2.OrdersWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.OrdersUpdateToOneWithWhereWithoutOrderItemsInput,
+      _i1.PrismaUnion<_i2.OrdersUpdateWithoutOrderItemsInput,
+          _i2.OrdersUncheckedUpdateWithoutOrderItemsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class OrderItemsUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpdateWithoutProductsInput({
+    this.quantity,
+    this.orders,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i2.OrdersUpdateOneRequiredWithoutOrderItemsNestedInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'orders': orders,
+      };
+}
+
+class OrderItemsUpsertWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpsertWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.OrderItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithoutProductsInput,
+      _i2.OrderItemsUncheckedUpdateWithoutProductsInput> update;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateWithoutProductsInput,
+      _i2.OrderItemsUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class OrderItemsUpdateManyWithoutProductsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsUpdateManyWithoutProductsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.OrderItemsCreateWithoutProductsInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.OrderItemsCreateWithoutProductsInput>,
+          _i1.PrismaUnion<
+              _i2.OrderItemsUncheckedCreateWithoutProductsInput,
+              Iterable<
+                  _i2.OrderItemsUncheckedCreateWithoutProductsInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.OrderItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.OrderItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpsertWithWhereUniqueWithoutProductsInput,
+          Iterable<_i2.OrderItemsUpsertWithWhereUniqueWithoutProductsInput>>?
+      upsert;
+
+  final _i2.OrderItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereUniqueInput,
+      Iterable<_i2.OrderItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateWithWhereUniqueWithoutProductsInput,
+          Iterable<_i2.OrderItemsUpdateWithWhereUniqueWithoutProductsInput>>?
+      update;
+
+  final _i1.PrismaUnion<_i2.OrderItemsUpdateManyWithWhereWithoutProductsInput,
+          Iterable<_i2.OrderItemsUpdateManyWithWhereWithoutProductsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.OrderItemsScalarWhereInput,
+      Iterable<_i2.OrderItemsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class ProductsUpdateWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateWithoutFavoritesInput({
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.nutritions,
+    this.orderItems,
+    this.categories,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  final _i2.CartItemsUpdateManyWithoutProductsNestedInput? cartItems;
+
+  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
+
+  final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
+
+  final _i2.ReviewsUpdateManyWithoutProductsNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUncheckedUpdateWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedUpdateWithoutFavoritesInput({
+    this.productId,
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? categoryId;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
+
+  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
+
+  final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.ReviewsUncheckedUpdateManyWithoutProductsNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUpsertWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpsertWithoutFavoritesInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutFavoritesInput,
+      _i2.ProductsUncheckedUpdateWithoutFavoritesInput> update;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
+      _i2.ProductsUncheckedCreateWithoutFavoritesInput> create;
+
+  final _i2.ProductsWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class ProductsUpdateToOneWithWhereWithoutFavoritesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateToOneWithWhereWithoutFavoritesInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.ProductsWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithoutFavoritesInput,
+      _i2.ProductsUncheckedUpdateWithoutFavoritesInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class ProductsUpdateOneRequiredWithoutFavoritesNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateOneRequiredWithoutFavoritesNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutFavoritesInput,
+      _i2.ProductsUncheckedCreateWithoutFavoritesInput>? create;
+
+  final _i2.ProductsCreateOrConnectWithoutFavoritesInput? connectOrCreate;
+
+  final _i2.ProductsUpsertWithoutFavoritesInput? upsert;
+
+  final _i2.ProductsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.ProductsUpdateToOneWithWhereWithoutFavoritesInput,
+      _i1.PrismaUnion<_i2.ProductsUpdateWithoutFavoritesInput,
+          _i2.ProductsUncheckedUpdateWithoutFavoritesInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class FavoritesUpdateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUpdateWithoutUsersInput({this.products});
+
+  final _i2.ProductsUpdateOneRequiredWithoutFavoritesNestedInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {'products': products};
+}
+
+class FavoritesUpsertWithWhereUniqueWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUpsertWithWhereUniqueWithoutUsersInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.FavoritesWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpdateWithoutUsersInput,
+      _i2.FavoritesUncheckedUpdateWithoutUsersInput> update;
+
+  final _i1.PrismaUnion<_i2.FavoritesCreateWithoutUsersInput,
+      _i2.FavoritesUncheckedCreateWithoutUsersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class FavoritesUpdateManyWithoutUsersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUpdateManyWithoutUsersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.FavoritesCreateWithoutUsersInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.FavoritesCreateWithoutUsersInput>,
+              _i1.PrismaUnion<_i2.FavoritesUncheckedCreateWithoutUsersInput,
+                  Iterable<_i2.FavoritesUncheckedCreateWithoutUsersInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.FavoritesCreateOrConnectWithoutUsersInput,
+      Iterable<_i2.FavoritesCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.FavoritesUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
+
+  final _i2.FavoritesCreateManyUsersInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.FavoritesWhereUniqueInput,
+      Iterable<_i2.FavoritesWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput,
+      Iterable<_i2.FavoritesUpdateWithWhereUniqueWithoutUsersInput>>? update;
+
+  final _i1.PrismaUnion<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput,
+      Iterable<_i2.FavoritesUpdateManyWithWhereWithoutUsersInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.FavoritesScalarWhereInput,
+      Iterable<_i2.FavoritesScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class UsersUpdateWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateWithoutCartsInput({
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
+
+  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class UsersUncheckedUpdateWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedUpdateWithoutCartsInput({
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
+
+  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class UsersUpsertWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpsertWithoutCartsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutCartsInput,
+      _i2.UsersUncheckedUpdateWithoutCartsInput> update;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutCartsInput,
+      _i2.UsersUncheckedCreateWithoutCartsInput> create;
+
+  final _i2.UsersWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class UsersUpdateToOneWithWhereWithoutCartsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateToOneWithWhereWithoutCartsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.UsersWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutCartsInput,
+      _i2.UsersUncheckedUpdateWithoutCartsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class UsersUpdateOneRequiredWithoutCartsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateOneRequiredWithoutCartsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutCartsInput,
+      _i2.UsersUncheckedCreateWithoutCartsInput>? create;
+
+  final _i2.UsersCreateOrConnectWithoutCartsInput? connectOrCreate;
+
+  final _i2.UsersUpsertWithoutCartsInput? upsert;
+
+  final _i2.UsersWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.UsersUpdateToOneWithWhereWithoutCartsInput,
+      _i1.PrismaUnion<_i2.UsersUpdateWithoutCartsInput,
+          _i2.UsersUncheckedUpdateWithoutCartsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class CartsUpdateWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateWithoutCartItemsInput({this.users});
+
+  final _i2.UsersUpdateOneRequiredWithoutCartsNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {'users': users};
+}
+
+class CartsUncheckedUpdateWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedUpdateWithoutCartItemsInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsUpsertWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpsertWithoutCartItemsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsUpdateWithoutCartItemsInput,
+      _i2.CartsUncheckedUpdateWithoutCartItemsInput> update;
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutCartItemsInput,
+      _i2.CartsUncheckedCreateWithoutCartItemsInput> create;
+
+  final _i2.CartsWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class CartsUpdateToOneWithWhereWithoutCartItemsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateToOneWithWhereWithoutCartItemsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.CartsWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.CartsUpdateWithoutCartItemsInput,
+      _i2.CartsUncheckedUpdateWithoutCartItemsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class CartsUpdateOneRequiredWithoutCartItemsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateOneRequiredWithoutCartItemsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsCreateWithoutCartItemsInput,
+      _i2.CartsUncheckedCreateWithoutCartItemsInput>? create;
+
+  final _i2.CartsCreateOrConnectWithoutCartItemsInput? connectOrCreate;
+
+  final _i2.CartsUpsertWithoutCartItemsInput? upsert;
+
+  final _i2.CartsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.CartsUpdateToOneWithWhereWithoutCartItemsInput,
+      _i1.PrismaUnion<_i2.CartsUpdateWithoutCartItemsInput,
+          _i2.CartsUncheckedUpdateWithoutCartItemsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class CartItemsUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateWithoutProductsInput({
+    this.quantity,
+    this.carts,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i2.CartsUpdateOneRequiredWithoutCartItemsNestedInput? carts;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'carts': carts,
+      };
+}
+
+class CartItemsUpsertWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpsertWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutProductsInput,
+      _i2.CartItemsUncheckedUpdateWithoutProductsInput> update;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutProductsInput,
+      _i2.CartItemsUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class CartItemsUpdateManyWithoutProductsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyWithoutProductsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
+
+  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput>>? update;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput,
+          Iterable<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class ProductsUpdateWithoutCategoriesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateWithoutCategoriesInput({
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  final _i2.CartItemsUpdateManyWithoutProductsNestedInput? cartItems;
+
+  final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
+
+  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
+
+  final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.ReviewsUpdateManyWithoutProductsNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -12168,6 +15476,7 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -12205,6 +15514,8 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
@@ -12224,6 +15535,7 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -14178,6 +17490,7 @@ class ProductsCreateWithoutNutritionsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.orderItems,
     required this.categories,
@@ -14200,6 +17513,8 @@ class ProductsCreateWithoutNutritionsInput
 
   final _i1.Decimal? rate;
 
+  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
@@ -14218,6 +17533,7 @@ class ProductsCreateWithoutNutritionsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'order_items': orderItems,
         'categories': categories,
@@ -14238,6 +17554,7 @@ class ProductsUncheckedCreateWithoutNutritionsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.orderItems,
     this.reviews,
@@ -14263,6 +17580,8 @@ class ProductsUncheckedCreateWithoutNutritionsInput
 
   final _i1.Decimal? rate;
 
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
@@ -14281,6 +17600,7 @@ class ProductsUncheckedCreateWithoutNutritionsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'order_items': orderItems,
         'reviews': reviews,
@@ -14426,6 +17746,7 @@ class ProductsUpdateWithoutNutritionsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.orderItems,
     this.categories,
@@ -14461,6 +17782,8 @@ class ProductsUpdateWithoutNutritionsInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i2.CartItemsUpdateManyWithoutProductsNestedInput? cartItems;
+
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
@@ -14479,6 +17802,7 @@ class ProductsUpdateWithoutNutritionsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'order_items': orderItems,
         'categories': categories,
@@ -14499,6 +17823,7 @@ class ProductsUncheckedUpdateWithoutNutritionsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.orderItems,
     this.reviews,
@@ -14537,6 +17862,8 @@ class ProductsUncheckedUpdateWithoutNutritionsInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
@@ -14555,6 +17882,7 @@ class ProductsUncheckedUpdateWithoutNutritionsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'order_items': orderItems,
         'reviews': reviews,
@@ -15775,14 +19103,11 @@ class OrderItemsCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderItemsCreateInput({
     required this.quantity,
-    required this.price,
     required this.orders,
     required this.products,
   });
 
   final int quantity;
-
-  final _i1.Decimal price;
 
   final _i2.OrdersCreateNestedOneWithoutOrderItemsInput orders;
 
@@ -15791,7 +19116,6 @@ class OrderItemsCreateInput
   @override
   Map<String, dynamic> toJson() => {
         'quantity': quantity,
-        'price': price,
         'orders': orders,
         'products': products,
       };
@@ -15803,7 +19127,6 @@ class OrderItemsUncheckedCreateInput
     required this.orderId,
     required this.productId,
     required this.quantity,
-    required this.price,
   });
 
   final int orderId;
@@ -15812,14 +19135,11 @@ class OrderItemsUncheckedCreateInput
 
   final int quantity;
 
-  final _i1.Decimal price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -15829,7 +19149,6 @@ class OrderItemsCreateManyInput
     required this.orderId,
     required this.productId,
     required this.quantity,
-    required this.price,
   });
 
   final int orderId;
@@ -15838,14 +19157,11 @@ class OrderItemsCreateManyInput
 
   final int quantity;
 
-  final _i1.Decimal price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -15853,15 +19169,11 @@ class OrderItemsUpdateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderItemsUpdateInput({
     this.quantity,
-    this.price,
     this.orders,
     this.products,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
 
   final _i2.OrdersUpdateOneRequiredWithoutOrderItemsNestedInput? orders;
 
@@ -15870,7 +19182,6 @@ class OrderItemsUpdateInput
   @override
   Map<String, dynamic> toJson() => {
         'quantity': quantity,
-        'price': price,
         'orders': orders,
         'products': products,
       };
@@ -15882,7 +19193,6 @@ class OrderItemsUncheckedUpdateInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
@@ -15891,15 +19201,11 @@ class OrderItemsUncheckedUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
 
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -15909,7 +19215,6 @@ class OrderItemsUncheckedUpdateManyInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
@@ -15918,15 +19223,11 @@ class OrderItemsUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
 
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -15935,7 +19236,6 @@ class OrderItemsCountAggregateOutputType {
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.$all,
   });
 
@@ -15944,7 +19244,6 @@ class OrderItemsCountAggregateOutputType {
         orderId: json['order_id'],
         productId: json['product_id'],
         quantity: json['quantity'],
-        price: json['price'],
         $all: json['_all'],
       );
 
@@ -15954,8 +19253,6 @@ class OrderItemsCountAggregateOutputType {
 
   final int? quantity;
 
-  final int? price;
-
   final int? $all;
 }
 
@@ -15964,7 +19261,6 @@ class OrderItemsAvgAggregateOutputType {
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   factory OrderItemsAvgAggregateOutputType.fromJson(Map json) =>
@@ -15972,7 +19268,6 @@ class OrderItemsAvgAggregateOutputType {
         orderId: json['order_id'],
         productId: json['product_id'],
         quantity: json['quantity'],
-        price: json['price'],
       );
 
   final double? orderId;
@@ -15980,8 +19275,6 @@ class OrderItemsAvgAggregateOutputType {
   final double? productId;
 
   final double? quantity;
-
-  final _i1.Decimal? price;
 }
 
 class OrderItemsSumAggregateOutputType {
@@ -15989,7 +19282,6 @@ class OrderItemsSumAggregateOutputType {
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   factory OrderItemsSumAggregateOutputType.fromJson(Map json) =>
@@ -15997,7 +19289,6 @@ class OrderItemsSumAggregateOutputType {
         orderId: json['order_id'],
         productId: json['product_id'],
         quantity: json['quantity'],
-        price: json['price'],
       );
 
   final int? orderId;
@@ -16005,8 +19296,6 @@ class OrderItemsSumAggregateOutputType {
   final int? productId;
 
   final int? quantity;
-
-  final _i1.Decimal? price;
 }
 
 class OrderItemsMinAggregateOutputType {
@@ -16014,7 +19303,6 @@ class OrderItemsMinAggregateOutputType {
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   factory OrderItemsMinAggregateOutputType.fromJson(Map json) =>
@@ -16022,7 +19310,6 @@ class OrderItemsMinAggregateOutputType {
         orderId: json['order_id'],
         productId: json['product_id'],
         quantity: json['quantity'],
-        price: json['price'],
       );
 
   final int? orderId;
@@ -16030,8 +19317,6 @@ class OrderItemsMinAggregateOutputType {
   final int? productId;
 
   final int? quantity;
-
-  final _i1.Decimal? price;
 }
 
 class OrderItemsMaxAggregateOutputType {
@@ -16039,7 +19324,6 @@ class OrderItemsMaxAggregateOutputType {
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   factory OrderItemsMaxAggregateOutputType.fromJson(Map json) =>
@@ -16047,7 +19331,6 @@ class OrderItemsMaxAggregateOutputType {
         orderId: json['order_id'],
         productId: json['product_id'],
         quantity: json['quantity'],
-        price: json['price'],
       );
 
   final int? orderId;
@@ -16055,8 +19338,6 @@ class OrderItemsMaxAggregateOutputType {
   final int? productId;
 
   final int? quantity;
-
-  final _i1.Decimal? price;
 }
 
 class OrderItemsGroupByOutputType {
@@ -16064,7 +19345,6 @@ class OrderItemsGroupByOutputType {
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.$count,
     this.$avg,
     this.$sum,
@@ -16077,7 +19357,6 @@ class OrderItemsGroupByOutputType {
         orderId: json['order_id'],
         productId: json['product_id'],
         quantity: json['quantity'],
-        price: json['price'],
         $count: json['_count'] is Map
             ? _i2.OrderItemsCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -16101,8 +19380,6 @@ class OrderItemsGroupByOutputType {
 
   final int? quantity;
 
-  final _i1.Decimal? price;
-
   final _i2.OrderItemsCountAggregateOutputType? $count;
 
   final _i2.OrderItemsAvgAggregateOutputType? $avg;
@@ -16120,7 +19397,6 @@ class OrderItemsCountOrderByAggregateInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i2.SortOrder? orderId;
@@ -16129,14 +19405,11 @@ class OrderItemsCountOrderByAggregateInput
 
   final _i2.SortOrder? quantity;
 
-  final _i2.SortOrder? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16146,7 +19419,6 @@ class OrderItemsAvgOrderByAggregateInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i2.SortOrder? orderId;
@@ -16155,14 +19427,11 @@ class OrderItemsAvgOrderByAggregateInput
 
   final _i2.SortOrder? quantity;
 
-  final _i2.SortOrder? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16172,7 +19441,6 @@ class OrderItemsMaxOrderByAggregateInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i2.SortOrder? orderId;
@@ -16181,14 +19449,11 @@ class OrderItemsMaxOrderByAggregateInput
 
   final _i2.SortOrder? quantity;
 
-  final _i2.SortOrder? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16198,7 +19463,6 @@ class OrderItemsMinOrderByAggregateInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i2.SortOrder? orderId;
@@ -16207,14 +19471,11 @@ class OrderItemsMinOrderByAggregateInput
 
   final _i2.SortOrder? quantity;
 
-  final _i2.SortOrder? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16224,7 +19485,6 @@ class OrderItemsSumOrderByAggregateInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i2.SortOrder? orderId;
@@ -16233,14 +19493,11 @@ class OrderItemsSumOrderByAggregateInput
 
   final _i2.SortOrder? quantity;
 
-  final _i2.SortOrder? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16250,7 +19507,6 @@ class OrderItemsOrderByWithAggregationInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.$count,
     this.$avg,
     this.$max,
@@ -16263,8 +19519,6 @@ class OrderItemsOrderByWithAggregationInput
   final _i2.SortOrder? productId;
 
   final _i2.SortOrder? quantity;
-
-  final _i2.SortOrder? price;
 
   final _i2.OrderItemsCountOrderByAggregateInput? $count;
 
@@ -16281,138 +19535,11 @@ class OrderItemsOrderByWithAggregationInput
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
         '_min': $min,
         '_sum': $sum,
-      };
-}
-
-class NestedDecimalWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedDecimalWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? equals;
-
-  final Iterable<_i1.Decimal>? $in;
-
-  final Iterable<_i1.Decimal>? notIn;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lt;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lte;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gt;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gte;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.NestedDecimalWithAggregatesFilter>?
-      not;
-
-  final _i2.NestedIntFilter? $count;
-
-  final _i2.NestedDecimalFilter? $avg;
-
-  final _i2.NestedDecimalFilter? $sum;
-
-  final _i2.NestedDecimalFilter? $min;
-
-  final _i2.NestedDecimalFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-class DecimalWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DecimalWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? equals;
-
-  final Iterable<_i1.Decimal>? $in;
-
-  final Iterable<_i1.Decimal>? notIn;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lt;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lte;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gt;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gte;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.NestedDecimalWithAggregatesFilter>?
-      not;
-
-  final _i2.NestedIntFilter? $count;
-
-  final _i2.NestedDecimalFilter? $avg;
-
-  final _i2.NestedDecimalFilter? $sum;
-
-  final _i2.NestedDecimalFilter? $min;
-
-  final _i2.NestedDecimalFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
       };
 }
 
@@ -16425,7 +19552,6 @@ class OrderItemsScalarWhereWithAggregatesInput
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final _i1.PrismaUnion<_i2.OrderItemsScalarWhereWithAggregatesInput,
@@ -16442,8 +19568,6 @@ class OrderItemsScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? quantity;
 
-  final _i1.PrismaUnion<_i2.DecimalWithAggregatesFilter, _i1.Decimal>? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -16452,7 +19576,6 @@ class OrderItemsScalarWhereWithAggregatesInput
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16462,7 +19585,6 @@ class OrderItemsCountAggregateOutputTypeSelect
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.$all,
   });
 
@@ -16472,8 +19594,6 @@ class OrderItemsCountAggregateOutputTypeSelect
 
   final bool? quantity;
 
-  final bool? price;
-
   final bool? $all;
 
   @override
@@ -16481,7 +19601,6 @@ class OrderItemsCountAggregateOutputTypeSelect
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
         '_all': $all,
       };
 }
@@ -16502,7 +19621,6 @@ class OrderItemsAvgAggregateOutputTypeSelect
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final bool? orderId;
@@ -16511,14 +19629,11 @@ class OrderItemsAvgAggregateOutputTypeSelect
 
   final bool? quantity;
 
-  final bool? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16538,7 +19653,6 @@ class OrderItemsSumAggregateOutputTypeSelect
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final bool? orderId;
@@ -16547,14 +19661,11 @@ class OrderItemsSumAggregateOutputTypeSelect
 
   final bool? quantity;
 
-  final bool? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16574,7 +19685,6 @@ class OrderItemsMinAggregateOutputTypeSelect
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final bool? orderId;
@@ -16583,14 +19693,11 @@ class OrderItemsMinAggregateOutputTypeSelect
 
   final bool? quantity;
 
-  final bool? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16610,7 +19717,6 @@ class OrderItemsMaxAggregateOutputTypeSelect
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
   });
 
   final bool? orderId;
@@ -16619,14 +19725,11 @@ class OrderItemsMaxAggregateOutputTypeSelect
 
   final bool? quantity;
 
-  final bool? price;
-
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
       };
 }
 
@@ -16646,7 +19749,6 @@ class OrderItemsGroupByOutputTypeSelect
     this.orderId,
     this.productId,
     this.quantity,
-    this.price,
     this.$count,
     this.$avg,
     this.$sum,
@@ -16659,8 +19761,6 @@ class OrderItemsGroupByOutputTypeSelect
   final bool? productId;
 
   final bool? quantity;
-
-  final bool? price;
 
   final _i1.PrismaUnion<bool, _i2.OrderItemsGroupByOutputTypeCountArgs>? $count;
 
@@ -16677,7 +19777,6 @@ class OrderItemsGroupByOutputTypeSelect
         'order_id': orderId,
         'product_id': productId,
         'quantity': quantity,
-        'price': price,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,
@@ -16823,17 +19922,23 @@ enum OrderStatusScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
 class OrdersCreateWithoutOrderStatusInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersCreateWithoutOrderStatusInput({
-    this.orderDate,
+    required this.orderDate,
     this.shippingDate,
+    required this.totalPrice,
     this.orderItems,
+    required this.paymentMethods,
     required this.users,
   });
 
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
+  final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final _i1.Decimal totalPrice;
+
   final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
+
+  final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
 
   final _i2.UsersCreateNestedOneWithoutOrdersInput users;
 
@@ -16841,7 +19946,9 @@ class OrdersCreateWithoutOrderStatusInput
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'total_price': totalPrice,
         'order_items': orderItems,
+        'payment_methods': paymentMethods,
         'users': users,
       };
 }
@@ -16850,19 +19957,25 @@ class OrdersUncheckedCreateWithoutOrderStatusInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersUncheckedCreateWithoutOrderStatusInput({
     this.orderId,
-    this.orderDate,
+    required this.orderDate,
     this.shippingDate,
     required this.userId,
+    required this.paymentMethodId,
+    required this.totalPrice,
     this.orderItems,
   });
 
   final int? orderId;
 
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
+  final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
   final int userId;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutOrdersInput? orderItems;
 
@@ -16872,6 +19985,8 @@ class OrdersUncheckedCreateWithoutOrderStatusInput
         'order_date': orderDate,
         'shipping_date': shippingDate,
         'user_id': userId,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         'order_items': orderItems,
       };
 }
@@ -16899,18 +20014,24 @@ class OrdersCreateManyOrderStatusInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersCreateManyOrderStatusInput({
     this.orderId,
-    this.orderDate,
+    required this.orderDate,
     this.shippingDate,
     required this.userId,
+    required this.paymentMethodId,
+    required this.totalPrice,
   });
 
   final int? orderId;
 
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
+  final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
   final int userId;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -16918,6 +20039,8 @@ class OrdersCreateManyOrderStatusInput
         'order_date': orderDate,
         'shipping_date': shippingDate,
         'user_id': userId,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -17073,21 +20196,27 @@ class OrdersUpdateWithoutOrderStatusInput
   const OrdersUpdateWithoutOrderStatusInput({
     this.orderDate,
     this.shippingDate,
+    this.totalPrice,
     this.orderItems,
+    this.paymentMethods,
     this.users,
   });
 
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
 
   final _i1.PrismaUnion<
       DateTime,
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
   final _i2.OrderItemsUpdateManyWithoutOrdersNestedInput? orderItems;
+
+  final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentMethods;
 
   final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
 
@@ -17095,7 +20224,9 @@ class OrdersUpdateWithoutOrderStatusInput
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'total_price': totalPrice,
         'order_items': orderItems,
+        'payment_methods': paymentMethods,
         'users': users,
       };
 }
@@ -17107,15 +20238,15 @@ class OrdersUncheckedUpdateWithoutOrderStatusInput
     this.orderDate,
     this.shippingDate,
     this.userId,
+    this.paymentMethodId,
+    this.totalPrice,
     this.orderItems,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
 
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
 
   final _i1.PrismaUnion<
       DateTime,
@@ -17123,6 +20254,12 @@ class OrdersUncheckedUpdateWithoutOrderStatusInput
           _i1.PrismaNull>>? shippingDate;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput? orderItems;
 
@@ -17132,6 +20269,8 @@ class OrdersUncheckedUpdateWithoutOrderStatusInput
         'order_date': orderDate,
         'shipping_date': shippingDate,
         'user_id': userId,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         'order_items': orderItems,
       };
 }
@@ -17186,14 +20325,14 @@ class OrdersUncheckedUpdateManyWithoutOrderStatusInput
     this.orderDate,
     this.shippingDate,
     this.userId,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
 
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
 
   final _i1.PrismaUnion<
       DateTime,
@@ -17202,12 +20341,20 @@ class OrdersUncheckedUpdateManyWithoutOrderStatusInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
         'user_id': userId,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -17991,20 +21138,26 @@ class AggregateOrderStatusSelect
 
 class OrdersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersCreateInput({
-    this.orderDate,
+    required this.orderDate,
     this.shippingDate,
+    required this.totalPrice,
     this.orderItems,
     required this.orderStatus,
+    required this.paymentMethods,
     required this.users,
   });
 
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
+  final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final _i1.Decimal totalPrice;
 
   final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
 
   final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
+
+  final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
 
   final _i2.UsersCreateNestedOneWithoutOrdersInput users;
 
@@ -18012,8 +21165,10 @@ class OrdersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
+        'payment_methods': paymentMethods,
         'users': users,
       };
 }
@@ -18022,22 +21177,28 @@ class OrdersUncheckedCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersUncheckedCreateInput({
     this.orderId,
-    this.orderDate,
+    required this.orderDate,
     this.shippingDate,
     required this.userId,
     required this.status,
+    required this.paymentMethodId,
+    required this.totalPrice,
     this.orderItems,
   });
 
   final int? orderId;
 
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
+  final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
   final int userId;
 
   final int status;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutOrdersInput? orderItems;
 
@@ -18048,6 +21209,8 @@ class OrdersUncheckedCreateInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         'order_items': orderItems,
       };
 }
@@ -18056,21 +21219,27 @@ class OrdersCreateManyInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersCreateManyInput({
     this.orderId,
-    this.orderDate,
+    required this.orderDate,
     this.shippingDate,
     required this.userId,
     required this.status,
+    required this.paymentMethodId,
+    required this.totalPrice,
   });
 
   final int? orderId;
 
-  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? orderDate;
+  final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
   final int userId;
 
   final int status;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -18079,6 +21248,8 @@ class OrdersCreateManyInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18086,24 +21257,30 @@ class OrdersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersUpdateInput({
     this.orderDate,
     this.shippingDate,
+    this.totalPrice,
     this.orderItems,
     this.orderStatus,
+    this.paymentMethods,
     this.users,
   });
 
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
 
   final _i1.PrismaUnion<
       DateTime,
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
   final _i2.OrderItemsUpdateManyWithoutOrdersNestedInput? orderItems;
 
   final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
+
+  final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentMethods;
 
   final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
 
@@ -18111,8 +21288,10 @@ class OrdersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
+        'payment_methods': paymentMethods,
         'users': users,
       };
 }
@@ -18125,15 +21304,15 @@ class OrdersUncheckedUpdateInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.orderItems,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
 
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
 
   final _i1.PrismaUnion<
       DateTime,
@@ -18144,6 +21323,12 @@ class OrdersUncheckedUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
   final _i2.OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput? orderItems;
 
   @override
@@ -18153,6 +21338,8 @@ class OrdersUncheckedUpdateInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         'order_items': orderItems,
       };
 }
@@ -18165,14 +21352,14 @@ class OrdersUncheckedUpdateManyInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
 
-  final _i1.PrismaUnion<
-      DateTime,
-      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
 
   final _i1.PrismaUnion<
       DateTime,
@@ -18183,6 +21370,12 @@ class OrdersUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
@@ -18190,6 +21383,8 @@ class OrdersUncheckedUpdateManyInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18200,6 +21395,8 @@ class OrdersCountAggregateOutputType {
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.$all,
   });
 
@@ -18210,6 +21407,8 @@ class OrdersCountAggregateOutputType {
         shippingDate: json['shipping_date'],
         userId: json['user_id'],
         status: json['status'],
+        paymentMethodId: json['payment_method_id'],
+        totalPrice: json['total_price'],
         $all: json['_all'],
       );
 
@@ -18223,6 +21422,10 @@ class OrdersCountAggregateOutputType {
 
   final int? status;
 
+  final int? paymentMethodId;
+
+  final int? totalPrice;
+
   final int? $all;
 }
 
@@ -18231,6 +21434,8 @@ class OrdersAvgAggregateOutputType {
     this.orderId,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   factory OrdersAvgAggregateOutputType.fromJson(Map json) =>
@@ -18238,6 +21443,8 @@ class OrdersAvgAggregateOutputType {
         orderId: json['order_id'],
         userId: json['user_id'],
         status: json['status'],
+        paymentMethodId: json['payment_method_id'],
+        totalPrice: json['total_price'],
       );
 
   final double? orderId;
@@ -18245,6 +21452,10 @@ class OrdersAvgAggregateOutputType {
   final double? userId;
 
   final double? status;
+
+  final double? paymentMethodId;
+
+  final _i1.Decimal? totalPrice;
 }
 
 class OrdersSumAggregateOutputType {
@@ -18252,6 +21463,8 @@ class OrdersSumAggregateOutputType {
     this.orderId,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   factory OrdersSumAggregateOutputType.fromJson(Map json) =>
@@ -18259,6 +21472,8 @@ class OrdersSumAggregateOutputType {
         orderId: json['order_id'],
         userId: json['user_id'],
         status: json['status'],
+        paymentMethodId: json['payment_method_id'],
+        totalPrice: json['total_price'],
       );
 
   final int? orderId;
@@ -18266,6 +21481,10 @@ class OrdersSumAggregateOutputType {
   final int? userId;
 
   final int? status;
+
+  final int? paymentMethodId;
+
+  final _i1.Decimal? totalPrice;
 }
 
 class OrdersMinAggregateOutputType {
@@ -18275,6 +21494,8 @@ class OrdersMinAggregateOutputType {
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   factory OrdersMinAggregateOutputType.fromJson(Map json) =>
@@ -18284,6 +21505,8 @@ class OrdersMinAggregateOutputType {
         shippingDate: json['shipping_date'],
         userId: json['user_id'],
         status: json['status'],
+        paymentMethodId: json['payment_method_id'],
+        totalPrice: json['total_price'],
       );
 
   final int? orderId;
@@ -18295,6 +21518,10 @@ class OrdersMinAggregateOutputType {
   final int? userId;
 
   final int? status;
+
+  final int? paymentMethodId;
+
+  final _i1.Decimal? totalPrice;
 }
 
 class OrdersMaxAggregateOutputType {
@@ -18304,6 +21531,8 @@ class OrdersMaxAggregateOutputType {
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   factory OrdersMaxAggregateOutputType.fromJson(Map json) =>
@@ -18313,6 +21542,8 @@ class OrdersMaxAggregateOutputType {
         shippingDate: json['shipping_date'],
         userId: json['user_id'],
         status: json['status'],
+        paymentMethodId: json['payment_method_id'],
+        totalPrice: json['total_price'],
       );
 
   final int? orderId;
@@ -18324,6 +21555,10 @@ class OrdersMaxAggregateOutputType {
   final int? userId;
 
   final int? status;
+
+  final int? paymentMethodId;
+
+  final _i1.Decimal? totalPrice;
 }
 
 class OrdersGroupByOutputType {
@@ -18333,6 +21568,8 @@ class OrdersGroupByOutputType {
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.$count,
     this.$avg,
     this.$sum,
@@ -18346,6 +21583,8 @@ class OrdersGroupByOutputType {
         shippingDate: json['shipping_date'],
         userId: json['user_id'],
         status: json['status'],
+        paymentMethodId: json['payment_method_id'],
+        totalPrice: json['total_price'],
         $count: json['_count'] is Map
             ? _i2.OrdersCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -18373,6 +21612,10 @@ class OrdersGroupByOutputType {
 
   final int? status;
 
+  final int? paymentMethodId;
+
+  final _i1.Decimal? totalPrice;
+
   final _i2.OrdersCountAggregateOutputType? $count;
 
   final _i2.OrdersAvgAggregateOutputType? $avg;
@@ -18392,6 +21635,8 @@ class OrdersCountOrderByAggregateInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i2.SortOrder? orderId;
@@ -18404,6 +21649,10 @@ class OrdersCountOrderByAggregateInput
 
   final _i2.SortOrder? status;
 
+  final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
@@ -18411,6 +21660,8 @@ class OrdersCountOrderByAggregateInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18420,6 +21671,8 @@ class OrdersAvgOrderByAggregateInput
     this.orderId,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i2.SortOrder? orderId;
@@ -18428,11 +21681,17 @@ class OrdersAvgOrderByAggregateInput
 
   final _i2.SortOrder? status;
 
+  final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18444,6 +21703,8 @@ class OrdersMaxOrderByAggregateInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i2.SortOrder? orderId;
@@ -18456,6 +21717,10 @@ class OrdersMaxOrderByAggregateInput
 
   final _i2.SortOrder? status;
 
+  final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
@@ -18463,6 +21728,8 @@ class OrdersMaxOrderByAggregateInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18474,6 +21741,8 @@ class OrdersMinOrderByAggregateInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i2.SortOrder? orderId;
@@ -18486,6 +21755,10 @@ class OrdersMinOrderByAggregateInput
 
   final _i2.SortOrder? status;
 
+  final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
@@ -18493,6 +21766,8 @@ class OrdersMinOrderByAggregateInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18502,6 +21777,8 @@ class OrdersSumOrderByAggregateInput
     this.orderId,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i2.SortOrder? orderId;
@@ -18510,11 +21787,17 @@ class OrdersSumOrderByAggregateInput
 
   final _i2.SortOrder? status;
 
+  final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18526,6 +21809,8 @@ class OrdersOrderByWithAggregationInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.$count,
     this.$avg,
     this.$max,
@@ -18535,13 +21820,17 @@ class OrdersOrderByWithAggregationInput
 
   final _i2.SortOrder? orderId;
 
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? orderDate;
+  final _i2.SortOrder? orderDate;
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? shippingDate;
 
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? status;
+
+  final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? totalPrice;
 
   final _i2.OrdersCountOrderByAggregateInput? $count;
 
@@ -18560,11 +21849,121 @@ class OrdersOrderByWithAggregationInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
         '_min': $min,
         '_sum': $sum,
+      };
+}
+
+class NestedDateTimeWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedDateTimeWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
+
+  final Iterable<DateTime>? $in;
+
+  final Iterable<DateTime>? notIn;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
+
+  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeWithAggregatesFilter>? not;
+
+  final _i2.NestedIntFilter? $count;
+
+  final _i2.NestedDateTimeFilter? $min;
+
+  final _i2.NestedDateTimeFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class DateTimeWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DateTimeWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
+
+  final Iterable<DateTime>? $in;
+
+  final Iterable<DateTime>? notIn;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
+
+  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
+
+  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeWithAggregatesFilter>? not;
+
+  final _i2.NestedIntFilter? $count;
+
+  final _i2.NestedDateTimeFilter? $min;
+
+  final _i2.NestedDateTimeFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_min': $min,
+        '_max': $max,
       };
 }
 
@@ -18684,6 +22083,132 @@ class DateTimeNullableWithAggregatesFilter
       };
 }
 
+class NestedDecimalWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedDecimalWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? equals;
+
+  final Iterable<_i1.Decimal>? $in;
+
+  final Iterable<_i1.Decimal>? notIn;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lt;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lte;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gt;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gte;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.NestedDecimalWithAggregatesFilter>?
+      not;
+
+  final _i2.NestedIntFilter? $count;
+
+  final _i2.NestedDecimalFilter? $avg;
+
+  final _i2.NestedDecimalFilter? $sum;
+
+  final _i2.NestedDecimalFilter? $min;
+
+  final _i2.NestedDecimalFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class DecimalWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const DecimalWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? equals;
+
+  final Iterable<_i1.Decimal>? $in;
+
+  final Iterable<_i1.Decimal>? notIn;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lt;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? lte;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gt;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.Reference<_i1.Decimal>>? gte;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.NestedDecimalWithAggregatesFilter>?
+      not;
+
+  final _i2.NestedIntFilter? $count;
+
+  final _i2.NestedDecimalFilter? $avg;
+
+  final _i2.NestedDecimalFilter? $sum;
+
+  final _i2.NestedDecimalFilter? $min;
+
+  final _i2.NestedDecimalFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
 class OrdersScalarWhereWithAggregatesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersScalarWhereWithAggregatesInput({
@@ -18695,6 +22220,8 @@ class OrdersScalarWhereWithAggregatesInput
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final _i1.PrismaUnion<_i2.OrdersScalarWhereWithAggregatesInput,
@@ -18707,8 +22234,7 @@ class OrdersScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? orderId;
 
-  final _i1.PrismaUnion<_i2.DateTimeNullableWithAggregatesFilter,
-      _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? orderDate;
+  final _i1.PrismaUnion<_i2.DateTimeWithAggregatesFilter, DateTime>? orderDate;
 
   final _i1.PrismaUnion<_i2.DateTimeNullableWithAggregatesFilter,
       _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
@@ -18716,6 +22242,11 @@ class OrdersScalarWhereWithAggregatesInput
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? userId;
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? status;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.DecimalWithAggregatesFilter, _i1.Decimal>?
+      totalPrice;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -18727,6 +22258,8 @@ class OrdersScalarWhereWithAggregatesInput
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18738,6 +22271,8 @@ class OrdersCountAggregateOutputTypeSelect
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.$all,
   });
 
@@ -18751,6 +22286,10 @@ class OrdersCountAggregateOutputTypeSelect
 
   final bool? status;
 
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
+
   final bool? $all;
 
   @override
@@ -18760,6 +22299,8 @@ class OrdersCountAggregateOutputTypeSelect
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         '_all': $all,
       };
 }
@@ -18780,6 +22321,8 @@ class OrdersAvgAggregateOutputTypeSelect
     this.orderId,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final bool? orderId;
@@ -18788,11 +22331,17 @@ class OrdersAvgAggregateOutputTypeSelect
 
   final bool? status;
 
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18812,6 +22361,8 @@ class OrdersSumAggregateOutputTypeSelect
     this.orderId,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final bool? orderId;
@@ -18820,11 +22371,17 @@ class OrdersSumAggregateOutputTypeSelect
 
   final bool? status;
 
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18846,6 +22403,8 @@ class OrdersMinAggregateOutputTypeSelect
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final bool? orderId;
@@ -18858,6 +22417,10 @@ class OrdersMinAggregateOutputTypeSelect
 
   final bool? status;
 
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
@@ -18865,6 +22428,8 @@ class OrdersMinAggregateOutputTypeSelect
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18886,6 +22451,8 @@ class OrdersMaxAggregateOutputTypeSelect
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
   });
 
   final bool? orderId;
@@ -18898,6 +22465,10 @@ class OrdersMaxAggregateOutputTypeSelect
 
   final bool? status;
 
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_id': orderId,
@@ -18905,6 +22476,8 @@ class OrdersMaxAggregateOutputTypeSelect
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
       };
 }
 
@@ -18926,6 +22499,8 @@ class OrdersGroupByOutputTypeSelect
     this.shippingDate,
     this.userId,
     this.status,
+    this.paymentMethodId,
+    this.totalPrice,
     this.$count,
     this.$avg,
     this.$sum,
@@ -18942,6 +22517,10 @@ class OrdersGroupByOutputTypeSelect
   final bool? userId;
 
   final bool? status;
+
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
 
   final _i1.PrismaUnion<bool, _i2.OrdersGroupByOutputTypeCountArgs>? $count;
 
@@ -18960,6 +22539,8 @@ class OrdersGroupByOutputTypeSelect
         'shipping_date': shippingDate,
         'user_id': userId,
         'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,
@@ -19086,106 +22667,6 @@ class AggregateOrdersSelect
       };
 }
 
-class PaymentMethodsWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.paymentId,
-    this.methodName,
-  });
-
-  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
-      Iterable<_i2.PaymentMethodsWhereInput>>? AND;
-
-  final Iterable<_i2.PaymentMethodsWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
-      Iterable<_i2.PaymentMethodsWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentId;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? methodName;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'payment_id': paymentId,
-        'method_name': methodName,
-      };
-}
-
-class PaymentMethodsWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsWhereUniqueInput({
-    this.paymentId,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.methodName,
-  });
-
-  final int? paymentId;
-
-  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
-      Iterable<_i2.PaymentMethodsWhereInput>>? AND;
-
-  final Iterable<_i2.PaymentMethodsWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
-      Iterable<_i2.PaymentMethodsWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? methodName;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'method_name': methodName,
-      };
-}
-
-class PaymentMethodsSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsSelect({
-    this.paymentId,
-    this.methodName,
-  });
-
-  final bool? paymentId;
-
-  final bool? methodName;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
-        'method_name': methodName,
-      };
-}
-
-class PaymentMethodsOrderByWithRelationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsOrderByWithRelationInput({
-    this.paymentId,
-    this.methodName,
-  });
-
-  final _i2.SortOrder? paymentId;
-
-  final _i2.SortOrder? methodName;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
-        'method_name': methodName,
-      };
-}
-
 enum PaymentMethodsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   paymentId<int>('payment_id', 'payment_methods'),
   methodName<String>('method_name', 'payment_methods');
@@ -19202,14 +22683,240 @@ enum PaymentMethodsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   final String model;
 }
 
+class OrdersCreateWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateWithoutPaymentMethodsInput({
+    required this.orderDate,
+    this.shippingDate,
+    required this.totalPrice,
+    this.orderItems,
+    required this.orderStatus,
+    required this.users,
+  });
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final _i1.Decimal totalPrice;
+
+  final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
+
+  final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
+
+  final _i2.UsersCreateNestedOneWithoutOrdersInput users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'users': users,
+      };
+}
+
+class OrdersUncheckedCreateWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedCreateWithoutPaymentMethodsInput({
+    this.orderId,
+    required this.orderDate,
+    this.shippingDate,
+    required this.userId,
+    required this.status,
+    required this.totalPrice,
+    this.orderItems,
+  });
+
+  final int? orderId;
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final int userId;
+
+  final int status;
+
+  final _i1.Decimal totalPrice;
+
+  final _i2.OrderItemsUncheckedCreateNestedManyWithoutOrdersInput? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+      };
+}
+
+class OrdersCreateOrConnectWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateOrConnectWithoutPaymentMethodsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutPaymentMethodsInput,
+      _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class OrdersCreateManyPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateManyPaymentMethodsInput({
+    this.orderId,
+    required this.orderDate,
+    this.shippingDate,
+    required this.userId,
+    required this.status,
+    required this.totalPrice,
+  });
+
+  final int? orderId;
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final int userId;
+
+  final int status;
+
+  final _i1.Decimal totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersCreateManyPaymentMethodsInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateManyPaymentMethodsInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.OrdersCreateManyPaymentMethodsInput,
+      Iterable<_i2.OrdersCreateManyPaymentMethodsInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class OrdersCreateNestedManyWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateNestedManyWithoutPaymentMethodsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentMethodsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentMethodsInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput>>?
+      connectOrCreate;
+
+  final _i2.OrdersCreateManyPaymentMethodsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
 class PaymentMethodsCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsCreateInput({required this.methodName});
+  const PaymentMethodsCreateInput({
+    required this.methodName,
+    this.orders,
+  });
 
   final String methodName;
 
+  final _i2.OrdersCreateNestedManyWithoutPaymentMethodsInput? orders;
+
   @override
-  Map<String, dynamic> toJson() => {'method_name': methodName};
+  Map<String, dynamic> toJson() => {
+        'method_name': methodName,
+        'orders': orders,
+      };
+}
+
+class OrdersUncheckedCreateNestedManyWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedCreateNestedManyWithoutPaymentMethodsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentMethodsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentMethodsInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput>>?
+      connectOrCreate;
+
+  final _i2.OrdersCreateManyPaymentMethodsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
 }
 
 class PaymentMethodsUncheckedCreateInput
@@ -19217,16 +22924,20 @@ class PaymentMethodsUncheckedCreateInput
   const PaymentMethodsUncheckedCreateInput({
     this.paymentId,
     required this.methodName,
+    this.orders,
   });
 
   final int? paymentId;
 
   final String methodName;
 
+  final _i2.OrdersUncheckedCreateNestedManyWithoutPaymentMethodsInput? orders;
+
   @override
   Map<String, dynamic> toJson() => {
         'payment_id': paymentId,
         'method_name': methodName,
+        'orders': orders,
       };
 }
 
@@ -19248,15 +22959,360 @@ class PaymentMethodsCreateManyInput
       };
 }
 
+class OrdersUpdateWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateWithoutPaymentMethodsInput({
+    this.orderDate,
+    this.shippingDate,
+    this.totalPrice,
+    this.orderItems,
+    this.orderStatus,
+    this.users,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  final _i2.OrderItemsUpdateManyWithoutOrdersNestedInput? orderItems;
+
+  final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
+
+  final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'users': users,
+      };
+}
+
+class OrdersUncheckedUpdateWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateWithoutPaymentMethodsInput({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.userId,
+    this.status,
+    this.totalPrice,
+    this.orderItems,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  final _i2.OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+      };
+}
+
+class OrdersUpsertWithWhereUniqueWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpsertWithWhereUniqueWithoutPaymentMethodsInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutPaymentMethodsInput,
+      _i2.OrdersUncheckedUpdateWithoutPaymentMethodsInput> update;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutPaymentMethodsInput,
+      _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class OrdersUpdateWithWhereUniqueWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateWithWhereUniqueWithoutPaymentMethodsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutPaymentMethodsInput,
+      _i2.OrdersUncheckedUpdateWithoutPaymentMethodsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrdersUncheckedUpdateManyWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateManyWithoutPaymentMethodsInput({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.userId,
+    this.status,
+    this.totalPrice,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersUpdateManyWithWhereWithoutPaymentMethodsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateManyWithWhereWithoutPaymentMethodsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrdersScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyMutationInput,
+      _i2.OrdersUncheckedUpdateManyWithoutPaymentMethodsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrdersUpdateManyWithoutPaymentMethodsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateManyWithoutPaymentMethodsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentMethodsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentMethodsInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpsertWithWhereUniqueWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutPaymentMethodsInput>>?
+      upsert;
+
+  final _i2.OrdersCreateManyPaymentMethodsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpdateWithWhereUniqueWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutPaymentMethodsInput>>?
+      update;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersUpdateManyWithWhereWithoutPaymentMethodsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
 class PaymentMethodsUpdateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsUpdateInput({this.methodName});
+  const PaymentMethodsUpdateInput({
+    this.methodName,
+    this.orders,
+  });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       methodName;
 
+  final _i2.OrdersUpdateManyWithoutPaymentMethodsNestedInput? orders;
+
   @override
-  Map<String, dynamic> toJson() => {'method_name': methodName};
+  Map<String, dynamic> toJson() => {
+        'method_name': methodName,
+        'orders': orders,
+      };
+}
+
+class OrdersUncheckedUpdateManyWithoutPaymentMethodsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateManyWithoutPaymentMethodsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentMethodsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentMethodsInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentMethodsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentMethodsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpsertWithWhereUniqueWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutPaymentMethodsInput>>?
+      upsert;
+
+  final _i2.OrdersCreateManyPaymentMethodsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpdateWithWhereUniqueWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutPaymentMethodsInput>>?
+      update;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutPaymentMethodsInput,
+          Iterable<_i2.OrdersUpdateManyWithWhereWithoutPaymentMethodsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
 }
 
 class PaymentMethodsUncheckedUpdateInput
@@ -19264,6 +23320,7 @@ class PaymentMethodsUncheckedUpdateInput
   const PaymentMethodsUncheckedUpdateInput({
     this.paymentId,
     this.methodName,
+    this.orders,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? paymentId;
@@ -19271,10 +23328,13 @@ class PaymentMethodsUncheckedUpdateInput
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       methodName;
 
+  final _i2.OrdersUncheckedUpdateManyWithoutPaymentMethodsNestedInput? orders;
+
   @override
   Map<String, dynamic> toJson() => {
         'payment_id': paymentId,
         'method_name': methodName,
+        'orders': orders,
       };
 }
 
@@ -19869,6 +23929,7 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -19892,6 +23953,8 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.Decimal? rate;
 
+  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
+
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
@@ -19912,6 +23975,7 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -19933,6 +23997,7 @@ class ProductsUncheckedCreateInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -19959,6 +24024,8 @@ class ProductsUncheckedCreateInput
 
   final _i1.Decimal? rate;
 
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
@@ -19979,6 +24046,7 @@ class ProductsUncheckedCreateInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -20046,6 +24114,7 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -20082,6 +24151,8 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i2.CartItemsUpdateManyWithoutProductsNestedInput? cartItems;
+
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
@@ -20102,6 +24173,7 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -20123,6 +24195,7 @@ class ProductsUncheckedUpdateInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.cartItems,
     this.favorites,
     this.nutritions,
     this.orderItems,
@@ -20162,6 +24235,8 @@ class ProductsUncheckedUpdateInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
@@ -20182,6 +24257,7 @@ class ProductsUncheckedUpdateInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'cart_items': cartItems,
         'favorites': favorites,
         'nutritions': nutritions,
         'order_items': orderItems,
@@ -22064,114 +26140,6 @@ class ReviewsOrderByWithAggregationInput
       };
 }
 
-class NestedDateTimeWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedDateTimeWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
-
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
-
-  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeWithAggregatesFilter>? not;
-
-  final _i2.NestedIntFilter? $count;
-
-  final _i2.NestedDateTimeFilter? $min;
-
-  final _i2.NestedDateTimeFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-        '_count': $count,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-class DateTimeWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const DateTimeWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? equals;
-
-  final Iterable<DateTime>? $in;
-
-  final Iterable<DateTime>? notIn;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? lte;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gt;
-
-  final _i1.PrismaUnion<DateTime, _i1.Reference<DateTime>>? gte;
-
-  final _i1.PrismaUnion<DateTime, _i2.NestedDateTimeWithAggregatesFilter>? not;
-
-  final _i2.NestedIntFilter? $count;
-
-  final _i2.NestedDateTimeFilter? $min;
-
-  final _i2.NestedDateTimeFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-        '_count': $count,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
 class ReviewsScalarWhereWithAggregatesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsScalarWhereWithAggregatesInput({
@@ -22611,6 +26579,7 @@ class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.phoneNumber,
     this.imageUrl,
     required this.isDeleted,
+    this.carts,
     this.favorites,
     this.orders,
     this.reviews,
@@ -22630,6 +26599,8 @@ class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool isDeleted;
 
+  final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
+
   final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
@@ -22645,6 +26616,7 @@ class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -22662,6 +26634,7 @@ class UsersUncheckedCreateInput
     this.phoneNumber,
     this.imageUrl,
     required this.isDeleted,
+    this.carts,
     this.favorites,
     this.orders,
     this.reviews,
@@ -22683,6 +26656,8 @@ class UsersUncheckedCreateInput
 
   final bool isDeleted;
 
+  final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
+
   final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
 
   final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
@@ -22699,6 +26674,7 @@ class UsersUncheckedCreateInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -22756,6 +26732,7 @@ class UsersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.carts,
     this.favorites,
     this.orders,
     this.reviews,
@@ -22784,6 +26761,8 @@ class UsersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
+  final _i2.CartsUpdateOneWithoutUsersNestedInput? carts;
+
   final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
 
   final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
@@ -22799,6 +26778,7 @@ class UsersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -22816,6 +26796,7 @@ class UsersUncheckedUpdateInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.carts,
     this.favorites,
     this.orders,
     this.reviews,
@@ -22846,6 +26827,8 @@ class UsersUncheckedUpdateInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
+  final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
 
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
@@ -22862,6 +26845,7 @@ class UsersUncheckedUpdateInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -23877,6 +27861,1543 @@ class AggregateUsersSelect
   final _i1.PrismaUnion<bool, _i2.AggregateUsersMinArgs>? $min;
 
   final _i1.PrismaUnion<bool, _i2.AggregateUsersMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class CartItemsCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateInput({
+    required this.quantity,
+    required this.carts,
+    required this.products,
+  });
+
+  final int quantity;
+
+  final _i2.CartsCreateNestedOneWithoutCartItemsInput carts;
+
+  final _i2.ProductsCreateNestedOneWithoutCartItemsInput products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'carts': carts,
+        'products': products,
+      };
+}
+
+class CartItemsUncheckedCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedCreateInput({
+    required this.quantity,
+    required this.cartId,
+    required this.productId,
+  });
+
+  final int quantity;
+
+  final int cartId;
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsCreateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateManyInput({
+    required this.quantity,
+    required this.cartId,
+    required this.productId,
+  });
+
+  final int quantity;
+
+  final int cartId;
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateInput({
+    this.quantity,
+    this.carts,
+    this.products,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i2.CartsUpdateOneRequiredWithoutCartItemsNestedInput? carts;
+
+  final _i2.ProductsUpdateOneRequiredWithoutCartItemsNestedInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'carts': carts,
+        'products': products,
+      };
+}
+
+class CartItemsUncheckedUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsUncheckedUpdateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateManyInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsCountAggregateOutputType {
+  const CartItemsCountAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$all,
+  });
+
+  factory CartItemsCountAggregateOutputType.fromJson(Map json) =>
+      CartItemsCountAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+        $all: json['_all'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+
+  final int? $all;
+}
+
+class CartItemsAvgAggregateOutputType {
+  const CartItemsAvgAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsAvgAggregateOutputType.fromJson(Map json) =>
+      CartItemsAvgAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final double? quantity;
+
+  final double? cartId;
+
+  final double? productId;
+}
+
+class CartItemsSumAggregateOutputType {
+  const CartItemsSumAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsSumAggregateOutputType.fromJson(Map json) =>
+      CartItemsSumAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+}
+
+class CartItemsMinAggregateOutputType {
+  const CartItemsMinAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsMinAggregateOutputType.fromJson(Map json) =>
+      CartItemsMinAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+}
+
+class CartItemsMaxAggregateOutputType {
+  const CartItemsMaxAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsMaxAggregateOutputType.fromJson(Map json) =>
+      CartItemsMaxAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+}
+
+class CartItemsGroupByOutputType {
+  const CartItemsGroupByOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory CartItemsGroupByOutputType.fromJson(Map json) =>
+      CartItemsGroupByOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+        $count: json['_count'] is Map
+            ? _i2.CartItemsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartItemsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartItemsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartItemsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartItemsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+
+  final _i2.CartItemsCountAggregateOutputType? $count;
+
+  final _i2.CartItemsAvgAggregateOutputType? $avg;
+
+  final _i2.CartItemsSumAggregateOutputType? $sum;
+
+  final _i2.CartItemsMinAggregateOutputType? $min;
+
+  final _i2.CartItemsMaxAggregateOutputType? $max;
+}
+
+class CartItemsCountOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCountOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsAvgOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsAvgOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsMaxOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMaxOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsMinOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMinOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsSumOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsSumOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsOrderByWithAggregationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsOrderByWithAggregationInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$count,
+    this.$avg,
+    this.$max,
+    this.$min,
+    this.$sum,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  final _i2.CartItemsCountOrderByAggregateInput? $count;
+
+  final _i2.CartItemsAvgOrderByAggregateInput? $avg;
+
+  final _i2.CartItemsMaxOrderByAggregateInput? $max;
+
+  final _i2.CartItemsMinOrderByAggregateInput? $min;
+
+  final _i2.CartItemsSumOrderByAggregateInput? $sum;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_count': $count,
+        '_avg': $avg,
+        '_max': $max,
+        '_min': $min,
+        '_sum': $sum,
+      };
+}
+
+class CartItemsScalarWhereWithAggregatesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsScalarWhereWithAggregatesInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>>? AND;
+
+  final Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsCountAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCountAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$all,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  final bool? $all;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_all': $all,
+      };
+}
+
+class CartItemsGroupByOutputTypeCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeCountArgs({this.select});
+
+  final _i2.CartItemsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsAvgAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsAvgAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeAvgArgs({this.select});
+
+  final _i2.CartItemsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsSumAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsSumAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeSumArgs({this.select});
+
+  final _i2.CartItemsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsMinAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMinAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeMinArgs({this.select});
+
+  final _i2.CartItemsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsMaxAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMaxAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeMaxArgs({this.select});
+
+  final _i2.CartItemsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsGroupByOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class AggregateCartItems {
+  const AggregateCartItems({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory AggregateCartItems.fromJson(Map json) => AggregateCartItems(
+        $count: json['_count'] is Map
+            ? _i2.CartItemsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartItemsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartItemsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartItemsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartItemsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final _i2.CartItemsCountAggregateOutputType? $count;
+
+  final _i2.CartItemsAvgAggregateOutputType? $avg;
+
+  final _i2.CartItemsSumAggregateOutputType? $sum;
+
+  final _i2.CartItemsMinAggregateOutputType? $min;
+
+  final _i2.CartItemsMaxAggregateOutputType? $max;
+}
+
+class AggregateCartItemsCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsCountArgs({this.select});
+
+  final _i2.CartItemsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsAvgArgs({this.select});
+
+  final _i2.CartItemsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsSumArgs({this.select});
+
+  final _i2.CartItemsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsMinArgs({this.select});
+
+  final _i2.CartItemsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsMaxArgs({this.select});
+
+  final _i2.CartItemsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsSelect({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+enum CartsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  cartId<int>('cart_id', 'carts'),
+  userId<int>('user_id', 'carts');
+
+  const CartsScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
+class CartsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateInput({
+    this.cartItems,
+    required this.users,
+  });
+
+  final _i2.CartItemsCreateNestedManyWithoutCartsInput? cartItems;
+
+  final _i2.UsersCreateNestedOneWithoutCartsInput users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
+        'users': users,
+      };
+}
+
+class CartsUncheckedCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedCreateInput({
+    this.cartId,
+    required this.userId,
+    this.cartItems,
+  });
+
+  final int? cartId;
+
+  final int userId;
+
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutCartsInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        'cart_items': cartItems,
+      };
+}
+
+class CartsCreateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateManyInput({
+    this.cartId,
+    required this.userId,
+  });
+
+  final int? cartId;
+
+  final int userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateInput({
+    this.cartItems,
+    this.users,
+  });
+
+  final _i2.CartItemsUpdateManyWithoutCartsNestedInput? cartItems;
+
+  final _i2.UsersUpdateOneRequiredWithoutCartsNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
+        'users': users,
+      };
+}
+
+class CartsUncheckedUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedUpdateInput({
+    this.cartId,
+    this.userId,
+    this.cartItems,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i2.CartItemsUncheckedUpdateManyWithoutCartsNestedInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        'cart_items': cartItems,
+      };
+}
+
+class CartsUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateManyMutationInput();
+
+  @override
+  Map<String, dynamic> toJson() => {};
+}
+
+class CartsUncheckedUpdateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedUpdateManyInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsCountAggregateOutputType {
+  const CartsCountAggregateOutputType({
+    this.cartId,
+    this.userId,
+    this.$all,
+  });
+
+  factory CartsCountAggregateOutputType.fromJson(Map json) =>
+      CartsCountAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+        $all: json['_all'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+
+  final int? $all;
+}
+
+class CartsAvgAggregateOutputType {
+  const CartsAvgAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsAvgAggregateOutputType.fromJson(Map json) =>
+      CartsAvgAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final double? cartId;
+
+  final double? userId;
+}
+
+class CartsSumAggregateOutputType {
+  const CartsSumAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsSumAggregateOutputType.fromJson(Map json) =>
+      CartsSumAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+}
+
+class CartsMinAggregateOutputType {
+  const CartsMinAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsMinAggregateOutputType.fromJson(Map json) =>
+      CartsMinAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+}
+
+class CartsMaxAggregateOutputType {
+  const CartsMaxAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsMaxAggregateOutputType.fromJson(Map json) =>
+      CartsMaxAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+}
+
+class CartsGroupByOutputType {
+  const CartsGroupByOutputType({
+    this.cartId,
+    this.userId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory CartsGroupByOutputType.fromJson(Map json) => CartsGroupByOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+        $count: json['_count'] is Map
+            ? _i2.CartsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final int? cartId;
+
+  final int? userId;
+
+  final _i2.CartsCountAggregateOutputType? $count;
+
+  final _i2.CartsAvgAggregateOutputType? $avg;
+
+  final _i2.CartsSumAggregateOutputType? $sum;
+
+  final _i2.CartsMinAggregateOutputType? $min;
+
+  final _i2.CartsMaxAggregateOutputType? $max;
+}
+
+class CartsCountOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCountOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsAvgOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsAvgOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsMaxOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMaxOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsMinOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMinOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsSumOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsSumOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsOrderByWithAggregationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsOrderByWithAggregationInput({
+    this.cartId,
+    this.userId,
+    this.$count,
+    this.$avg,
+    this.$max,
+    this.$min,
+    this.$sum,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  final _i2.CartsCountOrderByAggregateInput? $count;
+
+  final _i2.CartsAvgOrderByAggregateInput? $avg;
+
+  final _i2.CartsMaxOrderByAggregateInput? $max;
+
+  final _i2.CartsMinOrderByAggregateInput? $min;
+
+  final _i2.CartsSumOrderByAggregateInput? $sum;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_count': $count,
+        '_avg': $avg,
+        '_max': $max,
+        '_min': $min,
+        '_sum': $sum,
+      };
+}
+
+class CartsScalarWhereWithAggregatesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsScalarWhereWithAggregatesInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.cartId,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartsScalarWhereWithAggregatesInput>>? AND;
+
+  final Iterable<_i2.CartsScalarWhereWithAggregatesInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CartsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartsScalarWhereWithAggregatesInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsCountAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCountAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+    this.$all,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  final bool? $all;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_all': $all,
+      };
+}
+
+class CartsGroupByOutputTypeCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeCountArgs({this.select});
+
+  final _i2.CartsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsAvgAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsAvgAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeAvgArgs({this.select});
+
+  final _i2.CartsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsSumAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsSumAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeSumArgs({this.select});
+
+  final _i2.CartsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsMinAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMinAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeMinArgs({this.select});
+
+  final _i2.CartsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsMaxAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMaxAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeMaxArgs({this.select});
+
+  final _i2.CartsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsGroupByOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeSelect({
+    this.cartId,
+    this.userId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class AggregateCarts {
+  const AggregateCarts({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory AggregateCarts.fromJson(Map json) => AggregateCarts(
+        $count: json['_count'] is Map
+            ? _i2.CartsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final _i2.CartsCountAggregateOutputType? $count;
+
+  final _i2.CartsAvgAggregateOutputType? $avg;
+
+  final _i2.CartsSumAggregateOutputType? $sum;
+
+  final _i2.CartsMinAggregateOutputType? $min;
+
+  final _i2.CartsMaxAggregateOutputType? $max;
+}
+
+class AggregateCartsCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsCountArgs({this.select});
+
+  final _i2.CartsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsAvgArgs({this.select});
+
+  final _i2.CartsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsSumArgs({this.select});
+
+  final _i2.CartsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsMinArgs({this.select});
+
+  final _i2.CartsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsMaxArgs({this.select});
+
+  final _i2.CartsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsSelect({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsMaxArgs>? $max;
 
   @override
   Map<String, dynamic> toJson() => {
