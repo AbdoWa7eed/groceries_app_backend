@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, one_member_abstracts
 
-import 'dart:io';
-
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
@@ -45,8 +43,7 @@ class ProductsDataSourceImpl extends ProductsDataSource {
       ),
     );
     if (product == null) {
-      throw const Failure(
-        statusCode: HttpStatus.badRequest,
+      throw Failure.badRequest(
         message: ResponseMessages.invalidProductId,
       );
     }

@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, one_member_abstracts
 
-import 'dart:io';
-
 import 'package:groceries_app_backend/core/services/storage_service.dart';
 import 'package:groceries_app_backend/core/utils/constants.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
@@ -29,8 +27,7 @@ class UploadImageDataSourceImpl extends UploadImageDataSource {
     );
 
     if (response.id == null || response.id!.isEmpty) {
-      throw const Failure(
-        statusCode: HttpStatus.internalServerError,
+      throw Failure.internalServerError(
         message: ResponseMessages.errorWhileUploadingImage,
       );
     }

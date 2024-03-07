@@ -21,8 +21,7 @@ class StrorageService {
     final credentials = await _getCredintials();
 
     if (credentials == null) {
-      throw const Failure(
-        statusCode: HttpStatus.internalServerError,
+      throw Failure.internalServerError(
         message: ResponseMessages.errorWhileUploadingImage,
       );
     }
@@ -34,8 +33,7 @@ class StrorageService {
 
     final bytes = _decodeImage(encodedImage);
     if (bytes == null || bytes.isEmpty) {
-      throw const Failure(
-        statusCode: HttpStatus.badRequest,
+      throw Failure.badRequest(
         message: ResponseMessages.unSupportedImageFormat,
       );
     }
@@ -95,8 +93,7 @@ class StrorageService {
       case _png:
         return 'png';
       default:
-        throw const Failure(
-          statusCode: HttpStatus.badRequest,
+        throw Failure.badRequest(
           message: ResponseMessages.unSupportedImageFormat,
         );
     }

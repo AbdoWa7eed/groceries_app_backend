@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
@@ -42,8 +40,7 @@ class CartDataSourceImpl extends CartDataSource {
     );
 
     if (product == null) {
-      throw const Failure(
-        statusCode: HttpStatus.badRequest,
+      throw Failure.badRequest(
         message: ResponseMessages.checkProductId,
       );
     }
@@ -78,8 +75,7 @@ class CartDataSourceImpl extends CartDataSource {
     final item = await _findCartItem(productId, userId);
 
     if (item == null) {
-      throw const Failure(
-        statusCode: HttpStatus.badRequest,
+      throw Failure.badRequest(
         message: ResponseMessages.invalidCartItem,
       );
     }

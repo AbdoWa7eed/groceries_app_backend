@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-import 'dart:io';
 import 'package:groceries_app_backend/core/services/redis_service.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
@@ -36,8 +35,7 @@ class OTPLocalDataSourceImpl extends OTPLocalDataSource {
     final jsonData = await _redisService.get(key: verificationId);
 
     if (jsonData == null) {
-      throw const Failure(
-        statusCode: HttpStatus.unauthorized,
+      throw Failure.unauthorized(
         message: ResponseMessages.wrongMessageId,
       );
     }
@@ -50,14 +48,12 @@ class OTPLocalDataSourceImpl extends OTPLocalDataSource {
       }
     } else {
       await _redisService.delete(key: verificationId);
-      throw const Failure(
-        statusCode: HttpStatus.forbidden,
+      throw Failure.forbidden(
         message: ResponseMessages.expiredSession,
       );
     }
 
-    throw const Failure(
-      statusCode: HttpStatus.unauthorized,
+    throw Failure.unauthorized(
       message: ResponseMessages.wrongCode,
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
@@ -29,7 +27,8 @@ class FavoriteDataSourceImpl implements FavoriteDataSource {
 
   @override
   Future<Products> addFavorite(
-      FavoritesCreateInput favoritesCreateInput,) async {
+    FavoritesCreateInput favoritesCreateInput,
+  ) async {
     final favorite = await _client.favorites.findUnique(
       where: FavoritesWhereUniqueInput(
         userIdProductId: FavoritesUserIdProductIdCompoundUniqueInput(
@@ -40,16 +39,16 @@ class FavoriteDataSourceImpl implements FavoriteDataSource {
     );
 
     if (favorite != null) {
-      throw const Failure(
-        statusCode: HttpStatus.badRequest,
+      throw Failure.badRequest(
         message: ResponseMessages.favoriteAlreadyAdded,
       );
     }
     final response = await _client.favorites.create(
-        data: PrismaUnion.$1(favoritesCreateInput),
-        include: const FavoritesInclude(
-          products: PrismaUnion.$1(true),
-        ),);
+      data: PrismaUnion.$1(favoritesCreateInput),
+      include: const FavoritesInclude(
+        products: PrismaUnion.$1(true),
+      ),
+    );
 
     return response.products!;
   }
@@ -62,8 +61,7 @@ class FavoriteDataSourceImpl implements FavoriteDataSource {
         await _client.favorites.findUnique(where: favoritesWhereInput);
 
     if (favorite == null) {
-      throw const Failure(
-        statusCode: HttpStatus.badRequest,
+      throw Failure.badRequest(
         message: ResponseMessages.favoriteNotExists,
       );
     }

@@ -16,6 +16,66 @@ class Failure implements Exception {
     );
   }
 
+  ///not found error
+  factory Failure.notFound({
+    required String message,
+  }) {
+    return Failure(
+      statusCode: HttpStatus.internalServerError,
+      message: message,
+    );
+  }
+
+  ///internalServerError
+  factory Failure.internalServerError({
+    required String message,
+  }) {
+    return Failure(
+      statusCode: HttpStatus.internalServerError,
+      message: message,
+    );
+  }
+
+  ///internalServerError
+  factory Failure.forbidden({
+    required String message,
+  }) {
+    return Failure(
+      statusCode: HttpStatus.forbidden,
+      message: message,
+    );
+  }
+
+  ///conflict error
+  factory Failure.conflict({
+    required String message,
+  }) {
+    return Failure(
+      statusCode: HttpStatus.conflict,
+      message: message,
+    );
+  }
+
+  ///badRequest
+  factory Failure.badRequest({
+    String message = ResponseMessages.checkRequestBody,
+  }) {
+    return Failure(
+      statusCode: HttpStatus.badRequest,
+      message: message,
+    );
+  }
+
+  ///badRequest
+  factory Failure.unauthorized({
+    required String message,
+  }) {
+    return Failure(
+      statusCode: HttpStatus.unauthorized,
+      message: message,
+    );
+  }
+
   ///error code
   final int statusCode;
 
