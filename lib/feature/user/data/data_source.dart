@@ -67,7 +67,7 @@ class UserDataSourceImpl implements UserDataSource {
 
     if (user != null && !user.isDeleted!) {
       throw Failure.conflict(
-        message: ResponseMessages.userAlreadyexists,
+        message: ResponseMessages.userAlreadyExists,
       );
     }
 

@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 
-///Repesents for an error
+///Represents for an error
 class Failure implements Exception {
   ///Class's constructor
   const Failure({required this.statusCode, required this.message});
 
-  ///unknown error
+
+  ///Unknown error
+
   factory Failure.unknownError() {
     return const Failure(
       statusCode: HttpStatus.internalServerError,
@@ -21,7 +23,7 @@ class Failure implements Exception {
     required String message,
   }) {
     return Failure(
-      statusCode: HttpStatus.internalServerError,
+      statusCode: HttpStatus.notFound,
       message: message,
     );
   }

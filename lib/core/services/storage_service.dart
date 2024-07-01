@@ -13,12 +13,12 @@ import 'package:http/http.dart';
 const _png = 'iVB';
 const _jpg = '/9j';
 
-class StrorageService {
+class StorageService {
   Future<Object> uploadImage({
     required String encodedImage,
     required int userId,
   }) async {
-    final credentials = await _getCredintials();
+    final credentials = await _getCredentials();
 
     if (credentials == null) {
       throw Failure.internalServerError(
@@ -75,7 +75,7 @@ class StrorageService {
     }
   }
 
-  Future<ServiceAccountCredentials?> _getCredintials() async {
+  Future<ServiceAccountCredentials?> _getCredentials() async {
     try {
       final input = await File(Constants.keysPath).readAsString();
       final map = jsonDecode(input);

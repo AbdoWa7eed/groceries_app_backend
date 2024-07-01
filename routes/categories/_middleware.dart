@@ -3,7 +3,7 @@ import 'package:groceries_app_backend/core/di/di.dart';
 
 Handler middleware(Handler handler) {
   return (context) async {
-    initCategoiriesResources();
+    initCategoriesResources();
     final response = await handler(context);
 
     return response;

@@ -11,7 +11,7 @@ const _authenticationUrl = [
 
 Handler middleware(Handler handler) {
   return (context) async {
-    if (_isAuthrizationRequest(context)) {
+    if (_isAuthorizationRequest(context)) {
       final response = await handler(context);
       return response;
     }
@@ -43,6 +43,6 @@ bool _isVerifiedUser(String? token) {
   return false;
 }
 
-bool _isAuthrizationRequest(RequestContext context) {
+bool _isAuthorizationRequest(RequestContext context) {
   return _authenticationUrl.contains(context.request.url.toString());
 }

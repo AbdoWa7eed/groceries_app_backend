@@ -15,7 +15,7 @@ abstract class UploadImageDataSource {
 class UploadImageDataSourceImpl extends UploadImageDataSource {
   UploadImageDataSourceImpl(this._strorageService);
 
-  final StrorageService _strorageService;
+  final StorageService _strorageService;
   @override
   Future<String> uploadImage({
     required int userId,

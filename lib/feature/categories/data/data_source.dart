@@ -3,15 +3,15 @@
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 
-abstract class CategoiresDataSource {
+abstract class CategoriesDataSource {
   Future<List<Categories>> getCategories({
     int? take,
     int? skip,
   });
 }
 
-class CategoiresDataSourceImpl extends CategoiresDataSource {
-  CategoiresDataSourceImpl(this._client);
+class CategoriesDataSourceImpl extends CategoriesDataSource {
+  CategoriesDataSourceImpl(this._client);
 
   final PrismaClient _client;
   @override

@@ -74,13 +74,13 @@ Future<void> initRedis() async {
 }
 
 Future<void> initStorageService() async {
-  if (!instance.isRegistered<StrorageService>()) {
+  if (!instance.isRegistered<StorageService>()) {
     instance
       ..registerLazySingleton<UploadImageDataSource>(
-        () => UploadImageDataSourceImpl(instance<StrorageService>()),
+        () => UploadImageDataSourceImpl(instance<StorageService>()),
       )
-      ..registerLazySingleton<StrorageService>(
-        StrorageService.new,
+      ..registerLazySingleton<StorageService>(
+        StorageService.new,
       );
   }
 
@@ -105,14 +105,14 @@ void initProductsResources() {
   }
 }
 
-void initCategoiriesResources() {
+void initCategoriesResources() {
   if (!instance.isRegistered<CategoriesRepository>()) {
     instance
       ..registerLazySingleton<CategoriesRepository>(
-        () => CategoriesRepoImpl(instance<CategoiresDataSource>()),
+        () => CategoriesRepoImpl(instance<CategoriesDataSource>()),
       )
-      ..registerLazySingleton<CategoiresDataSource>(
-        () => CategoiresDataSourceImpl(instance<PrismaClient>()),
+      ..registerLazySingleton<CategoriesDataSource>(
+        () => CategoriesDataSourceImpl(instance<PrismaClient>()),
       );
   }
 }

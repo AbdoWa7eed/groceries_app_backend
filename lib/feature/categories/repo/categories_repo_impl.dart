@@ -10,7 +10,7 @@ import 'package:groceries_app_backend/feature/categories/repo/categories_repo.da
 
 class CategoriesRepoImpl extends CategoriesRepository {
   CategoriesRepoImpl(this._dataSource);
-  final CategoiresDataSource _dataSource;
+  final CategoriesDataSource _dataSource;
   @override
   Future<Either<Failure, List<CategoryModel>>> getCategories({
     required CategorySearchInput searchInput,

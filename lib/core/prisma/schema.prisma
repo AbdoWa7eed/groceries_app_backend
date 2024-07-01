@@ -12,6 +12,27 @@ model banners {
   image_url String @db.VarChar(255)
 }
 
+model cart_items {
+  quantity   Int
+  cart_id    Int
+  product_id Int
+  carts      carts    @relation(fields: [cart_id], references: [cart_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_carts1")
+  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_products1")
+
+  @@id([cart_id, product_id])
+  @@index([cart_id], map: "fk_cart_items_carts1_idx")
+  @@index([product_id], map: "fk_cart_items_products1_idx")
+}
+
+model carts {
+  cart_id    Int          @id @default(autoincrement())
+  user_id    Int          @unique(map: "user_id_UNIQUE")
+  cart_items cart_items[]
+  users      users        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_carts_users1")
+
+  @@index([user_id], map: "fk_carts_users1_idx")
+}
+
 model categories {
   category_id Int        @id @default(autoincrement())
   name        String     @db.VarChar(45)
@@ -31,12 +52,12 @@ model favorites {
 }
 
 model nutritions {
-  nutrition_id  Int       @id @default(autoincrement())
-  calories      Int       @db.SmallInt
-  protein       Int       @db.SmallInt
-  carbohydrates Int       @db.SmallInt
-  product_id    Int?
-  products      products? @relation(fields: [product_id], references: [product_id], map: "fk_nutritions_products1")
+  nutrition_id  Int      @id @default(autoincrement())
+  calories      Int      @db.SmallInt
+  protein       Int      @db.SmallInt
+  carbohydrates Int      @db.SmallInt
+  product_id    Int
+  products      products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_nutritions_products1")
 
   @@index([product_id], map: "fk_nutritions_products1_idx")
 }
@@ -69,18 +90,18 @@ model orders {
   total_price       Decimal         @db.Decimal(4, 2)
   order_items       order_items[]
   order_status      order_status    @relation(fields: [status], references: [status_id], onDelete: NoAction, map: "fk_orders_order_status1")
-  payment_methods   payment_methods @relation(fields: [payment_method_id], references: [payment_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_method")
+  payment_methods   payment_methods @relation(fields: [payment_method_id], references: [payment_method_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_methods1")
   users             users           @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_orders_users1")
 
   @@index([status], map: "fk_orders_order_status1_idx")
-  @@index([user_id], map: "fk_orders_users1_idx")
   @@index([payment_method_id], map: "fk_orders_payment_methods1_idx")
+  @@index([user_id], map: "fk_orders_users1_idx")
 }
 
 model payment_methods {
-  payment_id  Int      @id @default(autoincrement())
-  method_name String   @db.VarChar(45)
-  orders      orders[]
+  payment_method_id Int      @id @default(autoincrement())
+  method_name       String   @db.VarChar(45)
+  orders            orders[]
 }
 
 model products {
@@ -117,6 +138,12 @@ model reviews {
   @@index([user_id], map: "fk_reviews_users1_idx")
 }
 
+model user_roles {
+  role_id Int     @id @default(autoincrement())
+  role    String  @db.VarChar(10)
+  users   users[]
+}
+
 model users {
   user_id      Int         @id @default(autoincrement())
   user_name    String      @db.VarChar(100)
@@ -125,30 +152,13 @@ model users {
   address      String?     @db.VarChar(255)
   phone_number String?     @unique(map: "phone_number_UNIQUE") @db.VarChar(15)
   image_url    String?     @db.VarChar(255)
-  is_deleted   Boolean
+  is_deleted   Boolean     @default(false)
+  role_id      Int         @default(1)
   carts        carts?
   favorites    favorites[]
   orders       orders[]
   reviews      reviews[]
-}
+  user_roles   user_roles  @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_users_user_role1")
 
-model cart_items {
-  quantity   Int
-  cart_id    Int
-  product_id Int
-  carts      carts    @relation(fields: [cart_id], references: [cart_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_carts1")
-  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_products1")
-
-  @@id([cart_id, product_id])
-  @@index([cart_id], map: "fk_cart_items_carts1_idx")
-  @@index([product_id], map: "fk_cart_items_products1_idx")
-}
-
-model carts {
-  cart_id    Int          @id @default(autoincrement())
-  user_id    Int          @unique(map: "user_id_UNIQUE")
-  cart_items cart_items[]
-  users      users        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_carts_users1")
-
-  @@index([user_id], map: "fk_carts_users1_idx")
+  @@index([role_id], map: "fk_users_user_role1_idx")
 }

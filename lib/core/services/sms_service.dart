@@ -34,7 +34,7 @@ class SMSService {
                   'to': phoneNumber,
                 },
               ],
-              'from': 'APPLICATION',
+              'from': 'nectar',
               'text': "Here's your otp code $code valid for 4 minutes",
             }
           ],

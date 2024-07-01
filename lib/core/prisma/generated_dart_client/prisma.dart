@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-library prisma.namespace.prisma; // ignore_for_file: no_leading_underscores_for_library_prefixes
-
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:orm/orm.dart' as _i1;
 
 import 'prisma.dart' as _i2;
@@ -352,6 +351,8 @@ class AffectedRowsOutput {
       AffectedRowsOutput(count: json['count']);
 
   final int? count;
+
+  Map<String, dynamic> toJson() => {'count': count};
 }
 
 class BannersCreateManyInput
@@ -486,6 +487,12 @@ class BannersCountAggregateOutputType {
   final int? imageUrl;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'banner_id': bannerId,
+        'image_url': imageUrl,
+        '_all': $all,
+      };
 }
 
 class BannersAvgAggregateOutputType {
@@ -495,6 +502,8 @@ class BannersAvgAggregateOutputType {
       BannersAvgAggregateOutputType(bannerId: json['banner_id']);
 
   final double? bannerId;
+
+  Map<String, dynamic> toJson() => {'banner_id': bannerId};
 }
 
 class BannersSumAggregateOutputType {
@@ -504,6 +513,8 @@ class BannersSumAggregateOutputType {
       BannersSumAggregateOutputType(bannerId: json['banner_id']);
 
   final int? bannerId;
+
+  Map<String, dynamic> toJson() => {'banner_id': bannerId};
 }
 
 class BannersMinAggregateOutputType {
@@ -521,6 +532,11 @@ class BannersMinAggregateOutputType {
   final int? bannerId;
 
   final String? imageUrl;
+
+  Map<String, dynamic> toJson() => {
+        'banner_id': bannerId,
+        'image_url': imageUrl,
+      };
 }
 
 class BannersMaxAggregateOutputType {
@@ -538,6 +554,11 @@ class BannersMaxAggregateOutputType {
   final int? bannerId;
 
   final String? imageUrl;
+
+  Map<String, dynamic> toJson() => {
+        'banner_id': bannerId,
+        'image_url': imageUrl,
+      };
 }
 
 class BannersGroupByOutputType {
@@ -585,6 +606,16 @@ class BannersGroupByOutputType {
   final _i2.BannersMinAggregateOutputType? $min;
 
   final _i2.BannersMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'banner_id': bannerId,
+        'image_url': imageUrl,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class BannersCountOrderByAggregateInput
@@ -1230,6 +1261,14 @@ class AggregateBanners {
   final _i2.BannersMinAggregateOutputType? $min;
 
   final _i2.BannersMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateBannersCountArgs
@@ -1319,6 +1358,8 @@ class OrderStatusCountOutputType {
       OrderStatusCountOutputType(orders: json['orders']);
 
   final int? orders;
+
+  Map<String, dynamic> toJson() => {'orders': orders};
 }
 
 class PaymentMethodsCountOutputType {
@@ -1328,6 +1369,8 @@ class PaymentMethodsCountOutputType {
       PaymentMethodsCountOutputType(orders: json['orders']);
 
   final int? orders;
+
+  Map<String, dynamic> toJson() => {'orders': orders};
 }
 
 class OrdersCountOutputType {
@@ -1337,35 +1380,19 @@ class OrdersCountOutputType {
       OrdersCountOutputType(orderItems: json['order_items']);
 
   final int? orderItems;
+
+  Map<String, dynamic> toJson() => {'order_items': orderItems};
 }
 
-class UsersCountOutputType {
-  const UsersCountOutputType({
-    this.favorites,
-    this.orders,
-    this.reviews,
-  });
+class CategoriesCountOutputType {
+  const CategoriesCountOutputType({this.products});
 
-  factory UsersCountOutputType.fromJson(Map json) => UsersCountOutputType(
-        favorites: json['favorites'],
-        orders: json['orders'],
-        reviews: json['reviews'],
-      );
+  factory CategoriesCountOutputType.fromJson(Map json) =>
+      CategoriesCountOutputType(products: json['products']);
 
-  final int? favorites;
+  final int? products;
 
-  final int? orders;
-
-  final int? reviews;
-}
-
-class CartsCountOutputType {
-  const CartsCountOutputType({this.cartItems});
-
-  factory CartsCountOutputType.fromJson(Map json) =>
-      CartsCountOutputType(cartItems: json['cart_items']);
-
-  final int? cartItems;
+  Map<String, dynamic> toJson() => {'products': products};
 }
 
 class ProductsCountOutputType {
@@ -1394,15 +1421,102 @@ class ProductsCountOutputType {
   final int? orderItems;
 
   final int? reviews;
+
+  Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'reviews': reviews,
+      };
 }
 
-class CategoriesCountOutputType {
-  const CategoriesCountOutputType({this.products});
+class UserRolesCountOutputType {
+  const UserRolesCountOutputType({this.users});
 
-  factory CategoriesCountOutputType.fromJson(Map json) =>
-      CategoriesCountOutputType(products: json['products']);
+  factory UserRolesCountOutputType.fromJson(Map json) =>
+      UserRolesCountOutputType(users: json['users']);
 
-  final int? products;
+  final int? users;
+
+  Map<String, dynamic> toJson() => {'users': users};
+}
+
+class UsersCountOutputType {
+  const UsersCountOutputType({
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  factory UsersCountOutputType.fromJson(Map json) => UsersCountOutputType(
+        favorites: json['favorites'],
+        orders: json['orders'],
+        reviews: json['reviews'],
+      );
+
+  final int? favorites;
+
+  final int? orders;
+
+  final int? reviews;
+
+  Map<String, dynamic> toJson() => {
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class CartsCountOutputType {
+  const CartsCountOutputType({this.cartItems});
+
+  factory CartsCountOutputType.fromJson(Map json) =>
+      CartsCountOutputType(cartItems: json['cart_items']);
+
+  final int? cartItems;
+
+  Map<String, dynamic> toJson() => {'cart_items': cartItems};
+}
+
+class CartItemsCartIdProductIdCompoundUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCartIdProductIdCompoundUniqueInput({
+    required this.cartId,
+    required this.productId,
+  });
+
+  final int cartId;
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsListRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsListRelationFilter({
+    this.every,
+    this.some,
+    this.none,
+  });
+
+  final _i2.CartItemsWhereInput? every;
+
+  final _i2.CartItemsWhereInput? some;
+
+  final _i2.CartItemsWhereInput? none;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'every': every,
+        'some': some,
+        'none': none,
+      };
 }
 
 class NestedStringNullableFilter
@@ -1514,6 +1628,58 @@ class StringNullableFilter
         'startsWith': startsWith,
         'endsWith': endsWith,
         'not': not,
+      };
+}
+
+class NestedBoolFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedBoolFilter({
+    this.equals,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<bool, _i1.Reference<bool>>? equals;
+
+  final _i1.PrismaUnion<bool, _i2.NestedBoolFilter>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'not': not,
+      };
+}
+
+class BoolFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const BoolFilter({
+    this.equals,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<bool, _i1.Reference<bool>>? equals;
+
+  final _i1.PrismaUnion<bool, _i2.NestedBoolFilter>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'not': not,
+      };
+}
+
+class CartsNullableRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsNullableRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>? $is;
+
+  final _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
       };
 }
 
@@ -1687,131 +1853,68 @@ class DecimalNullableFilter
       };
 }
 
-class NestedBoolFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedBoolFilter({
-    this.equals,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<bool, _i1.Reference<bool>>? equals;
-
-  final _i1.PrismaUnion<bool, _i2.NestedBoolFilter>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'not': not,
-      };
-}
-
-class BoolFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const BoolFilter({
-    this.equals,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<bool, _i1.Reference<bool>>? equals;
-
-  final _i1.PrismaUnion<bool, _i2.NestedBoolFilter>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'not': not,
-      };
-}
-
-class CartsNullableRelationFilter
+class NutritionsWhereInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsNullableRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  final _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>? $is;
-
-  final _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'is': $is,
-        'isNot': isNot,
-      };
-}
-
-class ProductsRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  final _i2.ProductsWhereInput? $is;
-
-  final _i2.ProductsWhereInput? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'is': $is,
-        'isNot': isNot,
-      };
-}
-
-class FavoritesWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesWhereInput({
+  const NutritionsWhereInput({
     this.AND,
     this.OR,
     this.NOT,
-    this.userId,
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
     this.productId,
     this.products,
-    this.users,
   });
 
-  final _i1
-      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
-      AND;
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? AND;
 
-  final Iterable<_i2.FavoritesWhereInput>? OR;
+  final Iterable<_i2.NutritionsWhereInput>? OR;
 
-  final _i1
-      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
-      NOT;
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? NOT;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
+  final _i1.PrismaUnion<_i2.IntFilter, int>? nutritionId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
 
   final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
       products;
 
-  final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
-
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'user_id': userId,
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
         'product_id': productId,
         'products': products,
-        'users': users,
       };
 }
 
-class FavoritesListRelationFilter
+class NutritionsListRelationFilter
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesListRelationFilter({
+  const NutritionsListRelationFilter({
     this.every,
     this.some,
     this.none,
   });
 
-  final _i2.FavoritesWhereInput? every;
+  final _i2.NutritionsWhereInput? every;
 
-  final _i2.FavoritesWhereInput? some;
+  final _i2.NutritionsWhereInput? some;
 
-  final _i2.FavoritesWhereInput? none;
+  final _i2.NutritionsWhereInput? none;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -1992,82 +2095,19 @@ class DateTimeNullableFilter
       };
 }
 
-class OrdersRelationFilter
+class OrdersListRelationFilter
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  final _i2.OrdersWhereInput? $is;
-
-  final _i2.OrdersWhereInput? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'is': $is,
-        'isNot': isNot,
-      };
-}
-
-class OrderItemsWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.orderId,
-    this.productId,
-    this.quantity,
-    this.orders,
-    this.products,
-  });
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereInput,
-      Iterable<_i2.OrderItemsWhereInput>>? AND;
-
-  final Iterable<_i2.OrderItemsWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.OrderItemsWhereInput,
-      Iterable<_i2.OrderItemsWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? orderId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
-
-  final _i1.PrismaUnion<_i2.OrdersRelationFilter, _i2.OrdersWhereInput>? orders;
-
-  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
-      products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'order_id': orderId,
-        'product_id': productId,
-        'quantity': quantity,
-        'orders': orders,
-        'products': products,
-      };
-}
-
-class OrderItemsListRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsListRelationFilter({
+  const OrdersListRelationFilter({
     this.every,
     this.some,
     this.none,
   });
 
-  final _i2.OrderItemsWhereInput? every;
+  final _i2.OrdersWhereInput? every;
 
-  final _i2.OrderItemsWhereInput? some;
+  final _i2.OrdersWhereInput? some;
 
-  final _i2.OrderItemsWhereInput? none;
+  final _i2.OrdersWhereInput? none;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -2137,7 +2177,7 @@ class PaymentMethodsWhereInput
     this.AND,
     this.OR,
     this.NOT,
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.orders,
   });
@@ -2150,7 +2190,7 @@ class PaymentMethodsWhereInput
   final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
       Iterable<_i2.PaymentMethodsWhereInput>>? NOT;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentId;
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentMethodId;
 
   final _i1.PrismaUnion<_i2.StringFilter, String>? methodName;
 
@@ -2161,7 +2201,7 @@ class PaymentMethodsWhereInput
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         'orders': orders,
       };
@@ -2256,25 +2296,169 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class OrdersListRelationFilter
+class OrdersRelationFilter
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersListRelationFilter({
+  const OrdersRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.OrdersWhereInput? $is;
+
+  final _i2.OrdersWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
+class OrderItemsWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.orderId,
+    this.productId,
+    this.quantity,
+    this.orders,
+    this.products,
+  });
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereInput,
+      Iterable<_i2.OrderItemsWhereInput>>? AND;
+
+  final Iterable<_i2.OrderItemsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.OrderItemsWhereInput,
+      Iterable<_i2.OrderItemsWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? orderId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.OrdersRelationFilter, _i2.OrdersWhereInput>? orders;
+
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+        'orders': orders,
+        'products': products,
+      };
+}
+
+class OrderItemsListRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsListRelationFilter({
     this.every,
     this.some,
     this.none,
   });
 
-  final _i2.OrdersWhereInput? every;
+  final _i2.OrderItemsWhereInput? every;
 
-  final _i2.OrdersWhereInput? some;
+  final _i2.OrderItemsWhereInput? some;
 
-  final _i2.OrdersWhereInput? none;
+  final _i2.OrderItemsWhereInput? none;
 
   @override
   Map<String, dynamic> toJson() => {
         'every': every,
         'some': some,
         'none': none,
+      };
+}
+
+class ProductsListRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsListRelationFilter({
+    this.every,
+    this.some,
+    this.none,
+  });
+
+  final _i2.ProductsWhereInput? every;
+
+  final _i2.ProductsWhereInput? some;
+
+  final _i2.ProductsWhereInput? none;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'every': every,
+        'some': some,
+        'none': none,
+      };
+}
+
+class CategoriesWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.categoryId,
+    this.name,
+    this.imageUrl,
+    this.products,
+  });
+
+  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
+      Iterable<_i2.CategoriesWhereInput>>? AND;
+
+  final Iterable<_i2.CategoriesWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
+      Iterable<_i2.CategoriesWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? categoryId;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
+
+  final _i2.ProductsListRelationFilter? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+        'products': products,
+      };
+}
+
+class CategoriesRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.CategoriesWhereInput? $is;
+
+  final _i2.CategoriesWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
       };
 }
 
@@ -2352,6 +2536,258 @@ class ReviewsListRelationFilter
       };
 }
 
+class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.productId,
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.categories,
+    this.reviews,
+  });
+
+  final _i1
+      .PrismaUnion<_i2.ProductsWhereInput, Iterable<_i2.ProductsWhereInput>>?
+      AND;
+
+  final Iterable<_i2.ProductsWhereInput>? OR;
+
+  final _i1
+      .PrismaUnion<_i2.ProductsWhereInput, Iterable<_i2.ProductsWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantityInStock;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? description;
+
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? unitPrice;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? categoryId;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<_i2.DecimalNullableFilter,
+      _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
+
+  final _i2.CartItemsListRelationFilter? cartItems;
+
+  final _i2.FavoritesListRelationFilter? favorites;
+
+  final _i2.NutritionsListRelationFilter? nutritions;
+
+  final _i2.OrderItemsListRelationFilter? orderItems;
+
+  final _i1.PrismaUnion<_i2.CategoriesRelationFilter, _i2.CategoriesWhereInput>?
+      categories;
+
+  final _i2.ReviewsListRelationFilter? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class ProductsRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.ProductsWhereInput? $is;
+
+  final _i2.ProductsWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
+class FavoritesWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.userId,
+    this.productId,
+    this.products,
+    this.users,
+  });
+
+  final _i1
+      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
+      AND;
+
+  final Iterable<_i2.FavoritesWhereInput>? OR;
+
+  final _i1
+      .PrismaUnion<_i2.FavoritesWhereInput, Iterable<_i2.FavoritesWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
+
+  final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'user_id': userId,
+        'product_id': productId,
+        'products': products,
+        'users': users,
+      };
+}
+
+class FavoritesListRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesListRelationFilter({
+    this.every,
+    this.some,
+    this.none,
+  });
+
+  final _i2.FavoritesWhereInput? every;
+
+  final _i2.FavoritesWhereInput? some;
+
+  final _i2.FavoritesWhereInput? none;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'every': every,
+        'some': some,
+        'none': none,
+      };
+}
+
+class UsersListRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersListRelationFilter({
+    this.every,
+    this.some,
+    this.none,
+  });
+
+  final _i2.UsersWhereInput? every;
+
+  final _i2.UsersWhereInput? some;
+
+  final _i2.UsersWhereInput? none;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'every': every,
+        'some': some,
+        'none': none,
+      };
+}
+
+class UserRolesWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.roleId,
+    this.role,
+    this.users,
+  });
+
+  final _i1
+      .PrismaUnion<_i2.UserRolesWhereInput, Iterable<_i2.UserRolesWhereInput>>?
+      AND;
+
+  final Iterable<_i2.UserRolesWhereInput>? OR;
+
+  final _i1
+      .PrismaUnion<_i2.UserRolesWhereInput, Iterable<_i2.UserRolesWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? roleId;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? role;
+
+  final _i2.UsersListRelationFilter? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'role_id': roleId,
+        'role': role,
+        'users': users,
+      };
+}
+
+class UserRolesRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.UserRolesWhereInput? $is;
+
+  final _i2.UserRolesWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
 class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersWhereInput({
     this.AND,
@@ -2365,10 +2801,12 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.carts,
     this.favorites,
     this.orders,
     this.reviews,
+    this.userRoles,
   });
 
   final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
@@ -2398,6 +2836,8 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.BoolFilter, bool>? isDeleted;
 
+  final _i1.PrismaUnion<_i2.IntFilter, int>? roleId;
+
   final _i1.PrismaUnion<_i2.CartsNullableRelationFilter,
       _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>>? carts;
 
@@ -2406,6 +2846,9 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i2.OrdersListRelationFilter? orders;
 
   final _i2.ReviewsListRelationFilter? reviews;
+
+  final _i1.PrismaUnion<_i2.UserRolesRelationFilter, _i2.UserRolesWhereInput>?
+      userRoles;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -2420,10 +2863,12 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -2546,419 +2991,53 @@ class CartItemsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class CartItemsListRelationFilter
+class CartItemsWhereUniqueInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsListRelationFilter({
-    this.every,
-    this.some,
-    this.none,
-  });
-
-  final _i2.CartItemsWhereInput? every;
-
-  final _i2.CartItemsWhereInput? some;
-
-  final _i2.CartItemsWhereInput? none;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'every': every,
-        'some': some,
-        'none': none,
-      };
-}
-
-class NestedIntNullableFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedIntNullableFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1
-      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
-      equals;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
-
-  final _i1.PrismaUnion<int,
-      _i1.PrismaUnion<_i2.NestedIntNullableFilter, _i1.PrismaNull>>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-      };
-}
-
-class IntNullableFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const IntNullableFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1
-      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
-      equals;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
-
-  final _i1.PrismaUnion<int,
-      _i1.PrismaUnion<_i2.NestedIntNullableFilter, _i1.PrismaNull>>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-      };
-}
-
-class ProductsNullableRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsNullableRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsWhereInput, _i1.PrismaNull>? $is;
-
-  final _i1.PrismaUnion<_i2.ProductsWhereInput, _i1.PrismaNull>? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'is': $is,
-        'isNot': isNot,
-      };
-}
-
-class NutritionsWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsWhereInput({
+  const CartItemsWhereUniqueInput({
+    this.cartIdProductId,
     this.AND,
     this.OR,
     this.NOT,
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
+    this.quantity,
+    this.cartId,
     this.productId,
+    this.carts,
     this.products,
   });
 
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? AND;
-
-  final Iterable<_i2.NutritionsWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? nutritionId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
+  final _i2.CartItemsCartIdProductIdCompoundUniqueInput? cartIdProductId;
 
   final _i1
-      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
-      productId;
-
-  final _i1.PrismaUnion<_i2.ProductsNullableRelationFilter,
-      _i1.PrismaUnion<_i2.ProductsWhereInput, _i1.PrismaNull>>? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products,
-      };
-}
-
-class NutritionsListRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsListRelationFilter({
-    this.every,
-    this.some,
-    this.none,
-  });
-
-  final _i2.NutritionsWhereInput? every;
-
-  final _i2.NutritionsWhereInput? some;
-
-  final _i2.NutritionsWhereInput? none;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'every': every,
-        'some': some,
-        'none': none,
-      };
-}
-
-class CategoriesRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesRelationFilter({
-    this.$is,
-    this.isNot,
-  });
-
-  final _i2.CategoriesWhereInput? $is;
-
-  final _i2.CategoriesWhereInput? isNot;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'is': $is,
-        'isNot': isNot,
-      };
-}
-
-class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.productId,
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.categoryId,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.cartItems,
-    this.favorites,
-    this.nutritions,
-    this.orderItems,
-    this.categories,
-    this.reviews,
-  });
-
-  final _i1
-      .PrismaUnion<_i2.ProductsWhereInput, Iterable<_i2.ProductsWhereInput>>?
+      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
       AND;
 
-  final Iterable<_i2.ProductsWhereInput>? OR;
+  final Iterable<_i2.CartItemsWhereInput>? OR;
 
   final _i1
-      .PrismaUnion<_i2.ProductsWhereInput, Iterable<_i2.ProductsWhereInput>>?
+      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
       NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
 
-  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
+  final _i1.PrismaUnion<_i2.CartsRelationFilter, _i2.CartsWhereInput>? carts;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? quantityInStock;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? description;
-
-  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? unitPrice;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? categoryId;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? productDetails;
-
-  final _i1.PrismaUnion<_i2.DecimalNullableFilter,
-      _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>>? discountPercentage;
-
-  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
-
-  final _i2.CartItemsListRelationFilter? cartItems;
-
-  final _i2.FavoritesListRelationFilter? favorites;
-
-  final _i2.NutritionsListRelationFilter? nutritions;
-
-  final _i2.OrderItemsListRelationFilter? orderItems;
-
-  final _i1.PrismaUnion<_i2.CategoriesRelationFilter, _i2.CategoriesWhereInput>?
-      categories;
-
-  final _i2.ReviewsListRelationFilter? reviews;
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
 
   @override
   Map<String, dynamic> toJson() => {
+        'cart_id_product_id': cartIdProductId,
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
+        'quantity': quantity,
+        'cart_id': cartId,
         'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'category_id': categoryId,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'cart_items': cartItems,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'categories': categories,
-        'reviews': reviews,
-      };
-}
-
-class ProductsListRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsListRelationFilter({
-    this.every,
-    this.some,
-    this.none,
-  });
-
-  final _i2.ProductsWhereInput? every;
-
-  final _i2.ProductsWhereInput? some;
-
-  final _i2.ProductsWhereInput? none;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'every': every,
-        'some': some,
-        'none': none,
-      };
-}
-
-class CategoriesWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.categoryId,
-    this.name,
-    this.imageUrl,
-    this.products,
-  });
-
-  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
-      Iterable<_i2.CategoriesWhereInput>>? AND;
-
-  final Iterable<_i2.CategoriesWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
-      Iterable<_i2.CategoriesWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? categoryId;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
-
-  final _i2.ProductsListRelationFilter? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'category_id': categoryId,
-        'name': name,
-        'image_url': imageUrl,
-        'products': products,
-      };
-}
-
-class CategoriesWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesWhereUniqueInput({
-    this.categoryId,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.name,
-    this.imageUrl,
-    this.products,
-  });
-
-  final int? categoryId;
-
-  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
-      Iterable<_i2.CategoriesWhereInput>>? AND;
-
-  final Iterable<_i2.CategoriesWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
-      Iterable<_i2.CategoriesWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
-
-  final _i2.ProductsListRelationFilter? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'category_id': categoryId,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'name': name,
-        'image_url': imageUrl,
+        'carts': carts,
         'products': products,
       };
 }
@@ -3030,6 +3109,38 @@ class ReviewsOrderByRelationAggregateInput
   Map<String, dynamic> toJson() => {'_count': $count};
 }
 
+class UsersOrderByRelationAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersOrderByRelationAggregateInput({this.$count});
+
+  final _i2.SortOrder? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class UserRolesOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesOrderByWithRelationInput({
+    this.roleId,
+    this.role,
+    this.users,
+  });
+
+  final _i2.SortOrder? roleId;
+
+  final _i2.SortOrder? role;
+
+  final _i2.UsersOrderByRelationAggregateInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        'users': users,
+      };
+}
+
 class UsersOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersOrderByWithRelationInput({
@@ -3041,10 +3152,12 @@ class UsersOrderByWithRelationInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.carts,
     this.favorites,
     this.orders,
     this.reviews,
+    this.userRoles,
   });
 
   final _i2.SortOrder? userId;
@@ -3063,6 +3176,8 @@ class UsersOrderByWithRelationInput
 
   final _i2.SortOrder? isDeleted;
 
+  final _i2.SortOrder? roleId;
+
   final _i2.CartsOrderByWithRelationInput? carts;
 
   final _i2.FavoritesOrderByRelationAggregateInput? favorites;
@@ -3070,6 +3185,8 @@ class UsersOrderByWithRelationInput
   final _i2.OrdersOrderByRelationAggregateInput? orders;
 
   final _i2.ReviewsOrderByRelationAggregateInput? reviews;
+
+  final _i2.UserRolesOrderByWithRelationInput? userRoles;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -3081,10 +3198,12 @@ class UsersOrderByWithRelationInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -3274,75 +3393,6 @@ class CartItemsOrderByWithRelationInput
       };
 }
 
-class CartItemsCartIdProductIdCompoundUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCartIdProductIdCompoundUniqueInput({
-    required this.cartId,
-    required this.productId,
-  });
-
-  final int cartId;
-
-  final int productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsWhereUniqueInput({
-    this.cartIdProductId,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.quantity,
-    this.cartId,
-    this.productId,
-    this.carts,
-    this.products,
-  });
-
-  final _i2.CartItemsCartIdProductIdCompoundUniqueInput? cartIdProductId;
-
-  final _i1
-      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
-      AND;
-
-  final Iterable<_i2.CartItemsWhereInput>? OR;
-
-  final _i1
-      .PrismaUnion<_i2.CartItemsWhereInput, Iterable<_i2.CartItemsWhereInput>>?
-      NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  final _i1.PrismaUnion<_i2.CartsRelationFilter, _i2.CartsWhereInput>? carts;
-
-  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
-      products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id_product_id': cartIdProductId,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-        'carts': carts,
-        'products': products,
-      };
-}
-
 enum CartItemsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   quantity<int>('quantity', 'cart_items'),
   cartId<int>('cart_id', 'cart_items'),
@@ -3468,24 +3518,6 @@ class ProductsCartItemsArgs
       };
 }
 
-class FavoritesProductsArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesProductsArgs({
-    this.select,
-    this.include,
-  });
-
-  final _i2.ProductsSelect? select;
-
-  final _i2.ProductsInclude? include;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'select': select,
-        'include': include,
-      };
-}
-
 class FavoritesOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const FavoritesOrderByWithRelationInput({
@@ -3593,8 +3625,9 @@ enum FavoritesScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   final String model;
 }
 
-class UsersFavoritesArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersFavoritesArgs({
+class ProductsFavoritesArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsFavoritesArgs({
     this.where,
     this.orderBy,
     this.cursor,
@@ -3636,27 +3669,9 @@ class UsersFavoritesArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class OrderItemsOrdersArgs
+class NutritionsProductsArgs
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsOrdersArgs({
-    this.select,
-    this.include,
-  });
-
-  final _i2.OrdersSelect? select;
-
-  final _i2.OrdersInclude? include;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'select': select,
-        'include': include,
-      };
-}
-
-class OrderItemsProductsArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsProductsArgs({
+  const NutritionsProductsArgs({
     this.select,
     this.include,
   });
@@ -3672,20 +3687,191 @@ class OrderItemsProductsArgs
       };
 }
 
-class OrderItemsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsInclude({
-    this.orders,
+class NutritionsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsSelect({
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.productId,
     this.products,
   });
 
-  final _i1.PrismaUnion<bool, _i2.OrderItemsOrdersArgs>? orders;
+  final bool? nutritionId;
 
-  final _i1.PrismaUnion<bool, _i2.OrderItemsProductsArgs>? products;
+  final bool? calories;
+
+  final bool? protein;
+
+  final bool? carbohydrates;
+
+  final bool? productId;
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
 
   @override
   Map<String, dynamic> toJson() => {
-        'orders': orders,
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
         'products': products,
+      };
+}
+
+class NutritionsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsInclude({this.products});
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
+
+  @override
+  Map<String, dynamic> toJson() => {'products': products};
+}
+
+class NutritionsOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsOrderByWithRelationInput({
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.productId,
+    this.products,
+  });
+
+  final _i2.SortOrder? nutritionId;
+
+  final _i2.SortOrder? calories;
+
+  final _i2.SortOrder? protein;
+
+  final _i2.SortOrder? carbohydrates;
+
+  final _i2.SortOrder? productId;
+
+  final _i2.ProductsOrderByWithRelationInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+        'products': products,
+      };
+}
+
+class NutritionsWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsWhereUniqueInput({
+    this.nutritionId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.productId,
+    this.products,
+  });
+
+  final int? nutritionId;
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? AND;
+
+  final Iterable<_i2.NutritionsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+        'products': products,
+      };
+}
+
+enum NutritionsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  nutritionId<int>('nutrition_id', 'nutritions'),
+  calories<int>('calories', 'nutritions'),
+  protein<int>('protein', 'nutritions'),
+  carbohydrates<int>('carbohydrates', 'nutritions'),
+  productId<int>('product_id', 'nutritions');
+
+  const NutritionsScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
+class ProductsNutritionsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsNutritionsArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.NutritionsWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.NutritionsOrderByWithRelationInput>,
+      _i2.NutritionsOrderByWithRelationInput>? orderBy;
+
+  final _i2.NutritionsWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.NutritionsScalar, Iterable<_i2.NutritionsScalar>>?
+      distinct;
+
+  final _i2.NutritionsSelect? select;
+
+  final _i2.NutritionsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
       };
 }
 
@@ -3714,12 +3900,12 @@ class OrderStatusOrderByWithRelationInput
 class PaymentMethodsOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsOrderByWithRelationInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.orders,
   });
 
-  final _i2.SortOrder? paymentId;
+  final _i2.SortOrder? paymentMethodId;
 
   final _i2.SortOrder? methodName;
 
@@ -3727,7 +3913,7 @@ class PaymentMethodsOrderByWithRelationInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         'orders': orders,
       };
@@ -4227,13 +4413,13 @@ class PaymentMethodsCountArgs
 class PaymentMethodsSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsSelect({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.orders,
     this.$count,
   });
 
-  final bool? paymentId;
+  final bool? paymentMethodId;
 
   final bool? methodName;
 
@@ -4243,7 +4429,7 @@ class PaymentMethodsSelect
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         'orders': orders,
         '_count': $count,
@@ -4286,154 +4472,46 @@ class OrdersPaymentMethodsArgs
       };
 }
 
-class OrdersUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersUsersArgs({
+class UsersFavoritesArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersFavoritesArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
     this.select,
     this.include,
   });
 
-  final _i2.UsersSelect? select;
+  final _i2.FavoritesWhereInput? where;
 
-  final _i2.UsersInclude? include;
+  final _i1.PrismaUnion<Iterable<_i2.FavoritesOrderByWithRelationInput>,
+      _i2.FavoritesOrderByWithRelationInput>? orderBy;
+
+  final _i2.FavoritesWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.FavoritesScalar, Iterable<_i2.FavoritesScalar>>?
+      distinct;
+
+  final _i2.FavoritesSelect? select;
+
+  final _i2.FavoritesInclude? include;
 
   @override
   Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
         'select': select,
         'include': include,
-      };
-}
-
-class OrdersCountOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCountOutputTypeSelect({this.orderItems});
-
-  final bool? orderItems;
-
-  @override
-  Map<String, dynamic> toJson() => {'order_items': orderItems};
-}
-
-class OrdersCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersCountArgs({this.select});
-
-  final _i2.OrdersCountOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class OrdersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersInclude({
-    this.orderItems,
-    this.orderStatus,
-    this.paymentMethods,
-    this.users,
-    this.$count,
-  });
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_items': orderItems,
-        'order_status': orderStatus,
-        'payment_methods': paymentMethods,
-        'users': users,
-        '_count': $count,
-      };
-}
-
-class OrderItemsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsSelect({
-    this.orderId,
-    this.productId,
-    this.quantity,
-    this.orders,
-    this.products,
-  });
-
-  final bool? orderId;
-
-  final bool? productId;
-
-  final bool? quantity;
-
-  final _i1.PrismaUnion<bool, _i2.OrderItemsOrdersArgs>? orders;
-
-  final _i1.PrismaUnion<bool, _i2.OrderItemsProductsArgs>? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'product_id': productId,
-        'quantity': quantity,
-        'orders': orders,
-        'products': products,
-      };
-}
-
-class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrdersSelect({
-    this.orderId,
-    this.orderDate,
-    this.shippingDate,
-    this.userId,
-    this.status,
-    this.paymentMethodId,
-    this.totalPrice,
-    this.orderItems,
-    this.orderStatus,
-    this.paymentMethods,
-    this.users,
-    this.$count,
-  });
-
-  final bool? orderId;
-
-  final bool? orderDate;
-
-  final bool? shippingDate;
-
-  final bool? userId;
-
-  final bool? status;
-
-  final bool? paymentMethodId;
-
-  final bool? totalPrice;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
-
-  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'order_id': orderId,
-        'order_date': orderDate,
-        'shipping_date': shippingDate,
-        'user_id': userId,
-        'status': status,
-        'payment_method_id': paymentMethodId,
-        'total_price': totalPrice,
-        'order_items': orderItems,
-        'order_status': orderStatus,
-        'payment_methods': paymentMethods,
-        'users': users,
-        '_count': $count,
       };
 }
 
@@ -4720,6 +4798,233 @@ class UsersReviewsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
+class UsersWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersWhereUniqueInput({
+    this.userId,
+    this.email,
+    this.phoneNumber,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.userName,
+    this.password,
+    this.address,
+    this.imageUrl,
+    this.isDeleted,
+    this.roleId,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+    this.userRoles,
+  });
+
+  final int? userId;
+
+  final String? email;
+
+  final String? phoneNumber;
+
+  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
+      AND;
+
+  final Iterable<_i2.UsersWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? userName;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? password;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<_i2.BoolFilter, bool>? isDeleted;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? roleId;
+
+  final _i1.PrismaUnion<_i2.CartsNullableRelationFilter,
+      _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>>? carts;
+
+  final _i2.FavoritesListRelationFilter? favorites;
+
+  final _i2.OrdersListRelationFilter? orders;
+
+  final _i2.ReviewsListRelationFilter? reviews;
+
+  final _i1.PrismaUnion<_i2.UserRolesRelationFilter, _i2.UserRolesWhereInput>?
+      userRoles;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'email': email,
+        'phone_number': phoneNumber,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'user_name': userName,
+        'password': password,
+        'address': address,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+        'user_roles': userRoles,
+      };
+}
+
+enum UsersScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  userId<int>('user_id', 'users'),
+  userName<String>('user_name', 'users'),
+  email<String>('email', 'users'),
+  password<String>('password', 'users'),
+  address<String>('address', 'users'),
+  phoneNumber<String>('phone_number', 'users'),
+  imageUrl<String>('image_url', 'users'),
+  isDeleted<bool>('is_deleted', 'users'),
+  roleId<int>('role_id', 'users');
+
+  const UsersScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
+class UserRolesUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUsersArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.UsersWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.UsersOrderByWithRelationInput>,
+      _i2.UsersOrderByWithRelationInput>? orderBy;
+
+  final _i2.UsersWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.UsersScalar, Iterable<_i2.UsersScalar>>? distinct;
+
+  final _i2.UsersSelect? select;
+
+  final _i2.UsersInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
+      };
+}
+
+class UserRolesCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCountOutputTypeSelect({this.users});
+
+  final bool? users;
+
+  @override
+  Map<String, dynamic> toJson() => {'users': users};
+}
+
+class UserRolesCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCountArgs({this.select});
+
+  final _i2.UserRolesCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class UserRolesSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesSelect({
+    this.roleId,
+    this.role,
+    this.users,
+    this.$count,
+  });
+
+  final bool? roleId;
+
+  final bool? role;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        'users': users,
+        '_count': $count,
+      };
+}
+
+class UserRolesInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesInclude({
+    this.users,
+    this.$count,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'users': users,
+        '_count': $count,
+      };
+}
+
+class UsersUserRolesArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUserRolesArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.UserRolesSelect? select;
+
+  final _i2.UserRolesInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
 class UsersCountOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersCountOutputTypeSelect({
@@ -4757,6 +5062,7 @@ class UsersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.favorites,
     this.orders,
     this.reviews,
+    this.userRoles,
     this.$count,
   });
 
@@ -4768,6 +5074,8 @@ class UsersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<bool, _i2.UsersReviewsArgs>? reviews;
 
+  final _i1.PrismaUnion<bool, _i2.UsersUserRolesArgs>? userRoles;
+
   final _i1.PrismaUnion<bool, _i2.UsersCountArgs>? $count;
 
   @override
@@ -4776,12 +5084,13 @@ class UsersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
         '_count': $count,
       };
 }
 
-class FavoritesUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesUsersArgs({
+class OrdersUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUsersArgs({
     this.select,
     this.include,
   });
@@ -4797,76 +5106,78 @@ class FavoritesUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class FavoritesInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const FavoritesInclude({
-    this.products,
+class OrdersCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCountOutputTypeSelect({this.orderItems});
+
+  final bool? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {'order_items': orderItems};
+}
+
+class OrdersCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCountArgs({this.select});
+
+  final _i2.OrdersCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class OrdersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersInclude({
+    this.orderItems,
+    this.orderStatus,
+    this.paymentMethods,
     this.users,
+    this.$count,
   });
 
-  final _i1.PrismaUnion<bool, _i2.FavoritesProductsArgs>? products;
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
 
-  final _i1.PrismaUnion<bool, _i2.FavoritesUsersArgs>? users;
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
 
   @override
   Map<String, dynamic> toJson() => {
-        'products': products,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
         'users': users,
+        '_count': $count,
       };
 }
 
-class ProductsFavoritesArgs
+class OrderItemsOrdersArgs
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsFavoritesArgs({
-    this.where,
-    this.orderBy,
-    this.cursor,
-    this.take,
-    this.skip,
-    this.distinct,
+  const OrderItemsOrdersArgs({
     this.select,
     this.include,
   });
 
-  final _i2.FavoritesWhereInput? where;
+  final _i2.OrdersSelect? select;
 
-  final _i1.PrismaUnion<Iterable<_i2.FavoritesOrderByWithRelationInput>,
-      _i2.FavoritesOrderByWithRelationInput>? orderBy;
-
-  final _i2.FavoritesWhereUniqueInput? cursor;
-
-  final int? take;
-
-  final int? skip;
-
-  final _i1.PrismaUnion<_i2.FavoritesScalar, Iterable<_i2.FavoritesScalar>>?
-      distinct;
-
-  final _i2.FavoritesSelect? select;
-
-  final _i2.FavoritesInclude? include;
+  final _i2.OrdersInclude? include;
 
   @override
   Map<String, dynamic> toJson() => {
-        'where': where,
-        'orderBy': orderBy,
-        'cursor': cursor,
-        'take': take,
-        'skip': skip,
-        'distinct': distinct,
         'select': select,
         'include': include,
       };
 }
 
-class NutritionsProductsArgs
+class OrderItemsProductsArgs
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsProductsArgs({
-    this.where,
+  const OrderItemsProductsArgs({
     this.select,
     this.include,
   });
-
-  final _i2.ProductsWhereInput? where;
 
   final _i2.ProductsSelect? select;
 
@@ -4874,199 +5185,111 @@ class NutritionsProductsArgs
 
   @override
   Map<String, dynamic> toJson() => {
-        'where': where,
         'select': select,
         'include': include,
       };
 }
 
-class NutritionsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsSelect({
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
+class OrderItemsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsInclude({
+    this.orders,
     this.products,
   });
 
-  final bool? nutritionId;
+  final _i1.PrismaUnion<bool, _i2.OrderItemsOrdersArgs>? orders;
 
-  final bool? calories;
+  final _i1.PrismaUnion<bool, _i2.OrderItemsProductsArgs>? products;
 
-  final bool? protein;
+  @override
+  Map<String, dynamic> toJson() => {
+        'orders': orders,
+        'products': products,
+      };
+}
 
-  final bool? carbohydrates;
+class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersSelect({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.userId,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+    this.orderItems,
+    this.orderStatus,
+    this.paymentMethods,
+    this.users,
+    this.$count,
+  });
+
+  final bool? orderId;
+
+  final bool? orderDate;
+
+  final bool? shippingDate;
+
+  final bool? userId;
+
+  final bool? status;
+
+  final bool? paymentMethodId;
+
+  final bool? totalPrice;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderItemsArgs>? orderItems;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+        'users': users,
+        '_count': $count,
+      };
+}
+
+class OrderItemsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsSelect({
+    this.orderId,
+    this.productId,
+    this.quantity,
+    this.orders,
+    this.products,
+  });
+
+  final bool? orderId;
 
   final bool? productId;
 
-  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
+  final bool? quantity;
+
+  final _i1.PrismaUnion<bool, _i2.OrderItemsOrdersArgs>? orders;
+
+  final _i1.PrismaUnion<bool, _i2.OrderItemsProductsArgs>? products;
 
   @override
   Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
+        'order_id': orderId,
         'product_id': productId,
+        'quantity': quantity,
+        'orders': orders,
         'products': products,
-      };
-}
-
-class NutritionsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsInclude({this.products});
-
-  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
-
-  @override
-  Map<String, dynamic> toJson() => {'products': products};
-}
-
-class NutritionsOrderByWithRelationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsOrderByWithRelationInput({
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-    this.products,
-  });
-
-  final _i2.SortOrder? nutritionId;
-
-  final _i2.SortOrder? calories;
-
-  final _i2.SortOrder? protein;
-
-  final _i2.SortOrder? carbohydrates;
-
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? productId;
-
-  final _i2.ProductsOrderByWithRelationInput? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products,
-      };
-}
-
-class NutritionsWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsWhereUniqueInput({
-    this.nutritionId,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-    this.products,
-  });
-
-  final int? nutritionId;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? AND;
-
-  final Iterable<_i2.NutritionsWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
-
-  final _i1
-      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
-      productId;
-
-  final _i1.PrismaUnion<_i2.ProductsNullableRelationFilter,
-      _i1.PrismaUnion<_i2.ProductsWhereInput, _i1.PrismaNull>>? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products,
-      };
-}
-
-enum NutritionsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
-  nutritionId<int>('nutrition_id', 'nutritions'),
-  calories<int>('calories', 'nutritions'),
-  protein<int>('protein', 'nutritions'),
-  carbohydrates<int>('carbohydrates', 'nutritions'),
-  productId<int>('product_id', 'nutritions');
-
-  const NutritionsScalar(
-    this.name,
-    this.model,
-  );
-
-  @override
-  final String name;
-
-  @override
-  final String model;
-}
-
-class ProductsNutritionsArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsNutritionsArgs({
-    this.where,
-    this.orderBy,
-    this.cursor,
-    this.take,
-    this.skip,
-    this.distinct,
-    this.select,
-    this.include,
-  });
-
-  final _i2.NutritionsWhereInput? where;
-
-  final _i1.PrismaUnion<Iterable<_i2.NutritionsOrderByWithRelationInput>,
-      _i2.NutritionsOrderByWithRelationInput>? orderBy;
-
-  final _i2.NutritionsWhereUniqueInput? cursor;
-
-  final int? take;
-
-  final int? skip;
-
-  final _i1.PrismaUnion<_i2.NutritionsScalar, Iterable<_i2.NutritionsScalar>>?
-      distinct;
-
-  final _i2.NutritionsSelect? select;
-
-  final _i2.NutritionsInclude? include;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'orderBy': orderBy,
-        'cursor': cursor,
-        'take': take,
-        'skip': skip,
-        'distinct': distinct,
-        'select': select,
-        'include': include,
       };
 }
 
@@ -5295,6 +5518,35 @@ class CategoriesCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {'select': select};
 }
 
+class CategoriesSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesSelect({
+    this.categoryId,
+    this.name,
+    this.imageUrl,
+    this.products,
+    this.$count,
+  });
+
+  final bool? categoryId;
+
+  final bool? name;
+
+  final bool? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.CategoriesProductsArgs>? products;
+
+  final _i1.PrismaUnion<bool, _i2.CategoriesCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+        'products': products,
+        '_count': $count,
+      };
+}
+
 class CategoriesInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
   const CategoriesInclude({
     this.products,
@@ -5449,6 +5701,135 @@ class ProductsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
+class FavoritesProductsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesProductsArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.ProductsSelect? select;
+
+  final _i2.ProductsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class FavoritesUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesUsersArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.UsersSelect? select;
+
+  final _i2.UsersInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class FavoritesInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const FavoritesInclude({
+    this.products,
+    this.users,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.FavoritesProductsArgs>? products;
+
+  final _i1.PrismaUnion<bool, _i2.FavoritesUsersArgs>? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'products': products,
+        'users': users,
+      };
+}
+
+class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsSelect({
+    this.productId,
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.categories,
+    this.reviews,
+    this.$count,
+  });
+
+  final bool? productId;
+
+  final bool? name;
+
+  final bool? quantityInStock;
+
+  final bool? description;
+
+  final bool? unitPrice;
+
+  final bool? imageUrl;
+
+  final bool? categoryId;
+
+  final bool? productDetails;
+
+  final bool? discountPercentage;
+
+  final bool? rate;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsCartItemsArgs>? cartItems;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsFavoritesArgs>? favorites;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsOrderItemsArgs>? orderItems;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsCategoriesArgs>? categories;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsReviewsArgs>? reviews;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+        'reviews': reviews,
+        '_count': $count,
+      };
+}
+
 class FavoritesSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   const FavoritesSelect({
     this.userId,
@@ -5484,10 +5865,12 @@ class UsersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.carts,
     this.favorites,
     this.orders,
     this.reviews,
+    this.userRoles,
     this.$count,
   });
 
@@ -5507,6 +5890,8 @@ class UsersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? isDeleted;
 
+  final bool? roleId;
+
   final _i1.PrismaUnion<bool, _i2.UsersCartsArgs>? carts;
 
   final _i1.PrismaUnion<bool, _i2.UsersFavoritesArgs>? favorites;
@@ -5514,6 +5899,8 @@ class UsersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<bool, _i2.UsersOrdersArgs>? orders;
 
   final _i1.PrismaUnion<bool, _i2.UsersReviewsArgs>? reviews;
+
+  final _i1.PrismaUnion<bool, _i2.UsersUserRolesArgs>? userRoles;
 
   final _i1.PrismaUnion<bool, _i2.UsersCountArgs>? $count;
 
@@ -5527,10 +5914,12 @@ class UsersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
         '_count': $count,
       };
 }
@@ -5702,127 +6091,131 @@ class CartItemsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsSelect({
-    this.productId,
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.categoryId,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.cartItems,
-    this.favorites,
-    this.nutritions,
-    this.orderItems,
-    this.categories,
-    this.reviews,
-    this.$count,
+class CartItemsCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateWithoutProductsInput({
+    required this.quantity,
+    required this.carts,
   });
 
-  final bool? productId;
+  final int quantity;
 
-  final bool? name;
-
-  final bool? quantityInStock;
-
-  final bool? description;
-
-  final bool? unitPrice;
-
-  final bool? imageUrl;
-
-  final bool? categoryId;
-
-  final bool? productDetails;
-
-  final bool? discountPercentage;
-
-  final bool? rate;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsCartItemsArgs>? cartItems;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsFavoritesArgs>? favorites;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsOrderItemsArgs>? orderItems;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsCategoriesArgs>? categories;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsReviewsArgs>? reviews;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsCountArgs>? $count;
+  final _i2.CartsCreateNestedOneWithoutCartItemsInput carts;
 
   @override
   Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'category_id': categoryId,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'cart_items': cartItems,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'categories': categories,
-        'reviews': reviews,
-        '_count': $count,
+        'quantity': quantity,
+        'carts': carts,
       };
 }
 
-class CategoriesSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesSelect({
-    this.categoryId,
-    this.name,
-    this.imageUrl,
-    this.products,
-    this.$count,
+class CartItemsUncheckedCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedCreateWithoutProductsInput({
+    required this.quantity,
+    required this.cartId,
   });
 
-  final bool? categoryId;
+  final int quantity;
 
-  final bool? name;
-
-  final bool? imageUrl;
-
-  final _i1.PrismaUnion<bool, _i2.CategoriesProductsArgs>? products;
-
-  final _i1.PrismaUnion<bool, _i2.CategoriesCountArgs>? $count;
+  final int cartId;
 
   @override
   Map<String, dynamic> toJson() => {
-        'category_id': categoryId,
-        'name': name,
-        'image_url': imageUrl,
-        'products': products,
-        '_count': $count,
+        'quantity': quantity,
+        'cart_id': cartId,
       };
 }
 
-enum CategoriesScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
-  categoryId<int>('category_id', 'categories'),
-  name$<String>('name', 'categories'),
-  imageUrl<String>('image_url', 'categories');
+class CartItemsCreateOrConnectWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateOrConnectWithoutProductsInput({
+    required this.where,
+    required this.create,
+  });
 
-  const CategoriesScalar(
-    this.name,
-    this.model,
-  );
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutProductsInput,
+      _i2.CartItemsUncheckedCreateWithoutProductsInput> create;
 
   @override
-  final String name;
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class CartItemsCreateManyProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateManyProductsInput({
+    required this.quantity,
+    required this.cartId,
+  });
+
+  final int quantity;
+
+  final int cartId;
 
   @override
-  final String model;
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+      };
+}
+
+class CartItemsCreateManyProductsInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateManyProductsInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateManyProductsInput,
+      Iterable<_i2.CartItemsCreateManyProductsInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class CartItemsCreateNestedManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCreateNestedManyWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
 }
 
 class NutritionsCreateWithoutProductsInput
@@ -6092,17 +6485,17 @@ class PaymentMethodsCreateWithoutOrdersInput
 class PaymentMethodsUncheckedCreateWithoutOrdersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsUncheckedCreateWithoutOrdersInput({
-    this.paymentId,
+    this.paymentMethodId,
     required this.methodName,
   });
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final String methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
@@ -6110,7 +6503,7 @@ class PaymentMethodsUncheckedCreateWithoutOrdersInput
 class PaymentMethodsWhereUniqueInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsWhereUniqueInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.AND,
     this.OR,
     this.NOT,
@@ -6118,7 +6511,7 @@ class PaymentMethodsWhereUniqueInput
     this.orders,
   });
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
       Iterable<_i2.PaymentMethodsWhereInput>>? AND;
@@ -6134,7 +6527,7 @@ class PaymentMethodsWhereUniqueInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
@@ -6225,6 +6618,47 @@ class CategoriesUncheckedCreateWithoutProductsInput
       };
 }
 
+class CategoriesWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesWhereUniqueInput({
+    this.categoryId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.name,
+    this.imageUrl,
+    this.products,
+  });
+
+  final int? categoryId;
+
+  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
+      Iterable<_i2.CategoriesWhereInput>>? AND;
+
+  final Iterable<_i2.CategoriesWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CategoriesWhereInput,
+      Iterable<_i2.CategoriesWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
+
+  final _i2.ProductsListRelationFilter? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'name': name,
+        'image_url': imageUrl,
+        'products': products,
+      };
+}
+
 class CategoriesCreateOrConnectWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const CategoriesCreateOrConnectWithoutProductsInput({
@@ -6267,6 +6701,114 @@ class CategoriesCreateNestedOneWithoutProductsInput
       };
 }
 
+class UserRolesCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCreateWithoutUsersInput({required this.role});
+
+  final String role;
+
+  @override
+  Map<String, dynamic> toJson() => {'role': role};
+}
+
+class UserRolesUncheckedCreateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUncheckedCreateWithoutUsersInput({
+    this.roleId,
+    required this.role,
+  });
+
+  final int? roleId;
+
+  final String role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesWhereUniqueInput({
+    this.roleId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.role,
+    this.users,
+  });
+
+  final int? roleId;
+
+  final _i1
+      .PrismaUnion<_i2.UserRolesWhereInput, Iterable<_i2.UserRolesWhereInput>>?
+      AND;
+
+  final Iterable<_i2.UserRolesWhereInput>? OR;
+
+  final _i1
+      .PrismaUnion<_i2.UserRolesWhereInput, Iterable<_i2.UserRolesWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? role;
+
+  final _i2.UsersListRelationFilter? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'role': role,
+        'users': users,
+      };
+}
+
+class UserRolesCreateOrConnectWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCreateOrConnectWithoutUsersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.UserRolesWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UserRolesCreateWithoutUsersInput,
+      _i2.UserRolesUncheckedCreateWithoutUsersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class UserRolesCreateNestedOneWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCreateNestedOneWithoutUsersInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.UserRolesCreateWithoutUsersInput,
+      _i2.UserRolesUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.UserRolesCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.UserRolesWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
 class UsersCreateWithoutReviewsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersCreateWithoutReviewsInput({
@@ -6276,10 +6818,11 @@ class UsersCreateWithoutReviewsInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
     this.carts,
     this.favorites,
     this.orders,
+    this.userRoles,
   });
 
   final String userName;
@@ -6294,13 +6837,15 @@ class UsersCreateWithoutReviewsInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
 
   final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
 
   final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
+
+  final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -6314,6 +6859,7 @@ class UsersCreateWithoutReviewsInput
         'carts': carts,
         'favorites': favorites,
         'orders': orders,
+        'user_roles': userRoles,
       };
 }
 
@@ -6879,7 +7425,8 @@ class UsersUncheckedCreateWithoutReviewsInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
+    this.roleId,
     this.carts,
     this.favorites,
     this.orders,
@@ -6899,7 +7446,9 @@ class UsersUncheckedCreateWithoutReviewsInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
+
+  final int? roleId;
 
   final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
 
@@ -6917,84 +7466,10 @@ class UsersUncheckedCreateWithoutReviewsInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'favorites': favorites,
         'orders': orders,
-      };
-}
-
-class UsersWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersWhereUniqueInput({
-    this.userId,
-    this.email,
-    this.phoneNumber,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.userName,
-    this.password,
-    this.address,
-    this.imageUrl,
-    this.isDeleted,
-    this.carts,
-    this.favorites,
-    this.orders,
-    this.reviews,
-  });
-
-  final int? userId;
-
-  final String? email;
-
-  final String? phoneNumber;
-
-  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
-      AND;
-
-  final Iterable<_i2.UsersWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.UsersWhereInput, Iterable<_i2.UsersWhereInput>>?
-      NOT;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? userName;
-
-  final _i1.PrismaUnion<_i2.StringFilter, String>? password;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? address;
-
-  final _i1.PrismaUnion<_i2.StringNullableFilter,
-      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
-
-  final _i1.PrismaUnion<_i2.BoolFilter, bool>? isDeleted;
-
-  final _i1.PrismaUnion<_i2.CartsNullableRelationFilter,
-      _i1.PrismaUnion<_i2.CartsWhereInput, _i1.PrismaNull>>? carts;
-
-  final _i2.FavoritesListRelationFilter? favorites;
-
-  final _i2.OrdersListRelationFilter? orders;
-
-  final _i2.ReviewsListRelationFilter? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'user_id': userId,
-        'email': email,
-        'phone_number': phoneNumber,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'user_name': userName,
-        'password': password,
-        'address': address,
-        'image_url': imageUrl,
-        'is_deleted': isDeleted,
-        'carts': carts,
-        'favorites': favorites,
-        'orders': orders,
-        'reviews': reviews,
       };
 }
 
@@ -7246,80 +7721,6 @@ class ProductsCreateWithoutOrderItemsInput
         'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
-      };
-}
-
-class CartItemsUncheckedCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUncheckedCreateWithoutProductsInput({
-    required this.quantity,
-    required this.cartId,
-  });
-
-  final int quantity;
-
-  final int cartId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-      };
-}
-
-class CartItemsCreateOrConnectWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCreateOrConnectWithoutProductsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.CartItemsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutProductsInput,
-      _i2.CartItemsUncheckedCreateWithoutProductsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class CartItemsCreateManyProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCreateManyProductsInput({
-    required this.quantity,
-    required this.cartId,
-  });
-
-  final int quantity;
-
-  final int cartId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-      };
-}
-
-class CartItemsCreateManyProductsInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCreateManyProductsInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.CartItemsCreateManyProductsInput,
-      Iterable<_i2.CartItemsCreateManyProductsInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
       };
 }
 
@@ -8184,10 +8585,11 @@ class UsersCreateWithoutFavoritesInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
     this.carts,
     this.orders,
     this.reviews,
+    this.userRoles,
   });
 
   final String userName;
@@ -8202,13 +8604,15 @@ class UsersCreateWithoutFavoritesInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
 
   final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
 
   final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+
+  final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -8222,6 +8626,7 @@ class UsersCreateWithoutFavoritesInput
         'carts': carts,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -8268,7 +8673,8 @@ class UsersUncheckedCreateWithoutFavoritesInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
+    this.roleId,
     this.carts,
     this.orders,
     this.reviews,
@@ -8288,7 +8694,9 @@ class UsersUncheckedCreateWithoutFavoritesInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
+
+  final int? roleId;
 
   final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
 
@@ -8306,6 +8714,7 @@ class UsersUncheckedCreateWithoutFavoritesInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'orders': orders,
         'reviews': reviews,
@@ -8663,10 +9072,11 @@ class UsersCreateWithoutOrdersInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
     this.carts,
     this.favorites,
     this.reviews,
+    this.userRoles,
   });
 
   final String userName;
@@ -8681,13 +9091,15 @@ class UsersCreateWithoutOrdersInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
 
   final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
 
   final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
 
   final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+
+  final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -8701,6 +9113,7 @@ class UsersCreateWithoutOrdersInput
         'carts': carts,
         'favorites': favorites,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -8714,7 +9127,8 @@ class UsersUncheckedCreateWithoutOrdersInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
+    this.roleId,
     this.carts,
     this.favorites,
     this.reviews,
@@ -8734,7 +9148,9 @@ class UsersUncheckedCreateWithoutOrdersInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
+
+  final int? roleId;
 
   final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
 
@@ -8752,6 +9168,7 @@ class UsersUncheckedCreateWithoutOrdersInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'favorites': favorites,
         'reviews': reviews,
@@ -9191,10 +9608,11 @@ class UsersCreateWithoutCartsInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
     this.favorites,
     this.orders,
     this.reviews,
+    this.userRoles,
   });
 
   final String userName;
@@ -9209,13 +9627,15 @@ class UsersCreateWithoutCartsInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
 
   final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
 
   final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+
+  final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -9229,6 +9649,7 @@ class UsersCreateWithoutCartsInput
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -9242,7 +9663,8 @@ class UsersUncheckedCreateWithoutCartsInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
+    this.roleId,
     this.favorites,
     this.orders,
     this.reviews,
@@ -9262,7 +9684,9 @@ class UsersUncheckedCreateWithoutCartsInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
+
+  final int? roleId;
 
   final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
 
@@ -9280,6 +9704,7 @@ class UsersUncheckedCreateWithoutCartsInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -9398,410 +9823,69 @@ class CartsCreateNestedOneWithoutCartItemsInput
       };
 }
 
-class CartItemsCreateWithoutProductsInput
+class CartItemsCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCreateWithoutProductsInput({
+  const CartItemsCreateInput({
     required this.quantity,
     required this.carts,
+    required this.products,
   });
 
   final int quantity;
 
   final _i2.CartsCreateNestedOneWithoutCartItemsInput carts;
 
+  final _i2.ProductsCreateNestedOneWithoutCartItemsInput products;
+
   @override
   Map<String, dynamic> toJson() => {
         'quantity': quantity,
         'carts': carts,
-      };
-}
-
-class CartItemsCreateNestedManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCreateNestedManyWithoutProductsInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-          _i2.CartItemsCreateWithoutProductsInput,
-          _i1.PrismaUnion<
-              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
-              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
-                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
-      create;
-
-  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
-      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class ProductsCreateWithoutCategoriesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateWithoutCategoriesInput({
-    required this.name,
-    required this.quantityInStock,
-    required this.description,
-    required this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.cartItems,
-    this.favorites,
-    this.nutritions,
-    this.orderItems,
-    this.reviews,
-  });
-
-  final String name;
-
-  final int quantityInStock;
-
-  final String description;
-
-  final _i1.Decimal unitPrice;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
-
-  final _i1.Decimal? rate;
-
-  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
-
-  final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
-  final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
-
-  final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'cart_items': cartItems,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'reviews': reviews,
-      };
-}
-
-class ProductsUncheckedCreateWithoutCategoriesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUncheckedCreateWithoutCategoriesInput({
-    this.productId,
-    required this.name,
-    required this.quantityInStock,
-    required this.description,
-    required this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.cartItems,
-    this.favorites,
-    this.nutritions,
-    this.orderItems,
-    this.reviews,
-  });
-
-  final int? productId;
-
-  final String name;
-
-  final int quantityInStock;
-
-  final String description;
-
-  final _i1.Decimal unitPrice;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
-
-  final _i1.Decimal? rate;
-
-  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
-
-  final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
-
-  final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
-
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'cart_items': cartItems,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'reviews': reviews,
-      };
-}
-
-class ProductsCreateOrConnectWithoutCategoriesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateOrConnectWithoutCategoriesInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.ProductsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutCategoriesInput,
-      _i2.ProductsUncheckedCreateWithoutCategoriesInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class ProductsCreateManyCategoriesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateManyCategoriesInput({
-    this.productId,
-    required this.name,
-    required this.quantityInStock,
-    required this.description,
-    required this.unitPrice,
-    this.imageUrl,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-  });
-
-  final int? productId;
-
-  final String name;
-
-  final int quantityInStock;
-
-  final String description;
-
-  final _i1.Decimal unitPrice;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
-
-  final _i1.Decimal? rate;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-      };
-}
-
-class ProductsCreateManyCategoriesInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateManyCategoriesInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.ProductsCreateManyCategoriesInput,
-      Iterable<_i2.ProductsCreateManyCategoriesInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class ProductsCreateNestedManyWithoutCategoriesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateNestedManyWithoutCategoriesInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.ProductsCreateWithoutCategoriesInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.ProductsCreateWithoutCategoriesInput>,
-          _i1.PrismaUnion<
-              _i2.ProductsUncheckedCreateWithoutCategoriesInput,
-              Iterable<
-                  _i2.ProductsUncheckedCreateWithoutCategoriesInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutCategoriesInput,
-          Iterable<_i2.ProductsCreateOrConnectWithoutCategoriesInput>>?
-      connectOrCreate;
-
-  final _i2.ProductsCreateManyCategoriesInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
-      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
-class CategoriesCreateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesCreateInput({
-    required this.name,
-    this.imageUrl,
-    this.products,
-  });
-
-  final String name;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final _i2.ProductsCreateNestedManyWithoutCategoriesInput? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'image_url': imageUrl,
         'products': products,
       };
 }
 
-class ProductsUncheckedCreateNestedManyWithoutCategoriesInput
+class CartItemsUncheckedCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUncheckedCreateNestedManyWithoutCategoriesInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
+  const CartItemsUncheckedCreateInput({
+    required this.quantity,
+    required this.cartId,
+    required this.productId,
   });
 
-  final _i1.PrismaUnion<
-      _i2.ProductsCreateWithoutCategoriesInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.ProductsCreateWithoutCategoriesInput>,
-          _i1.PrismaUnion<
-              _i2.ProductsUncheckedCreateWithoutCategoriesInput,
-              Iterable<
-                  _i2.ProductsUncheckedCreateWithoutCategoriesInput>>>>? create;
+  final int quantity;
 
-  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutCategoriesInput,
-          Iterable<_i2.ProductsCreateOrConnectWithoutCategoriesInput>>?
-      connectOrCreate;
+  final int cartId;
 
-  final _i2.ProductsCreateManyCategoriesInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
-      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
+  final int productId;
 
   @override
   Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
       };
 }
 
-class CategoriesUncheckedCreateInput
+class CartItemsCreateManyInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesUncheckedCreateInput({
-    this.categoryId,
-    required this.name,
-    this.imageUrl,
-    this.products,
+  const CartItemsCreateManyInput({
+    required this.quantity,
+    required this.cartId,
+    required this.productId,
   });
 
-  final int? categoryId;
+  final int quantity;
 
-  final String name;
+  final int cartId;
 
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  final _i2.ProductsUncheckedCreateNestedManyWithoutCategoriesInput? products;
+  final int productId;
 
   @override
   Map<String, dynamic> toJson() => {
-        'category_id': categoryId,
-        'name': name,
-        'image_url': imageUrl,
-        'products': products,
-      };
-}
-
-class CategoriesCreateManyInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesCreateManyInput({
-    this.categoryId,
-    required this.name,
-    this.imageUrl,
-  });
-
-  final int? categoryId;
-
-  final String name;
-
-  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'category_id': categoryId,
-        'name': name,
-        'image_url': imageUrl,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
       };
 }
 
@@ -9810,6 +9894,16 @@ class NullableStringFieldUpdateOperationsInput
   const NullableStringFieldUpdateOperationsInput({this.set});
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? set;
+
+  @override
+  Map<String, dynamic> toJson() => {'set': set};
+}
+
+class BoolFieldUpdateOperationsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const BoolFieldUpdateOperationsInput({this.set});
+
+  final bool? set;
 
   @override
   Map<String, dynamic> toJson() => {'set': set};
@@ -9875,14 +9969,237 @@ class NullableDecimalFieldUpdateOperationsInput
       };
 }
 
-class BoolFieldUpdateOperationsInput
+class CartItemsUpdateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const BoolFieldUpdateOperationsInput({this.set});
+  const CartItemsUpdateWithoutProductsInput({
+    this.quantity,
+    this.carts,
+  });
 
-  final bool? set;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i2.CartsUpdateOneRequiredWithoutCartItemsNestedInput? carts;
 
   @override
-  Map<String, dynamic> toJson() => {'set': set};
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'carts': carts,
+      };
+}
+
+class CartItemsUncheckedUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateWithoutProductsInput({
+    this.quantity,
+    this.cartId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+      };
+}
+
+class CartItemsUpsertWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpsertWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutProductsInput,
+      _i2.CartItemsUncheckedUpdateWithoutProductsInput> update;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutProductsInput,
+      _i2.CartItemsUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class CartItemsUpdateWithWhereUniqueWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateWithWhereUniqueWithoutProductsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.CartItemsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutProductsInput,
+      _i2.CartItemsUncheckedUpdateWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class CartItemsScalarWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsScalarWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? AND;
+
+  final Iterable<_i2.CartItemsScalarWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyMutationInput({this.quantity});
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  @override
+  Map<String, dynamic> toJson() => {'quantity': quantity};
+}
+
+class CartItemsUncheckedUpdateManyWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateManyWithoutProductsInput({
+    this.quantity,
+    this.cartId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+      };
+}
+
+class CartItemsUpdateManyWithWhereWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyWithWhereWithoutProductsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.CartItemsScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyMutationInput,
+      _i2.CartItemsUncheckedUpdateManyWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class CartItemsUpdateManyWithoutProductsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUpdateManyWithoutProductsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.CartItemsCreateWithoutProductsInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
+              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
+                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
+          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
+
+  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
+      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput,
+      Iterable<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput>>? update;
+
+  final _i1.PrismaUnion<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput,
+          Iterable<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
+      Iterable<_i2.CartItemsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
 }
 
 class NutritionsUpdateWithoutProductsInput
@@ -10005,9 +10322,7 @@ class NutritionsScalarWhereInput
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
 
-  final _i1
-      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
-      productId;
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -10302,18 +10617,19 @@ class PaymentMethodsUpdateWithoutOrdersInput
 class PaymentMethodsUncheckedUpdateWithoutOrdersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsUncheckedUpdateWithoutOrdersInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? paymentId;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
@@ -10518,6 +10834,111 @@ class CategoriesUpdateOneRequiredWithoutProductsNestedInput
       };
 }
 
+class UserRolesUpdateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUpdateWithoutUsersInput({this.role});
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? role;
+
+  @override
+  Map<String, dynamic> toJson() => {'role': role};
+}
+
+class UserRolesUncheckedUpdateWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUncheckedUpdateWithoutUsersInput({
+    this.roleId,
+    this.role,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesUpsertWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUpsertWithoutUsersInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.UserRolesUpdateWithoutUsersInput,
+      _i2.UserRolesUncheckedUpdateWithoutUsersInput> update;
+
+  final _i1.PrismaUnion<_i2.UserRolesCreateWithoutUsersInput,
+      _i2.UserRolesUncheckedCreateWithoutUsersInput> create;
+
+  final _i2.UserRolesWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class UserRolesUpdateToOneWithWhereWithoutUsersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUpdateToOneWithWhereWithoutUsersInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.UserRolesWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.UserRolesUpdateWithoutUsersInput,
+      _i2.UserRolesUncheckedUpdateWithoutUsersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class UserRolesUpdateOneRequiredWithoutUsersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUpdateOneRequiredWithoutUsersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.UserRolesCreateWithoutUsersInput,
+      _i2.UserRolesUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.UserRolesCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.UserRolesUpsertWithoutUsersInput? upsert;
+
+  final _i2.UserRolesWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.UserRolesUpdateToOneWithWhereWithoutUsersInput,
+      _i1.PrismaUnion<_i2.UserRolesUpdateWithoutUsersInput,
+          _i2.UserRolesUncheckedUpdateWithoutUsersInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
 class UsersUpdateWithoutReviewsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersUpdateWithoutReviewsInput({
@@ -10531,6 +10952,7 @@ class UsersUpdateWithoutReviewsInput
     this.carts,
     this.favorites,
     this.orders,
+    this.userRoles,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
@@ -10562,6 +10984,8 @@ class UsersUpdateWithoutReviewsInput
 
   final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
 
+  final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_name': userName,
@@ -10574,6 +10998,7 @@ class UsersUpdateWithoutReviewsInput
         'carts': carts,
         'favorites': favorites,
         'orders': orders,
+        'user_roles': userRoles,
       };
 }
 
@@ -10612,52 +11037,6 @@ class CartItemsUpdateWithWhereUniqueWithoutCartsInput
         'where': where,
         'data': data,
       };
-}
-
-class CartItemsScalarWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
-      Iterable<_i2.CartItemsScalarWhereInput>>? AND;
-
-  final Iterable<_i2.CartItemsScalarWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
-      Iterable<_i2.CartItemsScalarWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? quantity;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? cartId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsUpdateManyMutationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUpdateManyMutationInput({this.quantity});
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  @override
-  Map<String, dynamic> toJson() => {'quantity': quantity};
 }
 
 class CartItemsUncheckedUpdateManyWithoutCartsInput
@@ -11484,6 +11863,7 @@ class UsersUncheckedUpdateWithoutReviewsInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.carts,
     this.favorites,
     this.orders,
@@ -11514,6 +11894,8 @@ class UsersUncheckedUpdateWithoutReviewsInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
   final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
 
   final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
@@ -11530,6 +11912,7 @@ class UsersUncheckedUpdateWithoutReviewsInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'favorites': favorites,
         'orders': orders,
@@ -11961,80 +12344,6 @@ class ProductsUpdateWithoutOrderItemsInput
         'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
-      };
-}
-
-class CartItemsUncheckedUpdateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUncheckedUpdateWithoutProductsInput({
-    this.quantity,
-    this.cartId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-      };
-}
-
-class CartItemsUpdateWithWhereUniqueWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUpdateWithWhereUniqueWithoutProductsInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.CartItemsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutProductsInput,
-      _i2.CartItemsUncheckedUpdateWithoutProductsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class CartItemsUncheckedUpdateManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUncheckedUpdateManyWithoutProductsInput({
-    this.quantity,
-    this.cartId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-      };
-}
-
-class CartItemsUpdateManyWithWhereWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUpdateManyWithWhereWithoutProductsInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.CartItemsScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.CartItemsUpdateManyMutationInput,
-      _i2.CartItemsUncheckedUpdateManyWithoutProductsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
       };
 }
 
@@ -13385,6 +13694,7 @@ class UsersUpdateWithoutFavoritesInput
     this.carts,
     this.orders,
     this.reviews,
+    this.userRoles,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
@@ -13416,6 +13726,8 @@ class UsersUpdateWithoutFavoritesInput
 
   final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
 
+  final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_name': userName,
@@ -13428,6 +13740,7 @@ class UsersUpdateWithoutFavoritesInput
         'carts': carts,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -13510,6 +13823,7 @@ class UsersUncheckedUpdateWithoutFavoritesInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.carts,
     this.orders,
     this.reviews,
@@ -13540,6 +13854,8 @@ class UsersUncheckedUpdateWithoutFavoritesInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
   final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
 
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
@@ -13556,6 +13872,7 @@ class UsersUncheckedUpdateWithoutFavoritesInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'orders': orders,
         'reviews': reviews,
@@ -14175,6 +14492,7 @@ class UsersUpdateWithoutOrdersInput
     this.carts,
     this.favorites,
     this.reviews,
+    this.userRoles,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
@@ -14206,6 +14524,8 @@ class UsersUpdateWithoutOrdersInput
 
   final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
 
+  final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_name': userName,
@@ -14218,6 +14538,7 @@ class UsersUpdateWithoutOrdersInput
         'carts': carts,
         'favorites': favorites,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -14232,6 +14553,7 @@ class UsersUncheckedUpdateWithoutOrdersInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.carts,
     this.favorites,
     this.reviews,
@@ -14262,6 +14584,8 @@ class UsersUncheckedUpdateWithoutOrdersInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
   final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
 
   final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
@@ -14278,6 +14602,7 @@ class UsersUncheckedUpdateWithoutOrdersInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'carts': carts,
         'favorites': favorites,
         'reviews': reviews,
@@ -14985,6 +15310,7 @@ class UsersUpdateWithoutCartsInput
     this.favorites,
     this.orders,
     this.reviews,
+    this.userRoles,
   });
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
@@ -15016,6 +15342,8 @@ class UsersUpdateWithoutCartsInput
 
   final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
 
+  final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_name': userName,
@@ -15028,6 +15356,7 @@ class UsersUpdateWithoutCartsInput
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
+        'user_roles': userRoles,
       };
 }
 
@@ -15042,6 +15371,7 @@ class UsersUncheckedUpdateWithoutCartsInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.favorites,
     this.orders,
     this.reviews,
@@ -15072,6 +15402,8 @@ class UsersUncheckedUpdateWithoutCartsInput
 
   final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
 
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
   final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
 
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
@@ -15088,6 +15420,7 @@ class UsersUncheckedUpdateWithoutCartsInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         'favorites': favorites,
         'orders': orders,
         'reviews': reviews,
@@ -15276,116 +15609,1939 @@ class CartsUpdateOneRequiredWithoutCartItemsNestedInput
       };
 }
 
-class CartItemsUpdateWithoutProductsInput
+class CartItemsUpdateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUpdateWithoutProductsInput({
+  const CartItemsUpdateInput({
     this.quantity,
     this.carts,
+    this.products,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
 
   final _i2.CartsUpdateOneRequiredWithoutCartItemsNestedInput? carts;
 
+  final _i2.ProductsUpdateOneRequiredWithoutCartItemsNestedInput? products;
+
   @override
   Map<String, dynamic> toJson() => {
         'quantity': quantity,
         'carts': carts,
+        'products': products,
       };
 }
 
-class CartItemsUpsertWithWhereUniqueWithoutProductsInput
+class CartItemsUncheckedUpdateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUpsertWithWhereUniqueWithoutProductsInput({
+  const CartItemsUncheckedUpdateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsUncheckedUpdateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsUncheckedUpdateManyInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsCountAggregateOutputType {
+  const CartItemsCountAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$all,
+  });
+
+  factory CartItemsCountAggregateOutputType.fromJson(Map json) =>
+      CartItemsCountAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+        $all: json['_all'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+
+  final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_all': $all,
+      };
+}
+
+class CartItemsAvgAggregateOutputType {
+  const CartItemsAvgAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsAvgAggregateOutputType.fromJson(Map json) =>
+      CartItemsAvgAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final double? quantity;
+
+  final double? cartId;
+
+  final double? productId;
+
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsSumAggregateOutputType {
+  const CartItemsSumAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsSumAggregateOutputType.fromJson(Map json) =>
+      CartItemsSumAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsMinAggregateOutputType {
+  const CartItemsMinAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsMinAggregateOutputType.fromJson(Map json) =>
+      CartItemsMinAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsMaxAggregateOutputType {
+  const CartItemsMaxAggregateOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  factory CartItemsMaxAggregateOutputType.fromJson(Map json) =>
+      CartItemsMaxAggregateOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputType {
+  const CartItemsGroupByOutputType({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory CartItemsGroupByOutputType.fromJson(Map json) =>
+      CartItemsGroupByOutputType(
+        quantity: json['quantity'],
+        cartId: json['cart_id'],
+        productId: json['product_id'],
+        $count: json['_count'] is Map
+            ? _i2.CartItemsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartItemsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartItemsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartItemsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartItemsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final int? quantity;
+
+  final int? cartId;
+
+  final int? productId;
+
+  final _i2.CartItemsCountAggregateOutputType? $count;
+
+  final _i2.CartItemsAvgAggregateOutputType? $avg;
+
+  final _i2.CartItemsSumAggregateOutputType? $sum;
+
+  final _i2.CartItemsMinAggregateOutputType? $min;
+
+  final _i2.CartItemsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class CartItemsCountOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCountOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsAvgOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsAvgOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsMaxOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMaxOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsMinOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMinOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsSumOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsSumOrderByAggregateInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsOrderByWithAggregationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsOrderByWithAggregationInput({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$count,
+    this.$avg,
+    this.$max,
+    this.$min,
+    this.$sum,
+  });
+
+  final _i2.SortOrder? quantity;
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? productId;
+
+  final _i2.CartItemsCountOrderByAggregateInput? $count;
+
+  final _i2.CartItemsAvgOrderByAggregateInput? $avg;
+
+  final _i2.CartItemsMaxOrderByAggregateInput? $max;
+
+  final _i2.CartItemsMinOrderByAggregateInput? $min;
+
+  final _i2.CartItemsSumOrderByAggregateInput? $sum;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_count': $count,
+        '_avg': $avg,
+        '_max': $max,
+        '_min': $min,
+        '_sum': $sum,
+      };
+}
+
+class CartItemsScalarWhereWithAggregatesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsScalarWhereWithAggregatesInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>>? AND;
+
+  final Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CartItemsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? quantity;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsCountAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsCountAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$all,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  final bool? $all;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_all': $all,
+      };
+}
+
+class CartItemsGroupByOutputTypeCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeCountArgs({this.select});
+
+  final _i2.CartItemsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsAvgAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsAvgAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeAvgArgs({this.select});
+
+  final _i2.CartItemsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsSumAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsSumAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeSumArgs({this.select});
+
+  final _i2.CartItemsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsMinAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMinAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeMinArgs({this.select});
+
+  final _i2.CartItemsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsMaxAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsMaxAggregateOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+      };
+}
+
+class CartItemsGroupByOutputTypeMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeMaxArgs({this.select});
+
+  final _i2.CartItemsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartItemsGroupByOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartItemsGroupByOutputTypeSelect({
+    this.quantity,
+    this.cartId,
+    this.productId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final bool? quantity;
+
+  final bool? cartId;
+
+  final bool? productId;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'quantity': quantity,
+        'cart_id': cartId,
+        'product_id': productId,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class AggregateCartItems {
+  const AggregateCartItems({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory AggregateCartItems.fromJson(Map json) => AggregateCartItems(
+        $count: json['_count'] is Map
+            ? _i2.CartItemsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartItemsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartItemsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartItemsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartItemsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final _i2.CartItemsCountAggregateOutputType? $count;
+
+  final _i2.CartItemsAvgAggregateOutputType? $avg;
+
+  final _i2.CartItemsSumAggregateOutputType? $sum;
+
+  final _i2.CartItemsMinAggregateOutputType? $min;
+
+  final _i2.CartItemsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class AggregateCartItemsCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsCountArgs({this.select});
+
+  final _i2.CartItemsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsAvgArgs({this.select});
+
+  final _i2.CartItemsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsSumArgs({this.select});
+
+  final _i2.CartItemsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsMinArgs({this.select});
+
+  final _i2.CartItemsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsMaxArgs({this.select});
+
+  final _i2.CartItemsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartItemsSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartItemsSelect({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+enum CartsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  cartId<int>('cart_id', 'carts'),
+  userId<int>('user_id', 'carts');
+
+  const CartsScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
+class CartsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateInput({
+    this.cartItems,
+    required this.users,
+  });
+
+  final _i2.CartItemsCreateNestedManyWithoutCartsInput? cartItems;
+
+  final _i2.UsersCreateNestedOneWithoutCartsInput users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
+        'users': users,
+      };
+}
+
+class CartsUncheckedCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedCreateInput({
+    this.cartId,
+    required this.userId,
+    this.cartItems,
+  });
+
+  final int? cartId;
+
+  final int userId;
+
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutCartsInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        'cart_items': cartItems,
+      };
+}
+
+class CartsCreateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCreateManyInput({
+    this.cartId,
+    required this.userId,
+  });
+
+  final int? cartId;
+
+  final int userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateInput({
+    this.cartItems,
+    this.users,
+  });
+
+  final _i2.CartItemsUpdateManyWithoutCartsNestedInput? cartItems;
+
+  final _i2.UsersUpdateOneRequiredWithoutCartsNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_items': cartItems,
+        'users': users,
+      };
+}
+
+class CartsUncheckedUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedUpdateInput({
+    this.cartId,
+    this.userId,
+    this.cartItems,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i2.CartItemsUncheckedUpdateManyWithoutCartsNestedInput? cartItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        'cart_items': cartItems,
+      };
+}
+
+class CartsUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUpdateManyMutationInput();
+
+  @override
+  Map<String, dynamic> toJson() => {};
+}
+
+class CartsUncheckedUpdateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsUncheckedUpdateManyInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsCountAggregateOutputType {
+  const CartsCountAggregateOutputType({
+    this.cartId,
+    this.userId,
+    this.$all,
+  });
+
+  factory CartsCountAggregateOutputType.fromJson(Map json) =>
+      CartsCountAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+        $all: json['_all'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+
+  final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_all': $all,
+      };
+}
+
+class CartsAvgAggregateOutputType {
+  const CartsAvgAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsAvgAggregateOutputType.fromJson(Map json) =>
+      CartsAvgAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final double? cartId;
+
+  final double? userId;
+
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsSumAggregateOutputType {
+  const CartsSumAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsSumAggregateOutputType.fromJson(Map json) =>
+      CartsSumAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsMinAggregateOutputType {
+  const CartsMinAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsMinAggregateOutputType.fromJson(Map json) =>
+      CartsMinAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsMaxAggregateOutputType {
+  const CartsMaxAggregateOutputType({
+    this.cartId,
+    this.userId,
+  });
+
+  factory CartsMaxAggregateOutputType.fromJson(Map json) =>
+      CartsMaxAggregateOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+      );
+
+  final int? cartId;
+
+  final int? userId;
+
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputType {
+  const CartsGroupByOutputType({
+    this.cartId,
+    this.userId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory CartsGroupByOutputType.fromJson(Map json) => CartsGroupByOutputType(
+        cartId: json['cart_id'],
+        userId: json['user_id'],
+        $count: json['_count'] is Map
+            ? _i2.CartsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final int? cartId;
+
+  final int? userId;
+
+  final _i2.CartsCountAggregateOutputType? $count;
+
+  final _i2.CartsAvgAggregateOutputType? $avg;
+
+  final _i2.CartsSumAggregateOutputType? $sum;
+
+  final _i2.CartsMinAggregateOutputType? $min;
+
+  final _i2.CartsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class CartsCountOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCountOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsAvgOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsAvgOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsMaxOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMaxOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsMinOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMinOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsSumOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsSumOrderByAggregateInput({
+    this.cartId,
+    this.userId,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsOrderByWithAggregationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsOrderByWithAggregationInput({
+    this.cartId,
+    this.userId,
+    this.$count,
+    this.$avg,
+    this.$max,
+    this.$min,
+    this.$sum,
+  });
+
+  final _i2.SortOrder? cartId;
+
+  final _i2.SortOrder? userId;
+
+  final _i2.CartsCountOrderByAggregateInput? $count;
+
+  final _i2.CartsAvgOrderByAggregateInput? $avg;
+
+  final _i2.CartsMaxOrderByAggregateInput? $max;
+
+  final _i2.CartsMinOrderByAggregateInput? $min;
+
+  final _i2.CartsSumOrderByAggregateInput? $sum;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_count': $count,
+        '_avg': $avg,
+        '_max': $max,
+        '_min': $min,
+        '_sum': $sum,
+      };
+}
+
+class CartsScalarWhereWithAggregatesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsScalarWhereWithAggregatesInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.cartId,
+    this.userId,
+  });
+
+  final _i1.PrismaUnion<_i2.CartsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartsScalarWhereWithAggregatesInput>>? AND;
+
+  final Iterable<_i2.CartsScalarWhereWithAggregatesInput>? OR;
+
+  final _i1.PrismaUnion<_i2.CartsScalarWhereWithAggregatesInput,
+      Iterable<_i2.CartsScalarWhereWithAggregatesInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? cartId;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsCountAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsCountAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+    this.$all,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  final bool? $all;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_all': $all,
+      };
+}
+
+class CartsGroupByOutputTypeCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeCountArgs({this.select});
+
+  final _i2.CartsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsAvgAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsAvgAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeAvgArgs({this.select});
+
+  final _i2.CartsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsSumAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsSumAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeSumArgs({this.select});
+
+  final _i2.CartsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsMinAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMinAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeMinArgs({this.select});
+
+  final _i2.CartsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsMaxAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsMaxAggregateOutputTypeSelect({
+    this.cartId,
+    this.userId,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+      };
+}
+
+class CartsGroupByOutputTypeMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeMaxArgs({this.select});
+
+  final _i2.CartsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class CartsGroupByOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CartsGroupByOutputTypeSelect({
+    this.cartId,
+    this.userId,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final bool? cartId;
+
+  final bool? userId;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'cart_id': cartId,
+        'user_id': userId,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class AggregateCarts {
+  const AggregateCarts({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory AggregateCarts.fromJson(Map json) => AggregateCarts(
+        $count: json['_count'] is Map
+            ? _i2.CartsCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.CartsAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.CartsSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.CartsMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.CartsMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final _i2.CartsCountAggregateOutputType? $count;
+
+  final _i2.CartsAvgAggregateOutputType? $avg;
+
+  final _i2.CartsSumAggregateOutputType? $sum;
+
+  final _i2.CartsMinAggregateOutputType? $min;
+
+  final _i2.CartsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class AggregateCartsCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsCountArgs({this.select});
+
+  final _i2.CartsCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsAvgArgs({this.select});
+
+  final _i2.CartsAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsSumArgs({this.select});
+
+  final _i2.CartsSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsMinArgs({this.select});
+
+  final _i2.CartsMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsMaxArgs({this.select});
+
+  final _i2.CartsMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateCartsSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateCartsSelect({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateCartsMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+enum CategoriesScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  categoryId<int>('category_id', 'categories'),
+  name$<String>('name', 'categories'),
+  imageUrl<String>('image_url', 'categories');
+
+  const CategoriesScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
+class ProductsCreateWithoutCategoriesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateWithoutCategoriesInput({
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
+
+  final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
+
+  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'reviews': reviews,
+      };
+}
+
+class ProductsUncheckedCreateWithoutCategoriesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedCreateWithoutCategoriesInput({
+    this.productId,
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.reviews,
+  });
+
+  final int? productId;
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
+
+  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
+
+  final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'reviews': reviews,
+      };
+}
+
+class ProductsCreateOrConnectWithoutCategoriesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateOrConnectWithoutCategoriesInput({
     required this.where,
-    required this.update,
     required this.create,
   });
 
-  final _i2.CartItemsWhereUniqueInput where;
+  final _i2.ProductsWhereUniqueInput where;
 
-  final _i1.PrismaUnion<_i2.CartItemsUpdateWithoutProductsInput,
-      _i2.CartItemsUncheckedUpdateWithoutProductsInput> update;
-
-  final _i1.PrismaUnion<_i2.CartItemsCreateWithoutProductsInput,
-      _i2.CartItemsUncheckedCreateWithoutProductsInput> create;
+  final _i1.PrismaUnion<_i2.ProductsCreateWithoutCategoriesInput,
+      _i2.ProductsUncheckedCreateWithoutCategoriesInput> create;
 
   @override
   Map<String, dynamic> toJson() => {
         'where': where,
-        'update': update,
         'create': create,
       };
 }
 
-class CartItemsUpdateManyWithoutProductsNestedInput
+class ProductsCreateManyCategoriesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUpdateManyWithoutProductsNestedInput({
+  const ProductsCreateManyCategoriesInput({
+    this.productId,
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+  });
+
+  final int? productId;
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+      };
+}
+
+class ProductsCreateManyCategoriesInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateManyCategoriesInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateManyCategoriesInput,
+      Iterable<_i2.ProductsCreateManyCategoriesInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class ProductsCreateNestedManyWithoutCategoriesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateNestedManyWithoutCategoriesInput({
     this.create,
     this.connectOrCreate,
-    this.upsert,
     this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
     this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
   });
 
   final _i1.PrismaUnion<
-          _i2.CartItemsCreateWithoutProductsInput,
+      _i2.ProductsCreateWithoutCategoriesInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.ProductsCreateWithoutCategoriesInput>,
           _i1.PrismaUnion<
-              Iterable<_i2.CartItemsCreateWithoutProductsInput>,
-              _i1.PrismaUnion<_i2.CartItemsUncheckedCreateWithoutProductsInput,
-                  Iterable<_i2.CartItemsUncheckedCreateWithoutProductsInput>>>>?
-      create;
+              _i2.ProductsUncheckedCreateWithoutCategoriesInput,
+              Iterable<
+                  _i2.ProductsUncheckedCreateWithoutCategoriesInput>>>>? create;
 
-  final _i1.PrismaUnion<_i2.CartItemsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.CartItemsCreateOrConnectWithoutProductsInput>>?
+  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutCategoriesInput,
+          Iterable<_i2.ProductsCreateOrConnectWithoutCategoriesInput>>?
       connectOrCreate;
 
-  final _i1.PrismaUnion<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput,
-      Iterable<_i2.CartItemsUpsertWithWhereUniqueWithoutProductsInput>>? upsert;
+  final _i2.ProductsCreateManyCategoriesInputEnvelope? createMany;
 
-  final _i2.CartItemsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
-      Iterable<_i2.CartItemsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
-      Iterable<_i2.CartItemsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
-      Iterable<_i2.CartItemsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.CartItemsWhereUniqueInput,
-      Iterable<_i2.CartItemsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput,
-      Iterable<_i2.CartItemsUpdateWithWhereUniqueWithoutProductsInput>>? update;
-
-  final _i1.PrismaUnion<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput,
-          Iterable<_i2.CartItemsUpdateManyWithWhereWithoutProductsInput>>?
-      updateMany;
-
-  final _i1.PrismaUnion<_i2.CartItemsScalarWhereInput,
-      Iterable<_i2.CartItemsScalarWhereInput>>? deleteMany;
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
         'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
         'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
+      };
+}
+
+class CategoriesCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesCreateInput({
+    required this.name,
+    this.imageUrl,
+    this.products,
+  });
+
+  final String name;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i2.ProductsCreateNestedManyWithoutCategoriesInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'image_url': imageUrl,
+        'products': products,
+      };
+}
+
+class ProductsUncheckedCreateNestedManyWithoutCategoriesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedCreateNestedManyWithoutCategoriesInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.ProductsCreateWithoutCategoriesInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.ProductsCreateWithoutCategoriesInput>,
+          _i1.PrismaUnion<
+              _i2.ProductsUncheckedCreateWithoutCategoriesInput,
+              Iterable<
+                  _i2.ProductsUncheckedCreateWithoutCategoriesInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutCategoriesInput,
+          Iterable<_i2.ProductsCreateOrConnectWithoutCategoriesInput>>?
+      connectOrCreate;
+
+  final _i2.ProductsCreateManyCategoriesInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class CategoriesUncheckedCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesUncheckedCreateInput({
+    this.categoryId,
+    required this.name,
+    this.imageUrl,
+    this.products,
+  });
+
+  final int? categoryId;
+
+  final String name;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final _i2.ProductsUncheckedCreateNestedManyWithoutCategoriesInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+        'products': products,
+      };
+}
+
+class CategoriesCreateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesCreateManyInput({
+    this.categoryId,
+    required this.name,
+    this.imageUrl,
+  });
+
+  final int? categoryId;
+
+  final String name;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
       };
 }
 
@@ -16057,6 +18213,13 @@ class CategoriesCountAggregateOutputType {
   final int? imageUrl;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+        '_all': $all,
+      };
 }
 
 class CategoriesAvgAggregateOutputType {
@@ -16066,6 +18229,8 @@ class CategoriesAvgAggregateOutputType {
       CategoriesAvgAggregateOutputType(categoryId: json['category_id']);
 
   final double? categoryId;
+
+  Map<String, dynamic> toJson() => {'category_id': categoryId};
 }
 
 class CategoriesSumAggregateOutputType {
@@ -16075,6 +18240,8 @@ class CategoriesSumAggregateOutputType {
       CategoriesSumAggregateOutputType(categoryId: json['category_id']);
 
   final int? categoryId;
+
+  Map<String, dynamic> toJson() => {'category_id': categoryId};
 }
 
 class CategoriesMinAggregateOutputType {
@@ -16096,6 +18263,12 @@ class CategoriesMinAggregateOutputType {
   final String? name;
 
   final String? imageUrl;
+
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+      };
 }
 
 class CategoriesMaxAggregateOutputType {
@@ -16117,6 +18290,12 @@ class CategoriesMaxAggregateOutputType {
   final String? name;
 
   final String? imageUrl;
+
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+      };
 }
 
 class CategoriesGroupByOutputType {
@@ -16168,6 +18347,17 @@ class CategoriesGroupByOutputType {
   final _i2.CategoriesMinAggregateOutputType? $min;
 
   final _i2.CategoriesMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class CategoriesCountOrderByAggregateInput
@@ -16295,6 +18485,51 @@ class CategoriesOrderByWithAggregationInput
         '_max': $max,
         '_min': $min,
         '_sum': $sum,
+      };
+}
+
+class NestedIntNullableFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedIntNullableFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  final _i1
+      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
+      equals;
+
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
+
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<int,
+      _i1.PrismaUnion<_i2.NestedIntNullableFilter, _i1.PrismaNull>>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
       };
 }
 
@@ -16693,6 +18928,14 @@ class AggregateCategories {
   final _i2.CategoriesMinAggregateOutputType? $min;
 
   final _i2.CategoriesMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateCategoriesCountArgs
@@ -16902,6 +19145,12 @@ class FavoritesCountAggregateOutputType {
   final int? productId;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'product_id': productId,
+        '_all': $all,
+      };
 }
 
 class FavoritesAvgAggregateOutputType {
@@ -16919,6 +19168,11 @@ class FavoritesAvgAggregateOutputType {
   final double? userId;
 
   final double? productId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class FavoritesSumAggregateOutputType {
@@ -16936,6 +19190,11 @@ class FavoritesSumAggregateOutputType {
   final int? userId;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class FavoritesMinAggregateOutputType {
@@ -16953,6 +19212,11 @@ class FavoritesMinAggregateOutputType {
   final int? userId;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class FavoritesMaxAggregateOutputType {
@@ -16970,6 +19234,11 @@ class FavoritesMaxAggregateOutputType {
   final int? userId;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class FavoritesGroupByOutputType {
@@ -17017,6 +19286,16 @@ class FavoritesGroupByOutputType {
   final _i2.FavoritesMinAggregateOutputType? $min;
 
   final _i2.FavoritesMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'product_id': productId,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class FavoritesCountOrderByAggregateInput
@@ -17397,6 +19676,14 @@ class AggregateFavorites {
   final _i2.FavoritesMinAggregateOutputType? $min;
 
   final _i2.FavoritesMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateFavoritesCountArgs
@@ -17655,7 +19942,7 @@ class NutritionsCreateInput
     required this.calories,
     required this.protein,
     required this.carbohydrates,
-    this.products,
+    required this.products,
   });
 
   final int calories;
@@ -17664,7 +19951,7 @@ class NutritionsCreateInput
 
   final int carbohydrates;
 
-  final _i2.ProductsCreateNestedOneWithoutNutritionsInput? products;
+  final _i2.ProductsCreateNestedOneWithoutNutritionsInput products;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -17682,7 +19969,7 @@ class NutritionsUncheckedCreateInput
     required this.calories,
     required this.protein,
     required this.carbohydrates,
-    this.productId,
+    required this.productId,
   });
 
   final int? nutritionId;
@@ -17693,7 +19980,7 @@ class NutritionsUncheckedCreateInput
 
   final int carbohydrates;
 
-  final _i1.PrismaUnion<int, _i1.PrismaNull>? productId;
+  final int productId;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -17712,7 +19999,7 @@ class NutritionsCreateManyInput
     required this.calories,
     required this.protein,
     required this.carbohydrates,
-    this.productId,
+    required this.productId,
   });
 
   final int? nutritionId;
@@ -17723,7 +20010,7 @@ class NutritionsCreateManyInput
 
   final int carbohydrates;
 
-  final _i1.PrismaUnion<int, _i1.PrismaNull>? productId;
+  final int productId;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -17932,14 +20219,12 @@ class ProductsUpdateToOneWithWhereWithoutNutritionsInput
       };
 }
 
-class ProductsUpdateOneWithoutNutritionsNestedInput
+class ProductsUpdateOneRequiredWithoutNutritionsNestedInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateOneWithoutNutritionsNestedInput({
+  const ProductsUpdateOneRequiredWithoutNutritionsNestedInput({
     this.create,
     this.connectOrCreate,
     this.upsert,
-    this.disconnect,
-    this.delete,
     this.connect,
     this.update,
   });
@@ -17950,10 +20235,6 @@ class ProductsUpdateOneWithoutNutritionsNestedInput
   final _i2.ProductsCreateOrConnectWithoutNutritionsInput? connectOrCreate;
 
   final _i2.ProductsUpsertWithoutNutritionsInput? upsert;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsWhereInput>? disconnect;
-
-  final _i1.PrismaUnion<bool, _i2.ProductsWhereInput>? delete;
 
   final _i2.ProductsWhereUniqueInput? connect;
 
@@ -17967,8 +20248,6 @@ class ProductsUpdateOneWithoutNutritionsNestedInput
         'create': create,
         'connectOrCreate': connectOrCreate,
         'upsert': upsert,
-        'disconnect': disconnect,
-        'delete': delete,
         'connect': connect,
         'update': update,
       };
@@ -17989,7 +20268,7 @@ class NutritionsUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
 
-  final _i2.ProductsUpdateOneWithoutNutritionsNestedInput? products;
+  final _i2.ProductsUpdateOneRequiredWithoutNutritionsNestedInput? products;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -17997,36 +20276,6 @@ class NutritionsUpdateInput
         'protein': protein,
         'carbohydrates': carbohydrates,
         'products': products,
-      };
-}
-
-class NullableIntFieldUpdateOperationsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NullableIntFieldUpdateOperationsInput({
-    this.set,
-    this.increment,
-    this.decrement,
-    this.multiply,
-    this.divide,
-  });
-
-  final _i1.PrismaUnion<int, _i1.PrismaNull>? set;
-
-  final int? increment;
-
-  final int? decrement;
-
-  final int? multiply;
-
-  final int? divide;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'set': set,
-        'increment': increment,
-        'decrement': decrement,
-        'multiply': multiply,
-        'divide': divide,
       };
 }
 
@@ -18048,10 +20297,7 @@ class NutritionsUncheckedUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
 
-  final _i1.PrismaUnion<
-      int,
-      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? productId;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -18081,10 +20327,7 @@ class NutritionsUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
 
-  final _i1.PrismaUnion<
-      int,
-      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
-          _i1.PrismaNull>>? productId;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -18127,6 +20370,15 @@ class NutritionsCountAggregateOutputType {
   final int? productId;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+        '_all': $all,
+      };
 }
 
 class NutritionsAvgAggregateOutputType {
@@ -18156,6 +20408,14 @@ class NutritionsAvgAggregateOutputType {
   final double? carbohydrates;
 
   final double? productId;
+
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+      };
 }
 
 class NutritionsSumAggregateOutputType {
@@ -18185,6 +20445,14 @@ class NutritionsSumAggregateOutputType {
   final int? carbohydrates;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+      };
 }
 
 class NutritionsMinAggregateOutputType {
@@ -18214,6 +20482,14 @@ class NutritionsMinAggregateOutputType {
   final int? carbohydrates;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+      };
 }
 
 class NutritionsMaxAggregateOutputType {
@@ -18243,6 +20519,14 @@ class NutritionsMaxAggregateOutputType {
   final int? carbohydrates;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+      };
 }
 
 class NutritionsGroupByOutputType {
@@ -18302,6 +20586,19 @@ class NutritionsGroupByOutputType {
   final _i2.NutritionsMinAggregateOutputType? $min;
 
   final _i2.NutritionsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'product_id': productId,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class NutritionsCountOrderByAggregateInput
@@ -18477,7 +20774,7 @@ class NutritionsOrderByWithAggregationInput
 
   final _i2.SortOrder? carbohydrates;
 
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? productId;
+  final _i2.SortOrder? productId;
 
   final _i2.NutritionsCountOrderByAggregateInput? $count;
 
@@ -18501,184 +20798,6 @@ class NutritionsOrderByWithAggregationInput
         '_max': $max,
         '_min': $min,
         '_sum': $sum,
-      };
-}
-
-class NestedFloatNullableFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedFloatNullableFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1.PrismaUnion<double,
-      _i1.PrismaUnion<_i1.Reference<double>, _i1.PrismaNull>>? equals;
-
-  final _i1.PrismaUnion<Iterable<double>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<double>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<double, _i1.Reference<double>>? lt;
-
-  final _i1.PrismaUnion<double, _i1.Reference<double>>? lte;
-
-  final _i1.PrismaUnion<double, _i1.Reference<double>>? gt;
-
-  final _i1.PrismaUnion<double, _i1.Reference<double>>? gte;
-
-  final _i1.PrismaUnion<double,
-      _i1.PrismaUnion<_i2.NestedFloatNullableFilter, _i1.PrismaNull>>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-      };
-}
-
-class NestedIntNullableWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedIntNullableWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1
-      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
-      equals;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
-
-  final _i1.PrismaUnion<
-      int,
-      _i1.PrismaUnion<_i2.NestedIntNullableWithAggregatesFilter,
-          _i1.PrismaNull>>? not;
-
-  final _i2.NestedIntNullableFilter? $count;
-
-  final _i2.NestedFloatNullableFilter? $avg;
-
-  final _i2.NestedIntNullableFilter? $sum;
-
-  final _i2.NestedIntNullableFilter? $min;
-
-  final _i2.NestedIntNullableFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-class IntNullableWithAggregatesFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const IntNullableWithAggregatesFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1
-      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
-      equals;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
-
-  final _i1.PrismaUnion<
-      int,
-      _i1.PrismaUnion<_i2.NestedIntNullableWithAggregatesFilter,
-          _i1.PrismaNull>>? not;
-
-  final _i2.NestedIntNullableFilter? $count;
-
-  final _i2.NestedFloatNullableFilter? $avg;
-
-  final _i2.NestedIntNullableFilter? $sum;
-
-  final _i2.NestedIntNullableFilter? $min;
-
-  final _i2.NestedIntNullableFilter? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
       };
 }
 
@@ -18711,8 +20830,7 @@ class NutritionsScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? carbohydrates;
 
-  final _i1.PrismaUnion<_i2.IntNullableWithAggregatesFilter,
-      _i1.PrismaUnion<int, _i1.PrismaNull>>? productId;
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? productId;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -19017,6 +21135,14 @@ class AggregateNutritions {
   final _i2.NutritionsMinAggregateOutputType? $min;
 
   final _i2.NutritionsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateNutritionsCountArgs
@@ -19254,6 +21380,13 @@ class OrderItemsCountAggregateOutputType {
   final int? quantity;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+        '_all': $all,
+      };
 }
 
 class OrderItemsAvgAggregateOutputType {
@@ -19275,6 +21408,12 @@ class OrderItemsAvgAggregateOutputType {
   final double? productId;
 
   final double? quantity;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+      };
 }
 
 class OrderItemsSumAggregateOutputType {
@@ -19296,6 +21435,12 @@ class OrderItemsSumAggregateOutputType {
   final int? productId;
 
   final int? quantity;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+      };
 }
 
 class OrderItemsMinAggregateOutputType {
@@ -19317,6 +21462,12 @@ class OrderItemsMinAggregateOutputType {
   final int? productId;
 
   final int? quantity;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+      };
 }
 
 class OrderItemsMaxAggregateOutputType {
@@ -19338,6 +21489,12 @@ class OrderItemsMaxAggregateOutputType {
   final int? productId;
 
   final int? quantity;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+      };
 }
 
 class OrderItemsGroupByOutputType {
@@ -19389,6 +21546,17 @@ class OrderItemsGroupByOutputType {
   final _i2.OrderItemsMinAggregateOutputType? $min;
 
   final _i2.OrderItemsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'product_id': productId,
+        'quantity': quantity,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class OrderItemsCountOrderByAggregateInput
@@ -19821,6 +21989,14 @@ class AggregateOrderItems {
   final _i2.OrderItemsMinAggregateOutputType? $min;
 
   final _i2.OrderItemsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateOrderItemsCountArgs
@@ -20606,6 +22782,12 @@ class OrderStatusCountAggregateOutputType {
   final int? name;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'status_id': statusId,
+        'name': name,
+        '_all': $all,
+      };
 }
 
 class OrderStatusAvgAggregateOutputType {
@@ -20615,6 +22797,8 @@ class OrderStatusAvgAggregateOutputType {
       OrderStatusAvgAggregateOutputType(statusId: json['status_id']);
 
   final double? statusId;
+
+  Map<String, dynamic> toJson() => {'status_id': statusId};
 }
 
 class OrderStatusSumAggregateOutputType {
@@ -20624,6 +22808,8 @@ class OrderStatusSumAggregateOutputType {
       OrderStatusSumAggregateOutputType(statusId: json['status_id']);
 
   final int? statusId;
+
+  Map<String, dynamic> toJson() => {'status_id': statusId};
 }
 
 class OrderStatusMinAggregateOutputType {
@@ -20641,6 +22827,11 @@ class OrderStatusMinAggregateOutputType {
   final int? statusId;
 
   final String? name;
+
+  Map<String, dynamic> toJson() => {
+        'status_id': statusId,
+        'name': name,
+      };
 }
 
 class OrderStatusMaxAggregateOutputType {
@@ -20658,6 +22849,11 @@ class OrderStatusMaxAggregateOutputType {
   final int? statusId;
 
   final String? name;
+
+  Map<String, dynamic> toJson() => {
+        'status_id': statusId,
+        'name': name,
+      };
 }
 
 class OrderStatusGroupByOutputType {
@@ -20705,6 +22901,16 @@ class OrderStatusGroupByOutputType {
   final _i2.OrderStatusMinAggregateOutputType? $min;
 
   final _i2.OrderStatusMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'status_id': statusId,
+        'name': name,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class OrderStatusCountOrderByAggregateInput
@@ -21054,6 +23260,14 @@ class AggregateOrderStatus {
   final _i2.OrderStatusMinAggregateOutputType? $min;
 
   final _i2.OrderStatusMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateOrderStatusCountArgs
@@ -21427,6 +23641,17 @@ class OrdersCountAggregateOutputType {
   final int? totalPrice;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        '_all': $all,
+      };
 }
 
 class OrdersAvgAggregateOutputType {
@@ -21456,6 +23681,14 @@ class OrdersAvgAggregateOutputType {
   final double? paymentMethodId;
 
   final _i1.Decimal? totalPrice;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
 }
 
 class OrdersSumAggregateOutputType {
@@ -21485,6 +23718,14 @@ class OrdersSumAggregateOutputType {
   final int? paymentMethodId;
 
   final _i1.Decimal? totalPrice;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
 }
 
 class OrdersMinAggregateOutputType {
@@ -21501,8 +23742,16 @@ class OrdersMinAggregateOutputType {
   factory OrdersMinAggregateOutputType.fromJson(Map json) =>
       OrdersMinAggregateOutputType(
         orderId: json['order_id'],
-        orderDate: json['order_date'],
-        shippingDate: json['shipping_date'],
+        orderDate: switch (json['order_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['order_date']
+        },
+        shippingDate: switch (json['shipping_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['shipping_date']
+        },
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
@@ -21522,6 +23771,16 @@ class OrdersMinAggregateOutputType {
   final int? paymentMethodId;
 
   final _i1.Decimal? totalPrice;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate?.toIso8601String(),
+        'shipping_date': shippingDate?.toIso8601String(),
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
 }
 
 class OrdersMaxAggregateOutputType {
@@ -21538,8 +23797,16 @@ class OrdersMaxAggregateOutputType {
   factory OrdersMaxAggregateOutputType.fromJson(Map json) =>
       OrdersMaxAggregateOutputType(
         orderId: json['order_id'],
-        orderDate: json['order_date'],
-        shippingDate: json['shipping_date'],
+        orderDate: switch (json['order_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['order_date']
+        },
+        shippingDate: switch (json['shipping_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['shipping_date']
+        },
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
@@ -21559,6 +23826,16 @@ class OrdersMaxAggregateOutputType {
   final int? paymentMethodId;
 
   final _i1.Decimal? totalPrice;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate?.toIso8601String(),
+        'shipping_date': shippingDate?.toIso8601String(),
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
 }
 
 class OrdersGroupByOutputType {
@@ -21579,8 +23856,16 @@ class OrdersGroupByOutputType {
 
   factory OrdersGroupByOutputType.fromJson(Map json) => OrdersGroupByOutputType(
         orderId: json['order_id'],
-        orderDate: json['order_date'],
-        shippingDate: json['shipping_date'],
+        orderDate: switch (json['order_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['order_date']
+        },
+        shippingDate: switch (json['shipping_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['shipping_date']
+        },
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
@@ -21625,6 +23910,21 @@ class OrdersGroupByOutputType {
   final _i2.OrdersMinAggregateOutputType? $min;
 
   final _i2.OrdersMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate?.toIso8601String(),
+        'shipping_date': shippingDate?.toIso8601String(),
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class OrdersCountOrderByAggregateInput
@@ -22585,6 +24885,14 @@ class AggregateOrders {
   final _i2.OrdersMinAggregateOutputType? $min;
 
   final _i2.OrdersMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateOrdersCountArgs
@@ -22668,7 +24976,7 @@ class AggregateOrdersSelect
 }
 
 enum PaymentMethodsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
-  paymentId<int>('payment_id', 'payment_methods'),
+  paymentMethodId<int>('payment_method_id', 'payment_methods'),
   methodName<String>('method_name', 'payment_methods');
 
   const PaymentMethodsScalar(
@@ -22922,12 +25230,12 @@ class OrdersUncheckedCreateNestedManyWithoutPaymentMethodsInput
 class PaymentMethodsUncheckedCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsUncheckedCreateInput({
-    this.paymentId,
+    this.paymentMethodId,
     required this.methodName,
     this.orders,
   });
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final String methodName;
 
@@ -22935,7 +25243,7 @@ class PaymentMethodsUncheckedCreateInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         'orders': orders,
       };
@@ -22944,17 +25252,17 @@ class PaymentMethodsUncheckedCreateInput
 class PaymentMethodsCreateManyInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsCreateManyInput({
-    this.paymentId,
+    this.paymentMethodId,
     required this.methodName,
   });
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final String methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
@@ -23318,12 +25626,13 @@ class OrdersUncheckedUpdateManyWithoutPaymentMethodsNestedInput
 class PaymentMethodsUncheckedUpdateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsUncheckedUpdateInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.orders,
   });
 
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? paymentId;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       methodName;
@@ -23332,7 +25641,7 @@ class PaymentMethodsUncheckedUpdateInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         'orders': orders,
       };
@@ -23352,98 +25661,121 @@ class PaymentMethodsUpdateManyMutationInput
 class PaymentMethodsUncheckedUpdateManyInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsUncheckedUpdateManyInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? paymentId;
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
 
   final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
       methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
 
 class PaymentMethodsCountAggregateOutputType {
   const PaymentMethodsCountAggregateOutputType({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.$all,
   });
 
   factory PaymentMethodsCountAggregateOutputType.fromJson(Map json) =>
       PaymentMethodsCountAggregateOutputType(
-        paymentId: json['payment_id'],
+        paymentMethodId: json['payment_method_id'],
         methodName: json['method_name'],
         $all: json['_all'],
       );
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final int? methodName;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'payment_method_id': paymentMethodId,
+        'method_name': methodName,
+        '_all': $all,
+      };
 }
 
 class PaymentMethodsAvgAggregateOutputType {
-  const PaymentMethodsAvgAggregateOutputType({this.paymentId});
+  const PaymentMethodsAvgAggregateOutputType({this.paymentMethodId});
 
   factory PaymentMethodsAvgAggregateOutputType.fromJson(Map json) =>
-      PaymentMethodsAvgAggregateOutputType(paymentId: json['payment_id']);
+      PaymentMethodsAvgAggregateOutputType(
+          paymentMethodId: json['payment_method_id']);
 
-  final double? paymentId;
+  final double? paymentMethodId;
+
+  Map<String, dynamic> toJson() => {'payment_method_id': paymentMethodId};
 }
 
 class PaymentMethodsSumAggregateOutputType {
-  const PaymentMethodsSumAggregateOutputType({this.paymentId});
+  const PaymentMethodsSumAggregateOutputType({this.paymentMethodId});
 
   factory PaymentMethodsSumAggregateOutputType.fromJson(Map json) =>
-      PaymentMethodsSumAggregateOutputType(paymentId: json['payment_id']);
+      PaymentMethodsSumAggregateOutputType(
+          paymentMethodId: json['payment_method_id']);
 
-  final int? paymentId;
+  final int? paymentMethodId;
+
+  Map<String, dynamic> toJson() => {'payment_method_id': paymentMethodId};
 }
 
 class PaymentMethodsMinAggregateOutputType {
   const PaymentMethodsMinAggregateOutputType({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
   factory PaymentMethodsMinAggregateOutputType.fromJson(Map json) =>
       PaymentMethodsMinAggregateOutputType(
-        paymentId: json['payment_id'],
+        paymentMethodId: json['payment_method_id'],
         methodName: json['method_name'],
       );
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final String? methodName;
+
+  Map<String, dynamic> toJson() => {
+        'payment_method_id': paymentMethodId,
+        'method_name': methodName,
+      };
 }
 
 class PaymentMethodsMaxAggregateOutputType {
   const PaymentMethodsMaxAggregateOutputType({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
   factory PaymentMethodsMaxAggregateOutputType.fromJson(Map json) =>
       PaymentMethodsMaxAggregateOutputType(
-        paymentId: json['payment_id'],
+        paymentMethodId: json['payment_method_id'],
         methodName: json['method_name'],
       );
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final String? methodName;
+
+  Map<String, dynamic> toJson() => {
+        'payment_method_id': paymentMethodId,
+        'method_name': methodName,
+      };
 }
 
 class PaymentMethodsGroupByOutputType {
   const PaymentMethodsGroupByOutputType({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.$count,
     this.$avg,
@@ -23454,7 +25786,7 @@ class PaymentMethodsGroupByOutputType {
 
   factory PaymentMethodsGroupByOutputType.fromJson(Map json) =>
       PaymentMethodsGroupByOutputType(
-        paymentId: json['payment_id'],
+        paymentMethodId: json['payment_method_id'],
         methodName: json['method_name'],
         $count: json['_count'] is Map
             ? _i2.PaymentMethodsCountAggregateOutputType.fromJson(
@@ -23474,7 +25806,7 @@ class PaymentMethodsGroupByOutputType {
             : null,
       );
 
-  final int? paymentId;
+  final int? paymentMethodId;
 
   final String? methodName;
 
@@ -23487,50 +25819,60 @@ class PaymentMethodsGroupByOutputType {
   final _i2.PaymentMethodsMinAggregateOutputType? $min;
 
   final _i2.PaymentMethodsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'payment_method_id': paymentMethodId,
+        'method_name': methodName,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class PaymentMethodsCountOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsCountOrderByAggregateInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
-  final _i2.SortOrder? paymentId;
+  final _i2.SortOrder? paymentMethodId;
 
   final _i2.SortOrder? methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
 
 class PaymentMethodsAvgOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsAvgOrderByAggregateInput({this.paymentId});
+  const PaymentMethodsAvgOrderByAggregateInput({this.paymentMethodId});
 
-  final _i2.SortOrder? paymentId;
+  final _i2.SortOrder? paymentMethodId;
 
   @override
-  Map<String, dynamic> toJson() => {'payment_id': paymentId};
+  Map<String, dynamic> toJson() => {'payment_method_id': paymentMethodId};
 }
 
 class PaymentMethodsMaxOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsMaxOrderByAggregateInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
-  final _i2.SortOrder? paymentId;
+  final _i2.SortOrder? paymentMethodId;
 
   final _i2.SortOrder? methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
@@ -23538,35 +25880,35 @@ class PaymentMethodsMaxOrderByAggregateInput
 class PaymentMethodsMinOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsMinOrderByAggregateInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
-  final _i2.SortOrder? paymentId;
+  final _i2.SortOrder? paymentMethodId;
 
   final _i2.SortOrder? methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
 
 class PaymentMethodsSumOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsSumOrderByAggregateInput({this.paymentId});
+  const PaymentMethodsSumOrderByAggregateInput({this.paymentMethodId});
 
-  final _i2.SortOrder? paymentId;
+  final _i2.SortOrder? paymentMethodId;
 
   @override
-  Map<String, dynamic> toJson() => {'payment_id': paymentId};
+  Map<String, dynamic> toJson() => {'payment_method_id': paymentMethodId};
 }
 
 class PaymentMethodsOrderByWithAggregationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsOrderByWithAggregationInput({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.$count,
     this.$avg,
@@ -23575,7 +25917,7 @@ class PaymentMethodsOrderByWithAggregationInput
     this.$sum,
   });
 
-  final _i2.SortOrder? paymentId;
+  final _i2.SortOrder? paymentMethodId;
 
   final _i2.SortOrder? methodName;
 
@@ -23591,7 +25933,7 @@ class PaymentMethodsOrderByWithAggregationInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         '_count': $count,
         '_avg': $avg,
@@ -23607,7 +25949,7 @@ class PaymentMethodsScalarWhereWithAggregatesInput
     this.AND,
     this.OR,
     this.NOT,
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
@@ -23619,7 +25961,7 @@ class PaymentMethodsScalarWhereWithAggregatesInput
   final _i1.PrismaUnion<_i2.PaymentMethodsScalarWhereWithAggregatesInput,
       Iterable<_i2.PaymentMethodsScalarWhereWithAggregatesInput>>? NOT;
 
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? paymentId;
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? paymentMethodId;
 
   final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? methodName;
 
@@ -23628,7 +25970,7 @@ class PaymentMethodsScalarWhereWithAggregatesInput
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
@@ -23636,12 +25978,12 @@ class PaymentMethodsScalarWhereWithAggregatesInput
 class PaymentMethodsCountAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsCountAggregateOutputTypeSelect({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.$all,
   });
 
-  final bool? paymentId;
+  final bool? paymentMethodId;
 
   final bool? methodName;
 
@@ -23649,7 +25991,7 @@ class PaymentMethodsCountAggregateOutputTypeSelect
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         '_all': $all,
       };
@@ -23667,12 +26009,12 @@ class PaymentMethodsGroupByOutputTypeCountArgs
 
 class PaymentMethodsAvgAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsAvgAggregateOutputTypeSelect({this.paymentId});
+  const PaymentMethodsAvgAggregateOutputTypeSelect({this.paymentMethodId});
 
-  final bool? paymentId;
+  final bool? paymentMethodId;
 
   @override
-  Map<String, dynamic> toJson() => {'payment_id': paymentId};
+  Map<String, dynamic> toJson() => {'payment_method_id': paymentMethodId};
 }
 
 class PaymentMethodsGroupByOutputTypeAvgArgs
@@ -23687,12 +26029,12 @@ class PaymentMethodsGroupByOutputTypeAvgArgs
 
 class PaymentMethodsSumAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const PaymentMethodsSumAggregateOutputTypeSelect({this.paymentId});
+  const PaymentMethodsSumAggregateOutputTypeSelect({this.paymentMethodId});
 
-  final bool? paymentId;
+  final bool? paymentMethodId;
 
   @override
-  Map<String, dynamic> toJson() => {'payment_id': paymentId};
+  Map<String, dynamic> toJson() => {'payment_method_id': paymentMethodId};
 }
 
 class PaymentMethodsGroupByOutputTypeSumArgs
@@ -23708,17 +26050,17 @@ class PaymentMethodsGroupByOutputTypeSumArgs
 class PaymentMethodsMinAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsMinAggregateOutputTypeSelect({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
-  final bool? paymentId;
+  final bool? paymentMethodId;
 
   final bool? methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
@@ -23736,17 +26078,17 @@ class PaymentMethodsGroupByOutputTypeMinArgs
 class PaymentMethodsMaxAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsMaxAggregateOutputTypeSelect({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
   });
 
-  final bool? paymentId;
+  final bool? paymentMethodId;
 
   final bool? methodName;
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
       };
 }
@@ -23764,7 +26106,7 @@ class PaymentMethodsGroupByOutputTypeMaxArgs
 class PaymentMethodsGroupByOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsGroupByOutputTypeSelect({
-    this.paymentId,
+    this.paymentMethodId,
     this.methodName,
     this.$count,
     this.$avg,
@@ -23773,7 +26115,7 @@ class PaymentMethodsGroupByOutputTypeSelect
     this.$max,
   });
 
-  final bool? paymentId;
+  final bool? paymentMethodId;
 
   final bool? methodName;
 
@@ -23790,7 +26132,7 @@ class PaymentMethodsGroupByOutputTypeSelect
 
   @override
   Map<String, dynamic> toJson() => {
-        'payment_id': paymentId,
+        'payment_method_id': paymentMethodId,
         'method_name': methodName,
         '_count': $count,
         '_avg': $avg,
@@ -23837,6 +26179,14 @@ class AggregatePaymentMethods {
   final _i2.PaymentMethodsMinAggregateOutputType? $min;
 
   final _i2.PaymentMethodsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregatePaymentMethodsCountArgs
@@ -24379,6 +26729,20 @@ class ProductsCountAggregateOutputType {
   final int? rate;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        '_all': $all,
+      };
 }
 
 class ProductsAvgAggregateOutputType {
@@ -24412,6 +26776,15 @@ class ProductsAvgAggregateOutputType {
   final _i1.Decimal? discountPercentage;
 
   final _i1.Decimal? rate;
+
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'quantity_in_stock': quantityInStock,
+        'unit_price': unitPrice,
+        'category_id': categoryId,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+      };
 }
 
 class ProductsSumAggregateOutputType {
@@ -24445,6 +26818,15 @@ class ProductsSumAggregateOutputType {
   final _i1.Decimal? discountPercentage;
 
   final _i1.Decimal? rate;
+
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'quantity_in_stock': quantityInStock,
+        'unit_price': unitPrice,
+        'category_id': categoryId,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+      };
 }
 
 class ProductsMinAggregateOutputType {
@@ -24494,6 +26876,19 @@ class ProductsMinAggregateOutputType {
   final _i1.Decimal? discountPercentage;
 
   final _i1.Decimal? rate;
+
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+      };
 }
 
 class ProductsMaxAggregateOutputType {
@@ -24543,6 +26938,19 @@ class ProductsMaxAggregateOutputType {
   final _i1.Decimal? discountPercentage;
 
   final _i1.Decimal? rate;
+
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+      };
 }
 
 class ProductsGroupByOutputType {
@@ -24622,6 +27030,24 @@ class ProductsGroupByOutputType {
   final _i2.ProductsMinAggregateOutputType? $min;
 
   final _i2.ProductsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class ProductsCountOrderByAggregateInput
@@ -25490,6 +27916,14 @@ class AggregateProducts {
   final _i2.ProductsMinAggregateOutputType? $min;
 
   final _i2.ProductsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateProductsCountArgs
@@ -25779,6 +28213,15 @@ class ReviewsCountAggregateOutputType {
   final int? productId;
 
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate,
+        'user_id': userId,
+        'product_id': productId,
+        '_all': $all,
+      };
 }
 
 class ReviewsAvgAggregateOutputType {
@@ -25804,6 +28247,13 @@ class ReviewsAvgAggregateOutputType {
   final double? userId;
 
   final double? productId;
+
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class ReviewsSumAggregateOutputType {
@@ -25829,6 +28279,13 @@ class ReviewsSumAggregateOutputType {
   final int? userId;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class ReviewsMinAggregateOutputType {
@@ -25844,7 +28301,11 @@ class ReviewsMinAggregateOutputType {
       ReviewsMinAggregateOutputType(
         reviewId: json['review_id'],
         rating: json['rating'],
-        reviewDate: json['review_date'],
+        reviewDate: switch (json['review_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['review_date']
+        },
         userId: json['user_id'],
         productId: json['product_id'],
       );
@@ -25858,6 +28319,14 @@ class ReviewsMinAggregateOutputType {
   final int? userId;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate?.toIso8601String(),
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class ReviewsMaxAggregateOutputType {
@@ -25873,7 +28342,11 @@ class ReviewsMaxAggregateOutputType {
       ReviewsMaxAggregateOutputType(
         reviewId: json['review_id'],
         rating: json['rating'],
-        reviewDate: json['review_date'],
+        reviewDate: switch (json['review_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['review_date']
+        },
         userId: json['user_id'],
         productId: json['product_id'],
       );
@@ -25887,6 +28360,14 @@ class ReviewsMaxAggregateOutputType {
   final int? userId;
 
   final int? productId;
+
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate?.toIso8601String(),
+        'user_id': userId,
+        'product_id': productId,
+      };
 }
 
 class ReviewsGroupByOutputType {
@@ -25907,7 +28388,11 @@ class ReviewsGroupByOutputType {
       ReviewsGroupByOutputType(
         reviewId: json['review_id'],
         rating: json['rating'],
-        reviewDate: json['review_date'],
+        reviewDate: switch (json['review_date']) {
+          DateTime value => value,
+          String value => DateTime.parse(value),
+          _ => json['review_date']
+        },
         userId: json['user_id'],
         productId: json['product_id'],
         $count: json['_count'] is Map
@@ -25946,6 +28431,19 @@ class ReviewsGroupByOutputType {
   final _i2.ReviewsMinAggregateOutputType? $min;
 
   final _i2.ReviewsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'review_id': reviewId,
+        'rating': rating,
+        'review_date': reviewDate?.toIso8601String(),
+        'user_id': userId,
+        'product_id': productId,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class ReviewsCountOrderByAggregateInput
@@ -26466,6 +28964,14 @@ class AggregateReviews {
   final _i2.ReviewsMinAggregateOutputType? $min;
 
   final _i2.ReviewsMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateReviewsCountArgs
@@ -26548,17 +29054,11 @@ class AggregateReviewsSelect
       };
 }
 
-enum UsersScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
-  userId<int>('user_id', 'users'),
-  userName<String>('user_name', 'users'),
-  email<String>('email', 'users'),
-  password<String>('password', 'users'),
-  address<String>('address', 'users'),
-  phoneNumber<String>('phone_number', 'users'),
-  imageUrl<String>('image_url', 'users'),
-  isDeleted<bool>('is_deleted', 'users');
+enum UserRolesScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  roleId<int>('role_id', 'user_roles'),
+  role<String>('role', 'user_roles');
 
-  const UsersScalar(
+  const UserRolesScalar(
     this.name,
     this.model,
   );
@@ -26570,15 +29070,16 @@ enum UsersScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   final String model;
 }
 
-class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateInput({
+class UsersCreateWithoutUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateWithoutUserRolesInput({
     required this.userName,
     required this.email,
     required this.password,
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
     this.carts,
     this.favorites,
     this.orders,
@@ -26597,7 +29098,7 @@ class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
 
   final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
 
@@ -26623,9 +29124,9 @@ class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class UsersUncheckedCreateInput
+class UsersUncheckedCreateWithoutUserRolesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUncheckedCreateInput({
+  const UsersUncheckedCreateWithoutUserRolesInput({
     this.userId,
     required this.userName,
     required this.email,
@@ -26633,7 +29134,7 @@ class UsersUncheckedCreateInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
     this.carts,
     this.favorites,
     this.orders,
@@ -26654,7 +29155,7 @@ class UsersUncheckedCreateInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
 
   final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
 
@@ -26681,9 +29182,28 @@ class UsersUncheckedCreateInput
       };
 }
 
-class UsersCreateManyInput
+class UsersCreateOrConnectWithoutUserRolesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersCreateManyInput({
+  const UsersCreateOrConnectWithoutUserRolesInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.UsersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutUserRolesInput,
+      _i2.UsersUncheckedCreateWithoutUserRolesInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class UsersCreateManyUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateManyUserRolesInput({
     this.userId,
     required this.userName,
     required this.email,
@@ -26691,7 +29211,7 @@ class UsersCreateManyInput
     this.address,
     this.phoneNumber,
     this.imageUrl,
-    required this.isDeleted,
+    this.isDeleted,
   });
 
   final int? userId;
@@ -26708,7 +29228,7 @@ class UsersCreateManyInput
 
   final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
 
-  final bool isDeleted;
+  final bool? isDeleted;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -26723,8 +29243,154 @@ class UsersCreateManyInput
       };
 }
 
-class UsersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUpdateInput({
+class UsersCreateManyUserRolesInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateManyUserRolesInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersCreateManyUserRolesInput,
+      Iterable<_i2.UsersCreateManyUserRolesInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class UsersCreateNestedManyWithoutUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateNestedManyWithoutUserRolesInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.UsersCreateWithoutUserRolesInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.UsersCreateWithoutUserRolesInput>,
+              _i1.PrismaUnion<_i2.UsersUncheckedCreateWithoutUserRolesInput,
+                  Iterable<_i2.UsersUncheckedCreateWithoutUserRolesInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.UsersCreateOrConnectWithoutUserRolesInput,
+      Iterable<_i2.UsersCreateOrConnectWithoutUserRolesInput>>? connectOrCreate;
+
+  final _i2.UsersCreateManyUserRolesInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class UserRolesCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCreateInput({
+    required this.role,
+    this.users,
+  });
+
+  final String role;
+
+  final _i2.UsersCreateNestedManyWithoutUserRolesInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role': role,
+        'users': users,
+      };
+}
+
+class UsersUncheckedCreateNestedManyWithoutUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedCreateNestedManyWithoutUserRolesInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.UsersCreateWithoutUserRolesInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.UsersCreateWithoutUserRolesInput>,
+              _i1.PrismaUnion<_i2.UsersUncheckedCreateWithoutUserRolesInput,
+                  Iterable<_i2.UsersUncheckedCreateWithoutUserRolesInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.UsersCreateOrConnectWithoutUserRolesInput,
+      Iterable<_i2.UsersCreateOrConnectWithoutUserRolesInput>>? connectOrCreate;
+
+  final _i2.UsersCreateManyUserRolesInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class UserRolesUncheckedCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUncheckedCreateInput({
+    this.roleId,
+    required this.role,
+    this.users,
+  });
+
+  final int? roleId;
+
+  final String role;
+
+  final _i2.UsersUncheckedCreateNestedManyWithoutUserRolesInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        'users': users,
+      };
+}
+
+class UserRolesCreateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCreateManyInput({
+    this.roleId,
+    required this.role,
+  });
+
+  final int? roleId;
+
+  final String role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UsersUpdateWithoutUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateWithoutUserRolesInput({
     this.userName,
     this.email,
     this.password,
@@ -26785,9 +29451,9 @@ class UsersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class UsersUncheckedUpdateInput
+class UsersUncheckedUpdateWithoutUserRolesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUncheckedUpdateInput({
+  const UsersUncheckedUpdateWithoutUserRolesInput({
     this.userId,
     this.userName,
     this.email,
@@ -26852,6 +29518,112 @@ class UsersUncheckedUpdateInput
       };
 }
 
+class UsersUpsertWithWhereUniqueWithoutUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpsertWithWhereUniqueWithoutUserRolesInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.UsersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutUserRolesInput,
+      _i2.UsersUncheckedUpdateWithoutUserRolesInput> update;
+
+  final _i1.PrismaUnion<_i2.UsersCreateWithoutUserRolesInput,
+      _i2.UsersUncheckedCreateWithoutUserRolesInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class UsersUpdateWithWhereUniqueWithoutUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateWithWhereUniqueWithoutUserRolesInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.UsersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithoutUserRolesInput,
+      _i2.UsersUncheckedUpdateWithoutUserRolesInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class UsersScalarWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersScalarWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.roleId,
+  });
+
+  final _i1.PrismaUnion<_i2.UsersScalarWhereInput,
+      Iterable<_i2.UsersScalarWhereInput>>? AND;
+
+  final Iterable<_i2.UsersScalarWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.UsersScalarWhereInput,
+      Iterable<_i2.UsersScalarWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? userName;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? email;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? password;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<_i2.BoolFilter, bool>? isDeleted;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? roleId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+      };
+}
+
 class UsersUpdateManyMutationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersUpdateManyMutationInput({
@@ -26899,9 +29671,9 @@ class UsersUpdateManyMutationInput
       };
 }
 
-class UsersUncheckedUpdateManyInput
+class UsersUncheckedUpdateManyWithoutUserRolesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersUncheckedUpdateManyInput({
+  const UsersUncheckedUpdateManyWithoutUserRolesInput({
     this.userId,
     this.userName,
     this.email,
@@ -26950,6 +29722,1174 @@ class UsersUncheckedUpdateManyInput
       };
 }
 
+class UsersUpdateManyWithWhereWithoutUserRolesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateManyWithWhereWithoutUserRolesInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.UsersScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateManyMutationInput,
+      _i2.UsersUncheckedUpdateManyWithoutUserRolesInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class UsersUpdateManyWithoutUserRolesNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateManyWithoutUserRolesNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.UsersCreateWithoutUserRolesInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.UsersCreateWithoutUserRolesInput>,
+              _i1.PrismaUnion<_i2.UsersUncheckedCreateWithoutUserRolesInput,
+                  Iterable<_i2.UsersUncheckedCreateWithoutUserRolesInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.UsersCreateOrConnectWithoutUserRolesInput,
+      Iterable<_i2.UsersCreateOrConnectWithoutUserRolesInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.UsersUpsertWithWhereUniqueWithoutUserRolesInput,
+      Iterable<_i2.UsersUpsertWithWhereUniqueWithoutUserRolesInput>>? upsert;
+
+  final _i2.UsersCreateManyUserRolesInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithWhereUniqueWithoutUserRolesInput,
+      Iterable<_i2.UsersUpdateWithWhereUniqueWithoutUserRolesInput>>? update;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateManyWithWhereWithoutUserRolesInput,
+      Iterable<_i2.UsersUpdateManyWithWhereWithoutUserRolesInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.UsersScalarWhereInput,
+      Iterable<_i2.UsersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class UserRolesUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUpdateInput({
+    this.role,
+    this.users,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? role;
+
+  final _i2.UsersUpdateManyWithoutUserRolesNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role': role,
+        'users': users,
+      };
+}
+
+class UsersUncheckedUpdateManyWithoutUserRolesNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedUpdateManyWithoutUserRolesNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.UsersCreateWithoutUserRolesInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.UsersCreateWithoutUserRolesInput>,
+              _i1.PrismaUnion<_i2.UsersUncheckedCreateWithoutUserRolesInput,
+                  Iterable<_i2.UsersUncheckedCreateWithoutUserRolesInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.UsersCreateOrConnectWithoutUserRolesInput,
+      Iterable<_i2.UsersCreateOrConnectWithoutUserRolesInput>>? connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.UsersUpsertWithWhereUniqueWithoutUserRolesInput,
+      Iterable<_i2.UsersUpsertWithWhereUniqueWithoutUserRolesInput>>? upsert;
+
+  final _i2.UsersCreateManyUserRolesInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.UsersWhereUniqueInput,
+      Iterable<_i2.UsersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateWithWhereUniqueWithoutUserRolesInput,
+      Iterable<_i2.UsersUpdateWithWhereUniqueWithoutUserRolesInput>>? update;
+
+  final _i1.PrismaUnion<_i2.UsersUpdateManyWithWhereWithoutUserRolesInput,
+      Iterable<_i2.UsersUpdateManyWithWhereWithoutUserRolesInput>>? updateMany;
+
+  final _i1.PrismaUnion<_i2.UsersScalarWhereInput,
+      Iterable<_i2.UsersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class UserRolesUncheckedUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUncheckedUpdateInput({
+    this.roleId,
+    this.role,
+    this.users,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? role;
+
+  final _i2.UsersUncheckedUpdateManyWithoutUserRolesNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        'users': users,
+      };
+}
+
+class UserRolesUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUpdateManyMutationInput({this.role});
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? role;
+
+  @override
+  Map<String, dynamic> toJson() => {'role': role};
+}
+
+class UserRolesUncheckedUpdateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesUncheckedUpdateManyInput({
+    this.roleId,
+    this.role,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesCountAggregateOutputType {
+  const UserRolesCountAggregateOutputType({
+    this.roleId,
+    this.role,
+    this.$all,
+  });
+
+  factory UserRolesCountAggregateOutputType.fromJson(Map json) =>
+      UserRolesCountAggregateOutputType(
+        roleId: json['role_id'],
+        role: json['role'],
+        $all: json['_all'],
+      );
+
+  final int? roleId;
+
+  final int? role;
+
+  final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        '_all': $all,
+      };
+}
+
+class UserRolesAvgAggregateOutputType {
+  const UserRolesAvgAggregateOutputType({this.roleId});
+
+  factory UserRolesAvgAggregateOutputType.fromJson(Map json) =>
+      UserRolesAvgAggregateOutputType(roleId: json['role_id']);
+
+  final double? roleId;
+
+  Map<String, dynamic> toJson() => {'role_id': roleId};
+}
+
+class UserRolesSumAggregateOutputType {
+  const UserRolesSumAggregateOutputType({this.roleId});
+
+  factory UserRolesSumAggregateOutputType.fromJson(Map json) =>
+      UserRolesSumAggregateOutputType(roleId: json['role_id']);
+
+  final int? roleId;
+
+  Map<String, dynamic> toJson() => {'role_id': roleId};
+}
+
+class UserRolesMinAggregateOutputType {
+  const UserRolesMinAggregateOutputType({
+    this.roleId,
+    this.role,
+  });
+
+  factory UserRolesMinAggregateOutputType.fromJson(Map json) =>
+      UserRolesMinAggregateOutputType(
+        roleId: json['role_id'],
+        role: json['role'],
+      );
+
+  final int? roleId;
+
+  final String? role;
+
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesMaxAggregateOutputType {
+  const UserRolesMaxAggregateOutputType({
+    this.roleId,
+    this.role,
+  });
+
+  factory UserRolesMaxAggregateOutputType.fromJson(Map json) =>
+      UserRolesMaxAggregateOutputType(
+        roleId: json['role_id'],
+        role: json['role'],
+      );
+
+  final int? roleId;
+
+  final String? role;
+
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesGroupByOutputType {
+  const UserRolesGroupByOutputType({
+    this.roleId,
+    this.role,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory UserRolesGroupByOutputType.fromJson(Map json) =>
+      UserRolesGroupByOutputType(
+        roleId: json['role_id'],
+        role: json['role'],
+        $count: json['_count'] is Map
+            ? _i2.UserRolesCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.UserRolesAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.UserRolesSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.UserRolesMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.UserRolesMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final int? roleId;
+
+  final String? role;
+
+  final _i2.UserRolesCountAggregateOutputType? $count;
+
+  final _i2.UserRolesAvgAggregateOutputType? $avg;
+
+  final _i2.UserRolesSumAggregateOutputType? $sum;
+
+  final _i2.UserRolesMinAggregateOutputType? $min;
+
+  final _i2.UserRolesMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class UserRolesCountOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCountOrderByAggregateInput({
+    this.roleId,
+    this.role,
+  });
+
+  final _i2.SortOrder? roleId;
+
+  final _i2.SortOrder? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesAvgOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesAvgOrderByAggregateInput({this.roleId});
+
+  final _i2.SortOrder? roleId;
+
+  @override
+  Map<String, dynamic> toJson() => {'role_id': roleId};
+}
+
+class UserRolesMaxOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesMaxOrderByAggregateInput({
+    this.roleId,
+    this.role,
+  });
+
+  final _i2.SortOrder? roleId;
+
+  final _i2.SortOrder? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesMinOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesMinOrderByAggregateInput({
+    this.roleId,
+    this.role,
+  });
+
+  final _i2.SortOrder? roleId;
+
+  final _i2.SortOrder? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesSumOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesSumOrderByAggregateInput({this.roleId});
+
+  final _i2.SortOrder? roleId;
+
+  @override
+  Map<String, dynamic> toJson() => {'role_id': roleId};
+}
+
+class UserRolesOrderByWithAggregationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesOrderByWithAggregationInput({
+    this.roleId,
+    this.role,
+    this.$count,
+    this.$avg,
+    this.$max,
+    this.$min,
+    this.$sum,
+  });
+
+  final _i2.SortOrder? roleId;
+
+  final _i2.SortOrder? role;
+
+  final _i2.UserRolesCountOrderByAggregateInput? $count;
+
+  final _i2.UserRolesAvgOrderByAggregateInput? $avg;
+
+  final _i2.UserRolesMaxOrderByAggregateInput? $max;
+
+  final _i2.UserRolesMinOrderByAggregateInput? $min;
+
+  final _i2.UserRolesSumOrderByAggregateInput? $sum;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        '_count': $count,
+        '_avg': $avg,
+        '_max': $max,
+        '_min': $min,
+        '_sum': $sum,
+      };
+}
+
+class UserRolesScalarWhereWithAggregatesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesScalarWhereWithAggregatesInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.roleId,
+    this.role,
+  });
+
+  final _i1.PrismaUnion<_i2.UserRolesScalarWhereWithAggregatesInput,
+      Iterable<_i2.UserRolesScalarWhereWithAggregatesInput>>? AND;
+
+  final Iterable<_i2.UserRolesScalarWhereWithAggregatesInput>? OR;
+
+  final _i1.PrismaUnion<_i2.UserRolesScalarWhereWithAggregatesInput,
+      Iterable<_i2.UserRolesScalarWhereWithAggregatesInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? roleId;
+
+  final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesCountAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesCountAggregateOutputTypeSelect({
+    this.roleId,
+    this.role,
+    this.$all,
+  });
+
+  final bool? roleId;
+
+  final bool? role;
+
+  final bool? $all;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        '_all': $all,
+      };
+}
+
+class UserRolesGroupByOutputTypeCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesGroupByOutputTypeCountArgs({this.select});
+
+  final _i2.UserRolesCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class UserRolesAvgAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesAvgAggregateOutputTypeSelect({this.roleId});
+
+  final bool? roleId;
+
+  @override
+  Map<String, dynamic> toJson() => {'role_id': roleId};
+}
+
+class UserRolesGroupByOutputTypeAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesGroupByOutputTypeAvgArgs({this.select});
+
+  final _i2.UserRolesAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class UserRolesSumAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesSumAggregateOutputTypeSelect({this.roleId});
+
+  final bool? roleId;
+
+  @override
+  Map<String, dynamic> toJson() => {'role_id': roleId};
+}
+
+class UserRolesGroupByOutputTypeSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesGroupByOutputTypeSumArgs({this.select});
+
+  final _i2.UserRolesSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class UserRolesMinAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesMinAggregateOutputTypeSelect({
+    this.roleId,
+    this.role,
+  });
+
+  final bool? roleId;
+
+  final bool? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesGroupByOutputTypeMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesGroupByOutputTypeMinArgs({this.select});
+
+  final _i2.UserRolesMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class UserRolesMaxAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesMaxAggregateOutputTypeSelect({
+    this.roleId,
+    this.role,
+  });
+
+  final bool? roleId;
+
+  final bool? role;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+      };
+}
+
+class UserRolesGroupByOutputTypeMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesGroupByOutputTypeMaxArgs({this.select});
+
+  final _i2.UserRolesMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class UserRolesGroupByOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UserRolesGroupByOutputTypeSelect({
+    this.roleId,
+    this.role,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final bool? roleId;
+
+  final bool? role;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesGroupByOutputTypeCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesGroupByOutputTypeAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesGroupByOutputTypeSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesGroupByOutputTypeMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.UserRolesGroupByOutputTypeMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'role_id': roleId,
+        'role': role,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class AggregateUserRoles {
+  const AggregateUserRoles({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory AggregateUserRoles.fromJson(Map json) => AggregateUserRoles(
+        $count: json['_count'] is Map
+            ? _i2.UserRolesCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.UserRolesAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.UserRolesSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.UserRolesMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.UserRolesMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final _i2.UserRolesCountAggregateOutputType? $count;
+
+  final _i2.UserRolesAvgAggregateOutputType? $avg;
+
+  final _i2.UserRolesSumAggregateOutputType? $sum;
+
+  final _i2.UserRolesMinAggregateOutputType? $min;
+
+  final _i2.UserRolesMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class AggregateUserRolesCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateUserRolesCountArgs({this.select});
+
+  final _i2.UserRolesCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateUserRolesAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateUserRolesAvgArgs({this.select});
+
+  final _i2.UserRolesAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateUserRolesSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateUserRolesSumArgs({this.select});
+
+  final _i2.UserRolesSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateUserRolesMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateUserRolesMinArgs({this.select});
+
+  final _i2.UserRolesMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateUserRolesMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateUserRolesMaxArgs({this.select});
+
+  final _i2.UserRolesMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregateUserRolesSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregateUserRolesSelect({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.AggregateUserRolesCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateUserRolesAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateUserRolesSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateUserRolesMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.AggregateUserRolesMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateInput({
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+    this.userRoles,
+  });
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool? isDeleted;
+
+  final _i2.CartsCreateNestedOneWithoutUsersInput? carts;
+
+  final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
+
+  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+
+  final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+        'user_roles': userRoles,
+      };
+}
+
+class UsersUncheckedCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedCreateInput({
+    this.userId,
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.roleId,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final int? userId;
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool? isDeleted;
+
+  final int? roleId;
+
+  final _i2.CartsUncheckedCreateNestedOneWithoutUsersInput? carts;
+
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
+
+  final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
+
+  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class UsersCreateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersCreateManyInput({
+    this.userId,
+    required this.userName,
+    required this.email,
+    required this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.roleId,
+  });
+
+  final int? userId;
+
+  final String userName;
+
+  final String email;
+
+  final String password;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? address;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? phoneNumber;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final bool? isDeleted;
+
+  final int? roleId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+      };
+}
+
+class UsersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUpdateInput({
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+    this.userRoles,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i2.CartsUpdateOneWithoutUsersNestedInput? carts;
+
+  final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
+
+  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+
+  final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+        'user_roles': userRoles,
+      };
+}
+
+class UsersUncheckedUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedUpdateInput({
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.roleId,
+    this.carts,
+    this.favorites,
+    this.orders,
+    this.reviews,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
+  final _i2.CartsUncheckedUpdateOneWithoutUsersNestedInput? carts;
+
+  final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
+
+  final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
+
+  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+        'carts': carts,
+        'favorites': favorites,
+        'orders': orders,
+        'reviews': reviews,
+      };
+}
+
+class UsersUncheckedUpdateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const UsersUncheckedUpdateManyInput({
+    this.userId,
+    this.userName,
+    this.email,
+    this.password,
+    this.address,
+    this.phoneNumber,
+    this.imageUrl,
+    this.isDeleted,
+    this.roleId,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? userName;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? email;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? password;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? address;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? phoneNumber;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<bool, _i2.BoolFieldUpdateOperationsInput>? isDeleted;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? roleId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+      };
+}
+
 class UsersCountAggregateOutputType {
   const UsersCountAggregateOutputType({
     this.userId,
@@ -26960,6 +30900,7 @@ class UsersCountAggregateOutputType {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.$all,
   });
 
@@ -26973,6 +30914,7 @@ class UsersCountAggregateOutputType {
         phoneNumber: json['phone_number'],
         imageUrl: json['image_url'],
         isDeleted: json['is_deleted'],
+        roleId: json['role_id'],
         $all: json['_all'],
       );
 
@@ -26992,25 +30934,66 @@ class UsersCountAggregateOutputType {
 
   final int? isDeleted;
 
+  final int? roleId;
+
   final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+        '_all': $all,
+      };
 }
 
 class UsersAvgAggregateOutputType {
-  const UsersAvgAggregateOutputType({this.userId});
+  const UsersAvgAggregateOutputType({
+    this.userId,
+    this.roleId,
+  });
 
   factory UsersAvgAggregateOutputType.fromJson(Map json) =>
-      UsersAvgAggregateOutputType(userId: json['user_id']);
+      UsersAvgAggregateOutputType(
+        userId: json['user_id'],
+        roleId: json['role_id'],
+      );
 
   final double? userId;
+
+  final double? roleId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'role_id': roleId,
+      };
 }
 
 class UsersSumAggregateOutputType {
-  const UsersSumAggregateOutputType({this.userId});
+  const UsersSumAggregateOutputType({
+    this.userId,
+    this.roleId,
+  });
 
   factory UsersSumAggregateOutputType.fromJson(Map json) =>
-      UsersSumAggregateOutputType(userId: json['user_id']);
+      UsersSumAggregateOutputType(
+        userId: json['user_id'],
+        roleId: json['role_id'],
+      );
 
   final int? userId;
+
+  final int? roleId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'role_id': roleId,
+      };
 }
 
 class UsersMinAggregateOutputType {
@@ -27023,6 +31006,7 @@ class UsersMinAggregateOutputType {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   factory UsersMinAggregateOutputType.fromJson(Map json) =>
@@ -27035,6 +31019,7 @@ class UsersMinAggregateOutputType {
         phoneNumber: json['phone_number'],
         imageUrl: json['image_url'],
         isDeleted: json['is_deleted'],
+        roleId: json['role_id'],
       );
 
   final int? userId;
@@ -27052,6 +31037,20 @@ class UsersMinAggregateOutputType {
   final String? imageUrl;
 
   final bool? isDeleted;
+
+  final int? roleId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+      };
 }
 
 class UsersMaxAggregateOutputType {
@@ -27064,6 +31063,7 @@ class UsersMaxAggregateOutputType {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   factory UsersMaxAggregateOutputType.fromJson(Map json) =>
@@ -27076,6 +31076,7 @@ class UsersMaxAggregateOutputType {
         phoneNumber: json['phone_number'],
         imageUrl: json['image_url'],
         isDeleted: json['is_deleted'],
+        roleId: json['role_id'],
       );
 
   final int? userId;
@@ -27093,6 +31094,20 @@ class UsersMaxAggregateOutputType {
   final String? imageUrl;
 
   final bool? isDeleted;
+
+  final int? roleId;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+      };
 }
 
 class UsersGroupByOutputType {
@@ -27105,6 +31120,7 @@ class UsersGroupByOutputType {
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -27121,6 +31137,7 @@ class UsersGroupByOutputType {
         phoneNumber: json['phone_number'],
         imageUrl: json['image_url'],
         isDeleted: json['is_deleted'],
+        roleId: json['role_id'],
         $count: json['_count'] is Map
             ? _i2.UsersCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -27154,6 +31171,8 @@ class UsersGroupByOutputType {
 
   final bool? isDeleted;
 
+  final int? roleId;
+
   final _i2.UsersCountAggregateOutputType? $count;
 
   final _i2.UsersAvgAggregateOutputType? $avg;
@@ -27163,6 +31182,23 @@ class UsersGroupByOutputType {
   final _i2.UsersMinAggregateOutputType? $min;
 
   final _i2.UsersMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_name': userName,
+        'email': email,
+        'password': password,
+        'address': address,
+        'phone_number': phoneNumber,
+        'image_url': imageUrl,
+        'is_deleted': isDeleted,
+        'role_id': roleId,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class UsersCountOrderByAggregateInput
@@ -27176,6 +31212,7 @@ class UsersCountOrderByAggregateInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   final _i2.SortOrder? userId;
@@ -27194,6 +31231,8 @@ class UsersCountOrderByAggregateInput
 
   final _i2.SortOrder? isDeleted;
 
+  final _i2.SortOrder? roleId;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_id': userId,
@@ -27204,17 +31243,26 @@ class UsersCountOrderByAggregateInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
       };
 }
 
 class UsersAvgOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersAvgOrderByAggregateInput({this.userId});
+  const UsersAvgOrderByAggregateInput({
+    this.userId,
+    this.roleId,
+  });
 
   final _i2.SortOrder? userId;
 
+  final _i2.SortOrder? roleId;
+
   @override
-  Map<String, dynamic> toJson() => {'user_id': userId};
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'role_id': roleId,
+      };
 }
 
 class UsersMaxOrderByAggregateInput
@@ -27228,6 +31276,7 @@ class UsersMaxOrderByAggregateInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   final _i2.SortOrder? userId;
@@ -27246,6 +31295,8 @@ class UsersMaxOrderByAggregateInput
 
   final _i2.SortOrder? isDeleted;
 
+  final _i2.SortOrder? roleId;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_id': userId,
@@ -27256,6 +31307,7 @@ class UsersMaxOrderByAggregateInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
       };
 }
 
@@ -27270,6 +31322,7 @@ class UsersMinOrderByAggregateInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   final _i2.SortOrder? userId;
@@ -27288,6 +31341,8 @@ class UsersMinOrderByAggregateInput
 
   final _i2.SortOrder? isDeleted;
 
+  final _i2.SortOrder? roleId;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_id': userId,
@@ -27298,17 +31353,26 @@ class UsersMinOrderByAggregateInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
       };
 }
 
 class UsersSumOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersSumOrderByAggregateInput({this.userId});
+  const UsersSumOrderByAggregateInput({
+    this.userId,
+    this.roleId,
+  });
 
   final _i2.SortOrder? userId;
 
+  final _i2.SortOrder? roleId;
+
   @override
-  Map<String, dynamic> toJson() => {'user_id': userId};
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'role_id': roleId,
+      };
 }
 
 class UsersOrderByWithAggregationInput
@@ -27322,6 +31386,7 @@ class UsersOrderByWithAggregationInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.$count,
     this.$avg,
     this.$max,
@@ -27345,6 +31410,8 @@ class UsersOrderByWithAggregationInput
 
   final _i2.SortOrder? isDeleted;
 
+  final _i2.SortOrder? roleId;
+
   final _i2.UsersCountOrderByAggregateInput? $count;
 
   final _i2.UsersAvgOrderByAggregateInput? $avg;
@@ -27365,6 +31432,7 @@ class UsersOrderByWithAggregationInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
@@ -27447,6 +31515,7 @@ class UsersScalarWhereWithAggregatesInput
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   final _i1.PrismaUnion<_i2.UsersScalarWhereWithAggregatesInput,
@@ -27476,6 +31545,8 @@ class UsersScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.BoolWithAggregatesFilter, bool>? isDeleted;
 
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? roleId;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -27489,6 +31560,7 @@ class UsersScalarWhereWithAggregatesInput
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
       };
 }
 
@@ -27503,6 +31575,7 @@ class UsersCountAggregateOutputTypeSelect
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.$all,
   });
 
@@ -27522,6 +31595,8 @@ class UsersCountAggregateOutputTypeSelect
 
   final bool? isDeleted;
 
+  final bool? roleId;
+
   final bool? $all;
 
   @override
@@ -27534,6 +31609,7 @@ class UsersCountAggregateOutputTypeSelect
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         '_all': $all,
       };
 }
@@ -27550,12 +31626,20 @@ class UsersGroupByOutputTypeCountArgs
 
 class UsersAvgAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersAvgAggregateOutputTypeSelect({this.userId});
+  const UsersAvgAggregateOutputTypeSelect({
+    this.userId,
+    this.roleId,
+  });
 
   final bool? userId;
 
+  final bool? roleId;
+
   @override
-  Map<String, dynamic> toJson() => {'user_id': userId};
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'role_id': roleId,
+      };
 }
 
 class UsersGroupByOutputTypeAvgArgs
@@ -27570,12 +31654,20 @@ class UsersGroupByOutputTypeAvgArgs
 
 class UsersSumAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const UsersSumAggregateOutputTypeSelect({this.userId});
+  const UsersSumAggregateOutputTypeSelect({
+    this.userId,
+    this.roleId,
+  });
 
   final bool? userId;
 
+  final bool? roleId;
+
   @override
-  Map<String, dynamic> toJson() => {'user_id': userId};
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'role_id': roleId,
+      };
 }
 
 class UsersGroupByOutputTypeSumArgs
@@ -27599,6 +31691,7 @@ class UsersMinAggregateOutputTypeSelect
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   final bool? userId;
@@ -27617,6 +31710,8 @@ class UsersMinAggregateOutputTypeSelect
 
   final bool? isDeleted;
 
+  final bool? roleId;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_id': userId,
@@ -27627,6 +31722,7 @@ class UsersMinAggregateOutputTypeSelect
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
       };
 }
 
@@ -27651,6 +31747,7 @@ class UsersMaxAggregateOutputTypeSelect
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
   });
 
   final bool? userId;
@@ -27669,6 +31766,8 @@ class UsersMaxAggregateOutputTypeSelect
 
   final bool? isDeleted;
 
+  final bool? roleId;
+
   @override
   Map<String, dynamic> toJson() => {
         'user_id': userId,
@@ -27679,6 +31778,7 @@ class UsersMaxAggregateOutputTypeSelect
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
       };
 }
 
@@ -27703,6 +31803,7 @@ class UsersGroupByOutputTypeSelect
     this.phoneNumber,
     this.imageUrl,
     this.isDeleted,
+    this.roleId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -27726,6 +31827,8 @@ class UsersGroupByOutputTypeSelect
 
   final bool? isDeleted;
 
+  final bool? roleId;
+
   final _i1.PrismaUnion<bool, _i2.UsersGroupByOutputTypeCountArgs>? $count;
 
   final _i1.PrismaUnion<bool, _i2.UsersGroupByOutputTypeAvgArgs>? $avg;
@@ -27746,6 +31849,7 @@ class UsersGroupByOutputTypeSelect
         'phone_number': phoneNumber,
         'image_url': imageUrl,
         'is_deleted': isDeleted,
+        'role_id': roleId,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,
@@ -27790,6 +31894,14 @@ class AggregateUsers {
   final _i2.UsersMinAggregateOutputType? $min;
 
   final _i2.UsersMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
 }
 
 class AggregateUsersCountArgs
@@ -27861,1543 +31973,6 @@ class AggregateUsersSelect
   final _i1.PrismaUnion<bool, _i2.AggregateUsersMinArgs>? $min;
 
   final _i1.PrismaUnion<bool, _i2.AggregateUsersMaxArgs>? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-class CartItemsCreateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCreateInput({
-    required this.quantity,
-    required this.carts,
-    required this.products,
-  });
-
-  final int quantity;
-
-  final _i2.CartsCreateNestedOneWithoutCartItemsInput carts;
-
-  final _i2.ProductsCreateNestedOneWithoutCartItemsInput products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'carts': carts,
-        'products': products,
-      };
-}
-
-class CartItemsUncheckedCreateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUncheckedCreateInput({
-    required this.quantity,
-    required this.cartId,
-    required this.productId,
-  });
-
-  final int quantity;
-
-  final int cartId;
-
-  final int productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsCreateManyInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCreateManyInput({
-    required this.quantity,
-    required this.cartId,
-    required this.productId,
-  });
-
-  final int quantity;
-
-  final int cartId;
-
-  final int productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsUpdateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUpdateInput({
-    this.quantity,
-    this.carts,
-    this.products,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i2.CartsUpdateOneRequiredWithoutCartItemsNestedInput? carts;
-
-  final _i2.ProductsUpdateOneRequiredWithoutCartItemsNestedInput? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'carts': carts,
-        'products': products,
-      };
-}
-
-class CartItemsUncheckedUpdateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUncheckedUpdateInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsUncheckedUpdateManyInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsUncheckedUpdateManyInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? quantity;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsCountAggregateOutputType {
-  const CartItemsCountAggregateOutputType({
-    this.quantity,
-    this.cartId,
-    this.productId,
-    this.$all,
-  });
-
-  factory CartItemsCountAggregateOutputType.fromJson(Map json) =>
-      CartItemsCountAggregateOutputType(
-        quantity: json['quantity'],
-        cartId: json['cart_id'],
-        productId: json['product_id'],
-        $all: json['_all'],
-      );
-
-  final int? quantity;
-
-  final int? cartId;
-
-  final int? productId;
-
-  final int? $all;
-}
-
-class CartItemsAvgAggregateOutputType {
-  const CartItemsAvgAggregateOutputType({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  factory CartItemsAvgAggregateOutputType.fromJson(Map json) =>
-      CartItemsAvgAggregateOutputType(
-        quantity: json['quantity'],
-        cartId: json['cart_id'],
-        productId: json['product_id'],
-      );
-
-  final double? quantity;
-
-  final double? cartId;
-
-  final double? productId;
-}
-
-class CartItemsSumAggregateOutputType {
-  const CartItemsSumAggregateOutputType({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  factory CartItemsSumAggregateOutputType.fromJson(Map json) =>
-      CartItemsSumAggregateOutputType(
-        quantity: json['quantity'],
-        cartId: json['cart_id'],
-        productId: json['product_id'],
-      );
-
-  final int? quantity;
-
-  final int? cartId;
-
-  final int? productId;
-}
-
-class CartItemsMinAggregateOutputType {
-  const CartItemsMinAggregateOutputType({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  factory CartItemsMinAggregateOutputType.fromJson(Map json) =>
-      CartItemsMinAggregateOutputType(
-        quantity: json['quantity'],
-        cartId: json['cart_id'],
-        productId: json['product_id'],
-      );
-
-  final int? quantity;
-
-  final int? cartId;
-
-  final int? productId;
-}
-
-class CartItemsMaxAggregateOutputType {
-  const CartItemsMaxAggregateOutputType({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  factory CartItemsMaxAggregateOutputType.fromJson(Map json) =>
-      CartItemsMaxAggregateOutputType(
-        quantity: json['quantity'],
-        cartId: json['cart_id'],
-        productId: json['product_id'],
-      );
-
-  final int? quantity;
-
-  final int? cartId;
-
-  final int? productId;
-}
-
-class CartItemsGroupByOutputType {
-  const CartItemsGroupByOutputType({
-    this.quantity,
-    this.cartId,
-    this.productId,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  factory CartItemsGroupByOutputType.fromJson(Map json) =>
-      CartItemsGroupByOutputType(
-        quantity: json['quantity'],
-        cartId: json['cart_id'],
-        productId: json['product_id'],
-        $count: json['_count'] is Map
-            ? _i2.CartItemsCountAggregateOutputType.fromJson(json['_count'])
-            : null,
-        $avg: json['_avg'] is Map
-            ? _i2.CartItemsAvgAggregateOutputType.fromJson(json['_avg'])
-            : null,
-        $sum: json['_sum'] is Map
-            ? _i2.CartItemsSumAggregateOutputType.fromJson(json['_sum'])
-            : null,
-        $min: json['_min'] is Map
-            ? _i2.CartItemsMinAggregateOutputType.fromJson(json['_min'])
-            : null,
-        $max: json['_max'] is Map
-            ? _i2.CartItemsMaxAggregateOutputType.fromJson(json['_max'])
-            : null,
-      );
-
-  final int? quantity;
-
-  final int? cartId;
-
-  final int? productId;
-
-  final _i2.CartItemsCountAggregateOutputType? $count;
-
-  final _i2.CartItemsAvgAggregateOutputType? $avg;
-
-  final _i2.CartItemsSumAggregateOutputType? $sum;
-
-  final _i2.CartItemsMinAggregateOutputType? $min;
-
-  final _i2.CartItemsMaxAggregateOutputType? $max;
-}
-
-class CartItemsCountOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCountOrderByAggregateInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i2.SortOrder? quantity;
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsAvgOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsAvgOrderByAggregateInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i2.SortOrder? quantity;
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsMaxOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsMaxOrderByAggregateInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i2.SortOrder? quantity;
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsMinOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsMinOrderByAggregateInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i2.SortOrder? quantity;
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsSumOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsSumOrderByAggregateInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i2.SortOrder? quantity;
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsOrderByWithAggregationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsOrderByWithAggregationInput({
-    this.quantity,
-    this.cartId,
-    this.productId,
-    this.$count,
-    this.$avg,
-    this.$max,
-    this.$min,
-    this.$sum,
-  });
-
-  final _i2.SortOrder? quantity;
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? productId;
-
-  final _i2.CartItemsCountOrderByAggregateInput? $count;
-
-  final _i2.CartItemsAvgOrderByAggregateInput? $avg;
-
-  final _i2.CartItemsMaxOrderByAggregateInput? $max;
-
-  final _i2.CartItemsMinOrderByAggregateInput? $min;
-
-  final _i2.CartItemsSumOrderByAggregateInput? $sum;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-        '_count': $count,
-        '_avg': $avg,
-        '_max': $max,
-        '_min': $min,
-        '_sum': $sum,
-      };
-}
-
-class CartItemsScalarWhereWithAggregatesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsScalarWhereWithAggregatesInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final _i1.PrismaUnion<_i2.CartItemsScalarWhereWithAggregatesInput,
-      Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>>? AND;
-
-  final Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>? OR;
-
-  final _i1.PrismaUnion<_i2.CartItemsScalarWhereWithAggregatesInput,
-      Iterable<_i2.CartItemsScalarWhereWithAggregatesInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? quantity;
-
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? cartId;
-
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsCountAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsCountAggregateOutputTypeSelect({
-    this.quantity,
-    this.cartId,
-    this.productId,
-    this.$all,
-  });
-
-  final bool? quantity;
-
-  final bool? cartId;
-
-  final bool? productId;
-
-  final bool? $all;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-        '_all': $all,
-      };
-}
-
-class CartItemsGroupByOutputTypeCountArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsGroupByOutputTypeCountArgs({this.select});
-
-  final _i2.CartItemsCountAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartItemsAvgAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsAvgAggregateOutputTypeSelect({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final bool? quantity;
-
-  final bool? cartId;
-
-  final bool? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsGroupByOutputTypeAvgArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsGroupByOutputTypeAvgArgs({this.select});
-
-  final _i2.CartItemsAvgAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartItemsSumAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsSumAggregateOutputTypeSelect({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final bool? quantity;
-
-  final bool? cartId;
-
-  final bool? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsGroupByOutputTypeSumArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsGroupByOutputTypeSumArgs({this.select});
-
-  final _i2.CartItemsSumAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartItemsMinAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsMinAggregateOutputTypeSelect({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final bool? quantity;
-
-  final bool? cartId;
-
-  final bool? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsGroupByOutputTypeMinArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsGroupByOutputTypeMinArgs({this.select});
-
-  final _i2.CartItemsMinAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartItemsMaxAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsMaxAggregateOutputTypeSelect({
-    this.quantity,
-    this.cartId,
-    this.productId,
-  });
-
-  final bool? quantity;
-
-  final bool? cartId;
-
-  final bool? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-      };
-}
-
-class CartItemsGroupByOutputTypeMaxArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsGroupByOutputTypeMaxArgs({this.select});
-
-  final _i2.CartItemsMaxAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartItemsGroupByOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartItemsGroupByOutputTypeSelect({
-    this.quantity,
-    this.cartId,
-    this.productId,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final bool? quantity;
-
-  final bool? cartId;
-
-  final bool? productId;
-
-  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeCountArgs>? $count;
-
-  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeAvgArgs>? $avg;
-
-  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeSumArgs>? $sum;
-
-  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeMinArgs>? $min;
-
-  final _i1.PrismaUnion<bool, _i2.CartItemsGroupByOutputTypeMaxArgs>? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'quantity': quantity,
-        'cart_id': cartId,
-        'product_id': productId,
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-class AggregateCartItems {
-  const AggregateCartItems({
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  factory AggregateCartItems.fromJson(Map json) => AggregateCartItems(
-        $count: json['_count'] is Map
-            ? _i2.CartItemsCountAggregateOutputType.fromJson(json['_count'])
-            : null,
-        $avg: json['_avg'] is Map
-            ? _i2.CartItemsAvgAggregateOutputType.fromJson(json['_avg'])
-            : null,
-        $sum: json['_sum'] is Map
-            ? _i2.CartItemsSumAggregateOutputType.fromJson(json['_sum'])
-            : null,
-        $min: json['_min'] is Map
-            ? _i2.CartItemsMinAggregateOutputType.fromJson(json['_min'])
-            : null,
-        $max: json['_max'] is Map
-            ? _i2.CartItemsMaxAggregateOutputType.fromJson(json['_max'])
-            : null,
-      );
-
-  final _i2.CartItemsCountAggregateOutputType? $count;
-
-  final _i2.CartItemsAvgAggregateOutputType? $avg;
-
-  final _i2.CartItemsSumAggregateOutputType? $sum;
-
-  final _i2.CartItemsMinAggregateOutputType? $min;
-
-  final _i2.CartItemsMaxAggregateOutputType? $max;
-}
-
-class AggregateCartItemsCountArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartItemsCountArgs({this.select});
-
-  final _i2.CartItemsCountAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartItemsAvgArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartItemsAvgArgs({this.select});
-
-  final _i2.CartItemsAvgAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartItemsSumArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartItemsSumArgs({this.select});
-
-  final _i2.CartItemsSumAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartItemsMinArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartItemsMinArgs({this.select});
-
-  final _i2.CartItemsMinAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartItemsMaxArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartItemsMaxArgs({this.select});
-
-  final _i2.CartItemsMaxAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartItemsSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartItemsSelect({
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsCountArgs>? $count;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsAvgArgs>? $avg;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsSumArgs>? $sum;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsMinArgs>? $min;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartItemsMaxArgs>? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-enum CartsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
-  cartId<int>('cart_id', 'carts'),
-  userId<int>('user_id', 'carts');
-
-  const CartsScalar(
-    this.name,
-    this.model,
-  );
-
-  @override
-  final String name;
-
-  @override
-  final String model;
-}
-
-class CartsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsCreateInput({
-    this.cartItems,
-    required this.users,
-  });
-
-  final _i2.CartItemsCreateNestedManyWithoutCartsInput? cartItems;
-
-  final _i2.UsersCreateNestedOneWithoutCartsInput users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_items': cartItems,
-        'users': users,
-      };
-}
-
-class CartsUncheckedCreateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsUncheckedCreateInput({
-    this.cartId,
-    required this.userId,
-    this.cartItems,
-  });
-
-  final int? cartId;
-
-  final int userId;
-
-  final _i2.CartItemsUncheckedCreateNestedManyWithoutCartsInput? cartItems;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-        'cart_items': cartItems,
-      };
-}
-
-class CartsCreateManyInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsCreateManyInput({
-    this.cartId,
-    required this.userId,
-  });
-
-  final int? cartId;
-
-  final int userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsUpdateInput({
-    this.cartItems,
-    this.users,
-  });
-
-  final _i2.CartItemsUpdateManyWithoutCartsNestedInput? cartItems;
-
-  final _i2.UsersUpdateOneRequiredWithoutCartsNestedInput? users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_items': cartItems,
-        'users': users,
-      };
-}
-
-class CartsUncheckedUpdateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsUncheckedUpdateInput({
-    this.cartId,
-    this.userId,
-    this.cartItems,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  final _i2.CartItemsUncheckedUpdateManyWithoutCartsNestedInput? cartItems;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-        'cart_items': cartItems,
-      };
-}
-
-class CartsUpdateManyMutationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsUpdateManyMutationInput();
-
-  @override
-  Map<String, dynamic> toJson() => {};
-}
-
-class CartsUncheckedUpdateManyInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsUncheckedUpdateManyInput({
-    this.cartId,
-    this.userId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? cartId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsCountAggregateOutputType {
-  const CartsCountAggregateOutputType({
-    this.cartId,
-    this.userId,
-    this.$all,
-  });
-
-  factory CartsCountAggregateOutputType.fromJson(Map json) =>
-      CartsCountAggregateOutputType(
-        cartId: json['cart_id'],
-        userId: json['user_id'],
-        $all: json['_all'],
-      );
-
-  final int? cartId;
-
-  final int? userId;
-
-  final int? $all;
-}
-
-class CartsAvgAggregateOutputType {
-  const CartsAvgAggregateOutputType({
-    this.cartId,
-    this.userId,
-  });
-
-  factory CartsAvgAggregateOutputType.fromJson(Map json) =>
-      CartsAvgAggregateOutputType(
-        cartId: json['cart_id'],
-        userId: json['user_id'],
-      );
-
-  final double? cartId;
-
-  final double? userId;
-}
-
-class CartsSumAggregateOutputType {
-  const CartsSumAggregateOutputType({
-    this.cartId,
-    this.userId,
-  });
-
-  factory CartsSumAggregateOutputType.fromJson(Map json) =>
-      CartsSumAggregateOutputType(
-        cartId: json['cart_id'],
-        userId: json['user_id'],
-      );
-
-  final int? cartId;
-
-  final int? userId;
-}
-
-class CartsMinAggregateOutputType {
-  const CartsMinAggregateOutputType({
-    this.cartId,
-    this.userId,
-  });
-
-  factory CartsMinAggregateOutputType.fromJson(Map json) =>
-      CartsMinAggregateOutputType(
-        cartId: json['cart_id'],
-        userId: json['user_id'],
-      );
-
-  final int? cartId;
-
-  final int? userId;
-}
-
-class CartsMaxAggregateOutputType {
-  const CartsMaxAggregateOutputType({
-    this.cartId,
-    this.userId,
-  });
-
-  factory CartsMaxAggregateOutputType.fromJson(Map json) =>
-      CartsMaxAggregateOutputType(
-        cartId: json['cart_id'],
-        userId: json['user_id'],
-      );
-
-  final int? cartId;
-
-  final int? userId;
-}
-
-class CartsGroupByOutputType {
-  const CartsGroupByOutputType({
-    this.cartId,
-    this.userId,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  factory CartsGroupByOutputType.fromJson(Map json) => CartsGroupByOutputType(
-        cartId: json['cart_id'],
-        userId: json['user_id'],
-        $count: json['_count'] is Map
-            ? _i2.CartsCountAggregateOutputType.fromJson(json['_count'])
-            : null,
-        $avg: json['_avg'] is Map
-            ? _i2.CartsAvgAggregateOutputType.fromJson(json['_avg'])
-            : null,
-        $sum: json['_sum'] is Map
-            ? _i2.CartsSumAggregateOutputType.fromJson(json['_sum'])
-            : null,
-        $min: json['_min'] is Map
-            ? _i2.CartsMinAggregateOutputType.fromJson(json['_min'])
-            : null,
-        $max: json['_max'] is Map
-            ? _i2.CartsMaxAggregateOutputType.fromJson(json['_max'])
-            : null,
-      );
-
-  final int? cartId;
-
-  final int? userId;
-
-  final _i2.CartsCountAggregateOutputType? $count;
-
-  final _i2.CartsAvgAggregateOutputType? $avg;
-
-  final _i2.CartsSumAggregateOutputType? $sum;
-
-  final _i2.CartsMinAggregateOutputType? $min;
-
-  final _i2.CartsMaxAggregateOutputType? $max;
-}
-
-class CartsCountOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsCountOrderByAggregateInput({
-    this.cartId,
-    this.userId,
-  });
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsAvgOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsAvgOrderByAggregateInput({
-    this.cartId,
-    this.userId,
-  });
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsMaxOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsMaxOrderByAggregateInput({
-    this.cartId,
-    this.userId,
-  });
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsMinOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsMinOrderByAggregateInput({
-    this.cartId,
-    this.userId,
-  });
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsSumOrderByAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsSumOrderByAggregateInput({
-    this.cartId,
-    this.userId,
-  });
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsOrderByWithAggregationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsOrderByWithAggregationInput({
-    this.cartId,
-    this.userId,
-    this.$count,
-    this.$avg,
-    this.$max,
-    this.$min,
-    this.$sum,
-  });
-
-  final _i2.SortOrder? cartId;
-
-  final _i2.SortOrder? userId;
-
-  final _i2.CartsCountOrderByAggregateInput? $count;
-
-  final _i2.CartsAvgOrderByAggregateInput? $avg;
-
-  final _i2.CartsMaxOrderByAggregateInput? $max;
-
-  final _i2.CartsMinOrderByAggregateInput? $min;
-
-  final _i2.CartsSumOrderByAggregateInput? $sum;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-        '_count': $count,
-        '_avg': $avg,
-        '_max': $max,
-        '_min': $min,
-        '_sum': $sum,
-      };
-}
-
-class CartsScalarWhereWithAggregatesInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsScalarWhereWithAggregatesInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.cartId,
-    this.userId,
-  });
-
-  final _i1.PrismaUnion<_i2.CartsScalarWhereWithAggregatesInput,
-      Iterable<_i2.CartsScalarWhereWithAggregatesInput>>? AND;
-
-  final Iterable<_i2.CartsScalarWhereWithAggregatesInput>? OR;
-
-  final _i1.PrismaUnion<_i2.CartsScalarWhereWithAggregatesInput,
-      Iterable<_i2.CartsScalarWhereWithAggregatesInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? cartId;
-
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsCountAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsCountAggregateOutputTypeSelect({
-    this.cartId,
-    this.userId,
-    this.$all,
-  });
-
-  final bool? cartId;
-
-  final bool? userId;
-
-  final bool? $all;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-        '_all': $all,
-      };
-}
-
-class CartsGroupByOutputTypeCountArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsGroupByOutputTypeCountArgs({this.select});
-
-  final _i2.CartsCountAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartsAvgAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsAvgAggregateOutputTypeSelect({
-    this.cartId,
-    this.userId,
-  });
-
-  final bool? cartId;
-
-  final bool? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsGroupByOutputTypeAvgArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsGroupByOutputTypeAvgArgs({this.select});
-
-  final _i2.CartsAvgAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartsSumAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsSumAggregateOutputTypeSelect({
-    this.cartId,
-    this.userId,
-  });
-
-  final bool? cartId;
-
-  final bool? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsGroupByOutputTypeSumArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsGroupByOutputTypeSumArgs({this.select});
-
-  final _i2.CartsSumAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartsMinAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsMinAggregateOutputTypeSelect({
-    this.cartId,
-    this.userId,
-  });
-
-  final bool? cartId;
-
-  final bool? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsGroupByOutputTypeMinArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsGroupByOutputTypeMinArgs({this.select});
-
-  final _i2.CartsMinAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartsMaxAggregateOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsMaxAggregateOutputTypeSelect({
-    this.cartId,
-    this.userId,
-  });
-
-  final bool? cartId;
-
-  final bool? userId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-      };
-}
-
-class CartsGroupByOutputTypeMaxArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsGroupByOutputTypeMaxArgs({this.select});
-
-  final _i2.CartsMaxAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class CartsGroupByOutputTypeSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CartsGroupByOutputTypeSelect({
-    this.cartId,
-    this.userId,
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final bool? cartId;
-
-  final bool? userId;
-
-  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeCountArgs>? $count;
-
-  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeAvgArgs>? $avg;
-
-  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeSumArgs>? $sum;
-
-  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeMinArgs>? $min;
-
-  final _i1.PrismaUnion<bool, _i2.CartsGroupByOutputTypeMaxArgs>? $max;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'cart_id': cartId,
-        'user_id': userId,
-        '_count': $count,
-        '_avg': $avg,
-        '_sum': $sum,
-        '_min': $min,
-        '_max': $max,
-      };
-}
-
-class AggregateCarts {
-  const AggregateCarts({
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  factory AggregateCarts.fromJson(Map json) => AggregateCarts(
-        $count: json['_count'] is Map
-            ? _i2.CartsCountAggregateOutputType.fromJson(json['_count'])
-            : null,
-        $avg: json['_avg'] is Map
-            ? _i2.CartsAvgAggregateOutputType.fromJson(json['_avg'])
-            : null,
-        $sum: json['_sum'] is Map
-            ? _i2.CartsSumAggregateOutputType.fromJson(json['_sum'])
-            : null,
-        $min: json['_min'] is Map
-            ? _i2.CartsMinAggregateOutputType.fromJson(json['_min'])
-            : null,
-        $max: json['_max'] is Map
-            ? _i2.CartsMaxAggregateOutputType.fromJson(json['_max'])
-            : null,
-      );
-
-  final _i2.CartsCountAggregateOutputType? $count;
-
-  final _i2.CartsAvgAggregateOutputType? $avg;
-
-  final _i2.CartsSumAggregateOutputType? $sum;
-
-  final _i2.CartsMinAggregateOutputType? $min;
-
-  final _i2.CartsMaxAggregateOutputType? $max;
-}
-
-class AggregateCartsCountArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartsCountArgs({this.select});
-
-  final _i2.CartsCountAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartsAvgArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartsAvgArgs({this.select});
-
-  final _i2.CartsAvgAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartsSumArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartsSumArgs({this.select});
-
-  final _i2.CartsSumAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartsMinArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartsMinArgs({this.select});
-
-  final _i2.CartsMinAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartsMaxArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartsMaxArgs({this.select});
-
-  final _i2.CartsMaxAggregateOutputTypeSelect? select;
-
-  @override
-  Map<String, dynamic> toJson() => {'select': select};
-}
-
-class AggregateCartsSelect
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const AggregateCartsSelect({
-    this.$count,
-    this.$avg,
-    this.$sum,
-    this.$min,
-    this.$max,
-  });
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartsCountArgs>? $count;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartsAvgArgs>? $avg;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartsSumArgs>? $sum;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartsMinArgs>? $min;
-
-  final _i1.PrismaUnion<bool, _i2.AggregateCartsMaxArgs>? $max;
 
   @override
   Map<String, dynamic> toJson() => {

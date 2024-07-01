@@ -12,7 +12,7 @@ abstract class ResponseMessages {
   static const String unauthorized = 'Unauthorized Access';
   static const String checkRequestBody = "Your request body isn't correct";
   static const String queryParametersInvalid = 'Invalid query parameters type';
-  static const String userAlreadyexists =
+  static const String userAlreadyExists =
       'User with this email address already exists.';
   static const String userNotFound = 'User account not found.';
   static const String noRouteFound = 'No Route found check url';
