@@ -37,12 +37,13 @@ class UserDataSourceImpl implements UserDataSource {
     required String password,
   }) async {
     final user = await _client.users.findUnique(
+      include: const UsersInclude(userRoles: PrismaUnion.$1(true)),
       where: UsersWhereUniqueInput(email: email),
     );
 
     if (user == null) {
       throw Failure.unauthorized(
-        message: ResponseMessages.wrongCredintials,
+        message: ResponseMessages.wrongCredentials,
       );
     }
 
@@ -53,7 +54,7 @@ class UserDataSourceImpl implements UserDataSource {
     }
     if (!password.checkHash(user.password!)) {
       throw Failure.unauthorized(
-        message: ResponseMessages.wrongCredintials,
+        message: ResponseMessages.wrongCredentials,
       );
     }
     return user;
@@ -64,7 +65,6 @@ class UserDataSourceImpl implements UserDataSource {
     final user = await _client.users.findUnique(
       where: UsersWhereUniqueInput(email: userModel.email),
     );
-
     if (user != null && !user.isDeleted!) {
       throw Failure.conflict(
         message: ResponseMessages.userAlreadyExists,
@@ -79,6 +79,9 @@ class UserDataSourceImpl implements UserDataSource {
 
     final newUser = await _client.users.create(
       data: PrismaUnion.$1(userModel),
+      include: const UsersInclude(
+        userRoles: PrismaUnion.$1(true),
+      ),
     );
     return newUser;
   }

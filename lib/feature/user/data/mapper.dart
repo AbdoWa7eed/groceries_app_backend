@@ -1,5 +1,6 @@
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
+import 'package:groceries_app_backend/core/utils/enums.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 import 'package:orm/orm.dart';
@@ -16,18 +17,30 @@ extension OrmResultUsersToUserModel on Users {
       address: address,
       phoneNumber: phoneNumber,
       imageUrl: imageUrl,
+      role: userRoles?.role,
     );
   }
 }
 
 ///Convert UserModel to OrmUserInput
 extension UserModelToOrmInput on UserModel {
-  ///Returns the equivalent ormuserinput
+  ///Returns the equivalent ormUserInput
   UsersCreateInput toUserInput() {
     return UsersCreateInput(
       userName: username!,
       email: email!.toLowerCase(),
       password: password!.hashValue(),
+      userRoles: UserRolesCreateNestedOneWithoutUsersInput(
+        connect: UserRolesWhereUniqueInput(
+          role: role ?? UserRolesEnum.user.toString(),
+        ),
+      ),
+      address: address != null
+          ? PrismaUnion.$1(address!)
+          : const PrismaUnion.$2(PrismaNull()),
+      imageUrl: imageUrl != null
+          ? PrismaUnion.$1(imageUrl!)
+          : const PrismaUnion.$2(PrismaNull()),
       isDeleted: false,
     );
   }
@@ -35,7 +48,7 @@ extension UserModelToOrmInput on UserModel {
 
 ///Convert UserModel to OrmUserInput
 extension UserModelToUpdateInput on UserModel {
-  ///Returns the equivalent ormuserinput
+  ///Returns the equivalent ormUserInput
   UsersUpdateInput toUpdateInput() {
     return UsersUpdateInput(
       userName: username != null ? PrismaUnion.$1(username!) : null,

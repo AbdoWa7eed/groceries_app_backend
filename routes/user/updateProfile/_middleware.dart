@@ -1,12 +1,17 @@
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
+import 'package:groceries_app_backend/core/utils/enums.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 
 Handler middleware(Handler handler) {
   return (context) async {
     try {
       final body = await context.request.json() as Map<String, dynamic>;
+      final role = body['role'];
+      if (role == UserRolesEnum.admin.name && !isAdmin(context)) {
+        return ResponseHelper.unAuthorized();
+      }
       final isImage = body['image'] != null;
       if (isImage) {
         await initStorageService();
@@ -19,6 +24,10 @@ Handler middleware(Handler handler) {
       );
     }
   };
+}
+
+bool isAdmin(RequestContext context) {
+  return context.read<String>() == UserRolesEnum.admin.name;
 }
 
 Middleware _getBodyProvider(Map<String, dynamic> body) {

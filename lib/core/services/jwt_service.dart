@@ -14,20 +14,24 @@ class JwtService {
   final DotEnv _env;
   late final String _secret;
 
-  String generateAccessToken({
-    required int userId,
-  }) {
-    final jwt = JWT({'id': userId, 'issued at': DateTime.now().toString()});
+  String generateAccessToken({required int userId, required String role}) {
+    final jwt = JWT({
+      'id': userId,
+      'role': role,
+      'issued at': DateTime.now().toString(),
+    });
     final token =
         jwt.sign(SecretKey(_secret), expiresIn: const Duration(hours: 10));
 
     return token;
   }
 
-  String generateRefreshToken({
-    required int userId,
-  }) {
-    final jwt = JWT({'id': userId, 'issued at': DateTime.now().toString()});
+  String generateRefreshToken({required int userId, required String role}) {
+    final jwt = JWT({
+      'id': userId,
+      'role': role,
+      'issued at': DateTime.now().toString(),
+    });
     final refreshSecret = _env[Constants.jwtRefreshSecret]!;
     final refreshToken = jwt.sign(
       SecretKey(refreshSecret),
@@ -67,8 +71,11 @@ class JwtService {
     return null;
   }
 
-  int userIdFromToken(String token) {
+  Map<String, dynamic> userDataFromToken(String token) {
     final jwt = JWT.decode(token);
-    return (jwt.payload as Map<String, dynamic>)['id'] as int;
+    return {
+      'userId': (jwt.payload as Map<String, dynamic>)['id'] as int,
+      'role': (jwt.payload as Map<String, dynamic>)['role'] as String,
+    };
   }
 }

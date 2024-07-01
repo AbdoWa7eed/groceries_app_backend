@@ -39,8 +39,14 @@ Future<Response> _login(RequestContext context) async {
 
 Response _generateSuccessResponse(UserModel userModel) {
   final jwt = instance<JwtService>();
-  final accessToken = jwt.generateAccessToken(userId: userModel.userId!);
-  final refreshToken = jwt.generateRefreshToken(userId: userModel.userId!);
+  final accessToken = jwt.generateAccessToken(
+    userId: userModel.userId!,
+    role: userModel.role!,
+  );
+  final refreshToken = jwt.generateRefreshToken(
+    userId: userModel.userId!,
+    role: userModel.role!,
+  );
   return ResponseHelper.ok(
     message: ResponseMessages.loggedIn,
     data: {

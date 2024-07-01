@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 ///Responses's messages
 abstract class ResponseMessages {
-  static const String wrongCredintials = "Email or password isn't correct";
+  static const String wrongCredentials = "Email or password isn't correct";
   static const String userCreationFailed = "Couldn't create your account";
   static const String loggedIn = 'logged in successfully';
   static const String userCreated = 'User created successfully';
@@ -53,4 +53,7 @@ abstract class ResponseMessages {
   static const String invalidEmailFormat = 'Invalid email address format';
   static const String weakPassword = '''
 Your password must be minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character''';
+
+  static const String cannotCreateAdminUser =
+      "It's not allowed to create admin user";
 }

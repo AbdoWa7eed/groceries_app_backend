@@ -6733,14 +6733,16 @@ class UserRolesWhereUniqueInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UserRolesWhereUniqueInput({
     this.roleId,
+    this.role,
     this.AND,
     this.OR,
     this.NOT,
-    this.role,
     this.users,
   });
 
   final int? roleId;
+
+  final String? role;
 
   final _i1
       .PrismaUnion<_i2.UserRolesWhereInput, Iterable<_i2.UserRolesWhereInput>>?
@@ -6752,17 +6754,15 @@ class UserRolesWhereUniqueInput
       .PrismaUnion<_i2.UserRolesWhereInput, Iterable<_i2.UserRolesWhereInput>>?
       NOT;
 
-  final _i1.PrismaUnion<_i2.StringFilter, String>? role;
-
   final _i2.UsersListRelationFilter? users;
 
   @override
   Map<String, dynamic> toJson() => {
         'role_id': roleId,
+        'role': role,
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'role': role,
         'users': users,
       };
 }

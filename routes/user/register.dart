@@ -2,6 +2,7 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
 import 'package:groceries_app_backend/core/services/jwt_service.dart';
+import 'package:groceries_app_backend/core/utils/enums.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:groceries_app_backend/feature/user/model/user_model.dart';
@@ -22,6 +23,11 @@ Future<Response> _createUser(RequestContext context) async {
   try {
     final userJson = await context.request.json() as Map<String, dynamic>;
     final user = UserModel.fromJson(userJson);
+    if (isValidAdminRegistration(user, context)) {
+      return ResponseHelper.unAuthorized(
+        message: ResponseMessages.cannotCreateAdminUser,
+      );
+    }
     final validationResponse = _emailAndPasswordValidations(user);
     if (validationResponse != null) {
       return validationResponse;
@@ -38,6 +44,10 @@ Future<Response> _createUser(RequestContext context) async {
       message: ResponseMessages.checkRequestBody,
     );
   }
+}
+
+bool isValidAdminRegistration(UserModel user, RequestContext context) {
+  return user.role == UserRolesEnum.admin.name;
 }
 
 Response? _emailAndPasswordValidations(UserModel userModel) {
@@ -58,8 +68,14 @@ Response? _emailAndPasswordValidations(UserModel userModel) {
 
 Response _generateSuccessResponse(UserModel createdUser) {
   final jwt = instance<JwtService>();
-  final accessToken = jwt.generateAccessToken(userId: createdUser.userId!);
-  final refreshToken = jwt.generateRefreshToken(userId: createdUser.userId!);
+  final accessToken = jwt.generateAccessToken(
+    userId: createdUser.userId!,
+    role: createdUser.role!,
+  );
+  final refreshToken = jwt.generateRefreshToken(
+    userId: createdUser.userId!,
+    role: createdUser.role!,
+  );
 
   return ResponseHelper.created(
     message: ResponseMessages.userCreated,

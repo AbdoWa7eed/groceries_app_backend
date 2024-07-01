@@ -6,8 +6,10 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 
 abstract class ResponseHelper {
-  static Response ok(
-      {String message = ResponseMessages.success, dynamic data,}) {
+  static Response ok({
+    String message = ResponseMessages.success,
+    dynamic data,
+  }) {
     return _json(statusCode: HttpStatus.ok, message: message, data: data);
   }
 
@@ -36,10 +38,12 @@ abstract class ResponseHelper {
     );
   }
 
-  static Response unAuthorized() {
+  static Response unAuthorized({
+    String message = ResponseMessages.unauthorized,
+  }) {
     return _json(
       statusCode: HttpStatus.unauthorized,
-      message: ResponseMessages.unauthorized,
+      message: message,
     );
   }
 

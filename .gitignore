@@ -7,13 +7,13 @@
 .dart_tool/
 .packages
 pubspec.lock
+prisma-query-engine
 
 # Files and directories created by dart_frog
 build/
 .dart_frog
 keys.json
 .env
-prisma-query-engine
 # Test related files
 coverage/
 .vscode

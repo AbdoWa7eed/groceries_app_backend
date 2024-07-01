@@ -11,8 +11,9 @@ class UserModel {
     required this.password,
     required this.address,
     required this.phoneNumber,
-    this.imageUrl,
-    this.userId,
+    required this.role,
+    required this.imageUrl,
+    required this.userId,
   });
 
   ///From json named constructor
@@ -40,10 +41,13 @@ class UserModel {
   ///User's imageUrl
   final String? imageUrl;
 
+  ///User's role
+  final String? role;
+
   ///To json method
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
-  ///Copywith method
+  ///copyWith method
   UserModel copyWith({
     int? userId,
     String? username,
@@ -52,6 +56,7 @@ class UserModel {
     String? address,
     String? phoneNumber,
     String? imageUrl,
+    String? role,
   }) {
     return UserModel(
       userId: userId ?? this.userId,
@@ -61,6 +66,7 @@ class UserModel {
       address: address ?? this.address,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       imageUrl: imageUrl ?? this.imageUrl,
+      role: role ?? this.role,
     );
   }
 }

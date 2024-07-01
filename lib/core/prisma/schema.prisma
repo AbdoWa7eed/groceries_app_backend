@@ -140,7 +140,7 @@ model reviews {
 
 model user_roles {
   role_id Int     @id @default(autoincrement())
-  role    String  @db.VarChar(10)
+  role    String  @unique(map:"role_UNIQUE") @db.VarChar(10)
   users   users[]
 }
 

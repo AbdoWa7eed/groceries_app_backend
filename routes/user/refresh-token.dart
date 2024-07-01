@@ -22,8 +22,11 @@ Future<Response> _refreshToken(RequestContext context) async {
     final jwt = instance<JwtService>();
     final isVerified = jwt.verifyRefreshToken(refreshToken);
     if (isVerified) {
-      final userId = jwt.userIdFromToken(refreshToken);
-      final accessToken = jwt.generateAccessToken(userId: userId);
+      final userData = jwt.userDataFromToken(refreshToken);
+      final accessToken = jwt.generateAccessToken(
+        userId: userData['userId'] as int,
+        role: userData['role'] as String,
+      );
       return ResponseHelper.ok(
         message: ResponseMessages.tokenRefreshed,
         data: {

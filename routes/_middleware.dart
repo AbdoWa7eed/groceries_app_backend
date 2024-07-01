@@ -20,7 +20,10 @@ Handler middleware(Handler handler) {
         .getTokenFromHeaders(headers: context.request.headers);
 
     if (_isVerifiedUser(token)) {
-      final response = handler.use(_getUserIdMiddleware(token!)).call(context);
+      final response = handler
+          .use(_getUserIdMiddleware(token!))
+          .use(_getUserRoleMiddleware(token))
+          .call(context);
       return response;
     }
 
@@ -30,8 +33,16 @@ Handler middleware(Handler handler) {
 
 Middleware _getUserIdMiddleware(String token) {
   return provider<int>((context) {
-    final id = instance<JwtService>().userIdFromToken(token);
+    final id = instance<JwtService>().userDataFromToken(token)['id'] as int;
     return id;
+  });
+}
+
+Middleware _getUserRoleMiddleware(String token) {
+  return provider<String>((context) {
+    final role =
+        instance<JwtService>().userDataFromToken(token)['role'] as String;
+    return role;
   });
 }
 
