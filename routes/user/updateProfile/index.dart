@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
@@ -31,7 +30,6 @@ Future<Response> _updateUserData(RequestContext context) async {
     final image = jsonData['image'] as String?;
     if (image != null) {
       final imageUrl = await _uploadImage(userId, image);
-      log(imageUrl);
       userModel = userModel.copyWith(imageUrl: imageUrl);
     }
 

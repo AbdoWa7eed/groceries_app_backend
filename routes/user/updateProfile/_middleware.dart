@@ -8,9 +8,11 @@ Handler middleware(Handler handler) {
   return (context) async {
     try {
       final body = await context.request.json() as Map<String, dynamic>;
-      final role = body['role'];
+      final role = body['role'] as String?;
       if (role == UserRolesEnum.admin.name && !isAdmin(context)) {
-        return ResponseHelper.unAuthorized();
+        return ResponseHelper.unAuthorized(
+          message: ResponseMessages.cannotUpdateAdminUser,
+        );
       }
       final isImage = body['image'] != null;
       if (isImage) {

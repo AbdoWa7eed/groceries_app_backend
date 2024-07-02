@@ -56,4 +56,7 @@ Your password must be minimum 8 characters, at least one uppercase letter, one l
 
   static const String cannotCreateAdminUser =
       "It's not allowed to create admin user";
+
+  static const String cannotUpdateAdminUser =
+      "It's not allowed to update user to admin";
 }

@@ -93,6 +93,7 @@ class UserDataSourceImpl implements UserDataSource {
   }) async {
     final user = await _client.users.update(
       data: PrismaUnion.$1(usersUpdateInput),
+      include: const UsersInclude(userRoles: PrismaUnion.$1(true)),
       where: UsersWhereUniqueInput(userId: userId),
     );
 

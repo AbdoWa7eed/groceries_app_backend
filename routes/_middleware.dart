@@ -33,7 +33,7 @@ Handler middleware(Handler handler) {
 
 Middleware _getUserIdMiddleware(String token) {
   return provider<int>((context) {
-    final id = instance<JwtService>().userDataFromToken(token)['id'] as int;
+    final id = instance<JwtService>().userDataFromToken(token)['userId'] as int;
     return id;
   });
 }

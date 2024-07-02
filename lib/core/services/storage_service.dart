@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:googleapis/storage/v1.dart';
 import 'package:googleapis_auth/auth_io.dart';
@@ -38,9 +37,7 @@ class StorageService {
       );
     }
     final extension = _getBase64FileExtension(encodedImage);
-    log('Start uploading');
     final response = await _uploadImage(httpClient, bytes, extension, userId);
-    log('end uploading');
     return response;
   }
 
