@@ -6398,14 +6398,16 @@ class OrderStatusWhereUniqueInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderStatusWhereUniqueInput({
     this.statusId,
+    this.name,
     this.AND,
     this.OR,
     this.NOT,
-    this.name,
     this.orders,
   });
 
   final int? statusId;
+
+  final String? name;
 
   final _i1.PrismaUnion<_i2.OrderStatusWhereInput,
       Iterable<_i2.OrderStatusWhereInput>>? AND;
@@ -6415,17 +6417,15 @@ class OrderStatusWhereUniqueInput
   final _i1.PrismaUnion<_i2.OrderStatusWhereInput,
       Iterable<_i2.OrderStatusWhereInput>>? NOT;
 
-  final _i1.PrismaUnion<_i2.StringFilter, String>? name;
-
   final _i2.OrdersListRelationFilter? orders;
 
   @override
   Map<String, dynamic> toJson() => {
         'status_id': statusId,
+        'name': name,
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'name': name,
         'orders': orders,
       };
 }
@@ -6504,14 +6504,16 @@ class PaymentMethodsWhereUniqueInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const PaymentMethodsWhereUniqueInput({
     this.paymentMethodId,
+    this.methodName,
     this.AND,
     this.OR,
     this.NOT,
-    this.methodName,
     this.orders,
   });
 
   final int? paymentMethodId;
+
+  final String? methodName;
 
   final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
       Iterable<_i2.PaymentMethodsWhereInput>>? AND;
@@ -6521,17 +6523,15 @@ class PaymentMethodsWhereUniqueInput
   final _i1.PrismaUnion<_i2.PaymentMethodsWhereInput,
       Iterable<_i2.PaymentMethodsWhereInput>>? NOT;
 
-  final _i1.PrismaUnion<_i2.StringFilter, String>? methodName;
-
   final _i2.OrdersListRelationFilter? orders;
 
   @override
   Map<String, dynamic> toJson() => {
         'payment_method_id': paymentMethodId,
+        'method_name': methodName,
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'method_name': methodName,
         'orders': orders,
       };
 }

@@ -1,7 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
 part 'login_input_model.g.dart';
 
 /// Represents the input model for the login operation.
 /// This model includes fields for email and password.
+@JsonSerializable()
 class LoginInputModel {
   /// Creates an instance of [LoginInputModel]
   /// with the provided email and password.

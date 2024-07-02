@@ -2,6 +2,7 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
 import 'package:groceries_app_backend/core/services/jwt_service.dart';
+import 'package:groceries_app_backend/core/utils/constants.dart';
 
 const _authenticationUrl = [
   'user/login',
@@ -33,15 +34,16 @@ Handler middleware(Handler handler) {
 
 Middleware _getUserIdMiddleware(String token) {
   return provider<int>((context) {
-    final id = instance<JwtService>().userDataFromToken(token)['userId'] as int;
+    final id = instance<JwtService>().userDataFromToken(token)[Constants.userId]
+        as int;
     return id;
   });
 }
 
 Middleware _getUserRoleMiddleware(String token) {
   return provider<String>((context) {
-    final role =
-        instance<JwtService>().userDataFromToken(token)['role'] as String;
+    final role = instance<JwtService>().userDataFromToken(token)[Constants.role]
+        as String;
     return role;
   });
 }

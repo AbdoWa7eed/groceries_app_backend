@@ -76,7 +76,7 @@ model order_items {
 
 model order_status {
   status_id Int      @id @default(autoincrement())
-  name      String   @db.VarChar(45)
+  name      String   @unique(map: "name_UNIQUE") @db.VarChar(45)
   orders    orders[]
 }
 
@@ -100,7 +100,7 @@ model orders {
 
 model payment_methods {
   payment_method_id Int      @id @default(autoincrement())
-  method_name       String   @db.VarChar(45)
+  method_name       String   @unique(map: "method_name_UNIQUE") @db.VarChar(45)
   orders            orders[]
 }
 
@@ -140,7 +140,7 @@ model reviews {
 
 model user_roles {
   role_id Int     @id @default(autoincrement())
-  role    String  @unique(map:"role_UNIQUE") @db.VarChar(10)
+  role    String  @unique(map: "role_UNIQUE") @db.VarChar(10)
   users   users[]
 }
 
@@ -158,7 +158,7 @@ model users {
   favorites    favorites[]
   orders       orders[]
   reviews      reviews[]
-  user_roles   user_roles  @relation(fields: [role_id], references: [role_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_users_user_role1")
+  user_roles   user_roles  @relation(fields: [role_id], references: [role_id], onDelete: Cascade, map: "fk_users_user_role1")
 
   @@index([role_id], map: "fk_users_user_role1_idx")
 }

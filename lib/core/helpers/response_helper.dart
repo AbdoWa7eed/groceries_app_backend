@@ -38,7 +38,16 @@ abstract class ResponseHelper {
     );
   }
 
-  static Response unAuthorized({
+  static Response forbidden({
+    String message = ResponseMessages.unauthorized,
+  }) {
+    return _json(
+      statusCode: HttpStatus.forbidden,
+      message: message,
+    );
+  }
+
+    static Response unAuthorized({
     String message = ResponseMessages.unauthorized,
   }) {
     return _json(

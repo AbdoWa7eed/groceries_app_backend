@@ -14,7 +14,7 @@ extension ProductMapper on Products {
       description: description,
       unitPrice: unitPrice?.toDouble(),
       imageUrl: imageUrl,
-      discountPrecentage: discountPercentage?.toDouble(),
+      discountPercentage: discountPercentage?.toDouble(),
     );
   }
 }

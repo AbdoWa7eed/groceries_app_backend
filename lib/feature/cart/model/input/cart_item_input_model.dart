@@ -1,6 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
 part 'cart_item_input_model.g.dart';
 
-/// A data model representing input for adding or updating items in the cart.
+@JsonSerializable()
 class CartItemInputModel {
   /// Constructor for creating a [CartItemInputModel] instance.
   CartItemInputModel({

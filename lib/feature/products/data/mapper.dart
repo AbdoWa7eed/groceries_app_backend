@@ -23,7 +23,7 @@ extension ProductMapper on Products {
       reviews: reviews?.map((e) => e.toReviewModel()).toList(),
       nutritions: nutritions?.map((e) => e.toNutritionModel()).toList(),
       productDetails: productDetails,
-      discountPrecentage: discountPercentage?.toDouble(),
+      discountPercentage: discountPercentage?.toDouble(),
     );
   }
 }
@@ -33,7 +33,7 @@ extension NutritionsMapper on Nutritions? {
     return NutritionsModel(
       nutritionId: this?.nutritionId,
       calories: this?.calories,
-      protien: this?.protein,
+      protein: this?.protein,
       carbohydrates: this?.carbohydrates,
     );
   }

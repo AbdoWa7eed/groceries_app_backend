@@ -3,6 +3,13 @@ class BannerModel {
   /// Creates an instance of [BannerModel].
   BannerModel({required this.id, required this.imageUrl});
 
+  factory BannerModel.fromJson(Map<String, dynamic> json) {
+    return BannerModel(
+      id: json['id'] as int?,
+      imageUrl: json['imageUrl'] as String?,
+    );
+  }
+
   /// The unique identifier for the banner.
   final int? id;
 

@@ -9,7 +9,7 @@ class NutritionsModel {
   NutritionsModel({
     required this.nutritionId,
     required this.calories,
-    required this.protien,
+    required this.protein,
     required this.carbohydrates,
   });
 
@@ -24,7 +24,7 @@ class NutritionsModel {
   final int? calories;
 
   /// The protein content in the nutrition.
-  final int? protien;
+  final int? protein;
 
   /// The carbohydrates content in the nutrition.
   final int? carbohydrates;

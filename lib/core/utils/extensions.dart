@@ -2,6 +2,7 @@
 
 import 'package:bcrypt/bcrypt.dart';
 import 'package:dartz/dartz.dart';
+import 'package:groceries_app_backend/core/utils/enums.dart';
 
 ///Hash String
 extension HashStringValue on String {
@@ -28,13 +29,19 @@ extension Validations on String? {
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     ).hasMatch(this!);
   }
-}
 
-extension PasswordValidations on String? {
   bool isValidPassword() {
     return RegExp(
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
     ).hasMatch(this!);
+  }
+
+  bool isValidPaymentMethod() {
+    return PaymentMethodEnum.values.map((e) => e.name).contains(this);
+  }
+
+  bool isValidOrderStatus() {
+    return OrderStatusEnum.values.map((e) => e.name).contains(this);
   }
 }
 

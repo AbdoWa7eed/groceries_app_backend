@@ -14,4 +14,7 @@ abstract class Constants {
   static const String bucketName = 'users-images-bucket';
   static const String storageUrl = 'https://storage.cloud.google.com/';
   static const String keysPath = 'keys.json';
+  static const String userId = 'userId';
+  static const String role = 'role';
+  static const String issuedAt = 'issued at';
 }

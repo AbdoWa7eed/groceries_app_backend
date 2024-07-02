@@ -152,3 +152,15 @@ void initCartResources() {
       );
   }
 }
+
+void initOrdersResources() {
+  if (!instance.isRegistered<OrdersRepository>()) {
+    instance
+      ..registerLazySingleton<OrdersRepository>(
+        () => OrdersRepositoryImpl(instance<OrdersDataSource>()),
+      )
+      ..registerLazySingleton<OrdersDataSource>(
+        () => OrdersDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}

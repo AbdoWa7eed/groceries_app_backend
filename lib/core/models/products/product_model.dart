@@ -18,7 +18,7 @@ class ProductModel {
     required this.unitPrice,
     required this.rate,
     required this.imageUrl,
-    required this.discountPrecentage,
+    required this.discountPercentage,
     this.category,
     this.reviews,
     this.nutritions,
@@ -54,7 +54,7 @@ class ProductModel {
   final String? productDetails;
 
   /// The percentage of discount applied to the product.
-  final double? discountPrecentage;
+  final double? discountPercentage;
 
   /// The category to which the product belongs.
   final CategoryModel? category;
