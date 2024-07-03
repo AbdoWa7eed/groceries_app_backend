@@ -2,7 +2,6 @@
 
 import 'package:groceries_app_backend/feature/categories/model/categories/category_model.dart';
 import 'package:groceries_app_backend/feature/products/model/nutritions/nutritions_model.dart';
-import 'package:groceries_app_backend/feature/products/model/reviews/reviews_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product_model.g.dart';
@@ -20,7 +19,6 @@ class ProductModel {
     required this.imageUrl,
     required this.discountPercentage,
     this.category,
-    this.reviews,
     this.nutritions,
     this.productDetails,
   });
@@ -62,8 +60,6 @@ class ProductModel {
   /// The list of nutrition information associated with the product.
   final List<NutritionsModel>? nutritions;
 
-  /// The list of reviews submitted for the product.
-  final List<ReviewsModel>? reviews;
 
   /// Converts this [ProductModel] instance to a JSON map.
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);

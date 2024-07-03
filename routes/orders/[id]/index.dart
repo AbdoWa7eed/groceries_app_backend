@@ -34,7 +34,7 @@ Future<Response> _cancelOrder(RequestContext context, String id) async {
     return data.asFailure().failureResponse;
   } catch (error) {
     return ResponseHelper.badRequest(
-      message: error.toString(),
+      message: ResponseMessages.checkRequestBody
     );
   }
 }

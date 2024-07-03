@@ -8,13 +8,11 @@ class Failure implements Exception {
   ///Class's constructor
   const Failure({required this.statusCode, required this.message});
 
-
   ///Unknown error
-
-  factory Failure.unknownError() {
-    return const Failure(
+  factory Failure.unknownError({String? message}) {
+    return Failure(
       statusCode: HttpStatus.internalServerError,
-      message: ResponseMessages.unknownError,
+      message: message ?? ResponseMessages.unknownError,
     );
   }
 

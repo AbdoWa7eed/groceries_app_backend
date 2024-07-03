@@ -1446,25 +1446,20 @@ class UsersCountOutputType {
   const UsersCountOutputType({
     this.favorites,
     this.orders,
-    this.reviews,
   });
 
   factory UsersCountOutputType.fromJson(Map json) => UsersCountOutputType(
         favorites: json['favorites'],
         orders: json['orders'],
-        reviews: json['reviews'],
       );
 
   final int? favorites;
 
   final int? orders;
 
-  final int? reviews;
-
   Map<String, dynamic> toJson() => {
         'favorites': favorites,
         'orders': orders,
-        'reviews': reviews,
       };
 }
 
@@ -2467,11 +2462,11 @@ class ReviewsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.AND,
     this.OR,
     this.NOT,
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
     this.products,
     this.users,
   });
@@ -2484,8 +2479,6 @@ class ReviewsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<_i2.ReviewsWhereInput, Iterable<_i2.ReviewsWhereInput>>?
       NOT;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? reviewId;
-
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rating;
 
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? reviewDate;
@@ -2493,6 +2486,9 @@ class ReviewsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? reviewDescription;
 
   final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
       products;
@@ -2504,11 +2500,11 @@ class ReviewsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
         'products': products,
         'users': users,
       };
@@ -2711,6 +2707,24 @@ class FavoritesListRelationFilter
       };
 }
 
+class ReviewsNullableRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsNullableRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereInput, _i1.PrismaNull>? $is;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereInput, _i1.PrismaNull>? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
 class UsersListRelationFilter
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersListRelationFilter({
@@ -2845,7 +2859,8 @@ class UsersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.OrdersListRelationFilter? orders;
 
-  final _i2.ReviewsListRelationFilter? reviews;
+  final _i1.PrismaUnion<_i2.ReviewsNullableRelationFilter,
+      _i1.PrismaUnion<_i2.ReviewsWhereInput, _i1.PrismaNull>>? reviews;
 
   final _i1.PrismaUnion<_i2.UserRolesRelationFilter, _i2.UserRolesWhereInput>?
       userRoles;
@@ -3099,6 +3114,62 @@ class OrdersOrderByRelationAggregateInput
   Map<String, dynamic> toJson() => {'_count': $count};
 }
 
+class NutritionsOrderByRelationAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsOrderByRelationAggregateInput({this.$count});
+
+  final _i2.SortOrder? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class OrderItemsOrderByRelationAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrderItemsOrderByRelationAggregateInput({this.$count});
+
+  final _i2.SortOrder? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class ProductsOrderByRelationAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsOrderByRelationAggregateInput({this.$count});
+
+  final _i2.SortOrder? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class CategoriesOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const CategoriesOrderByWithRelationInput({
+    this.categoryId,
+    this.name,
+    this.imageUrl,
+    this.products,
+  });
+
+  final _i2.SortOrder? categoryId;
+
+  final _i2.SortOrder? name;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
+
+  final _i2.ProductsOrderByRelationAggregateInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'category_id': categoryId,
+        'name': name,
+        'image_url': imageUrl,
+        'products': products,
+      };
+}
+
 class ReviewsOrderByRelationAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsOrderByRelationAggregateInput({this.$count});
@@ -3107,6 +3178,118 @@ class ReviewsOrderByRelationAggregateInput
 
   @override
   Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class ProductsOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsOrderByWithRelationInput({
+    this.productId,
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+    this.cartItems,
+    this.favorites,
+    this.nutritions,
+    this.orderItems,
+    this.categories,
+    this.reviews,
+  });
+
+  final _i2.SortOrder? productId;
+
+  final _i2.SortOrder? name;
+
+  final _i2.SortOrder? quantityInStock;
+
+  final _i2.SortOrder? description;
+
+  final _i2.SortOrder? unitPrice;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
+
+  final _i2.SortOrder? categoryId;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? productDetails;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? discountPercentage;
+
+  final _i2.SortOrder? rate;
+
+  final _i2.CartItemsOrderByRelationAggregateInput? cartItems;
+
+  final _i2.FavoritesOrderByRelationAggregateInput? favorites;
+
+  final _i2.NutritionsOrderByRelationAggregateInput? nutritions;
+
+  final _i2.OrderItemsOrderByRelationAggregateInput? orderItems;
+
+  final _i2.CategoriesOrderByWithRelationInput? categories;
+
+  final _i2.ReviewsOrderByRelationAggregateInput? reviews;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+        'cart_items': cartItems,
+        'favorites': favorites,
+        'nutritions': nutritions,
+        'order_items': orderItems,
+        'categories': categories,
+        'reviews': reviews,
+      };
+}
+
+class ReviewsOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsOrderByWithRelationInput({
+    this.rating,
+    this.reviewDate,
+    this.userId,
+    this.productId,
+    this.reviewDescription,
+    this.products,
+    this.users,
+  });
+
+  final _i2.SortOrder? rating;
+
+  final _i2.SortOrder? reviewDate;
+
+  final _i2.SortOrder? userId;
+
+  final _i2.SortOrder? productId;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? reviewDescription;
+
+  final _i2.ProductsOrderByWithRelationInput? products;
+
+  final _i2.UsersOrderByWithRelationInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'rating': rating,
+        'review_date': reviewDate,
+        'user_id': userId,
+        'product_id': productId,
+        'review_description': reviewDescription,
+        'products': products,
+        'users': users,
+      };
 }
 
 class UsersOrderByRelationAggregateInput
@@ -3184,7 +3367,7 @@ class UsersOrderByWithRelationInput
 
   final _i2.OrdersOrderByRelationAggregateInput? orders;
 
-  final _i2.ReviewsOrderByRelationAggregateInput? reviews;
+  final _i2.ReviewsOrderByWithRelationInput? reviews;
 
   final _i2.UserRolesOrderByWithRelationInput? userRoles;
 
@@ -3230,136 +3413,6 @@ class CartsOrderByWithRelationInput
         'user_id': userId,
         'cart_items': cartItems,
         'users': users,
-      };
-}
-
-class NutritionsOrderByRelationAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsOrderByRelationAggregateInput({this.$count});
-
-  final _i2.SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {'_count': $count};
-}
-
-class OrderItemsOrderByRelationAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const OrderItemsOrderByRelationAggregateInput({this.$count});
-
-  final _i2.SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {'_count': $count};
-}
-
-class ProductsOrderByRelationAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsOrderByRelationAggregateInput({this.$count});
-
-  final _i2.SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {'_count': $count};
-}
-
-class CategoriesOrderByWithRelationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const CategoriesOrderByWithRelationInput({
-    this.categoryId,
-    this.name,
-    this.imageUrl,
-    this.products,
-  });
-
-  final _i2.SortOrder? categoryId;
-
-  final _i2.SortOrder? name;
-
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
-
-  final _i2.ProductsOrderByRelationAggregateInput? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'category_id': categoryId,
-        'name': name,
-        'image_url': imageUrl,
-        'products': products,
-      };
-}
-
-class ProductsOrderByWithRelationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsOrderByWithRelationInput({
-    this.productId,
-    this.name,
-    this.quantityInStock,
-    this.description,
-    this.unitPrice,
-    this.imageUrl,
-    this.categoryId,
-    this.productDetails,
-    this.discountPercentage,
-    this.rate,
-    this.cartItems,
-    this.favorites,
-    this.nutritions,
-    this.orderItems,
-    this.categories,
-    this.reviews,
-  });
-
-  final _i2.SortOrder? productId;
-
-  final _i2.SortOrder? name;
-
-  final _i2.SortOrder? quantityInStock;
-
-  final _i2.SortOrder? description;
-
-  final _i2.SortOrder? unitPrice;
-
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? imageUrl;
-
-  final _i2.SortOrder? categoryId;
-
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? productDetails;
-
-  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? discountPercentage;
-
-  final _i2.SortOrder? rate;
-
-  final _i2.CartItemsOrderByRelationAggregateInput? cartItems;
-
-  final _i2.FavoritesOrderByRelationAggregateInput? favorites;
-
-  final _i2.NutritionsOrderByRelationAggregateInput? nutritions;
-
-  final _i2.OrderItemsOrderByRelationAggregateInput? orderItems;
-
-  final _i2.CategoriesOrderByWithRelationInput? categories;
-
-  final _i2.ReviewsOrderByRelationAggregateInput? reviews;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'product_id': productId,
-        'name': name,
-        'quantity_in_stock': quantityInStock,
-        'description': description,
-        'unit_price': unitPrice,
-        'image_url': imageUrl,
-        'category_id': categoryId,
-        'product_details': productDetails,
-        'discount_percentage': discountPercentage,
-        'rate': rate,
-        'cart_items': cartItems,
-        'favorites': favorites,
-        'nutritions': nutritions,
-        'order_items': orderItems,
-        'categories': categories,
-        'reviews': reviews,
       };
 }
 
@@ -4593,16 +4646,14 @@ class ReviewsUsersArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
 
 class ReviewsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsSelect({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
     this.products,
     this.users,
   });
-
-  final bool? reviewId;
 
   final bool? rating;
 
@@ -4612,17 +4663,19 @@ class ReviewsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? productId;
 
+  final bool? reviewDescription;
+
   final _i1.PrismaUnion<bool, _i2.ReviewsProductsArgs>? products;
 
   final _i1.PrismaUnion<bool, _i2.ReviewsUsersArgs>? users;
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
         'products': products,
         'users': users,
       };
@@ -4645,141 +4698,14 @@ class ReviewsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
       };
 }
 
-class ReviewsOrderByWithRelationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsOrderByWithRelationInput({
-    this.reviewId,
-    this.rating,
-    this.reviewDate,
-    this.userId,
-    this.productId,
-    this.products,
-    this.users,
-  });
-
-  final _i2.SortOrder? reviewId;
-
-  final _i2.SortOrder? rating;
-
-  final _i2.SortOrder? reviewDate;
-
-  final _i2.SortOrder? userId;
-
-  final _i2.SortOrder? productId;
-
-  final _i2.ProductsOrderByWithRelationInput? products;
-
-  final _i2.UsersOrderByWithRelationInput? users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'user_id': userId,
-        'product_id': productId,
-        'products': products,
-        'users': users,
-      };
-}
-
-class ReviewsWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsWhereUniqueInput({
-    this.reviewId,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.rating,
-    this.reviewDate,
-    this.userId,
-    this.productId,
-    this.products,
-    this.users,
-  });
-
-  final int? reviewId;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereInput, Iterable<_i2.ReviewsWhereInput>>?
-      AND;
-
-  final Iterable<_i2.ReviewsWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereInput, Iterable<_i2.ReviewsWhereInput>>?
-      NOT;
-
-  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rating;
-
-  final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? reviewDate;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
-      products;
-
-  final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'rating': rating,
-        'review_date': reviewDate,
-        'user_id': userId,
-        'product_id': productId,
-        'products': products,
-        'users': users,
-      };
-}
-
-enum ReviewsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
-  reviewId<int>('review_id', 'reviews'),
-  rating<_i1.Decimal>('rating', 'reviews'),
-  reviewDate<DateTime>('review_date', 'reviews'),
-  userId<int>('user_id', 'reviews'),
-  productId<int>('product_id', 'reviews');
-
-  const ReviewsScalar(
-    this.name,
-    this.model,
-  );
-
-  @override
-  final String name;
-
-  @override
-  final String model;
-}
-
 class UsersReviewsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
   const UsersReviewsArgs({
     this.where,
-    this.orderBy,
-    this.cursor,
-    this.take,
-    this.skip,
-    this.distinct,
     this.select,
     this.include,
   });
 
   final _i2.ReviewsWhereInput? where;
-
-  final _i1.PrismaUnion<Iterable<_i2.ReviewsOrderByWithRelationInput>,
-      _i2.ReviewsOrderByWithRelationInput>? orderBy;
-
-  final _i2.ReviewsWhereUniqueInput? cursor;
-
-  final int? take;
-
-  final int? skip;
-
-  final _i1.PrismaUnion<_i2.ReviewsScalar, Iterable<_i2.ReviewsScalar>>?
-      distinct;
 
   final _i2.ReviewsSelect? select;
 
@@ -4788,11 +4714,6 @@ class UsersReviewsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
   @override
   Map<String, dynamic> toJson() => {
         'where': where,
-        'orderBy': orderBy,
-        'cursor': cursor,
-        'take': take,
-        'skip': skip,
-        'distinct': distinct,
         'select': select,
         'include': include,
       };
@@ -4855,7 +4776,8 @@ class UsersWhereUniqueInput
 
   final _i2.OrdersListRelationFilter? orders;
 
-  final _i2.ReviewsListRelationFilter? reviews;
+  final _i1.PrismaUnion<_i2.ReviewsNullableRelationFilter,
+      _i1.PrismaUnion<_i2.ReviewsWhereInput, _i1.PrismaNull>>? reviews;
 
   final _i1.PrismaUnion<_i2.UserRolesRelationFilter, _i2.UserRolesWhereInput>?
       userRoles;
@@ -5030,20 +4952,16 @@ class UsersCountOutputTypeSelect
   const UsersCountOutputTypeSelect({
     this.favorites,
     this.orders,
-    this.reviews,
   });
 
   final bool? favorites;
 
   final bool? orders;
 
-  final bool? reviews;
-
   @override
   Map<String, dynamic> toJson() => {
         'favorites': favorites,
         'orders': orders,
-        'reviews': reviews,
       };
 }
 
@@ -5580,6 +5498,101 @@ class ProductsCategoriesArgs
         'select': select,
         'include': include,
       };
+}
+
+class ReviewsUserIdProductIdCompoundUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsUserIdProductIdCompoundUniqueInput({
+    required this.userId,
+    required this.productId,
+  });
+
+  final int userId;
+
+  final int productId;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'product_id': productId,
+      };
+}
+
+class ReviewsWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ReviewsWhereUniqueInput({
+    this.userId,
+    this.userIdProductId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.rating,
+    this.reviewDate,
+    this.productId,
+    this.reviewDescription,
+    this.products,
+    this.users,
+  });
+
+  final int? userId;
+
+  final _i2.ReviewsUserIdProductIdCompoundUniqueInput? userIdProductId;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereInput, Iterable<_i2.ReviewsWhereInput>>?
+      AND;
+
+  final Iterable<_i2.ReviewsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.ReviewsWhereInput, Iterable<_i2.ReviewsWhereInput>>?
+      NOT;
+
+  final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rating;
+
+  final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? reviewDate;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
+
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? reviewDescription;
+
+  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
+      products;
+
+  final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'user_id': userId,
+        'user_id_product_id': userIdProductId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'rating': rating,
+        'review_date': reviewDate,
+        'product_id': productId,
+        'review_description': reviewDescription,
+        'products': products,
+        'users': users,
+      };
+}
+
+enum ReviewsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  rating<_i1.Decimal>('rating', 'reviews'),
+  reviewDate<DateTime>('review_date', 'reviews'),
+  userId<int>('user_id', 'reviews'),
+  productId<int>('product_id', 'reviews'),
+  reviewDescription<String>('review_description', 'reviews');
+
+  const ReviewsScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
 }
 
 class ProductsReviewsArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
@@ -7520,6 +7533,7 @@ class ReviewsCreateWithoutProductsInput
   const ReviewsCreateWithoutProductsInput({
     required this.rating,
     required this.reviewDate,
+    this.reviewDescription,
     required this.users,
   });
 
@@ -7527,12 +7541,15 @@ class ReviewsCreateWithoutProductsInput
 
   final DateTime reviewDate;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
+
   final _i2.UsersCreateNestedOneWithoutReviewsInput users;
 
   @override
   Map<String, dynamic> toJson() => {
         'rating': rating,
         'review_date': reviewDate,
+        'review_description': reviewDescription,
         'users': users,
       };
 }
@@ -7540,13 +7557,11 @@ class ReviewsCreateWithoutProductsInput
 class ReviewsUncheckedCreateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedCreateWithoutProductsInput({
-    this.reviewId,
     required this.rating,
     required this.reviewDate,
     required this.userId,
+    this.reviewDescription,
   });
-
-  final int? reviewId;
 
   final _i1.Decimal rating;
 
@@ -7554,12 +7569,14 @@ class ReviewsUncheckedCreateWithoutProductsInput
 
   final int userId;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -7585,13 +7602,11 @@ class ReviewsCreateOrConnectWithoutProductsInput
 class ReviewsCreateManyProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsCreateManyProductsInput({
-    this.reviewId,
     required this.rating,
     required this.reviewDate,
     required this.userId,
+    this.reviewDescription,
   });
-
-  final int? reviewId;
 
   final _i1.Decimal rating;
 
@@ -7599,12 +7614,14 @@ class ReviewsCreateManyProductsInput
 
   final int userId;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -8436,6 +8453,7 @@ class ReviewsCreateWithoutUsersInput
   const ReviewsCreateWithoutUsersInput({
     required this.rating,
     required this.reviewDate,
+    this.reviewDescription,
     required this.products,
   });
 
@@ -8443,12 +8461,15 @@ class ReviewsCreateWithoutUsersInput
 
   final DateTime reviewDate;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
+
   final _i2.ProductsCreateNestedOneWithoutReviewsInput products;
 
   @override
   Map<String, dynamic> toJson() => {
         'rating': rating,
         'review_date': reviewDate,
+        'review_description': reviewDescription,
         'products': products,
       };
 }
@@ -8456,13 +8477,11 @@ class ReviewsCreateWithoutUsersInput
 class ReviewsUncheckedCreateWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedCreateWithoutUsersInput({
-    this.reviewId,
     required this.rating,
     required this.reviewDate,
     required this.productId,
+    this.reviewDescription,
   });
-
-  final int? reviewId;
 
   final _i1.Decimal rating;
 
@@ -8470,12 +8489,14 @@ class ReviewsUncheckedCreateWithoutUsersInput
 
   final int productId;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -8498,80 +8519,25 @@ class ReviewsCreateOrConnectWithoutUsersInput
       };
 }
 
-class ReviewsCreateManyUsersInput
+class ReviewsCreateNestedOneWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateManyUsersInput({
-    this.reviewId,
-    required this.rating,
-    required this.reviewDate,
-    required this.productId,
-  });
-
-  final int? reviewId;
-
-  final _i1.Decimal rating;
-
-  final DateTime reviewDate;
-
-  final int productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'product_id': productId,
-      };
-}
-
-class ReviewsCreateManyUsersInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateManyUsersInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateManyUsersInput,
-      Iterable<_i2.ReviewsCreateManyUsersInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class ReviewsCreateNestedManyWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsCreateNestedManyWithoutUsersInput({
+  const ReviewsCreateNestedOneWithoutUsersInput({
     this.create,
     this.connectOrCreate,
-    this.createMany,
     this.connect,
   });
 
-  final _i1.PrismaUnion<
-      _i2.ReviewsCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.ReviewsCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.ReviewsUncheckedCreateWithoutUsersInput>>>>? create;
+  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutUsersInput,
+      _i2.ReviewsUncheckedCreateWithoutUsersInput>? create;
 
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.ReviewsCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+  final _i2.ReviewsCreateOrConnectWithoutUsersInput? connectOrCreate;
 
-  final _i2.ReviewsCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
+  final _i2.ReviewsWhereUniqueInput? connect;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
         'connect': connect,
       };
 }
@@ -8610,7 +8576,7 @@ class UsersCreateWithoutFavoritesInput
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsCreateNestedOneWithoutUsersInput? reviews;
 
   final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
@@ -8630,35 +8596,25 @@ class UsersCreateWithoutFavoritesInput
       };
 }
 
-class ReviewsUncheckedCreateNestedManyWithoutUsersInput
+class ReviewsUncheckedCreateNestedOneWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedCreateNestedManyWithoutUsersInput({
+  const ReviewsUncheckedCreateNestedOneWithoutUsersInput({
     this.create,
     this.connectOrCreate,
-    this.createMany,
     this.connect,
   });
 
-  final _i1.PrismaUnion<
-      _i2.ReviewsCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.ReviewsCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.ReviewsUncheckedCreateWithoutUsersInput>>>>? create;
+  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutUsersInput,
+      _i2.ReviewsUncheckedCreateWithoutUsersInput>? create;
 
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.ReviewsCreateOrConnectWithoutUsersInput>>? connectOrCreate;
+  final _i2.ReviewsCreateOrConnectWithoutUsersInput? connectOrCreate;
 
-  final _i2.ReviewsCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
+  final _i2.ReviewsWhereUniqueInput? connect;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
         'connect': connect,
       };
 }
@@ -8702,7 +8658,7 @@ class UsersUncheckedCreateWithoutFavoritesInput
 
   final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsUncheckedCreateNestedOneWithoutUsersInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -9097,7 +9053,7 @@ class UsersCreateWithoutOrdersInput
 
   final _i2.FavoritesCreateNestedManyWithoutUsersInput? favorites;
 
-  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsCreateNestedOneWithoutUsersInput? reviews;
 
   final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
@@ -9156,7 +9112,7 @@ class UsersUncheckedCreateWithoutOrdersInput
 
   final _i2.FavoritesUncheckedCreateNestedManyWithoutUsersInput? favorites;
 
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsUncheckedCreateNestedOneWithoutUsersInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -9633,7 +9589,7 @@ class UsersCreateWithoutCartsInput
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsCreateNestedOneWithoutUsersInput? reviews;
 
   final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
@@ -9692,7 +9648,7 @@ class UsersUncheckedCreateWithoutCartsInput
 
   final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsUncheckedCreateNestedOneWithoutUsersInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -12001,6 +11957,7 @@ class ReviewsUpdateWithoutProductsInput
   const ReviewsUpdateWithoutProductsInput({
     this.rating,
     this.reviewDate,
+    this.reviewDescription,
     this.users,
   });
 
@@ -12010,12 +11967,18 @@ class ReviewsUpdateWithoutProductsInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       reviewDate;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   final _i2.UsersUpdateOneRequiredWithoutReviewsNestedInput? users;
 
   @override
   Map<String, dynamic> toJson() => {
         'rating': rating,
         'review_date': reviewDate,
+        'review_description': reviewDescription,
         'users': users,
       };
 }
@@ -12023,13 +11986,11 @@ class ReviewsUpdateWithoutProductsInput
 class ReviewsUncheckedUpdateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedUpdateWithoutProductsInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
+    this.reviewDescription,
   });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rating;
@@ -12039,12 +12000,17 @@ class ReviewsUncheckedUpdateWithoutProductsInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -12097,11 +12063,11 @@ class ReviewsScalarWhereInput
     this.AND,
     this.OR,
     this.NOT,
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
 
   final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
@@ -12112,8 +12078,6 @@ class ReviewsScalarWhereInput
   final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
       Iterable<_i2.ReviewsScalarWhereInput>>? NOT;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? reviewId;
-
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rating;
 
   final _i1.PrismaUnion<_i2.DateTimeFilter, DateTime>? reviewDate;
@@ -12122,16 +12086,19 @@ class ReviewsScalarWhereInput
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
 
+  final _i1.PrismaUnion<_i2.StringNullableFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -12140,6 +12107,7 @@ class ReviewsUpdateManyMutationInput
   const ReviewsUpdateManyMutationInput({
     this.rating,
     this.reviewDate,
+    this.reviewDescription,
   });
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
@@ -12148,23 +12116,27 @@ class ReviewsUpdateManyMutationInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       reviewDate;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
         'rating': rating,
         'review_date': reviewDate,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsUncheckedUpdateManyWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedUpdateManyWithoutProductsInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
+    this.reviewDescription,
   });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rating;
@@ -12174,12 +12146,17 @@ class ReviewsUncheckedUpdateManyWithoutProductsInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -13476,6 +13453,7 @@ class ReviewsUpdateWithoutUsersInput
   const ReviewsUpdateWithoutUsersInput({
     this.rating,
     this.reviewDate,
+    this.reviewDescription,
     this.products,
   });
 
@@ -13485,12 +13463,18 @@ class ReviewsUpdateWithoutUsersInput
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       reviewDate;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   final _i2.ProductsUpdateOneRequiredWithoutReviewsNestedInput? products;
 
   @override
   Map<String, dynamic> toJson() => {
         'rating': rating,
         'review_date': reviewDate,
+        'review_description': reviewDescription,
         'products': products,
       };
 }
@@ -13498,13 +13482,11 @@ class ReviewsUpdateWithoutUsersInput
 class ReviewsUncheckedUpdateWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedUpdateWithoutUsersInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.productId,
+    this.reviewDescription,
   });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rating;
@@ -13514,24 +13496,27 @@ class ReviewsUncheckedUpdateWithoutUsersInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
-class ReviewsUpsertWithWhereUniqueWithoutUsersInput
+class ReviewsUpsertWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpsertWithWhereUniqueWithoutUsersInput({
-    required this.where,
+  const ReviewsUpsertWithoutUsersInput({
     required this.update,
     required this.create,
+    this.where,
   });
-
-  final _i2.ReviewsWhereUniqueInput where;
 
   final _i1.PrismaUnion<_i2.ReviewsUpdateWithoutUsersInput,
       _i2.ReviewsUncheckedUpdateWithoutUsersInput> update;
@@ -13539,22 +13524,24 @@ class ReviewsUpsertWithWhereUniqueWithoutUsersInput
   final _i1.PrismaUnion<_i2.ReviewsCreateWithoutUsersInput,
       _i2.ReviewsUncheckedCreateWithoutUsersInput> create;
 
+  final _i2.ReviewsWhereInput? where;
+
   @override
   Map<String, dynamic> toJson() => {
-        'where': where,
         'update': update,
         'create': create,
+        'where': where,
       };
 }
 
-class ReviewsUpdateWithWhereUniqueWithoutUsersInput
+class ReviewsUpdateToOneWithWhereWithoutUsersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateWithWhereUniqueWithoutUsersInput({
-    required this.where,
+  const ReviewsUpdateToOneWithWhereWithoutUsersInput({
+    this.where,
     required this.data,
   });
 
-  final _i2.ReviewsWhereUniqueInput where;
+  final _i2.ReviewsWhereInput? where;
 
   final _i1.PrismaUnion<_i2.ReviewsUpdateWithoutUsersInput,
       _i2.ReviewsUncheckedUpdateWithoutUsersInput> data;
@@ -13566,118 +13553,45 @@ class ReviewsUpdateWithWhereUniqueWithoutUsersInput
       };
 }
 
-class ReviewsUncheckedUpdateManyWithoutUsersInput
+class ReviewsUpdateOneWithoutUsersNestedInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedUpdateManyWithoutUsersInput({
-    this.reviewId,
-    this.rating,
-    this.reviewDate,
-    this.productId,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
-
-  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
-      rating;
-
-  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
-      reviewDate;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
-        'rating': rating,
-        'review_date': reviewDate,
-        'product_id': productId,
-      };
-}
-
-class ReviewsUpdateManyWithWhereWithoutUsersInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateManyWithWhereWithoutUsersInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.ReviewsScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateManyMutationInput,
-      _i2.ReviewsUncheckedUpdateManyWithoutUsersInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class ReviewsUpdateManyWithoutUsersNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUpdateManyWithoutUsersNestedInput({
+  const ReviewsUpdateOneWithoutUsersNestedInput({
     this.create,
     this.connectOrCreate,
     this.upsert,
-    this.createMany,
-    this.set,
     this.disconnect,
     this.delete,
     this.connect,
     this.update,
-    this.updateMany,
-    this.deleteMany,
   });
 
+  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutUsersInput,
+      _i2.ReviewsUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.ReviewsCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.ReviewsUpsertWithoutUsersInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.ReviewsWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.ReviewsWhereInput>? delete;
+
+  final _i2.ReviewsWhereUniqueInput? connect;
+
   final _i1.PrismaUnion<
-      _i2.ReviewsCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.ReviewsCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.ReviewsUncheckedCreateWithoutUsersInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.ReviewsCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpsertWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.ReviewsUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
-
-  final _i2.ReviewsCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.ReviewsUpdateWithWhereUniqueWithoutUsersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateManyWithWhereWithoutUsersInput,
-      Iterable<_i2.ReviewsUpdateManyWithWhereWithoutUsersInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
-      Iterable<_i2.ReviewsScalarWhereInput>>? deleteMany;
+      _i2.ReviewsUpdateToOneWithWhereWithoutUsersInput,
+      _i1.PrismaUnion<_i2.ReviewsUpdateWithoutUsersInput,
+          _i2.ReviewsUncheckedUpdateWithoutUsersInput>>? update;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
         'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
         'disconnect': disconnect,
         'delete': delete,
         'connect': connect,
         'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
       };
 }
 
@@ -13724,7 +13638,7 @@ class UsersUpdateWithoutFavoritesInput
 
   final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUpdateOneWithoutUsersNestedInput? reviews;
 
   final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
 
@@ -13744,71 +13658,45 @@ class UsersUpdateWithoutFavoritesInput
       };
 }
 
-class ReviewsUncheckedUpdateManyWithoutUsersNestedInput
+class ReviewsUncheckedUpdateOneWithoutUsersNestedInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ReviewsUncheckedUpdateManyWithoutUsersNestedInput({
+  const ReviewsUncheckedUpdateOneWithoutUsersNestedInput({
     this.create,
     this.connectOrCreate,
     this.upsert,
-    this.createMany,
-    this.set,
     this.disconnect,
     this.delete,
     this.connect,
     this.update,
-    this.updateMany,
-    this.deleteMany,
   });
 
+  final _i1.PrismaUnion<_i2.ReviewsCreateWithoutUsersInput,
+      _i2.ReviewsUncheckedCreateWithoutUsersInput>? create;
+
+  final _i2.ReviewsCreateOrConnectWithoutUsersInput? connectOrCreate;
+
+  final _i2.ReviewsUpsertWithoutUsersInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.ReviewsWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.ReviewsWhereInput>? delete;
+
+  final _i2.ReviewsWhereUniqueInput? connect;
+
   final _i1.PrismaUnion<
-      _i2.ReviewsCreateWithoutUsersInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.ReviewsCreateWithoutUsersInput>,
-          _i1.PrismaUnion<_i2.ReviewsUncheckedCreateWithoutUsersInput,
-              Iterable<_i2.ReviewsUncheckedCreateWithoutUsersInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.ReviewsCreateOrConnectWithoutUsersInput,
-      Iterable<_i2.ReviewsCreateOrConnectWithoutUsersInput>>? connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpsertWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.ReviewsUpsertWithWhereUniqueWithoutUsersInput>>? upsert;
-
-  final _i2.ReviewsCreateManyUsersInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.ReviewsWhereUniqueInput,
-      Iterable<_i2.ReviewsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateWithWhereUniqueWithoutUsersInput,
-      Iterable<_i2.ReviewsUpdateWithWhereUniqueWithoutUsersInput>>? update;
-
-  final _i1.PrismaUnion<_i2.ReviewsUpdateManyWithWhereWithoutUsersInput,
-      Iterable<_i2.ReviewsUpdateManyWithWhereWithoutUsersInput>>? updateMany;
-
-  final _i1.PrismaUnion<_i2.ReviewsScalarWhereInput,
-      Iterable<_i2.ReviewsScalarWhereInput>>? deleteMany;
+      _i2.ReviewsUpdateToOneWithWhereWithoutUsersInput,
+      _i1.PrismaUnion<_i2.ReviewsUpdateWithoutUsersInput,
+          _i2.ReviewsUncheckedUpdateWithoutUsersInput>>? update;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
         'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
         'disconnect': disconnect,
         'delete': delete,
         'connect': connect,
         'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
       };
 }
 
@@ -13860,7 +13748,7 @@ class UsersUncheckedUpdateWithoutFavoritesInput
 
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUncheckedUpdateOneWithoutUsersNestedInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -14522,7 +14410,7 @@ class UsersUpdateWithoutOrdersInput
 
   final _i2.FavoritesUpdateManyWithoutUsersNestedInput? favorites;
 
-  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUpdateOneWithoutUsersNestedInput? reviews;
 
   final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
 
@@ -14590,7 +14478,7 @@ class UsersUncheckedUpdateWithoutOrdersInput
 
   final _i2.FavoritesUncheckedUpdateManyWithoutUsersNestedInput? favorites;
 
-  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUncheckedUpdateOneWithoutUsersNestedInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -15340,7 +15228,7 @@ class UsersUpdateWithoutCartsInput
 
   final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUpdateOneWithoutUsersNestedInput? reviews;
 
   final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
 
@@ -15408,7 +15296,7 @@ class UsersUncheckedUpdateWithoutCartsInput
 
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUncheckedUpdateOneWithoutUsersNestedInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -28010,6 +27898,7 @@ class ReviewsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsCreateInput({
     required this.rating,
     required this.reviewDate,
+    this.reviewDescription,
     required this.products,
     required this.users,
   });
@@ -28017,6 +27906,8 @@ class ReviewsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.Decimal rating;
 
   final DateTime reviewDate;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
 
   final _i2.ProductsCreateNestedOneWithoutReviewsInput products;
 
@@ -28026,6 +27917,7 @@ class ReviewsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {
         'rating': rating,
         'review_date': reviewDate,
+        'review_description': reviewDescription,
         'products': products,
         'users': users,
       };
@@ -28034,14 +27926,12 @@ class ReviewsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 class ReviewsUncheckedCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedCreateInput({
-    this.reviewId,
     required this.rating,
     required this.reviewDate,
     required this.userId,
     required this.productId,
+    this.reviewDescription,
   });
-
-  final int? reviewId;
 
   final _i1.Decimal rating;
 
@@ -28051,27 +27941,27 @@ class ReviewsUncheckedCreateInput
 
   final int productId;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsCreateManyInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsCreateManyInput({
-    this.reviewId,
     required this.rating,
     required this.reviewDate,
     required this.userId,
     required this.productId,
+    this.reviewDescription,
   });
-
-  final int? reviewId;
 
   final _i1.Decimal rating;
 
@@ -28081,13 +27971,15 @@ class ReviewsCreateManyInput
 
   final int productId;
 
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -28095,6 +27987,7 @@ class ReviewsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUpdateInput({
     this.rating,
     this.reviewDate,
+    this.reviewDescription,
     this.products,
     this.users,
   });
@@ -28105,6 +27998,11 @@ class ReviewsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
       reviewDate;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   final _i2.ProductsUpdateOneRequiredWithoutReviewsNestedInput? products;
 
   final _i2.UsersUpdateOneRequiredWithoutReviewsNestedInput? users;
@@ -28113,6 +28011,7 @@ class ReviewsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {
         'rating': rating,
         'review_date': reviewDate,
+        'review_description': reviewDescription,
         'products': products,
         'users': users,
       };
@@ -28121,14 +28020,12 @@ class ReviewsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 class ReviewsUncheckedUpdateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedUpdateInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rating;
@@ -28140,27 +28037,30 @@ class ReviewsUncheckedUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsUncheckedUpdateManyInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedUpdateManyInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? reviewId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rating;
@@ -28172,37 +28072,40 @@ class ReviewsUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
 
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsCountAggregateOutputType {
   const ReviewsCountAggregateOutputType({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
     this.$all,
   });
 
   factory ReviewsCountAggregateOutputType.fromJson(Map json) =>
       ReviewsCountAggregateOutputType(
-        reviewId: json['review_id'],
         rating: json['rating'],
         reviewDate: json['review_date'],
         userId: json['user_id'],
         productId: json['product_id'],
+        reviewDescription: json['review_description'],
         $all: json['_all'],
       );
-
-  final int? reviewId;
 
   final int? rating;
 
@@ -28212,21 +28115,22 @@ class ReviewsCountAggregateOutputType {
 
   final int? productId;
 
+  final int? reviewDescription;
+
   final int? $all;
 
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
         '_all': $all,
       };
 }
 
 class ReviewsAvgAggregateOutputType {
   const ReviewsAvgAggregateOutputType({
-    this.reviewId,
     this.rating,
     this.userId,
     this.productId,
@@ -28234,13 +28138,10 @@ class ReviewsAvgAggregateOutputType {
 
   factory ReviewsAvgAggregateOutputType.fromJson(Map json) =>
       ReviewsAvgAggregateOutputType(
-        reviewId: json['review_id'],
         rating: json['rating'],
         userId: json['user_id'],
         productId: json['product_id'],
       );
-
-  final double? reviewId;
 
   final _i1.Decimal? rating;
 
@@ -28249,7 +28150,6 @@ class ReviewsAvgAggregateOutputType {
   final double? productId;
 
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'user_id': userId,
         'product_id': productId,
@@ -28258,7 +28158,6 @@ class ReviewsAvgAggregateOutputType {
 
 class ReviewsSumAggregateOutputType {
   const ReviewsSumAggregateOutputType({
-    this.reviewId,
     this.rating,
     this.userId,
     this.productId,
@@ -28266,13 +28165,10 @@ class ReviewsSumAggregateOutputType {
 
   factory ReviewsSumAggregateOutputType.fromJson(Map json) =>
       ReviewsSumAggregateOutputType(
-        reviewId: json['review_id'],
         rating: json['rating'],
         userId: json['user_id'],
         productId: json['product_id'],
       );
-
-  final int? reviewId;
 
   final _i1.Decimal? rating;
 
@@ -28281,7 +28177,6 @@ class ReviewsSumAggregateOutputType {
   final int? productId;
 
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'user_id': userId,
         'product_id': productId,
@@ -28290,16 +28185,15 @@ class ReviewsSumAggregateOutputType {
 
 class ReviewsMinAggregateOutputType {
   const ReviewsMinAggregateOutputType({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
 
   factory ReviewsMinAggregateOutputType.fromJson(Map json) =>
       ReviewsMinAggregateOutputType(
-        reviewId: json['review_id'],
         rating: json['rating'],
         reviewDate: switch (json['review_date']) {
           DateTime value => value,
@@ -28308,9 +28202,8 @@ class ReviewsMinAggregateOutputType {
         },
         userId: json['user_id'],
         productId: json['product_id'],
+        reviewDescription: json['review_description'],
       );
-
-  final int? reviewId;
 
   final _i1.Decimal? rating;
 
@@ -28320,27 +28213,28 @@ class ReviewsMinAggregateOutputType {
 
   final int? productId;
 
+  final String? reviewDescription;
+
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate?.toIso8601String(),
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsMaxAggregateOutputType {
   const ReviewsMaxAggregateOutputType({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
 
   factory ReviewsMaxAggregateOutputType.fromJson(Map json) =>
       ReviewsMaxAggregateOutputType(
-        reviewId: json['review_id'],
         rating: json['rating'],
         reviewDate: switch (json['review_date']) {
           DateTime value => value,
@@ -28349,9 +28243,8 @@ class ReviewsMaxAggregateOutputType {
         },
         userId: json['user_id'],
         productId: json['product_id'],
+        reviewDescription: json['review_description'],
       );
-
-  final int? reviewId;
 
   final _i1.Decimal? rating;
 
@@ -28361,22 +28254,24 @@ class ReviewsMaxAggregateOutputType {
 
   final int? productId;
 
+  final String? reviewDescription;
+
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate?.toIso8601String(),
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsGroupByOutputType {
   const ReviewsGroupByOutputType({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
     this.$count,
     this.$avg,
     this.$sum,
@@ -28386,7 +28281,6 @@ class ReviewsGroupByOutputType {
 
   factory ReviewsGroupByOutputType.fromJson(Map json) =>
       ReviewsGroupByOutputType(
-        reviewId: json['review_id'],
         rating: json['rating'],
         reviewDate: switch (json['review_date']) {
           DateTime value => value,
@@ -28395,6 +28289,7 @@ class ReviewsGroupByOutputType {
         },
         userId: json['user_id'],
         productId: json['product_id'],
+        reviewDescription: json['review_description'],
         $count: json['_count'] is Map
             ? _i2.ReviewsCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -28412,8 +28307,6 @@ class ReviewsGroupByOutputType {
             : null,
       );
 
-  final int? reviewId;
-
   final _i1.Decimal? rating;
 
   final DateTime? reviewDate;
@@ -28421,6 +28314,8 @@ class ReviewsGroupByOutputType {
   final int? userId;
 
   final int? productId;
+
+  final String? reviewDescription;
 
   final _i2.ReviewsCountAggregateOutputType? $count;
 
@@ -28433,11 +28328,11 @@ class ReviewsGroupByOutputType {
   final _i2.ReviewsMaxAggregateOutputType? $max;
 
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate?.toIso8601String(),
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
         '_count': $count?.toJson(),
         '_avg': $avg?.toJson(),
         '_sum': $sum?.toJson(),
@@ -28449,14 +28344,12 @@ class ReviewsGroupByOutputType {
 class ReviewsCountOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsCountOrderByAggregateInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
-
-  final _i2.SortOrder? reviewId;
 
   final _i2.SortOrder? rating;
 
@@ -28466,26 +28359,25 @@ class ReviewsCountOrderByAggregateInput
 
   final _i2.SortOrder? productId;
 
+  final _i2.SortOrder? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsAvgOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsAvgOrderByAggregateInput({
-    this.reviewId,
     this.rating,
     this.userId,
     this.productId,
   });
-
-  final _i2.SortOrder? reviewId;
 
   final _i2.SortOrder? rating;
 
@@ -28495,7 +28387,6 @@ class ReviewsAvgOrderByAggregateInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'user_id': userId,
         'product_id': productId,
@@ -28505,14 +28396,12 @@ class ReviewsAvgOrderByAggregateInput
 class ReviewsMaxOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsMaxOrderByAggregateInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
-
-  final _i2.SortOrder? reviewId;
 
   final _i2.SortOrder? rating;
 
@@ -28522,27 +28411,27 @@ class ReviewsMaxOrderByAggregateInput
 
   final _i2.SortOrder? productId;
 
+  final _i2.SortOrder? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsMinOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsMinOrderByAggregateInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
-
-  final _i2.SortOrder? reviewId;
 
   final _i2.SortOrder? rating;
 
@@ -28552,26 +28441,25 @@ class ReviewsMinOrderByAggregateInput
 
   final _i2.SortOrder? productId;
 
+  final _i2.SortOrder? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsSumOrderByAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsSumOrderByAggregateInput({
-    this.reviewId,
     this.rating,
     this.userId,
     this.productId,
   });
-
-  final _i2.SortOrder? reviewId;
 
   final _i2.SortOrder? rating;
 
@@ -28581,7 +28469,6 @@ class ReviewsSumOrderByAggregateInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'user_id': userId,
         'product_id': productId,
@@ -28591,19 +28478,17 @@ class ReviewsSumOrderByAggregateInput
 class ReviewsOrderByWithAggregationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsOrderByWithAggregationInput({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
     this.$count,
     this.$avg,
     this.$max,
     this.$min,
     this.$sum,
   });
-
-  final _i2.SortOrder? reviewId;
 
   final _i2.SortOrder? rating;
 
@@ -28612,6 +28497,8 @@ class ReviewsOrderByWithAggregationInput
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? productId;
+
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? reviewDescription;
 
   final _i2.ReviewsCountOrderByAggregateInput? $count;
 
@@ -28625,11 +28512,11 @@ class ReviewsOrderByWithAggregationInput
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
@@ -28644,11 +28531,11 @@ class ReviewsScalarWhereWithAggregatesInput
     this.AND,
     this.OR,
     this.NOT,
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
 
   final _i1.PrismaUnion<_i2.ReviewsScalarWhereWithAggregatesInput,
@@ -28659,8 +28546,6 @@ class ReviewsScalarWhereWithAggregatesInput
   final _i1.PrismaUnion<_i2.ReviewsScalarWhereWithAggregatesInput,
       Iterable<_i2.ReviewsScalarWhereWithAggregatesInput>>? NOT;
 
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? reviewId;
-
   final _i1.PrismaUnion<_i2.DecimalWithAggregatesFilter, _i1.Decimal>? rating;
 
   final _i1.PrismaUnion<_i2.DateTimeWithAggregatesFilter, DateTime>? reviewDate;
@@ -28669,31 +28554,32 @@ class ReviewsScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? productId;
 
+  final _i1.PrismaUnion<_i2.StringNullableWithAggregatesFilter,
+      _i1.PrismaUnion<String, _i1.PrismaNull>>? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
         'OR': OR,
         'NOT': NOT,
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
 class ReviewsCountAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsCountAggregateOutputTypeSelect({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
     this.$all,
   });
-
-  final bool? reviewId;
 
   final bool? rating;
 
@@ -28703,15 +28589,17 @@ class ReviewsCountAggregateOutputTypeSelect
 
   final bool? productId;
 
+  final bool? reviewDescription;
+
   final bool? $all;
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
         '_all': $all,
       };
 }
@@ -28729,13 +28617,10 @@ class ReviewsGroupByOutputTypeCountArgs
 class ReviewsAvgAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsAvgAggregateOutputTypeSelect({
-    this.reviewId,
     this.rating,
     this.userId,
     this.productId,
   });
-
-  final bool? reviewId;
 
   final bool? rating;
 
@@ -28745,7 +28630,6 @@ class ReviewsAvgAggregateOutputTypeSelect
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'user_id': userId,
         'product_id': productId,
@@ -28765,13 +28649,10 @@ class ReviewsGroupByOutputTypeAvgArgs
 class ReviewsSumAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsSumAggregateOutputTypeSelect({
-    this.reviewId,
     this.rating,
     this.userId,
     this.productId,
   });
-
-  final bool? reviewId;
 
   final bool? rating;
 
@@ -28781,7 +28662,6 @@ class ReviewsSumAggregateOutputTypeSelect
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'user_id': userId,
         'product_id': productId,
@@ -28801,14 +28681,12 @@ class ReviewsGroupByOutputTypeSumArgs
 class ReviewsMinAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsMinAggregateOutputTypeSelect({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
-
-  final bool? reviewId;
 
   final bool? rating;
 
@@ -28818,13 +28696,15 @@ class ReviewsMinAggregateOutputTypeSelect
 
   final bool? productId;
 
+  final bool? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -28841,14 +28721,12 @@ class ReviewsGroupByOutputTypeMinArgs
 class ReviewsMaxAggregateOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsMaxAggregateOutputTypeSelect({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
   });
-
-  final bool? reviewId;
 
   final bool? rating;
 
@@ -28858,13 +28736,15 @@ class ReviewsMaxAggregateOutputTypeSelect
 
   final bool? productId;
 
+  final bool? reviewDescription;
+
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
       };
 }
 
@@ -28881,19 +28761,17 @@ class ReviewsGroupByOutputTypeMaxArgs
 class ReviewsGroupByOutputTypeSelect
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsGroupByOutputTypeSelect({
-    this.reviewId,
     this.rating,
     this.reviewDate,
     this.userId,
     this.productId,
+    this.reviewDescription,
     this.$count,
     this.$avg,
     this.$sum,
     this.$min,
     this.$max,
   });
-
-  final bool? reviewId;
 
   final bool? rating;
 
@@ -28902,6 +28780,8 @@ class ReviewsGroupByOutputTypeSelect
   final bool? userId;
 
   final bool? productId;
+
+  final bool? reviewDescription;
 
   final _i1.PrismaUnion<bool, _i2.ReviewsGroupByOutputTypeCountArgs>? $count;
 
@@ -28915,11 +28795,11 @@ class ReviewsGroupByOutputTypeSelect
 
   @override
   Map<String, dynamic> toJson() => {
-        'review_id': reviewId,
         'rating': rating,
         'review_date': reviewDate,
         'user_id': userId,
         'product_id': productId,
+        'review_description': reviewDescription,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,
@@ -29106,7 +28986,7 @@ class UsersCreateWithoutUserRolesInput
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsCreateNestedOneWithoutUsersInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -29163,7 +29043,7 @@ class UsersUncheckedCreateWithoutUserRolesInput
 
   final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsUncheckedCreateNestedOneWithoutUsersInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -29433,7 +29313,7 @@ class UsersUpdateWithoutUserRolesInput
 
   final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUpdateOneWithoutUsersNestedInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -29499,7 +29379,7 @@ class UsersUncheckedUpdateWithoutUserRolesInput
 
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUncheckedUpdateOneWithoutUsersNestedInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -30569,7 +30449,7 @@ class UsersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.OrdersCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsCreateNestedOneWithoutUsersInput? reviews;
 
   final _i2.UserRolesCreateNestedOneWithoutUsersInput? userRoles;
 
@@ -30632,7 +30512,7 @@ class UsersUncheckedCreateInput
 
   final _i2.OrdersUncheckedCreateNestedManyWithoutUsersInput? orders;
 
-  final _i2.ReviewsUncheckedCreateNestedManyWithoutUsersInput? reviews;
+  final _i2.ReviewsUncheckedCreateNestedOneWithoutUsersInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -30743,7 +30623,7 @@ class UsersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.OrdersUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUpdateOneWithoutUsersNestedInput? reviews;
 
   final _i2.UserRolesUpdateOneRequiredWithoutUsersNestedInput? userRoles;
 
@@ -30815,7 +30695,7 @@ class UsersUncheckedUpdateInput
 
   final _i2.OrdersUncheckedUpdateManyWithoutUsersNestedInput? orders;
 
-  final _i2.ReviewsUncheckedUpdateManyWithoutUsersNestedInput? reviews;
+  final _i2.ReviewsUncheckedUpdateOneWithoutUsersNestedInput? reviews;
 
   @override
   Map<String, dynamic> toJson() => {

@@ -33,7 +33,7 @@ Future<Response> _getOrders(RequestContext context) async {
     return data.asFailure().failureResponse;
   } catch (error) {
     return ResponseHelper.badRequest(
-      message: error.toString(),
+      message: ResponseMessages.checkRequestBody
     );
   }
 }
@@ -57,7 +57,7 @@ Future<Response> _createOrder(RequestContext context) async {
     return data.asFailure().failureResponse;
   } catch (error) {
     return ResponseHelper.badRequest(
-      message: error.toString(),
+      message: ResponseMessages.checkRequestBody
     );
   }
 }

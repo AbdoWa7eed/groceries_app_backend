@@ -18,9 +18,6 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       category: json['category'] == null
           ? null
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
-      reviews: (json['reviews'] as List<dynamic>?)
-          ?.map((e) => ReviewsModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
       nutritions: (json['nutritions'] as List<dynamic>?)
           ?.map((e) => NutritionsModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -40,7 +37,6 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'discountPercentage': instance.discountPercentage,
       'category': instance.category,
       'nutritions': instance.nutritions,
-      'reviews': instance.reviews,
     };
 Map<String, dynamic> _$SimpleProductModelToJson(ProductModel instance) =>
     <String, dynamic>{

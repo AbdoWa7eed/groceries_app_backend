@@ -39,7 +39,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure(statusCode: 500, message: error.toString()));
+      return Left(Failure.unknownError());
     }
   }
 

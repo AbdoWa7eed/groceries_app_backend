@@ -47,7 +47,7 @@ Future<Response> _updateUserData(RequestContext context) async {
     return data.asFailure().failureResponse;
   } catch (error) {
     return ResponseHelper.badRequest(
-      message: error.toString(),
+      message: ResponseMessages.checkRequestBody,
     );
   }
 }

@@ -164,3 +164,15 @@ void initOrdersResources() {
       );
   }
 }
+
+void initReviewResources() {
+  if (!instance.isRegistered<ReviewRepository>()) {
+    instance
+      ..registerLazySingleton<ReviewRepository>(
+        () => ReviewRepositoryImpl(instance<ReviewDataSource>()),
+      )
+      ..registerLazySingleton<ReviewDataSource>(
+        () => ReviewDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}
