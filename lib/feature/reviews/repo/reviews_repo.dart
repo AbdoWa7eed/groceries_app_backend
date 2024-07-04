@@ -10,8 +10,10 @@ abstract class ReviewRepository {
   Future<Either<Failure, ReviewModel>> addReview(
     ReviewInputModel reviewInputModel,
   );
-  Future<Either<Failure, ReviewModel>> deleteReview(
-      {required int productId, required int userId});
+  Future<Either<Failure, ReviewModel>> deleteReview({
+    required int productId,
+    required int userId,
+  });
 
   Future<Either<Failure, ReviewModel>> updateReview({
     required ReviewInputModel reviewInputModel,

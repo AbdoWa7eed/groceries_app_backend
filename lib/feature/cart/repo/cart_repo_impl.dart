@@ -23,8 +23,8 @@ class CartRepositoryImpl extends CartRepository {
       return Right(cartItem.toCartItemModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -35,8 +35,8 @@ class CartRepositoryImpl extends CartRepository {
       return Right(cart.toCartModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -52,8 +52,8 @@ class CartRepositoryImpl extends CartRepository {
       return Right(cartItem.toCartItemModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 }

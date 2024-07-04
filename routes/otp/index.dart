@@ -33,7 +33,7 @@ Future<Response> _sendOTPMessage(RequestContext context) async {
     return data.asFailure().failureResponse;
   } catch (error) {
     return ResponseHelper.badRequest(
-      message: ResponseMessages.checkRequestBody
+      message: ResponseMessages.checkRequestBody,
     );
   }
 }

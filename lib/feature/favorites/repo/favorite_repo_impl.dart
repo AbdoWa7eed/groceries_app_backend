@@ -24,7 +24,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -39,7 +39,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -57,7 +57,7 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 }

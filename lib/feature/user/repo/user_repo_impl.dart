@@ -27,7 +27,7 @@ class UserRepositoryImpl implements UserRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -40,7 +40,7 @@ class UserRepositoryImpl implements UserRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -55,7 +55,7 @@ class UserRepositoryImpl implements UserRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 }

@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs
 
-
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/otp/data/local_data_source.dart';
@@ -25,7 +24,7 @@ class OTPRepositoryImpl extends OTPRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -44,7 +43,7 @@ class OTPRepositoryImpl extends OTPRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 }

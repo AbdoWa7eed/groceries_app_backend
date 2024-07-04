@@ -10,7 +10,7 @@ abstract class ProductsRepository {
     required ProductSearchInput searchInput,
   });
 
-  Future<Either<Failure, ProductModel>> getProductDetials({
+  Future<Either<Failure, ProductModel>> getProductDetails({
     required int productId,
   });
 }

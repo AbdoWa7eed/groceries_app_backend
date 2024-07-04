@@ -22,8 +22,8 @@ class ReviewRepositoryImpl implements ReviewRepository {
       return Right(reviewModels);
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -37,8 +37,8 @@ class ReviewRepositoryImpl implements ReviewRepository {
       return Right(review.toReviewModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -55,8 +55,8 @@ class ReviewRepositoryImpl implements ReviewRepository {
       return Right(review.toReviewModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -72,8 +72,8 @@ class ReviewRepositoryImpl implements ReviewRepository {
       return Right(review.toReviewModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 }

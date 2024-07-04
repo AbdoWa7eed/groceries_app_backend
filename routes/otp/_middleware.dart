@@ -7,7 +7,7 @@ Handler middleware(Handler handler) {
     try {
       await initOTPResources();
     } catch (error) {
-      return Failure.unknownError().failureResponse;
+      return Failure.fromException(error).failureResponse;
     }
     final response = await handler(context);
     return response;

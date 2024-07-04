@@ -29,9 +29,6 @@ class OrdersDataSourceImpl extends OrdersDataSource {
     required int userId,
     required String paymentMethod,
   }) async {
-    if (!paymentMethod.isValidPaymentMethod()) {
-      throw Failure.badRequest(message: ResponseMessages.invalidPaymentMethod);
-    }
     final cart = await _getUserCart(userId);
 
     final totalPrice = _getPriceFromProducts(cart.cartItems?.toList() ?? []);

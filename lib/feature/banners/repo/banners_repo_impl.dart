@@ -17,9 +17,9 @@ class BannersRepositoryImpl extends BannersRepository {
     try {
       final banners = await _bannerDataSource.getBanners();
 
-      return Right(banners.map((e) => e.toBannerModel()).toList());
-    } catch (e) {
-      return Left(Failure.unknownError());
+      return Right(banners.map((banner) => banner.toBannerModel()).toList());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 }

@@ -101,7 +101,7 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
   // Token Management
   static const String tokenRefreshed = 'Your access token has been refreshed';
 
-  //Reviews Management
+  // Reviews Management
   static const String reviewCreated = 'Review created successfully';
   static const String reviewNotFound = 'Review not found';
   static const String reviewDeleted = 'Review deleted successfully';
@@ -109,4 +109,13 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
       'You have already reviewed this product';
   static const String reviewUpdated = 'Review updated successfully';
   static const String invalidRating = 'Rating must be between 1 and 5';
+
+  // Prisma Error Messages
+  static const String uniqueConstraintViolation = 'Unique constraint violation';
+  static const String fieldDoesNotExist = 'Field does not exist';
+  static const String otherKnownRequestError = 'Request error';
+  static const String unknownRequestError = 'Unknown request error';
+  static const String rustPanicError = 'Rust panic error';
+  static const String initializationError = 'Initialization error';
+  static const String validationError = 'Validation error';
 }

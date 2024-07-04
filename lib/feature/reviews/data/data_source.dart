@@ -24,34 +24,10 @@ class ReviewDataSourceImpl implements ReviewDataSource {
 
   @override
   Future<Reviews> addReview(ReviewsCreateInput reviewInputModel) async {
-    final review = await _findReview(
-      reviewInputModel.products.connect?.productId ?? 0,
-      reviewInputModel.users.connect?.userId ?? 0,
-    );
-
-    final rating = reviewInputModel.rating.toDouble();
-    if (rating < 1 || rating > 5) {
-      throw Failure.badRequest(message: ResponseMessages.invalidRating);
-    }
-
-    if (review != null) {
-      throw Failure.badRequest(message: ResponseMessages.userAlreadyReviewed);
-    }
-
-
-    final product = await _client.products.findUnique(
-      where: ProductsWhereUniqueInput(
-        productId: reviewInputModel.products.connect?.productId,
-      ),
-    );
-
-    if (product == null) {
-      throw Failure.badRequest(message: ResponseMessages.checkProductId);
-    }
-
-    final newReview = await _client.reviews.create(
+    final review = await _client.reviews.create(
       data: PrismaUnion.$1(reviewInputModel),
       include: const ReviewsInclude(
+        products: PrismaUnion.$1(true),
         users: PrismaUnion.$2(
           ReviewsUsersArgs(
             include: UsersInclude(
@@ -62,9 +38,9 @@ class ReviewDataSourceImpl implements ReviewDataSource {
       ),
     );
 
-    await _updateProductRate(product);
+    await _updateProductRate(review.products!);
 
-    return newReview;
+    return review;
   }
 
   @override
@@ -72,11 +48,6 @@ class ReviewDataSourceImpl implements ReviewDataSource {
     required int productId,
     required int userId,
   }) async {
-    final review = await _findReview(productId, userId);
-
-    if (review == null) {
-      throw Failure.badRequest(message: ResponseMessages.reviewNotFound);
-    }
     final deletedReview = await _client.reviews.delete(
       where: ReviewsWhereUniqueInput(
         userIdProductId: ReviewsUserIdProductIdCompoundUniqueInput(
@@ -121,19 +92,6 @@ class ReviewDataSourceImpl implements ReviewDataSource {
   Future<Reviews> updateReview({
     required ReviewsUpdateInput reviewInputModel,
   }) async {
-    final rating = reviewInputModel.rating?.$1?.toDouble() ?? 1;
-    if (rating < 1 || rating > 5) {
-      throw Failure.badRequest(message: ResponseMessages.invalidRating);
-    }
-
-    final review = await _findReview(
-      reviewInputModel.products?.connect?.productId ?? 0,
-      reviewInputModel.users?.connect?.userId ?? 0,
-    );
-
-    if (review == null) {
-      throw Failure.badRequest(message: ResponseMessages.reviewNotFound);
-    }
     final updatedReview = await _client.reviews.update(
       data: PrismaUnion.$1(reviewInputModel),
       where: ReviewsWhereUniqueInput(
@@ -162,17 +120,7 @@ class ReviewDataSourceImpl implements ReviewDataSource {
     return updatedReview;
   }
 
-  Future<Reviews?> _findReview(int productId, int userId) async {
-    final review = await _client.reviews.findUnique(
-      where: ReviewsWhereUniqueInput(
-        userIdProductId: ReviewsUserIdProductIdCompoundUniqueInput(
-          userId: userId,
-          productId: productId,
-        ),
-      ),
-    );
-    return review;
-  }
+
 
   Future<void> _updateProductRate(Products product) async {
     final values = (await _client.$raw.query(

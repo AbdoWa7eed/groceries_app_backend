@@ -22,8 +22,8 @@ class OrdersRepositoryImpl extends OrdersRepository {
       return Right(order.toOrderModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure(message: e.toString(), statusCode: 500));
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 
@@ -35,7 +35,7 @@ class OrdersRepositoryImpl extends OrdersRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (e) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(e));
     }
   }
 
@@ -52,14 +52,13 @@ class OrdersRepositoryImpl extends OrdersRepository {
       return Right(order.toOrderModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 
   @override
-  Future<Either<Failure, OrderModel>> updateOrderStatus(
-      {
+  Future<Either<Failure, OrderModel>> updateOrderStatus({
     required int orderId,
     required String status,
   }) async {
@@ -71,8 +70,8 @@ class OrdersRepositoryImpl extends OrdersRepository {
       return Right(order.toOrderModel());
     } on Failure catch (failure) {
       return Left(failure);
-    } catch (e) {
-      return Left(Failure.unknownError());
+    } catch (error) {
+      return Left(Failure.fromException(error));
     }
   }
 }

@@ -1,12 +1,48 @@
 import 'dart:io';
-
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
+import 'package:orm/orm.dart';
 
-///Represents for an error
 class Failure implements Exception {
-  ///Class's constructor
   const Failure({required this.statusCode, required this.message});
+
+  factory Failure.fromException(dynamic error) {
+    if (error is PrismaClientKnownRequestError) {
+      switch (error.code) {
+        case 'P2002':
+          return Failure.conflict(
+            message: ResponseMessages.uniqueConstraintViolation,
+          );
+        case 'P2009':
+          return Failure.badRequest(
+            message: ResponseMessages.fieldDoesNotExist,
+          );
+        default:
+          return Failure.badRequest(
+            message:
+                '${ResponseMessages.otherKnownRequestError}: ${error.message}',
+          );
+      }
+    } else if (error is PrismaClientUnknownRequestError) {
+      return Failure.internalServerError(
+        message: '${ResponseMessages.unknownRequestError}: ${error.message}',
+      );
+    } else if (error is PrismaClientRustPanicError) {
+      return Failure.internalServerError(
+        message: '${ResponseMessages.rustPanicError}: ${error.message}',
+      );
+    } else if (error is PrismaClientInitializationError) {
+      return Failure.internalServerError(
+        message: '${ResponseMessages.initializationError}: ${error.message}',
+      );
+    } else if (error is PrismaClientValidationError) {
+      return Failure.badRequest(
+        message: '${ResponseMessages.validationError}: ${error.message}',
+      );
+    } else {
+      return Failure.unknownError(message: error.toString());
+    }
+  }
 
   ///Unknown error
   factory Failure.unknownError({String? message}) {

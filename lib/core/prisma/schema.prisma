@@ -126,10 +126,10 @@ model products {
 }
 
 model reviews {
+  user_id            Int
+  product_id         Int
   rating             Decimal  @db.Decimal(2, 1)
   review_date        DateTime @db.DateTime(0)
-  user_id            Int      @unique(map: "user_id_UNIQUE")
-  product_id         Int
   review_description String?  @db.Text
   products           products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_reviews_products1")
   users              users    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_reviews_users1")
@@ -158,7 +158,7 @@ model users {
   carts        carts?
   favorites    favorites[]
   orders       orders[]
-  reviews      reviews?
+  reviews      reviews[]
   user_roles   user_roles  @relation(fields: [role_id], references: [role_id], onDelete: Cascade, map: "fk_users_user_role1")
 
   @@index([role_id], map: "fk_users_user_role1_idx")

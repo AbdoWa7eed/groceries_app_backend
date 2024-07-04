@@ -302,24 +302,24 @@ class Categories {
 
 class Reviews {
   const Reviews({
-    this.rating,
-    this.reviewDate,
     this.userId,
     this.productId,
+    this.rating,
+    this.reviewDate,
     this.reviewDescription,
     this.products,
     this.users,
   });
 
   factory Reviews.fromJson(Map json) => Reviews(
+        userId: json['user_id'],
+        productId: json['product_id'],
         rating: json['rating'],
         reviewDate: switch (json['review_date']) {
           DateTime value => value,
           String value => DateTime.parse(value),
           _ => json['review_date']
         },
-        userId: json['user_id'],
-        productId: json['product_id'],
         reviewDescription: json['review_description'],
         products: json['products'] is Map
             ? _i1.Products.fromJson(json['products'])
@@ -327,13 +327,13 @@ class Reviews {
         users: json['users'] is Map ? _i1.Users.fromJson(json['users']) : null,
       );
 
-  final _i3.Decimal? rating;
-
-  final DateTime? reviewDate;
-
   final int? userId;
 
   final int? productId;
+
+  final _i3.Decimal? rating;
+
+  final DateTime? reviewDate;
 
   final String? reviewDescription;
 
@@ -342,10 +342,10 @@ class Reviews {
   final _i1.Users? users;
 
   Map<String, dynamic> toJson() => {
-        'rating': rating,
-        'review_date': reviewDate?.toIso8601String(),
         'user_id': userId,
         'product_id': productId,
+        'rating': rating,
+        'review_date': reviewDate?.toIso8601String(),
         'review_description': reviewDescription,
         'products': products?.toJson(),
         'users': users?.toJson(),
@@ -558,9 +558,8 @@ class Users {
             ?.map((json) => _i1.Favorites.fromJson(json)),
         orders: (json['orders'] as Iterable?)
             ?.map((json) => _i1.Orders.fromJson(json)),
-        reviews: json['reviews'] is Map
-            ? _i1.Reviews.fromJson(json['reviews'])
-            : null,
+        reviews: (json['reviews'] as Iterable?)
+            ?.map((json) => _i1.Reviews.fromJson(json)),
         userRoles: json['user_roles'] is Map
             ? _i1.UserRoles.fromJson(json['user_roles'])
             : null,
@@ -593,7 +592,7 @@ class Users {
 
   final Iterable<_i1.Orders>? orders;
 
-  final _i1.Reviews? reviews;
+  final Iterable<_i1.Reviews>? reviews;
 
   final _i1.UserRoles? userRoles;
 
@@ -612,7 +611,7 @@ class Users {
         'carts': carts?.toJson(),
         'favorites': favorites?.map((e) => e.toJson()),
         'orders': orders?.map((e) => e.toJson()),
-        'reviews': reviews?.toJson(),
+        'reviews': reviews?.map((e) => e.toJson()),
         'user_roles': userRoles?.toJson(),
         '_count': $count?.toJson(),
       };

@@ -23,7 +23,7 @@ Future<Response> _getProductDetails(RequestContext context, String id) async {
   try {
     final productsRepo = instance<ProductsRepository>();
 
-    final data = await productsRepo.getProductDetials(productId: id.toInt());
+    final data = await productsRepo.getProductDetails(productId: id.toInt());
     if (data.isRight()) {
       return ResponseHelper.ok(
         data: data.asRight().toJson(),

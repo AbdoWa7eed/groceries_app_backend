@@ -8,9 +8,7 @@ import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:orm/orm.dart';
 
-///Data Source
 abstract class UserDataSource {
-  ///Get user from it's credentials
   Future<Users> userFromCredentials({
     required String email,
     required String password,
@@ -26,10 +24,8 @@ abstract class UserDataSource {
 
 ///Data Source Implementation
 class UserDataSourceImpl implements UserDataSource {
-  ///Class's Constructor
   UserDataSourceImpl(this._client);
 
-  ///ORM client object
   final PrismaClient _client;
   @override
   Future<Users> userFromCredentials({

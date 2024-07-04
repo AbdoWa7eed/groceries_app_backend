@@ -5,26 +5,19 @@ import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:orm/orm.dart';
 
-/// Abstract class defining the contract
-/// for interacting with the cart data source.
 abstract class CartDataSource {
-  /// Adds a new item to the cart.
   Future<CartItems> addToCart(CartItemsCreateInput cartItemsCreateInput);
 
-  /// Removes an item from the cart.
   Future<CartItems> removeFromCart({
     required int productId,
     required int userId,
   });
 
-  /// UPDATE an item int the cart.
   Future<Carts?> getUserCart({required int userId});
 }
 
-/// Implementation of the [CartDataSource] interface.
 
 class CartDataSourceImpl extends CartDataSource {
-  /// Constructor that takes a [PrismaClient] instance.
   CartDataSourceImpl(this._client);
 
   final PrismaClient _client;
@@ -33,17 +26,6 @@ class CartDataSourceImpl extends CartDataSource {
     final productId = cartItemsCreateInput.products.connect?.productId;
     final userId = cartItemsCreateInput.carts.connectOrCreate?.where.userId;
 
-    final product = await _client.products.findUnique(
-      where: ProductsWhereUniqueInput(
-        productId: productId,
-      ),
-    );
-
-    if (product == null) {
-      throw Failure.badRequest(
-        message: ResponseMessages.checkProductId,
-      );
-    }
 
     final item = await _findCartItem(productId!, userId!);
 

@@ -20,9 +20,11 @@ class CategoriesRepoImpl extends CategoriesRepository {
         take: searchInput.size,
         skip: searchInput.skip,
       );
-      return Right(products.map((e) => e.toCategoryModel()).toList());
+      return Right(
+        products.map((category) => category.toCategoryModel()).toList(),
+      );
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 }

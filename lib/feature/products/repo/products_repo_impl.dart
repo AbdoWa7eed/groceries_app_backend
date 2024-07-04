@@ -23,14 +23,16 @@ class ProductRepoImpl extends ProductsRepository {
         skip: searchInput.skip,
         searchInput: searchInput.toProductWhereInput(),
       );
-      return Right(products.map((e) => e.toSimpleProductModel()).toList());
+      return Right(
+        products.map((product) => product.toSimpleProductModel()).toList(),
+      );
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 
   @override
-  Future<Either<Failure, ProductModel>> getProductDetials({
+  Future<Either<Failure, ProductModel>> getProductDetails({
     required int productId,
   }) async {
     try {
@@ -39,7 +41,7 @@ class ProductRepoImpl extends ProductsRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 }

@@ -9,8 +9,10 @@ class UploadImageRepoImpl extends UploadImageRepository {
   UploadImageRepoImpl(this._uploadImageDataSource);
   final UploadImageDataSource _uploadImageDataSource;
   @override
-  Future<Either<Failure, String>> uploadImage(
-      {required int userId, required String encodedImage,}) async {
+  Future<Either<Failure, String>> uploadImage({
+    required int userId,
+    required String encodedImage,
+  }) async {
     try {
       final imageUrl = await _uploadImageDataSource.uploadImage(
         userId: userId,
@@ -20,7 +22,7 @@ class UploadImageRepoImpl extends UploadImageRepository {
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
-      return Left(Failure.unknownError());
+      return Left(Failure.fromException(error));
     }
   }
 }

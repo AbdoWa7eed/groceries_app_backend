@@ -13,15 +13,15 @@ abstract class UploadImageDataSource {
 }
 
 class UploadImageDataSourceImpl extends UploadImageDataSource {
-  UploadImageDataSourceImpl(this._strorageService);
+  UploadImageDataSourceImpl(this._storageService);
 
-  final StorageService _strorageService;
+  final StorageService _storageService;
   @override
   Future<String> uploadImage({
     required int userId,
     required String encodedImage,
   }) async {
-    final response = await _strorageService.uploadImage(
+    final response = await _storageService.uploadImage(
       encodedImage: encodedImage,
       userId: userId,
     );
