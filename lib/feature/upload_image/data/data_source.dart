@@ -7,7 +7,7 @@ import 'package:groceries_app_backend/core/utils/response_message.dart';
 
 abstract class UploadImageDataSource {
   Future<String> uploadImage({
-    required int userId,
+    required String imageName,
     required String encodedImage,
   });
 }
@@ -18,12 +18,12 @@ class UploadImageDataSourceImpl extends UploadImageDataSource {
   final StorageService _storageService;
   @override
   Future<String> uploadImage({
-    required int userId,
+    required String imageName,
     required String encodedImage,
   }) async {
     final response = await _storageService.uploadImage(
       encodedImage: encodedImage,
-      userId: userId,
+      imageName: imageName,
     );
 
     if (response.id == null || response.id!.isEmpty) {
@@ -32,10 +32,10 @@ class UploadImageDataSourceImpl extends UploadImageDataSource {
       );
     }
 
-    return _getImageUrl(response.name!);
+    return _getImageUrl(response.name!, response.bucket!);
   }
 
-  String _getImageUrl(String imageName) {
-    return '${Constants.storageUrl}${Constants.bucketName}/$imageName';
+  String _getImageUrl(String imageName, String bucketName) {
+    return '${Constants.storageUrl}$bucketName/$imageName';
   }
 }

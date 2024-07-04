@@ -19,4 +19,16 @@ class CategoryModel {
   final String? imageUrl;
 
   Map<String, dynamic> toJson() => _$CategoryModelToJson(this);
+
+  CategoryModel copyWith({
+    int? categoryId,
+    String? name,
+    String? imageUrl,
+  }) {
+    return CategoryModel(
+      categoryId: categoryId ?? this.categoryId,
+      name: name ?? this.name,
+      imageUrl: imageUrl ?? this.imageUrl,
+    );
+  }
 }

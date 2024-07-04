@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs
-
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/categories/data/data_source.dart';
@@ -10,19 +8,44 @@ import 'package:groceries_app_backend/feature/categories/repo/categories_repo.da
 
 class CategoriesRepoImpl extends CategoriesRepository {
   CategoriesRepoImpl(this._dataSource);
+
   final CategoriesDataSource _dataSource;
+
   @override
   Future<Either<Failure, List<CategoryModel>>> getCategories({
     required CategorySearchInput searchInput,
   }) async {
     try {
-      final products = await _dataSource.getCategories(
+      final categories = await _dataSource.getCategories(
         take: searchInput.size,
         skip: searchInput.skip,
       );
       return Right(
-        products.map((category) => category.toCategoryModel()).toList(),
+        categories.map((category) => category.toCategoryModel()).toList(),
       );
+    } catch (error) {
+      return Left(Failure.fromException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CategoryModel>> addCategory(
+    CategoryModel categoryModel,
+  ) async {
+    try {
+      final category =
+          await _dataSource.addCategory(categoryModel.toCreateInputModel());
+      return Right(category.toCategoryModel());
+    } catch (error) {
+      return Left(Failure.fromException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CategoryModel>> deleteCategory(int categoryId) async {
+    try {
+      final category = await _dataSource.deleteCategory(categoryId);
+      return Right(category.toCategoryModel());
     } catch (error) {
       return Left(Failure.fromException(error));
     }

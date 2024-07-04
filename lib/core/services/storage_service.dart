@@ -15,7 +15,7 @@ const _jpg = '/9j';
 class StorageService {
   Future<Object> uploadImage({
     required String encodedImage,
-    required int userId,
+    required String imageName,
   }) async {
     final credentials = await _getCredentials();
 
@@ -37,21 +37,26 @@ class StorageService {
       );
     }
     final extension = _getBase64FileExtension(encodedImage);
-    final response = await _uploadImage(httpClient, bytes, extension, userId);
+    final response = await _uploadImage(
+      httpClient: httpClient,
+      bytes: bytes,
+      extension: extension,
+      imageName: imageName,
+    );
     return response;
   }
 
-  Future<Object> _uploadImage(
-    Client httpClient,
-    List<int> bytes,
-    String extension,
-    int userId,
-  ) async {
+  Future<Object> _uploadImage({
+    required Client httpClient,
+    required List<int> bytes,
+    required String extension,
+    required String imageName,
+  }) async {
     final storage = StorageApi(httpClient);
 
-    final imageName = 'User$userId.$extension';
+    final imageFullName = '$imageName.$extension';
 
-    final bucketObject = Object(name: imageName);
+    final bucketObject = Object(name: imageFullName);
 
     final media = Media(
       Stream<List<int>>.fromIterable([bytes]),

@@ -1,19 +1,21 @@
-// ignore_for_file: one_member_abstracts
-
 import 'dart:async';
 
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
+import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
+import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/core/utils/response_message.dart';
+import 'package:orm/orm.dart';
 
-/// An abstract class defining the contract for fetching banner data.
 abstract class BannersDataSource {
-  /// Returns a `Future` containing a list of [Banners].
   Future<List<Banners>> getBanners();
+
+  Future<Banners> addBanner(String imageUrl);
+
+  Future<Banners> deleteBanner(int bannerId);
 }
 
-/// A concrete implementation of [BannersDataSource] that uses PrismaClient.
 class BannersDataSourceImpl extends BannersDataSource {
-  /// Creates an instance of [BannersDataSourceImpl].
   BannersDataSourceImpl(this._client);
 
   final PrismaClient _client;
@@ -23,5 +25,23 @@ class BannersDataSourceImpl extends BannersDataSource {
     final banners = await _client.banners.findMany();
 
     return banners.toList();
+  }
+
+  @override
+  Future<Banners> addBanner(String imageUrl) async {
+    final banner = await _client.banners
+        .create(data: PrismaUnion.$1(BannersCreateInput(imageUrl: imageUrl)));
+
+    return banner;
+  }
+
+  @override
+  Future<Banners> deleteBanner(int bannerId) async {
+    final banner = await _client.banners
+        .delete(where: BannersWhereUniqueInput(bannerId: bannerId));
+    if (banner == null) {
+      throw Failure.notFound(message: ResponseMessages.bannerNotFound);
+    }
+    return banner;
   }
 }

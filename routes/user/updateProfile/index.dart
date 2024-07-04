@@ -55,7 +55,7 @@ Future<Response> _updateUserData(RequestContext context) async {
 Future<String> _uploadImage(int userId, String encodedImage) async {
   final uploadImageRepo = instance<UploadImageRepository>();
   final data = await uploadImageRepo.uploadImage(
-    userId: userId,
+    imageName: _userImageName(userId),
     encodedImage: encodedImage,
   );
   if (data.isLeft()) {
@@ -64,3 +64,5 @@ Future<String> _uploadImage(int userId, String encodedImage) async {
 
   return data.asRight();
 }
+
+String _userImageName(int userId) => 'User$userId';

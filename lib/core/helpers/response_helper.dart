@@ -63,10 +63,12 @@ abstract class ResponseHelper {
     );
   }
 
-  static Response notFound() {
+  static Response notFound({
+    String message = ResponseMessages.noRouteFound,
+  }) {
     return _json(
       statusCode: HttpStatus.notFound,
-      message: ResponseMessages.noRouteFound,
+      message: message,
     );
   }
 

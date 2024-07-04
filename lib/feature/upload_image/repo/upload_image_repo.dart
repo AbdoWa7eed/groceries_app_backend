@@ -5,7 +5,7 @@ import 'package:groceries_app_backend/core/utils/failure.dart';
 
 abstract class UploadImageRepository {
   Future<Either<Failure, String>> uploadImage({
-    required int userId,
+    required String imageName,
     required String encodedImage,
   });
 }

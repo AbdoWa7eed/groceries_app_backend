@@ -118,4 +118,17 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
   static const String rustPanicError = 'Rust panic error';
   static const String initializationError = 'Initialization error';
   static const String validationError = 'Validation error';
+
+  // Banners
+  static const String bannerNotFound = 'Banner not found';
+  static const String bannerAdded = 'Banner added successfully';
+  static const String bannerRemoved = 'Banner removed successfully';
+  static const String resolveBannerIdError = "Couldn't Resolve banner ID";
+  static const String imageIsRequired = 'Image is required';
+
+  // Categories
+  static const String categoryNotFound = 'Category not found';
+  static const String categoryAdded = 'Category added successfully';
+  static const String categoryRemoved = 'Category removed successfully';
+  static const String resolveCategoryIdError = "Couldn't Resolve category ID";
 }
