@@ -47,7 +47,7 @@ abstract class ResponseHelper {
     );
   }
 
-    static Response unAuthorized({
+  static Response unAuthorized({
     String message = ResponseMessages.unauthorized,
   }) {
     return _json(
@@ -68,6 +68,15 @@ abstract class ResponseHelper {
   }) {
     return _json(
       statusCode: HttpStatus.notFound,
+      message: message,
+    );
+  }
+
+  static Response internalServerError({
+    required String message,
+  }) {
+    return _json(
+      statusCode: HttpStatus.internalServerError,
       message: message,
     );
   }

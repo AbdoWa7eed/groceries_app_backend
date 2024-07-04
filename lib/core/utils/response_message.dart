@@ -136,4 +136,11 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
   static const String categoryAdded = 'Category added successfully';
   static const String categoryRemoved = 'Category removed successfully';
   static const String resolveCategoryIdError = "Couldn't Resolve category ID";
+
+
+  // Nutritions
+  static const String nutritionAdded = 'Nutrition added successfully';
+  static const String nutritionRemoved = 'Nutrition removed successfully';
+  static const String nutritionUpdated = 'Nutrition updated successfully';
+  static const String resolveNutritionIdError = "Couldn't Resolve nutrition ID";
 }

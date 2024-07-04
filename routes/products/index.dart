@@ -66,7 +66,7 @@ Future<Response> _addProduct(RequestContext context) async {
     return product.asFailure().failureResponse;
   } catch (error) {
     return ResponseHelper.badRequest(
-      message: error.toString(),
+      message: ResponseMessages.checkRequestBody,
     );
   }
 }

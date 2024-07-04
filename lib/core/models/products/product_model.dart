@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:groceries_app_backend/feature/categories/model/categories/category_model.dart';
-import 'package:groceries_app_backend/feature/products/model/nutritions/nutritions_model.dart';
+import 'package:groceries_app_backend/feature/nutritions/model/nutritions_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product_model.g.dart';

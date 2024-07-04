@@ -176,3 +176,15 @@ void initReviewResources() {
       );
   }
 }
+
+void initNutritionResources() {
+  if (!instance.isRegistered<NutritionsRepository>()) {
+    instance
+      ..registerLazySingleton<NutritionsRepository>(
+        () => NutritionsRepositoryImpl(instance<NutritionsDataSource>()),
+      )
+      ..registerLazySingleton<NutritionsDataSource>(
+        () => NutritionsDataSourceImpl(instance<PrismaClient>()),
+      );
+  }
+}

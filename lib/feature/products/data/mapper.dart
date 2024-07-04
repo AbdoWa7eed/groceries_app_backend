@@ -4,8 +4,8 @@ import 'package:groceries_app_backend/core/models/products/product_model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
 import 'package:groceries_app_backend/feature/categories/data/mapper.dart';
+import 'package:groceries_app_backend/feature/nutritions/data/mapper.dart';
 import 'package:groceries_app_backend/feature/products/model/Input_model/product_input_model.dart';
-import 'package:groceries_app_backend/feature/products/model/nutritions/nutritions_model.dart';
 import 'package:groceries_app_backend/feature/products/model/search/product_search_input.dart';
 import 'package:orm/orm.dart';
 
@@ -23,17 +23,6 @@ extension ProductMapper on Products {
       nutritions: nutritions?.toNutritionModel(),
       productDetails: productDetails,
       discountPercentage: discountPercentage?.toDouble(),
-    );
-  }
-}
-
-extension NutritionsMapper on Nutritions? {
-  NutritionsModel toNutritionModel() {
-    return NutritionsModel(
-      nutritionId: this?.nutritionId,
-      calories: this?.calories,
-      protein: this?.protein,
-      carbohydrates: this?.carbohydrates,
     );
   }
 }

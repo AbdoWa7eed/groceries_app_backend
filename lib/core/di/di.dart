@@ -20,6 +20,9 @@ import 'package:groceries_app_backend/feature/categories/repo/categories_repo_im
 import 'package:groceries_app_backend/feature/favorites/data/favorite_data_source.dart';
 import 'package:groceries_app_backend/feature/favorites/repo/favorite_repo.dart';
 import 'package:groceries_app_backend/feature/favorites/repo/favorite_repo_impl.dart';
+import 'package:groceries_app_backend/feature/nutritions/data/data_source.dart';
+import 'package:groceries_app_backend/feature/nutritions/repo/nutritions_repo.dart';
+import 'package:groceries_app_backend/feature/nutritions/repo/nutritions_repo_impl.dart';
 import 'package:groceries_app_backend/feature/orders/data/data_source.dart';
 import 'package:groceries_app_backend/feature/orders/repo/orders_repo.dart';
 import 'package:groceries_app_backend/feature/orders/repo/orders_repo_impl.dart';
