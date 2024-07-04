@@ -4,8 +4,8 @@ import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
+import 'package:groceries_app_backend/core/utils/functions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
-import 'package:groceries_app_backend/feature/upload_image/repo/upload_image_repo.dart';
 import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 import 'package:groceries_app_backend/feature/user/repo/user_repo.dart';
 
@@ -24,13 +24,20 @@ Future<Response> _updateUserData(RequestContext context) async {
   try {
     final jsonData = context.read<Map<String, dynamic>>();
     final userId = context.read<int>();
-    var userModel = UserModel.fromJson(jsonData).copyWith(
+    final userModel = UserModel.fromJson(jsonData).copyWith(
       userId: userId,
     );
     final image = jsonData['image'] as String?;
     if (image != null) {
-      final imageUrl = await _uploadImage(userId, image);
-      userModel = userModel.copyWith(imageUrl: imageUrl);
+      final imageResult = await uploadImage(
+        encodedImage: image,
+        imageName: _userImageName(userId),
+      );
+
+      if (imageResult.isLeft()) {
+        return imageResult.asFailure().failureResponse;
+      }
+      userModel.copyWith(imageUrl: imageResult.asRight());
     }
 
     final userRepo = instance<UserRepository>();
@@ -50,19 +57,6 @@ Future<Response> _updateUserData(RequestContext context) async {
       message: ResponseMessages.checkRequestBody,
     );
   }
-}
-
-Future<String> _uploadImage(int userId, String encodedImage) async {
-  final uploadImageRepo = instance<UploadImageRepository>();
-  final data = await uploadImageRepo.uploadImage(
-    imageName: _userImageName(userId),
-    encodedImage: encodedImage,
-  );
-  if (data.isLeft()) {
-    throw data.asFailure();
-  }
-
-  return data.asRight();
 }
 
 String _userImageName(int userId) => 'User$userId';

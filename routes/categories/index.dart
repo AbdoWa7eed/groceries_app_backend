@@ -1,14 +1,12 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
-import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/core/utils/functions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:groceries_app_backend/feature/categories/model/categories/category_model.dart';
 import 'package:groceries_app_backend/feature/categories/model/search/category_search_input.dart';
 import 'package:groceries_app_backend/feature/categories/repo/categories_repo.dart';
-import 'package:groceries_app_backend/feature/upload_image/repo/upload_image_repo.dart';
 
 Future<Response> onRequest(RequestContext context) {
   return _getResponse(context);
@@ -46,19 +44,19 @@ Future<Response> _addCategory(RequestContext context) async {
   try {
     final categoryRepo = instance<CategoriesRepository>();
     final data = await context.request.json() as Map<String, dynamic>;
-    final model = CategoryModel.fromJson(data);
-    String? imageUrl;
+    var model = CategoryModel.fromJson(data);
     if ((data['image'] as String?) != null) {
-      final imageResult =
-          await _uploadImage(encodedImage: data['image'].toString());
+      final imageResult = await uploadImage(
+        encodedImage: data['image'].toString(),
+        imageName: _categoryName,
+      );
       if (imageResult.isLeft()) {
         return imageResult.asFailure().failureResponse;
       }
-      imageUrl = imageResult.asRight();
+      model = model.copyWith(imageUrl: imageResult.asRight());
     }
 
-    final result =
-        await categoryRepo.addCategory(model.copyWith(imageUrl: imageUrl));
+    final result = await categoryRepo.addCategory(model);
     if (result.isRight()) {
       return ResponseHelper.created(
         message: ResponseMessages.categoryAdded,
@@ -71,18 +69,6 @@ Future<Response> _addCategory(RequestContext context) async {
       message: ResponseMessages.checkRequestBody,
     );
   }
-}
-
-Future<Either<Failure, String>> _uploadImage({
-  required String encodedImage,
-}) async {
-  final uploadImageRepo = instance<UploadImageRepository>();
-  final data = await uploadImageRepo.uploadImage(
-    imageName: _categoryName,
-    encodedImage: encodedImage,
-  );
-
-  return data;
 }
 
 String get _categoryName => 'category${DateTime.now().millisecondsSinceEpoch}';

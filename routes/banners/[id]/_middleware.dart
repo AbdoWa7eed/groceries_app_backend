@@ -5,19 +5,11 @@ import 'package:groceries_app_backend/core/utils/response_message.dart';
 
 Handler middleware(Handler handler) {
   return (context) async {
-    if (isDeleteMethod(context)) {
-      if (context.read<String>() != UserRolesEnum.admin.name) {
-        return ResponseHelper.forbidden(
-          message: ResponseMessages.onlyAdminsAllowed,
-        );
-      }
-      return await handler(context);
-    } else {
-      return ResponseHelper.methodNotAllowed();
+    if (context.read<String>() != UserRolesEnum.admin.name) {
+      return ResponseHelper.forbidden(
+        message: ResponseMessages.onlyAdminsAllowed,
+      );
     }
+    return await handler(context);
   };
-}
-
-bool isDeleteMethod(RequestContext context) {
-  return context.request.method == HttpMethod.delete;
 }

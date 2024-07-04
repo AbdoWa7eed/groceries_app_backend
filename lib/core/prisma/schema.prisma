@@ -52,14 +52,11 @@ model favorites {
 }
 
 model nutritions {
-  nutrition_id  Int      @id @default(autoincrement())
-  calories      Int      @db.SmallInt
-  protein       Int      @db.SmallInt
-  carbohydrates Int      @db.SmallInt
-  product_id    Int
-  products      products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_nutritions_products1")
-
-  @@index([product_id], map: "fk_nutritions_products1_idx")
+  nutrition_id  Int        @id @default(autoincrement())
+  calories      Int        @db.SmallInt
+  protein       Int        @db.SmallInt
+  carbohydrates Int        @db.SmallInt
+  products      products[]
 }
 
 model order_items {
@@ -115,14 +112,16 @@ model products {
   product_details     String?       @db.Text
   discount_percentage Decimal?      @default(0.00) @db.Decimal(5, 2)
   rate                Decimal       @default(0.0) @db.Decimal(2, 1)
+  nutrition_id        Int?
   cart_items          cart_items[]
   favorites           favorites[]
-  nutritions          nutritions[]
   order_items         order_items[]
+  nutritions          nutritions?   @relation(fields: [nutrition_id], references: [nutrition_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_nutrition_id")
   categories          categories    @relation(fields: [category_id], references: [category_id], onDelete: NoAction, map: "fk_products_Categoires1")
   reviews             reviews[]
 
   @@index([category_id], map: "fk_products_Categoires1_idx")
+  @@index([nutrition_id], map: "fk_nutrition_id")
 }
 
 model reviews {

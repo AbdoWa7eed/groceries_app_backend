@@ -25,49 +25,6 @@ class Banners {
       };
 }
 
-class Nutritions {
-  const Nutritions({
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-    this.products,
-  });
-
-  factory Nutritions.fromJson(Map json) => Nutritions(
-        nutritionId: json['nutrition_id'],
-        calories: json['calories'],
-        protein: json['protein'],
-        carbohydrates: json['carbohydrates'],
-        productId: json['product_id'],
-        products: json['products'] is Map
-            ? _i1.Products.fromJson(json['products'])
-            : null,
-      );
-
-  final int? nutritionId;
-
-  final int? calories;
-
-  final int? protein;
-
-  final int? carbohydrates;
-
-  final int? productId;
-
-  final _i1.Products? products;
-
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products?.toJson(),
-      };
-}
-
 class OrderStatus {
   const OrderStatus({
     this.statusId,
@@ -261,6 +218,50 @@ class OrderItems {
       };
 }
 
+class Nutritions {
+  const Nutritions({
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.products,
+    this.$count,
+  });
+
+  factory Nutritions.fromJson(Map json) => Nutritions(
+        nutritionId: json['nutrition_id'],
+        calories: json['calories'],
+        protein: json['protein'],
+        carbohydrates: json['carbohydrates'],
+        products: (json['products'] as Iterable?)
+            ?.map((json) => _i1.Products.fromJson(json)),
+        $count: json['_count'] is Map
+            ? _i2.NutritionsCountOutputType.fromJson(json['_count'])
+            : null,
+      );
+
+  final int? nutritionId;
+
+  final int? calories;
+
+  final int? protein;
+
+  final int? carbohydrates;
+
+  final Iterable<_i1.Products>? products;
+
+  final _i2.NutritionsCountOutputType? $count;
+
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'products': products?.map((e) => e.toJson()),
+        '_count': $count?.toJson(),
+      };
+}
+
 class Categories {
   const Categories({
     this.categoryId,
@@ -364,10 +365,11 @@ class Products {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
     this.$count,
@@ -384,14 +386,16 @@ class Products {
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
         rate: json['rate'],
+        nutritionId: json['nutrition_id'],
         cartItems: (json['cart_items'] as Iterable?)
             ?.map((json) => _i1.CartItems.fromJson(json)),
         favorites: (json['favorites'] as Iterable?)
             ?.map((json) => _i1.Favorites.fromJson(json)),
-        nutritions: (json['nutritions'] as Iterable?)
-            ?.map((json) => _i1.Nutritions.fromJson(json)),
         orderItems: (json['order_items'] as Iterable?)
             ?.map((json) => _i1.OrderItems.fromJson(json)),
+        nutritions: json['nutritions'] is Map
+            ? _i1.Nutritions.fromJson(json['nutritions'])
+            : null,
         categories: json['categories'] is Map
             ? _i1.Categories.fromJson(json['categories'])
             : null,
@@ -422,13 +426,15 @@ class Products {
 
   final _i3.Decimal? rate;
 
+  final int? nutritionId;
+
   final Iterable<_i1.CartItems>? cartItems;
 
   final Iterable<_i1.Favorites>? favorites;
 
-  final Iterable<_i1.Nutritions>? nutritions;
-
   final Iterable<_i1.OrderItems>? orderItems;
+
+  final _i1.Nutritions? nutritions;
 
   final _i1.Categories? categories;
 
@@ -447,10 +453,11 @@ class Products {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems?.map((e) => e.toJson()),
         'favorites': favorites?.map((e) => e.toJson()),
-        'nutritions': nutritions?.map((e) => e.toJson()),
         'order_items': orderItems?.map((e) => e.toJson()),
+        'nutritions': nutritions?.toJson(),
         'categories': categories?.toJson(),
         'reviews': reviews?.map((e) => e.toJson()),
         '_count': $count?.toJson(),

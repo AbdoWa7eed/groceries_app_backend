@@ -1384,6 +1384,17 @@ class OrdersCountOutputType {
   Map<String, dynamic> toJson() => {'order_items': orderItems};
 }
 
+class NutritionsCountOutputType {
+  const NutritionsCountOutputType({this.products});
+
+  factory NutritionsCountOutputType.fromJson(Map json) =>
+      NutritionsCountOutputType(products: json['products']);
+
+  final int? products;
+
+  Map<String, dynamic> toJson() => {'products': products};
+}
+
 class CategoriesCountOutputType {
   const CategoriesCountOutputType({this.products});
 
@@ -1399,7 +1410,6 @@ class ProductsCountOutputType {
   const ProductsCountOutputType({
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -1407,7 +1417,6 @@ class ProductsCountOutputType {
   factory ProductsCountOutputType.fromJson(Map json) => ProductsCountOutputType(
         cartItems: json['cart_items'],
         favorites: json['favorites'],
-        nutritions: json['nutritions'],
         orderItems: json['order_items'],
         reviews: json['reviews'],
       );
@@ -1416,8 +1425,6 @@ class ProductsCountOutputType {
 
   final int? favorites;
 
-  final int? nutritions;
-
   final int? orderItems;
 
   final int? reviews;
@@ -1425,7 +1432,6 @@ class ProductsCountOutputType {
   Map<String, dynamic> toJson() => {
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -1853,74 +1859,92 @@ class DecimalNullableFilter
       };
 }
 
-class NutritionsWhereInput
+class NestedIntNullableFilter
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-    this.products,
+  const NestedIntNullableFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
   });
 
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? AND;
+  final _i1
+      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
+      equals;
 
-  final Iterable<_i2.NutritionsWhereInput>? OR;
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
 
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? NOT;
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? nutritionId;
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
 
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
-      products;
+  final _i1.PrismaUnion<int,
+      _i1.PrismaUnion<_i2.NestedIntNullableFilter, _i1.PrismaNull>>? not;
 
   @override
   Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products,
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
       };
 }
 
-class NutritionsListRelationFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsListRelationFilter({
-    this.every,
-    this.some,
-    this.none,
+class IntNullableFilter implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const IntNullableFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
   });
 
-  final _i2.NutritionsWhereInput? every;
+  final _i1
+      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
+      equals;
 
-  final _i2.NutritionsWhereInput? some;
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
 
-  final _i2.NutritionsWhereInput? none;
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<int,
+      _i1.PrismaUnion<_i2.NestedIntNullableFilter, _i1.PrismaNull>>? not;
 
   @override
   Map<String, dynamic> toJson() => {
-        'every': every,
-        'some': some,
-        'none': none,
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
       };
 }
 
@@ -2403,6 +2427,68 @@ class ProductsListRelationFilter
       };
 }
 
+class NutritionsWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.products,
+  });
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? AND;
+
+  final Iterable<_i2.NutritionsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? nutritionId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
+
+  final _i2.ProductsListRelationFilter? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'products': products,
+      };
+}
+
+class NutritionsNullableRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsNullableRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput, _i1.PrismaNull>? $is;
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput, _i1.PrismaNull>? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
 class CategoriesWhereInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const CategoriesWhereInput({
@@ -2552,10 +2638,11 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
   });
@@ -2593,13 +2680,18 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
 
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      nutritionId;
+
   final _i2.CartItemsListRelationFilter? cartItems;
 
   final _i2.FavoritesListRelationFilter? favorites;
 
-  final _i2.NutritionsListRelationFilter? nutritions;
-
   final _i2.OrderItemsListRelationFilter? orderItems;
+
+  final _i1.PrismaUnion<_i2.NutritionsNullableRelationFilter,
+      _i1.PrismaUnion<_i2.NutritionsWhereInput, _i1.PrismaNull>>? nutritions;
 
   final _i1.PrismaUnion<_i2.CategoriesRelationFilter, _i2.CategoriesWhereInput>?
       categories;
@@ -2621,10 +2713,11 @@ class ProductsWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -3234,16 +3327,6 @@ class CartsOrderByWithRelationInput
       };
 }
 
-class NutritionsOrderByRelationAggregateInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsOrderByRelationAggregateInput({this.$count});
-
-  final _i2.SortOrder? $count;
-
-  @override
-  Map<String, dynamic> toJson() => {'_count': $count};
-}
-
 class OrderItemsOrderByRelationAggregateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderItemsOrderByRelationAggregateInput({this.$count});
@@ -3262,6 +3345,36 @@ class ProductsOrderByRelationAggregateInput
 
   @override
   Map<String, dynamic> toJson() => {'_count': $count};
+}
+
+class NutritionsOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsOrderByWithRelationInput({
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.products,
+  });
+
+  final _i2.SortOrder? nutritionId;
+
+  final _i2.SortOrder? calories;
+
+  final _i2.SortOrder? protein;
+
+  final _i2.SortOrder? carbohydrates;
+
+  final _i2.ProductsOrderByRelationAggregateInput? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'products': products,
+      };
 }
 
 class CategoriesOrderByWithRelationInput
@@ -3303,10 +3416,11 @@ class ProductsOrderByWithRelationInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
   });
@@ -3331,13 +3445,15 @@ class ProductsOrderByWithRelationInput
 
   final _i2.SortOrder? rate;
 
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? nutritionId;
+
   final _i2.CartItemsOrderByRelationAggregateInput? cartItems;
 
   final _i2.FavoritesOrderByRelationAggregateInput? favorites;
 
-  final _i2.NutritionsOrderByRelationAggregateInput? nutritions;
-
   final _i2.OrderItemsOrderByRelationAggregateInput? orderItems;
+
+  final _i2.NutritionsOrderByWithRelationInput? nutritions;
 
   final _i2.CategoriesOrderByWithRelationInput? categories;
 
@@ -3355,10 +3471,11 @@ class ProductsOrderByWithRelationInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -3656,212 +3773,6 @@ class ProductsFavoritesArgs
   final _i2.FavoritesSelect? select;
 
   final _i2.FavoritesInclude? include;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'orderBy': orderBy,
-        'cursor': cursor,
-        'take': take,
-        'skip': skip,
-        'distinct': distinct,
-        'select': select,
-        'include': include,
-      };
-}
-
-class NutritionsProductsArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsProductsArgs({
-    this.select,
-    this.include,
-  });
-
-  final _i2.ProductsSelect? select;
-
-  final _i2.ProductsInclude? include;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'select': select,
-        'include': include,
-      };
-}
-
-class NutritionsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsSelect({
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-    this.products,
-  });
-
-  final bool? nutritionId;
-
-  final bool? calories;
-
-  final bool? protein;
-
-  final bool? carbohydrates;
-
-  final bool? productId;
-
-  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products,
-      };
-}
-
-class NutritionsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsInclude({this.products});
-
-  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
-
-  @override
-  Map<String, dynamic> toJson() => {'products': products};
-}
-
-class NutritionsOrderByWithRelationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsOrderByWithRelationInput({
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-    this.products,
-  });
-
-  final _i2.SortOrder? nutritionId;
-
-  final _i2.SortOrder? calories;
-
-  final _i2.SortOrder? protein;
-
-  final _i2.SortOrder? carbohydrates;
-
-  final _i2.SortOrder? productId;
-
-  final _i2.ProductsOrderByWithRelationInput? products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products,
-      };
-}
-
-class NutritionsWhereUniqueInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsWhereUniqueInput({
-    this.nutritionId,
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-    this.products,
-  });
-
-  final int? nutritionId;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? AND;
-
-  final Iterable<_i2.NutritionsWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
-      Iterable<_i2.NutritionsWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  final _i1.PrismaUnion<_i2.ProductsRelationFilter, _i2.ProductsWhereInput>?
-      products;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-        'products': products,
-      };
-}
-
-enum NutritionsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
-  nutritionId<int>('nutrition_id', 'nutritions'),
-  calories<int>('calories', 'nutritions'),
-  protein<int>('protein', 'nutritions'),
-  carbohydrates<int>('carbohydrates', 'nutritions'),
-  productId<int>('product_id', 'nutritions');
-
-  const NutritionsScalar(
-    this.name,
-    this.model,
-  );
-
-  @override
-  final String name;
-
-  @override
-  final String model;
-}
-
-class ProductsNutritionsArgs
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsNutritionsArgs({
-    this.where,
-    this.orderBy,
-    this.cursor,
-    this.take,
-    this.skip,
-    this.distinct,
-    this.select,
-    this.include,
-  });
-
-  final _i2.NutritionsWhereInput? where;
-
-  final _i1.PrismaUnion<Iterable<_i2.NutritionsOrderByWithRelationInput>,
-      _i2.NutritionsOrderByWithRelationInput>? orderBy;
-
-  final _i2.NutritionsWhereUniqueInput? cursor;
-
-  final int? take;
-
-  final int? skip;
-
-  final _i1.PrismaUnion<_i2.NutritionsScalar, Iterable<_i2.NutritionsScalar>>?
-      distinct;
-
-  final _i2.NutritionsSelect? select;
-
-  final _i2.NutritionsInclude? include;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -5377,10 +5288,11 @@ class ProductsWhereUniqueInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
   });
@@ -5418,13 +5330,18 @@ class ProductsWhereUniqueInput
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
 
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      nutritionId;
+
   final _i2.CartItemsListRelationFilter? cartItems;
 
   final _i2.FavoritesListRelationFilter? favorites;
 
-  final _i2.NutritionsListRelationFilter? nutritions;
-
   final _i2.OrderItemsListRelationFilter? orderItems;
+
+  final _i1.PrismaUnion<_i2.NutritionsNullableRelationFilter,
+      _i1.PrismaUnion<_i2.NutritionsWhereInput, _i1.PrismaNull>>? nutritions;
 
   final _i1.PrismaUnion<_i2.CategoriesRelationFilter, _i2.CategoriesWhereInput>?
       categories;
@@ -5446,10 +5363,11 @@ class ProductsWhereUniqueInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -5465,7 +5383,8 @@ enum ProductsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   categoryId<int>('category_id', 'products'),
   productDetails<String>('product_details', 'products'),
   discountPercentage<_i1.Decimal>('discount_percentage', 'products'),
-  rate<_i1.Decimal>('rate', 'products');
+  rate<_i1.Decimal>('rate', 'products'),
+  nutritionId<int>('nutrition_id', 'products');
 
   const ProductsScalar(
     this.name,
@@ -5477,6 +5396,141 @@ enum ProductsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
 
   @override
   final String model;
+}
+
+class NutritionsProductsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsProductsArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.ProductsWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.ProductsOrderByWithRelationInput>,
+      _i2.ProductsOrderByWithRelationInput>? orderBy;
+
+  final _i2.ProductsWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.ProductsScalar, Iterable<_i2.ProductsScalar>>?
+      distinct;
+
+  final _i2.ProductsSelect? select;
+
+  final _i2.ProductsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
+      };
+}
+
+class NutritionsCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsCountOutputTypeSelect({this.products});
+
+  final bool? products;
+
+  @override
+  Map<String, dynamic> toJson() => {'products': products};
+}
+
+class NutritionsCountArgs implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsCountArgs({this.select});
+
+  final _i2.NutritionsCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class NutritionsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsSelect({
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.products,
+    this.$count,
+  });
+
+  final bool? nutritionId;
+
+  final bool? calories;
+
+  final bool? protein;
+
+  final bool? carbohydrates;
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'products': products,
+        '_count': $count,
+      };
+}
+
+class NutritionsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsInclude({
+    this.products,
+    this.$count,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsProductsArgs>? products;
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'products': products,
+        '_count': $count,
+      };
+}
+
+class ProductsNutritionsArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsNutritionsArgs({
+    this.where,
+    this.select,
+    this.include,
+  });
+
+  final _i2.NutritionsWhereInput? where;
+
+  final _i2.NutritionsSelect? select;
+
+  final _i2.NutritionsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'select': select,
+        'include': include,
+      };
 }
 
 class CategoriesProductsArgs
@@ -5654,7 +5708,6 @@ class ProductsCountOutputTypeSelect
   const ProductsCountOutputTypeSelect({
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -5662,8 +5715,6 @@ class ProductsCountOutputTypeSelect
   final bool? cartItems;
 
   final bool? favorites;
-
-  final bool? nutritions;
 
   final bool? orderItems;
 
@@ -5673,7 +5724,6 @@ class ProductsCountOutputTypeSelect
   Map<String, dynamic> toJson() => {
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -5692,8 +5742,8 @@ class ProductsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ProductsInclude({
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
     this.$count,
@@ -5703,9 +5753,9 @@ class ProductsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<bool, _i2.ProductsFavoritesArgs>? favorites;
 
-  final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
-
   final _i1.PrismaUnion<bool, _i2.ProductsOrderItemsArgs>? orderItems;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
 
   final _i1.PrismaUnion<bool, _i2.ProductsCategoriesArgs>? categories;
 
@@ -5717,8 +5767,8 @@ class ProductsInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
   Map<String, dynamic> toJson() => {
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
         '_count': $count,
@@ -5789,10 +5839,11 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
     this.$count,
@@ -5818,13 +5869,15 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? rate;
 
+  final bool? nutritionId;
+
   final _i1.PrismaUnion<bool, _i2.ProductsCartItemsArgs>? cartItems;
 
   final _i1.PrismaUnion<bool, _i2.ProductsFavoritesArgs>? favorites;
 
-  final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
-
   final _i1.PrismaUnion<bool, _i2.ProductsOrderItemsArgs>? orderItems;
+
+  final _i1.PrismaUnion<bool, _i2.ProductsNutritionsArgs>? nutritions;
 
   final _i1.PrismaUnion<bool, _i2.ProductsCategoriesArgs>? categories;
 
@@ -5844,10 +5897,11 @@ class ProductsSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
         '_count': $count,
@@ -6242,154 +6296,6 @@ class CartItemsCreateNestedManyWithoutProductsInput
       };
 }
 
-class NutritionsCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsCreateWithoutProductsInput({
-    required this.calories,
-    required this.protein,
-    required this.carbohydrates,
-  });
-
-  final int calories;
-
-  final int protein;
-
-  final int carbohydrates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-      };
-}
-
-class NutritionsUncheckedCreateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUncheckedCreateWithoutProductsInput({
-    this.nutritionId,
-    required this.calories,
-    required this.protein,
-    required this.carbohydrates,
-  });
-
-  final int? nutritionId;
-
-  final int calories;
-
-  final int protein;
-
-  final int carbohydrates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-      };
-}
-
-class NutritionsCreateOrConnectWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsCreateOrConnectWithoutProductsInput({
-    required this.where,
-    required this.create,
-  });
-
-  final _i2.NutritionsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.NutritionsCreateWithoutProductsInput,
-      _i2.NutritionsUncheckedCreateWithoutProductsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'create': create,
-      };
-}
-
-class NutritionsCreateManyProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsCreateManyProductsInput({
-    this.nutritionId,
-    required this.calories,
-    required this.protein,
-    required this.carbohydrates,
-  });
-
-  final int? nutritionId;
-
-  final int calories;
-
-  final int protein;
-
-  final int carbohydrates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-      };
-}
-
-class NutritionsCreateManyProductsInputEnvelope
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsCreateManyProductsInputEnvelope({
-    required this.data,
-    this.skipDuplicates,
-  });
-
-  final _i1.PrismaUnion<_i2.NutritionsCreateManyProductsInput,
-      Iterable<_i2.NutritionsCreateManyProductsInput>> data;
-
-  final bool? skipDuplicates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'data': data,
-        'skipDuplicates': skipDuplicates,
-      };
-}
-
-class NutritionsCreateNestedManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsCreateNestedManyWithoutProductsInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.NutritionsCreateWithoutProductsInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.NutritionsCreateWithoutProductsInput>,
-          _i1.PrismaUnion<
-              _i2.NutritionsUncheckedCreateWithoutProductsInput,
-              Iterable<
-                  _i2.NutritionsUncheckedCreateWithoutProductsInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.NutritionsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.NutritionsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i2.NutritionsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
 class OrderStatusCreateWithoutOrdersInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrderStatusCreateWithoutOrdersInput({required this.name});
@@ -6593,6 +6499,140 @@ class PaymentMethodsCreateNestedOneWithoutOrdersInput
   final _i2.PaymentMethodsCreateOrConnectWithoutOrdersInput? connectOrCreate;
 
   final _i2.PaymentMethodsWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
+class NutritionsCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsCreateWithoutProductsInput({
+    required this.calories,
+    required this.protein,
+    required this.carbohydrates,
+  });
+
+  final int calories;
+
+  final int protein;
+
+  final int carbohydrates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+      };
+}
+
+class NutritionsUncheckedCreateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsUncheckedCreateWithoutProductsInput({
+    this.nutritionId,
+    required this.calories,
+    required this.protein,
+    required this.carbohydrates,
+  });
+
+  final int? nutritionId;
+
+  final int calories;
+
+  final int protein;
+
+  final int carbohydrates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+      };
+}
+
+class NutritionsWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsWhereUniqueInput({
+    this.nutritionId,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+    this.products,
+  });
+
+  final int? nutritionId;
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? AND;
+
+  final Iterable<_i2.NutritionsWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.NutritionsWhereInput,
+      Iterable<_i2.NutritionsWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
+
+  final _i2.ProductsListRelationFilter? products;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+        'products': products,
+      };
+}
+
+class NutritionsCreateOrConnectWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsCreateOrConnectWithoutProductsInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.NutritionsWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.NutritionsCreateWithoutProductsInput,
+      _i2.NutritionsUncheckedCreateWithoutProductsInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class NutritionsCreateNestedOneWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsCreateNestedOneWithoutProductsInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.NutritionsCreateWithoutProductsInput,
+      _i2.NutritionsUncheckedCreateWithoutProductsInput>? create;
+
+  final _i2.NutritionsCreateOrConnectWithoutProductsInput? connectOrCreate;
+
+  final _i2.NutritionsWhereUniqueInput? connect;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -7728,7 +7768,7 @@ class ProductsCreateWithoutOrderItemsInput
 
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
+  final _i2.NutritionsCreateNestedOneWithoutProductsInput? nutritions;
 
   final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
 
@@ -7880,42 +7920,6 @@ class FavoritesUncheckedCreateNestedManyWithoutProductsInput
       };
 }
 
-class NutritionsUncheckedCreateNestedManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUncheckedCreateNestedManyWithoutProductsInput({
-    this.create,
-    this.connectOrCreate,
-    this.createMany,
-    this.connect,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.NutritionsCreateWithoutProductsInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.NutritionsCreateWithoutProductsInput>,
-          _i1.PrismaUnion<
-              _i2.NutritionsUncheckedCreateWithoutProductsInput,
-              Iterable<
-                  _i2.NutritionsUncheckedCreateWithoutProductsInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.NutritionsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.NutritionsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i2.NutritionsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? connect;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'createMany': createMany,
-        'connect': connect,
-      };
-}
-
 class ReviewsUncheckedCreateNestedManyWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedCreateNestedManyWithoutProductsInput({
@@ -7964,9 +7968,9 @@ class ProductsUncheckedCreateWithoutOrderItemsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.reviews,
   });
 
@@ -7990,11 +7994,11 @@ class ProductsUncheckedCreateWithoutOrderItemsInput
 
   final _i1.Decimal? rate;
 
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
+
   final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
 
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
 
   final _i2.ReviewsUncheckedCreateNestedManyWithoutProductsInput? reviews;
 
@@ -8010,9 +8014,9 @@ class ProductsUncheckedCreateWithoutOrderItemsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'reviews': reviews,
       };
 }
@@ -8192,8 +8196,8 @@ class ProductsCreateWithoutReviewsInput
     this.rate,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     required this.categories,
   });
 
@@ -8217,9 +8221,9 @@ class ProductsCreateWithoutReviewsInput
 
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.NutritionsCreateNestedOneWithoutProductsInput? nutritions;
 
   final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
 
@@ -8235,8 +8239,8 @@ class ProductsCreateWithoutReviewsInput
         'rate': rate,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
       };
 }
@@ -8364,9 +8368,9 @@ class ProductsUncheckedCreateWithoutReviewsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
   });
 
@@ -8390,11 +8394,11 @@ class ProductsUncheckedCreateWithoutReviewsInput
 
   final _i1.Decimal? rate;
 
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
+
   final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
 
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
 
@@ -8410,9 +8414,9 @@ class ProductsUncheckedCreateWithoutReviewsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
       };
 }
@@ -8852,8 +8856,8 @@ class ProductsCreateWithoutCartItemsInput
     this.discountPercentage,
     this.rate,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     required this.categories,
     this.reviews,
   });
@@ -8876,9 +8880,9 @@ class ProductsCreateWithoutCartItemsInput
 
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.NutritionsCreateNestedOneWithoutProductsInput? nutritions;
 
   final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
 
@@ -8895,8 +8899,8 @@ class ProductsCreateWithoutCartItemsInput
         'discount_percentage': discountPercentage,
         'rate': rate,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -8915,8 +8919,8 @@ class ProductsUncheckedCreateWithoutCartItemsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -8941,9 +8945,9 @@ class ProductsUncheckedCreateWithoutCartItemsInput
 
   final _i1.Decimal? rate;
 
-  final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
 
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
+  final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
 
@@ -8961,8 +8965,8 @@ class ProductsUncheckedCreateWithoutCartItemsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -9429,8 +9433,8 @@ class ProductsCreateWithoutFavoritesInput
     this.discountPercentage,
     this.rate,
     this.cartItems,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     required this.categories,
     this.reviews,
   });
@@ -9453,9 +9457,9 @@ class ProductsCreateWithoutFavoritesInput
 
   final _i2.CartItemsCreateNestedManyWithoutProductsInput? cartItems;
 
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.NutritionsCreateNestedOneWithoutProductsInput? nutritions;
 
   final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
 
@@ -9472,8 +9476,8 @@ class ProductsCreateWithoutFavoritesInput
         'discount_percentage': discountPercentage,
         'rate': rate,
         'cart_items': cartItems,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -9492,8 +9496,8 @@ class ProductsUncheckedCreateWithoutFavoritesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -9518,9 +9522,9 @@ class ProductsUncheckedCreateWithoutFavoritesInput
 
   final _i1.Decimal? rate;
 
-  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
 
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
+  final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
 
@@ -9538,8 +9542,8 @@ class ProductsUncheckedCreateWithoutFavoritesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -10234,282 +10238,6 @@ class CartItemsUpdateManyWithoutProductsNestedInput
       };
 }
 
-class NutritionsUpdateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUpdateWithoutProductsInput({
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? calories;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? protein;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-      };
-}
-
-class NutritionsUncheckedUpdateWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUncheckedUpdateWithoutProductsInput({
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? nutritionId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? calories;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? protein;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-      };
-}
-
-class NutritionsUpsertWithWhereUniqueWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUpsertWithWhereUniqueWithoutProductsInput({
-    required this.where,
-    required this.update,
-    required this.create,
-  });
-
-  final _i2.NutritionsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpdateWithoutProductsInput,
-      _i2.NutritionsUncheckedUpdateWithoutProductsInput> update;
-
-  final _i1.PrismaUnion<_i2.NutritionsCreateWithoutProductsInput,
-      _i2.NutritionsUncheckedCreateWithoutProductsInput> create;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'update': update,
-        'create': create,
-      };
-}
-
-class NutritionsUpdateWithWhereUniqueWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUpdateWithWhereUniqueWithoutProductsInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.NutritionsWhereUniqueInput where;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpdateWithoutProductsInput,
-      _i2.NutritionsUncheckedUpdateWithoutProductsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class NutritionsScalarWhereInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsScalarWhereInput({
-    this.AND,
-    this.OR,
-    this.NOT,
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-    this.productId,
-  });
-
-  final _i1.PrismaUnion<_i2.NutritionsScalarWhereInput,
-      Iterable<_i2.NutritionsScalarWhereInput>>? AND;
-
-  final Iterable<_i2.NutritionsScalarWhereInput>? OR;
-
-  final _i1.PrismaUnion<_i2.NutritionsScalarWhereInput,
-      Iterable<_i2.NutritionsScalarWhereInput>>? NOT;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? nutritionId;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? calories;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? protein;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? carbohydrates;
-
-  final _i1.PrismaUnion<_i2.IntFilter, int>? productId;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'AND': AND,
-        'OR': OR,
-        'NOT': NOT,
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-        'product_id': productId,
-      };
-}
-
-class NutritionsUpdateManyMutationInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUpdateManyMutationInput({
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? calories;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? protein;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-      };
-}
-
-class NutritionsUncheckedUpdateManyWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUncheckedUpdateManyWithoutProductsInput({
-    this.nutritionId,
-    this.calories,
-    this.protein,
-    this.carbohydrates,
-  });
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? nutritionId;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? calories;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? protein;
-
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'nutrition_id': nutritionId,
-        'calories': calories,
-        'protein': protein,
-        'carbohydrates': carbohydrates,
-      };
-}
-
-class NutritionsUpdateManyWithWhereWithoutProductsInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUpdateManyWithWhereWithoutProductsInput({
-    required this.where,
-    required this.data,
-  });
-
-  final _i2.NutritionsScalarWhereInput where;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpdateManyMutationInput,
-      _i2.NutritionsUncheckedUpdateManyWithoutProductsInput> data;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'where': where,
-        'data': data,
-      };
-}
-
-class NutritionsUpdateManyWithoutProductsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUpdateManyWithoutProductsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.NutritionsCreateWithoutProductsInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.NutritionsCreateWithoutProductsInput>,
-          _i1.PrismaUnion<
-              _i2.NutritionsUncheckedCreateWithoutProductsInput,
-              Iterable<
-                  _i2.NutritionsUncheckedCreateWithoutProductsInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.NutritionsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.NutritionsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpsertWithWhereUniqueWithoutProductsInput,
-          Iterable<_i2.NutritionsUpsertWithWhereUniqueWithoutProductsInput>>?
-      upsert;
-
-  final _i2.NutritionsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpdateWithWhereUniqueWithoutProductsInput,
-          Iterable<_i2.NutritionsUpdateWithWhereUniqueWithoutProductsInput>>?
-      update;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpdateManyWithWhereWithoutProductsInput,
-          Iterable<_i2.NutritionsUpdateManyWithWhereWithoutProductsInput>>?
-      updateMany;
-
-  final _i1.PrismaUnion<_i2.NutritionsScalarWhereInput,
-      Iterable<_i2.NutritionsScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
 class DateTimeFieldUpdateOperationsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const DateTimeFieldUpdateOperationsInput({this.set});
@@ -10738,6 +10466,139 @@ class PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput
         'create': create,
         'connectOrCreate': connectOrCreate,
         'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
+class NutritionsUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsUpdateWithoutProductsInput({
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? calories;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? protein;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+      };
+}
+
+class NutritionsUncheckedUpdateWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsUncheckedUpdateWithoutProductsInput({
+    this.nutritionId,
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? nutritionId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? calories;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? protein;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'nutrition_id': nutritionId,
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
+      };
+}
+
+class NutritionsUpsertWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsUpsertWithoutProductsInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.NutritionsUpdateWithoutProductsInput,
+      _i2.NutritionsUncheckedUpdateWithoutProductsInput> update;
+
+  final _i1.PrismaUnion<_i2.NutritionsCreateWithoutProductsInput,
+      _i2.NutritionsUncheckedCreateWithoutProductsInput> create;
+
+  final _i2.NutritionsWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class NutritionsUpdateToOneWithWhereWithoutProductsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsUpdateToOneWithWhereWithoutProductsInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.NutritionsWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.NutritionsUpdateWithoutProductsInput,
+      _i2.NutritionsUncheckedUpdateWithoutProductsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class NutritionsUpdateOneWithoutProductsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsUpdateOneWithoutProductsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.NutritionsCreateWithoutProductsInput,
+      _i2.NutritionsUncheckedCreateWithoutProductsInput>? create;
+
+  final _i2.NutritionsCreateOrConnectWithoutProductsInput? connectOrCreate;
+
+  final _i2.NutritionsUpsertWithoutProductsInput? upsert;
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsWhereInput>? disconnect;
+
+  final _i1.PrismaUnion<bool, _i2.NutritionsWhereInput>? delete;
+
+  final _i2.NutritionsWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.NutritionsUpdateToOneWithWhereWithoutProductsInput,
+      _i1.PrismaUnion<_i2.NutritionsUpdateWithoutProductsInput,
+          _i2.NutritionsUncheckedUpdateWithoutProductsInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'disconnect': disconnect,
+        'delete': delete,
         'connect': connect,
         'update': update,
       };
@@ -12376,7 +12237,7 @@ class ProductsUpdateWithoutOrderItemsInput
 
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
+  final _i2.NutritionsUpdateOneWithoutProductsNestedInput? nutritions;
 
   final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
 
@@ -12397,6 +12258,36 @@ class ProductsUpdateWithoutOrderItemsInput
         'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
+      };
+}
+
+class NullableIntFieldUpdateOperationsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NullableIntFieldUpdateOperationsInput({
+    this.set,
+    this.increment,
+    this.decrement,
+    this.multiply,
+    this.divide,
+  });
+
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? set;
+
+  final int? increment;
+
+  final int? decrement;
+
+  final int? multiply;
+
+  final int? divide;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'set': set,
+        'increment': increment,
+        'decrement': decrement,
+        'multiply': multiply,
+        'divide': divide,
       };
 }
 
@@ -12600,80 +12491,6 @@ class FavoritesUncheckedUpdateManyWithoutProductsNestedInput
       };
 }
 
-class NutritionsUncheckedUpdateManyWithoutProductsNestedInput
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NutritionsUncheckedUpdateManyWithoutProductsNestedInput({
-    this.create,
-    this.connectOrCreate,
-    this.upsert,
-    this.createMany,
-    this.set,
-    this.disconnect,
-    this.delete,
-    this.connect,
-    this.update,
-    this.updateMany,
-    this.deleteMany,
-  });
-
-  final _i1.PrismaUnion<
-      _i2.NutritionsCreateWithoutProductsInput,
-      _i1.PrismaUnion<
-          Iterable<_i2.NutritionsCreateWithoutProductsInput>,
-          _i1.PrismaUnion<
-              _i2.NutritionsUncheckedCreateWithoutProductsInput,
-              Iterable<
-                  _i2.NutritionsUncheckedCreateWithoutProductsInput>>>>? create;
-
-  final _i1.PrismaUnion<_i2.NutritionsCreateOrConnectWithoutProductsInput,
-          Iterable<_i2.NutritionsCreateOrConnectWithoutProductsInput>>?
-      connectOrCreate;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpsertWithWhereUniqueWithoutProductsInput,
-          Iterable<_i2.NutritionsUpsertWithWhereUniqueWithoutProductsInput>>?
-      upsert;
-
-  final _i2.NutritionsCreateManyProductsInputEnvelope? createMany;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? set;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? disconnect;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? delete;
-
-  final _i1.PrismaUnion<_i2.NutritionsWhereUniqueInput,
-      Iterable<_i2.NutritionsWhereUniqueInput>>? connect;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpdateWithWhereUniqueWithoutProductsInput,
-          Iterable<_i2.NutritionsUpdateWithWhereUniqueWithoutProductsInput>>?
-      update;
-
-  final _i1.PrismaUnion<_i2.NutritionsUpdateManyWithWhereWithoutProductsInput,
-          Iterable<_i2.NutritionsUpdateManyWithWhereWithoutProductsInput>>?
-      updateMany;
-
-  final _i1.PrismaUnion<_i2.NutritionsScalarWhereInput,
-      Iterable<_i2.NutritionsScalarWhereInput>>? deleteMany;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'create': create,
-        'connectOrCreate': connectOrCreate,
-        'upsert': upsert,
-        'createMany': createMany,
-        'set': set,
-        'disconnect': disconnect,
-        'delete': delete,
-        'connect': connect,
-        'update': update,
-        'updateMany': updateMany,
-        'deleteMany': deleteMany,
-      };
-}
-
 class ReviewsUncheckedUpdateManyWithoutProductsNestedInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ReviewsUncheckedUpdateManyWithoutProductsNestedInput({
@@ -12757,9 +12574,9 @@ class ProductsUncheckedUpdateWithoutOrderItemsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.reviews,
   });
 
@@ -12796,11 +12613,14 @@ class ProductsUncheckedUpdateWithoutOrderItemsInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
+
   final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
 
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
-
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
 
   final _i2.ReviewsUncheckedUpdateManyWithoutProductsNestedInput? reviews;
 
@@ -12816,9 +12636,9 @@ class ProductsUncheckedUpdateWithoutOrderItemsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'reviews': reviews,
       };
 }
@@ -13158,8 +12978,8 @@ class ProductsUpdateWithoutReviewsInput
     this.rate,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
   });
 
@@ -13196,9 +13016,9 @@ class ProductsUpdateWithoutReviewsInput
 
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.NutritionsUpdateOneWithoutProductsNestedInput? nutritions;
 
   final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
 
@@ -13214,8 +13034,8 @@ class ProductsUpdateWithoutReviewsInput
         'rate': rate,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
       };
 }
@@ -13381,9 +13201,9 @@ class ProductsUncheckedUpdateWithoutReviewsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
   });
 
@@ -13420,11 +13240,14 @@ class ProductsUncheckedUpdateWithoutReviewsInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
+
   final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
 
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
-
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
 
@@ -13440,9 +13263,9 @@ class ProductsUncheckedUpdateWithoutReviewsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
       };
 }
@@ -14139,8 +13962,8 @@ class ProductsUpdateWithoutCartItemsInput
     this.discountPercentage,
     this.rate,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
   });
@@ -14176,9 +13999,9 @@ class ProductsUpdateWithoutCartItemsInput
 
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.NutritionsUpdateOneWithoutProductsNestedInput? nutritions;
 
   final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
 
@@ -14195,8 +14018,8 @@ class ProductsUpdateWithoutCartItemsInput
         'discount_percentage': discountPercentage,
         'rate': rate,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -14215,8 +14038,8 @@ class ProductsUncheckedUpdateWithoutCartItemsInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -14254,9 +14077,12 @@ class ProductsUncheckedUpdateWithoutCartItemsInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
-  final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
 
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
+  final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
 
@@ -14274,8 +14100,8 @@ class ProductsUncheckedUpdateWithoutCartItemsInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -15041,8 +14867,8 @@ class ProductsUpdateWithoutFavoritesInput
     this.discountPercentage,
     this.rate,
     this.cartItems,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
   });
@@ -15078,9 +14904,9 @@ class ProductsUpdateWithoutFavoritesInput
 
   final _i2.CartItemsUpdateManyWithoutProductsNestedInput? cartItems;
 
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.NutritionsUpdateOneWithoutProductsNestedInput? nutritions;
 
   final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
 
@@ -15097,8 +14923,8 @@ class ProductsUpdateWithoutFavoritesInput
         'discount_percentage': discountPercentage,
         'rate': rate,
         'cart_items': cartItems,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -15117,8 +14943,8 @@ class ProductsUncheckedUpdateWithoutFavoritesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -15156,9 +14982,12 @@ class ProductsUncheckedUpdateWithoutFavoritesInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
-  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
 
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
+  final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
 
@@ -15176,8 +15005,8 @@ class ProductsUncheckedUpdateWithoutFavoritesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -17270,8 +17099,8 @@ class ProductsCreateWithoutCategoriesInput
     this.rate,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.reviews,
   });
 
@@ -17295,9 +17124,9 @@ class ProductsCreateWithoutCategoriesInput
 
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.NutritionsCreateNestedOneWithoutProductsInput? nutritions;
 
   final _i2.ReviewsCreateNestedManyWithoutProductsInput? reviews;
 
@@ -17313,8 +17142,8 @@ class ProductsCreateWithoutCategoriesInput
         'rate': rate,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'reviews': reviews,
       };
 }
@@ -17331,9 +17160,9 @@ class ProductsUncheckedCreateWithoutCategoriesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -17356,11 +17185,11 @@ class ProductsUncheckedCreateWithoutCategoriesInput
 
   final _i1.Decimal? rate;
 
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
+
   final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
 
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
 
@@ -17377,9 +17206,9 @@ class ProductsUncheckedCreateWithoutCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -17416,6 +17245,7 @@ class ProductsCreateManyCategoriesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final int? productId;
@@ -17436,6 +17266,8 @@ class ProductsCreateManyCategoriesInput
 
   final _i1.Decimal? rate;
 
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -17447,6 +17279,7 @@ class ProductsCreateManyCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -17624,8 +17457,8 @@ class ProductsUpdateWithoutCategoriesInput
     this.rate,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.reviews,
   });
 
@@ -17662,9 +17495,9 @@ class ProductsUpdateWithoutCategoriesInput
 
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.NutritionsUpdateOneWithoutProductsNestedInput? nutritions;
 
   final _i2.ReviewsUpdateManyWithoutProductsNestedInput? reviews;
 
@@ -17680,8 +17513,8 @@ class ProductsUpdateWithoutCategoriesInput
         'rate': rate,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'reviews': reviews,
       };
 }
@@ -17698,9 +17531,9 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -17736,11 +17569,14 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
+
   final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
 
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
-
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
 
@@ -17757,9 +17593,9 @@ class ProductsUncheckedUpdateWithoutCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -17824,6 +17660,7 @@ class ProductsScalarWhereInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i1.PrismaUnion<_i2.ProductsScalarWhereInput,
@@ -17857,6 +17694,10 @@ class ProductsScalarWhereInput
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? rate;
 
+  final _i1
+      .PrismaUnion<_i2.IntNullableFilter, _i1.PrismaUnion<int, _i1.PrismaNull>>?
+      nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -17872,6 +17713,7 @@ class ProductsScalarWhereInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -17942,6 +17784,7 @@ class ProductsUncheckedUpdateManyWithoutCategoriesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
@@ -17975,6 +17818,11 @@ class ProductsUncheckedUpdateManyWithoutCategoriesInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -17986,6 +17834,7 @@ class ProductsUncheckedUpdateManyWithoutCategoriesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -18551,51 +18400,6 @@ class CategoriesOrderByWithAggregationInput
         '_max': $max,
         '_min': $min,
         '_sum': $sum,
-      };
-}
-
-class NestedIntNullableFilter
-    implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const NestedIntNullableFilter({
-    this.equals,
-    this.$in,
-    this.notIn,
-    this.lt,
-    this.lte,
-    this.gt,
-    this.gte,
-    this.not,
-  });
-
-  final _i1
-      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
-      equals;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
-
-  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
-
-  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
-
-  final _i1.PrismaUnion<int,
-      _i1.PrismaUnion<_i2.NestedIntNullableFilter, _i1.PrismaNull>>? not;
-
-  @override
-  Map<String, dynamic> toJson() => {
-        'equals': equals,
-        'in': $in,
-        'notIn': notIn,
-        'lt': lt,
-        'lte': lte,
-        'gt': gt,
-        'gte': gte,
-        'not': not,
       };
 }
 
@@ -19832,6 +19636,24 @@ class AggregateFavoritesSelect
       };
 }
 
+enum NutritionsScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  nutritionId<int>('nutrition_id', 'nutritions'),
+  calories<int>('calories', 'nutritions'),
+  protein<int>('protein', 'nutritions'),
+  carbohydrates<int>('carbohydrates', 'nutritions');
+
+  const NutritionsScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
 class ProductsCreateWithoutNutritionsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ProductsCreateWithoutNutritionsInput({
@@ -19979,25 +19801,107 @@ class ProductsCreateOrConnectWithoutNutritionsInput
       };
 }
 
-class ProductsCreateNestedOneWithoutNutritionsInput
+class ProductsCreateManyNutritionsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsCreateNestedOneWithoutNutritionsInput({
+  const ProductsCreateManyNutritionsInput({
+    this.productId,
+    required this.name,
+    required this.quantityInStock,
+    required this.description,
+    required this.unitPrice,
+    this.imageUrl,
+    required this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+  });
+
+  final int? productId;
+
+  final String name;
+
+  final int quantityInStock;
+
+  final String description;
+
+  final _i1.Decimal unitPrice;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? imageUrl;
+
+  final int categoryId;
+
+  final _i1.PrismaUnion<String, _i1.PrismaNull>? productDetails;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i1.PrismaNull>? discountPercentage;
+
+  final _i1.Decimal? rate;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+      };
+}
+
+class ProductsCreateManyNutritionsInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateManyNutritionsInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.ProductsCreateManyNutritionsInput,
+      Iterable<_i2.ProductsCreateManyNutritionsInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class ProductsCreateNestedManyWithoutNutritionsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsCreateNestedManyWithoutNutritionsInput({
     this.create,
     this.connectOrCreate,
+    this.createMany,
     this.connect,
   });
 
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutNutritionsInput,
-      _i2.ProductsUncheckedCreateWithoutNutritionsInput>? create;
+  final _i1.PrismaUnion<
+      _i2.ProductsCreateWithoutNutritionsInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.ProductsCreateWithoutNutritionsInput>,
+          _i1.PrismaUnion<
+              _i2.ProductsUncheckedCreateWithoutNutritionsInput,
+              Iterable<
+                  _i2.ProductsUncheckedCreateWithoutNutritionsInput>>>>? create;
 
-  final _i2.ProductsCreateOrConnectWithoutNutritionsInput? connectOrCreate;
+  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutNutritionsInput,
+          Iterable<_i2.ProductsCreateOrConnectWithoutNutritionsInput>>?
+      connectOrCreate;
 
-  final _i2.ProductsWhereUniqueInput? connect;
+  final _i2.ProductsCreateManyNutritionsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
         'connect': connect,
       };
 }
@@ -20008,7 +19912,7 @@ class NutritionsCreateInput
     required this.calories,
     required this.protein,
     required this.carbohydrates,
-    required this.products,
+    this.products,
   });
 
   final int calories;
@@ -20017,7 +19921,7 @@ class NutritionsCreateInput
 
   final int carbohydrates;
 
-  final _i2.ProductsCreateNestedOneWithoutNutritionsInput products;
+  final _i2.ProductsCreateNestedManyWithoutNutritionsInput? products;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -20028,6 +19932,42 @@ class NutritionsCreateInput
       };
 }
 
+class ProductsUncheckedCreateNestedManyWithoutNutritionsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedCreateNestedManyWithoutNutritionsInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.ProductsCreateWithoutNutritionsInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.ProductsCreateWithoutNutritionsInput>,
+          _i1.PrismaUnion<
+              _i2.ProductsUncheckedCreateWithoutNutritionsInput,
+              Iterable<
+                  _i2.ProductsUncheckedCreateWithoutNutritionsInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutNutritionsInput,
+          Iterable<_i2.ProductsCreateOrConnectWithoutNutritionsInput>>?
+      connectOrCreate;
+
+  final _i2.ProductsCreateManyNutritionsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
 class NutritionsUncheckedCreateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NutritionsUncheckedCreateInput({
@@ -20035,7 +19975,7 @@ class NutritionsUncheckedCreateInput
     required this.calories,
     required this.protein,
     required this.carbohydrates,
-    required this.productId,
+    this.products,
   });
 
   final int? nutritionId;
@@ -20046,7 +19986,7 @@ class NutritionsUncheckedCreateInput
 
   final int carbohydrates;
 
-  final int productId;
+  final _i2.ProductsUncheckedCreateNestedManyWithoutNutritionsInput? products;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -20054,7 +19994,7 @@ class NutritionsUncheckedCreateInput
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
+        'products': products,
       };
 }
 
@@ -20065,7 +20005,6 @@ class NutritionsCreateManyInput
     required this.calories,
     required this.protein,
     required this.carbohydrates,
-    required this.productId,
   });
 
   final int? nutritionId;
@@ -20076,15 +20015,12 @@ class NutritionsCreateManyInput
 
   final int carbohydrates;
 
-  final int productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20242,13 +20178,15 @@ class ProductsUncheckedUpdateWithoutNutritionsInput
       };
 }
 
-class ProductsUpsertWithoutNutritionsInput
+class ProductsUpsertWithWhereUniqueWithoutNutritionsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpsertWithoutNutritionsInput({
+  const ProductsUpsertWithWhereUniqueWithoutNutritionsInput({
+    required this.where,
     required this.update,
     required this.create,
-    this.where,
   });
+
+  final _i2.ProductsWhereUniqueInput where;
 
   final _i1.PrismaUnion<_i2.ProductsUpdateWithoutNutritionsInput,
       _i2.ProductsUncheckedUpdateWithoutNutritionsInput> update;
@@ -20256,24 +20194,22 @@ class ProductsUpsertWithoutNutritionsInput
   final _i1.PrismaUnion<_i2.ProductsCreateWithoutNutritionsInput,
       _i2.ProductsUncheckedCreateWithoutNutritionsInput> create;
 
-  final _i2.ProductsWhereInput? where;
-
   @override
   Map<String, dynamic> toJson() => {
+        'where': where,
         'update': update,
         'create': create,
-        'where': where,
       };
 }
 
-class ProductsUpdateToOneWithWhereWithoutNutritionsInput
+class ProductsUpdateWithWhereUniqueWithoutNutritionsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateToOneWithWhereWithoutNutritionsInput({
-    this.where,
+  const ProductsUpdateWithWhereUniqueWithoutNutritionsInput({
+    required this.where,
     required this.data,
   });
 
-  final _i2.ProductsWhereInput? where;
+  final _i2.ProductsWhereUniqueInput where;
 
   final _i1.PrismaUnion<_i2.ProductsUpdateWithoutNutritionsInput,
       _i2.ProductsUncheckedUpdateWithoutNutritionsInput> data;
@@ -20285,37 +20221,159 @@ class ProductsUpdateToOneWithWhereWithoutNutritionsInput
       };
 }
 
-class ProductsUpdateOneRequiredWithoutNutritionsNestedInput
+class ProductsUncheckedUpdateManyWithoutNutritionsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
-  const ProductsUpdateOneRequiredWithoutNutritionsNestedInput({
+  const ProductsUncheckedUpdateManyWithoutNutritionsInput({
+    this.productId,
+    this.name,
+    this.quantityInStock,
+    this.description,
+    this.unitPrice,
+    this.imageUrl,
+    this.categoryId,
+    this.productDetails,
+    this.discountPercentage,
+    this.rate,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? name;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      quantityInStock;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      description;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      unitPrice;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? imageUrl;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? categoryId;
+
+  final _i1.PrismaUnion<
+      String,
+      _i1.PrismaUnion<_i2.NullableStringFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? productDetails;
+
+  final _i1.PrismaUnion<
+      _i1.Decimal,
+      _i1.PrismaUnion<_i2.NullableDecimalFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? discountPercentage;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      rate;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'product_id': productId,
+        'name': name,
+        'quantity_in_stock': quantityInStock,
+        'description': description,
+        'unit_price': unitPrice,
+        'image_url': imageUrl,
+        'category_id': categoryId,
+        'product_details': productDetails,
+        'discount_percentage': discountPercentage,
+        'rate': rate,
+      };
+}
+
+class ProductsUpdateManyWithWhereWithoutNutritionsInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateManyWithWhereWithoutNutritionsInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.ProductsScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateManyMutationInput,
+      _i2.ProductsUncheckedUpdateManyWithoutNutritionsInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class ProductsUpdateManyWithoutNutritionsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUpdateManyWithoutNutritionsNestedInput({
     this.create,
     this.connectOrCreate,
     this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
     this.connect,
     this.update,
+    this.updateMany,
+    this.deleteMany,
   });
 
-  final _i1.PrismaUnion<_i2.ProductsCreateWithoutNutritionsInput,
-      _i2.ProductsUncheckedCreateWithoutNutritionsInput>? create;
-
-  final _i2.ProductsCreateOrConnectWithoutNutritionsInput? connectOrCreate;
-
-  final _i2.ProductsUpsertWithoutNutritionsInput? upsert;
-
-  final _i2.ProductsWhereUniqueInput? connect;
-
   final _i1.PrismaUnion<
-      _i2.ProductsUpdateToOneWithWhereWithoutNutritionsInput,
-      _i1.PrismaUnion<_i2.ProductsUpdateWithoutNutritionsInput,
-          _i2.ProductsUncheckedUpdateWithoutNutritionsInput>>? update;
+      _i2.ProductsCreateWithoutNutritionsInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.ProductsCreateWithoutNutritionsInput>,
+          _i1.PrismaUnion<
+              _i2.ProductsUncheckedCreateWithoutNutritionsInput,
+              Iterable<
+                  _i2.ProductsUncheckedCreateWithoutNutritionsInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutNutritionsInput,
+          Iterable<_i2.ProductsCreateOrConnectWithoutNutritionsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.ProductsUpsertWithWhereUniqueWithoutNutritionsInput,
+          Iterable<_i2.ProductsUpsertWithWhereUniqueWithoutNutritionsInput>>?
+      upsert;
+
+  final _i2.ProductsCreateManyNutritionsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithWhereUniqueWithoutNutritionsInput,
+          Iterable<_i2.ProductsUpdateWithWhereUniqueWithoutNutritionsInput>>?
+      update;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateManyWithWhereWithoutNutritionsInput,
+          Iterable<_i2.ProductsUpdateManyWithWhereWithoutNutritionsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.ProductsScalarWhereInput,
+      Iterable<_i2.ProductsScalarWhereInput>>? deleteMany;
 
   @override
   Map<String, dynamic> toJson() => {
         'create': create,
         'connectOrCreate': connectOrCreate,
         'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
         'connect': connect,
         'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
       };
 }
 
@@ -20334,7 +20392,7 @@ class NutritionsUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
 
-  final _i2.ProductsUpdateOneRequiredWithoutNutritionsNestedInput? products;
+  final _i2.ProductsUpdateManyWithoutNutritionsNestedInput? products;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -20345,6 +20403,80 @@ class NutritionsUpdateInput
       };
 }
 
+class ProductsUncheckedUpdateManyWithoutNutritionsNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const ProductsUncheckedUpdateManyWithoutNutritionsNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+      _i2.ProductsCreateWithoutNutritionsInput,
+      _i1.PrismaUnion<
+          Iterable<_i2.ProductsCreateWithoutNutritionsInput>,
+          _i1.PrismaUnion<
+              _i2.ProductsUncheckedCreateWithoutNutritionsInput,
+              Iterable<
+                  _i2.ProductsUncheckedCreateWithoutNutritionsInput>>>>? create;
+
+  final _i1.PrismaUnion<_i2.ProductsCreateOrConnectWithoutNutritionsInput,
+          Iterable<_i2.ProductsCreateOrConnectWithoutNutritionsInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<_i2.ProductsUpsertWithWhereUniqueWithoutNutritionsInput,
+          Iterable<_i2.ProductsUpsertWithWhereUniqueWithoutNutritionsInput>>?
+      upsert;
+
+  final _i2.ProductsCreateManyNutritionsInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.ProductsWhereUniqueInput,
+      Iterable<_i2.ProductsWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateWithWhereUniqueWithoutNutritionsInput,
+          Iterable<_i2.ProductsUpdateWithWhereUniqueWithoutNutritionsInput>>?
+      update;
+
+  final _i1.PrismaUnion<_i2.ProductsUpdateManyWithWhereWithoutNutritionsInput,
+          Iterable<_i2.ProductsUpdateManyWithWhereWithoutNutritionsInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.ProductsScalarWhereInput,
+      Iterable<_i2.ProductsScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
 class NutritionsUncheckedUpdateInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NutritionsUncheckedUpdateInput({
@@ -20352,7 +20484,7 @@ class NutritionsUncheckedUpdateInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
+    this.products,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? nutritionId;
@@ -20363,7 +20495,7 @@ class NutritionsUncheckedUpdateInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
 
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
+  final _i2.ProductsUncheckedUpdateManyWithoutNutritionsNestedInput? products;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -20371,7 +20503,29 @@ class NutritionsUncheckedUpdateInput
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
+        'products': products,
+      };
+}
+
+class NutritionsUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NutritionsUpdateManyMutationInput({
+    this.calories,
+    this.protein,
+    this.carbohydrates,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? calories;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? protein;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'calories': calories,
+        'protein': protein,
+        'carbohydrates': carbohydrates,
       };
 }
 
@@ -20382,7 +20536,6 @@ class NutritionsUncheckedUpdateManyInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? nutritionId;
@@ -20393,15 +20546,12 @@ class NutritionsUncheckedUpdateManyInput
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? carbohydrates;
 
-  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20411,7 +20561,6 @@ class NutritionsCountAggregateOutputType {
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
     this.$all,
   });
 
@@ -20421,7 +20570,6 @@ class NutritionsCountAggregateOutputType {
         calories: json['calories'],
         protein: json['protein'],
         carbohydrates: json['carbohydrates'],
-        productId: json['product_id'],
         $all: json['_all'],
       );
 
@@ -20433,8 +20581,6 @@ class NutritionsCountAggregateOutputType {
 
   final int? carbohydrates;
 
-  final int? productId;
-
   final int? $all;
 
   Map<String, dynamic> toJson() => {
@@ -20442,7 +20588,6 @@ class NutritionsCountAggregateOutputType {
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
         '_all': $all,
       };
 }
@@ -20453,7 +20598,6 @@ class NutritionsAvgAggregateOutputType {
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   factory NutritionsAvgAggregateOutputType.fromJson(Map json) =>
@@ -20462,7 +20606,6 @@ class NutritionsAvgAggregateOutputType {
         calories: json['calories'],
         protein: json['protein'],
         carbohydrates: json['carbohydrates'],
-        productId: json['product_id'],
       );
 
   final double? nutritionId;
@@ -20473,14 +20616,11 @@ class NutritionsAvgAggregateOutputType {
 
   final double? carbohydrates;
 
-  final double? productId;
-
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20490,7 +20630,6 @@ class NutritionsSumAggregateOutputType {
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   factory NutritionsSumAggregateOutputType.fromJson(Map json) =>
@@ -20499,7 +20638,6 @@ class NutritionsSumAggregateOutputType {
         calories: json['calories'],
         protein: json['protein'],
         carbohydrates: json['carbohydrates'],
-        productId: json['product_id'],
       );
 
   final int? nutritionId;
@@ -20510,14 +20648,11 @@ class NutritionsSumAggregateOutputType {
 
   final int? carbohydrates;
 
-  final int? productId;
-
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20527,7 +20662,6 @@ class NutritionsMinAggregateOutputType {
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   factory NutritionsMinAggregateOutputType.fromJson(Map json) =>
@@ -20536,7 +20670,6 @@ class NutritionsMinAggregateOutputType {
         calories: json['calories'],
         protein: json['protein'],
         carbohydrates: json['carbohydrates'],
-        productId: json['product_id'],
       );
 
   final int? nutritionId;
@@ -20547,14 +20680,11 @@ class NutritionsMinAggregateOutputType {
 
   final int? carbohydrates;
 
-  final int? productId;
-
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20564,7 +20694,6 @@ class NutritionsMaxAggregateOutputType {
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   factory NutritionsMaxAggregateOutputType.fromJson(Map json) =>
@@ -20573,7 +20702,6 @@ class NutritionsMaxAggregateOutputType {
         calories: json['calories'],
         protein: json['protein'],
         carbohydrates: json['carbohydrates'],
-        productId: json['product_id'],
       );
 
   final int? nutritionId;
@@ -20584,14 +20712,11 @@ class NutritionsMaxAggregateOutputType {
 
   final int? carbohydrates;
 
-  final int? productId;
-
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20601,7 +20726,6 @@ class NutritionsGroupByOutputType {
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -20615,7 +20739,6 @@ class NutritionsGroupByOutputType {
         calories: json['calories'],
         protein: json['protein'],
         carbohydrates: json['carbohydrates'],
-        productId: json['product_id'],
         $count: json['_count'] is Map
             ? _i2.NutritionsCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -20641,8 +20764,6 @@ class NutritionsGroupByOutputType {
 
   final int? carbohydrates;
 
-  final int? productId;
-
   final _i2.NutritionsCountAggregateOutputType? $count;
 
   final _i2.NutritionsAvgAggregateOutputType? $avg;
@@ -20658,7 +20779,6 @@ class NutritionsGroupByOutputType {
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
         '_count': $count?.toJson(),
         '_avg': $avg?.toJson(),
         '_sum': $sum?.toJson(),
@@ -20674,7 +20794,6 @@ class NutritionsCountOrderByAggregateInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final _i2.SortOrder? nutritionId;
@@ -20685,15 +20804,12 @@ class NutritionsCountOrderByAggregateInput
 
   final _i2.SortOrder? carbohydrates;
 
-  final _i2.SortOrder? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20704,7 +20820,6 @@ class NutritionsAvgOrderByAggregateInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final _i2.SortOrder? nutritionId;
@@ -20715,15 +20830,12 @@ class NutritionsAvgOrderByAggregateInput
 
   final _i2.SortOrder? carbohydrates;
 
-  final _i2.SortOrder? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20734,7 +20846,6 @@ class NutritionsMaxOrderByAggregateInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final _i2.SortOrder? nutritionId;
@@ -20745,15 +20856,12 @@ class NutritionsMaxOrderByAggregateInput
 
   final _i2.SortOrder? carbohydrates;
 
-  final _i2.SortOrder? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20764,7 +20872,6 @@ class NutritionsMinOrderByAggregateInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final _i2.SortOrder? nutritionId;
@@ -20775,15 +20882,12 @@ class NutritionsMinOrderByAggregateInput
 
   final _i2.SortOrder? carbohydrates;
 
-  final _i2.SortOrder? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20794,7 +20898,6 @@ class NutritionsSumOrderByAggregateInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final _i2.SortOrder? nutritionId;
@@ -20805,15 +20908,12 @@ class NutritionsSumOrderByAggregateInput
 
   final _i2.SortOrder? carbohydrates;
 
-  final _i2.SortOrder? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20824,7 +20924,6 @@ class NutritionsOrderByWithAggregationInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
     this.$count,
     this.$avg,
     this.$max,
@@ -20839,8 +20938,6 @@ class NutritionsOrderByWithAggregationInput
   final _i2.SortOrder? protein;
 
   final _i2.SortOrder? carbohydrates;
-
-  final _i2.SortOrder? productId;
 
   final _i2.NutritionsCountOrderByAggregateInput? $count;
 
@@ -20858,7 +20955,6 @@ class NutritionsOrderByWithAggregationInput
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
@@ -20877,7 +20973,6 @@ class NutritionsScalarWhereWithAggregatesInput
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final _i1.PrismaUnion<_i2.NutritionsScalarWhereWithAggregatesInput,
@@ -20896,8 +20991,6 @@ class NutritionsScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? carbohydrates;
 
-  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -20907,7 +21000,6 @@ class NutritionsScalarWhereWithAggregatesInput
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -20918,7 +21010,6 @@ class NutritionsCountAggregateOutputTypeSelect
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
     this.$all,
   });
 
@@ -20930,8 +21021,6 @@ class NutritionsCountAggregateOutputTypeSelect
 
   final bool? carbohydrates;
 
-  final bool? productId;
-
   final bool? $all;
 
   @override
@@ -20940,7 +21029,6 @@ class NutritionsCountAggregateOutputTypeSelect
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
         '_all': $all,
       };
 }
@@ -20962,7 +21050,6 @@ class NutritionsAvgAggregateOutputTypeSelect
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final bool? nutritionId;
@@ -20973,15 +21060,12 @@ class NutritionsAvgAggregateOutputTypeSelect
 
   final bool? carbohydrates;
 
-  final bool? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -21002,7 +21086,6 @@ class NutritionsSumAggregateOutputTypeSelect
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final bool? nutritionId;
@@ -21013,15 +21096,12 @@ class NutritionsSumAggregateOutputTypeSelect
 
   final bool? carbohydrates;
 
-  final bool? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -21042,7 +21122,6 @@ class NutritionsMinAggregateOutputTypeSelect
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final bool? nutritionId;
@@ -21053,15 +21132,12 @@ class NutritionsMinAggregateOutputTypeSelect
 
   final bool? carbohydrates;
 
-  final bool? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -21082,7 +21158,6 @@ class NutritionsMaxAggregateOutputTypeSelect
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
   });
 
   final bool? nutritionId;
@@ -21093,15 +21168,12 @@ class NutritionsMaxAggregateOutputTypeSelect
 
   final bool? carbohydrates;
 
-  final bool? productId;
-
   @override
   Map<String, dynamic> toJson() => {
         'nutrition_id': nutritionId,
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
       };
 }
 
@@ -21122,7 +21194,6 @@ class NutritionsGroupByOutputTypeSelect
     this.calories,
     this.protein,
     this.carbohydrates,
-    this.productId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -21137,8 +21208,6 @@ class NutritionsGroupByOutputTypeSelect
   final bool? protein;
 
   final bool? carbohydrates;
-
-  final bool? productId;
 
   final _i1.PrismaUnion<bool, _i2.NutritionsGroupByOutputTypeCountArgs>? $count;
 
@@ -21156,7 +21225,6 @@ class NutritionsGroupByOutputTypeSelect
         'calories': calories,
         'protein': protein,
         'carbohydrates': carbohydrates,
-        'product_id': productId,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,
@@ -26347,8 +26415,8 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.rate,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     required this.categories,
     this.reviews,
   });
@@ -26373,9 +26441,9 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.FavoritesCreateNestedManyWithoutProductsInput? favorites;
 
-  final _i2.NutritionsCreateNestedManyWithoutProductsInput? nutritions;
-
   final _i2.OrderItemsCreateNestedManyWithoutProductsInput? orderItems;
+
+  final _i2.NutritionsCreateNestedOneWithoutProductsInput? nutritions;
 
   final _i2.CategoriesCreateNestedOneWithoutProductsInput categories;
 
@@ -26393,8 +26461,8 @@ class ProductsCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'rate': rate,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -26413,9 +26481,9 @@ class ProductsUncheckedCreateInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -26440,11 +26508,11 @@ class ProductsUncheckedCreateInput
 
   final _i1.Decimal? rate;
 
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
+
   final _i2.CartItemsUncheckedCreateNestedManyWithoutProductsInput? cartItems;
 
   final _i2.FavoritesUncheckedCreateNestedManyWithoutProductsInput? favorites;
-
-  final _i2.NutritionsUncheckedCreateNestedManyWithoutProductsInput? nutritions;
 
   final _i2.OrderItemsUncheckedCreateNestedManyWithoutProductsInput? orderItems;
 
@@ -26462,9 +26530,9 @@ class ProductsUncheckedCreateInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -26483,6 +26551,7 @@ class ProductsCreateManyInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final int? productId;
@@ -26505,6 +26574,8 @@ class ProductsCreateManyInput
 
   final _i1.Decimal? rate;
 
+  final _i1.PrismaUnion<int, _i1.PrismaNull>? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -26517,6 +26588,7 @@ class ProductsCreateManyInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -26532,8 +26604,8 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.rate,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
+    this.nutritions,
     this.categories,
     this.reviews,
   });
@@ -26571,9 +26643,9 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.FavoritesUpdateManyWithoutProductsNestedInput? favorites;
 
-  final _i2.NutritionsUpdateManyWithoutProductsNestedInput? nutritions;
-
   final _i2.OrderItemsUpdateManyWithoutProductsNestedInput? orderItems;
+
+  final _i2.NutritionsUpdateOneWithoutProductsNestedInput? nutritions;
 
   final _i2.CategoriesUpdateOneRequiredWithoutProductsNestedInput? categories;
 
@@ -26591,8 +26663,8 @@ class ProductsUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'rate': rate,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
+        'nutritions': nutritions,
         'categories': categories,
         'reviews': reviews,
       };
@@ -26611,9 +26683,9 @@ class ProductsUncheckedUpdateInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.cartItems,
     this.favorites,
-    this.nutritions,
     this.orderItems,
     this.reviews,
   });
@@ -26651,11 +26723,14 @@ class ProductsUncheckedUpdateInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
+
   final _i2.CartItemsUncheckedUpdateManyWithoutProductsNestedInput? cartItems;
 
   final _i2.FavoritesUncheckedUpdateManyWithoutProductsNestedInput? favorites;
-
-  final _i2.NutritionsUncheckedUpdateManyWithoutProductsNestedInput? nutritions;
 
   final _i2.OrderItemsUncheckedUpdateManyWithoutProductsNestedInput? orderItems;
 
@@ -26673,9 +26748,9 @@ class ProductsUncheckedUpdateInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         'cart_items': cartItems,
         'favorites': favorites,
-        'nutritions': nutritions,
         'order_items': orderItems,
         'reviews': reviews,
       };
@@ -26694,6 +26769,7 @@ class ProductsUncheckedUpdateManyInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? productId;
@@ -26729,6 +26805,11 @@ class ProductsUncheckedUpdateManyInput
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       rate;
 
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NullableIntFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -26741,6 +26822,7 @@ class ProductsUncheckedUpdateManyInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -26756,6 +26838,7 @@ class ProductsCountAggregateOutputType {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.$all,
   });
 
@@ -26771,6 +26854,7 @@ class ProductsCountAggregateOutputType {
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
         rate: json['rate'],
+        nutritionId: json['nutrition_id'],
         $all: json['_all'],
       );
 
@@ -26794,6 +26878,8 @@ class ProductsCountAggregateOutputType {
 
   final int? rate;
 
+  final int? nutritionId;
+
   final int? $all;
 
   Map<String, dynamic> toJson() => {
@@ -26807,6 +26893,7 @@ class ProductsCountAggregateOutputType {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         '_all': $all,
       };
 }
@@ -26819,6 +26906,7 @@ class ProductsAvgAggregateOutputType {
     this.categoryId,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   factory ProductsAvgAggregateOutputType.fromJson(Map json) =>
@@ -26829,6 +26917,7 @@ class ProductsAvgAggregateOutputType {
         categoryId: json['category_id'],
         discountPercentage: json['discount_percentage'],
         rate: json['rate'],
+        nutritionId: json['nutrition_id'],
       );
 
   final double? productId;
@@ -26843,6 +26932,8 @@ class ProductsAvgAggregateOutputType {
 
   final _i1.Decimal? rate;
 
+  final double? nutritionId;
+
   Map<String, dynamic> toJson() => {
         'product_id': productId,
         'quantity_in_stock': quantityInStock,
@@ -26850,6 +26941,7 @@ class ProductsAvgAggregateOutputType {
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -26861,6 +26953,7 @@ class ProductsSumAggregateOutputType {
     this.categoryId,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   factory ProductsSumAggregateOutputType.fromJson(Map json) =>
@@ -26871,6 +26964,7 @@ class ProductsSumAggregateOutputType {
         categoryId: json['category_id'],
         discountPercentage: json['discount_percentage'],
         rate: json['rate'],
+        nutritionId: json['nutrition_id'],
       );
 
   final int? productId;
@@ -26885,6 +26979,8 @@ class ProductsSumAggregateOutputType {
 
   final _i1.Decimal? rate;
 
+  final int? nutritionId;
+
   Map<String, dynamic> toJson() => {
         'product_id': productId,
         'quantity_in_stock': quantityInStock,
@@ -26892,6 +26988,7 @@ class ProductsSumAggregateOutputType {
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -26907,6 +27004,7 @@ class ProductsMinAggregateOutputType {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   factory ProductsMinAggregateOutputType.fromJson(Map json) =>
@@ -26921,6 +27019,7 @@ class ProductsMinAggregateOutputType {
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
         rate: json['rate'],
+        nutritionId: json['nutrition_id'],
       );
 
   final int? productId;
@@ -26943,6 +27042,8 @@ class ProductsMinAggregateOutputType {
 
   final _i1.Decimal? rate;
 
+  final int? nutritionId;
+
   Map<String, dynamic> toJson() => {
         'product_id': productId,
         'name': name,
@@ -26954,6 +27055,7 @@ class ProductsMinAggregateOutputType {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -26969,6 +27071,7 @@ class ProductsMaxAggregateOutputType {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   factory ProductsMaxAggregateOutputType.fromJson(Map json) =>
@@ -26983,6 +27086,7 @@ class ProductsMaxAggregateOutputType {
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
         rate: json['rate'],
+        nutritionId: json['nutrition_id'],
       );
 
   final int? productId;
@@ -27005,6 +27109,8 @@ class ProductsMaxAggregateOutputType {
 
   final _i1.Decimal? rate;
 
+  final int? nutritionId;
+
   Map<String, dynamic> toJson() => {
         'product_id': productId,
         'name': name,
@@ -27016,6 +27122,7 @@ class ProductsMaxAggregateOutputType {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27031,6 +27138,7 @@ class ProductsGroupByOutputType {
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -27050,6 +27158,7 @@ class ProductsGroupByOutputType {
         productDetails: json['product_details'],
         discountPercentage: json['discount_percentage'],
         rate: json['rate'],
+        nutritionId: json['nutrition_id'],
         $count: json['_count'] is Map
             ? _i2.ProductsCountAggregateOutputType.fromJson(json['_count'])
             : null,
@@ -27087,6 +27196,8 @@ class ProductsGroupByOutputType {
 
   final _i1.Decimal? rate;
 
+  final int? nutritionId;
+
   final _i2.ProductsCountAggregateOutputType? $count;
 
   final _i2.ProductsAvgAggregateOutputType? $avg;
@@ -27108,6 +27219,7 @@ class ProductsGroupByOutputType {
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         '_count': $count?.toJson(),
         '_avg': $avg?.toJson(),
         '_sum': $sum?.toJson(),
@@ -27129,6 +27241,7 @@ class ProductsCountOrderByAggregateInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i2.SortOrder? productId;
@@ -27151,6 +27264,8 @@ class ProductsCountOrderByAggregateInput
 
   final _i2.SortOrder? rate;
 
+  final _i2.SortOrder? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27163,6 +27278,7 @@ class ProductsCountOrderByAggregateInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27175,6 +27291,7 @@ class ProductsAvgOrderByAggregateInput
     this.categoryId,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i2.SortOrder? productId;
@@ -27189,6 +27306,8 @@ class ProductsAvgOrderByAggregateInput
 
   final _i2.SortOrder? rate;
 
+  final _i2.SortOrder? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27197,6 +27316,7 @@ class ProductsAvgOrderByAggregateInput
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27213,6 +27333,7 @@ class ProductsMaxOrderByAggregateInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i2.SortOrder? productId;
@@ -27235,6 +27356,8 @@ class ProductsMaxOrderByAggregateInput
 
   final _i2.SortOrder? rate;
 
+  final _i2.SortOrder? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27247,6 +27370,7 @@ class ProductsMaxOrderByAggregateInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27263,6 +27387,7 @@ class ProductsMinOrderByAggregateInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i2.SortOrder? productId;
@@ -27285,6 +27410,8 @@ class ProductsMinOrderByAggregateInput
 
   final _i2.SortOrder? rate;
 
+  final _i2.SortOrder? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27297,6 +27424,7 @@ class ProductsMinOrderByAggregateInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27309,6 +27437,7 @@ class ProductsSumOrderByAggregateInput
     this.categoryId,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i2.SortOrder? productId;
@@ -27323,6 +27452,8 @@ class ProductsSumOrderByAggregateInput
 
   final _i2.SortOrder? rate;
 
+  final _i2.SortOrder? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27331,6 +27462,7 @@ class ProductsSumOrderByAggregateInput
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27347,6 +27479,7 @@ class ProductsOrderByWithAggregationInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.$count,
     this.$avg,
     this.$max,
@@ -27374,6 +27507,8 @@ class ProductsOrderByWithAggregationInput
 
   final _i2.SortOrder? rate;
 
+  final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? nutritionId;
+
   final _i2.ProductsCountOrderByAggregateInput? $count;
 
   final _i2.ProductsAvgOrderByAggregateInput? $avg;
@@ -27396,6 +27531,7 @@ class ProductsOrderByWithAggregationInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         '_count': $count,
         '_avg': $avg,
         '_max': $max,
@@ -27536,6 +27672,184 @@ class DecimalNullableWithAggregatesFilter
       };
 }
 
+class NestedFloatNullableFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedFloatNullableFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+  });
+
+  final _i1.PrismaUnion<double,
+      _i1.PrismaUnion<_i1.Reference<double>, _i1.PrismaNull>>? equals;
+
+  final _i1.PrismaUnion<Iterable<double>, _i1.PrismaNull>? $in;
+
+  final _i1.PrismaUnion<Iterable<double>, _i1.PrismaNull>? notIn;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? lt;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? lte;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? gt;
+
+  final _i1.PrismaUnion<double, _i1.Reference<double>>? gte;
+
+  final _i1.PrismaUnion<double,
+      _i1.PrismaUnion<_i2.NestedFloatNullableFilter, _i1.PrismaNull>>? not;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+      };
+}
+
+class NestedIntNullableWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const NestedIntNullableWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1
+      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
+      equals;
+
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
+
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NestedIntNullableWithAggregatesFilter,
+          _i1.PrismaNull>>? not;
+
+  final _i2.NestedIntNullableFilter? $count;
+
+  final _i2.NestedFloatNullableFilter? $avg;
+
+  final _i2.NestedIntNullableFilter? $sum;
+
+  final _i2.NestedIntNullableFilter? $min;
+
+  final _i2.NestedIntNullableFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class IntNullableWithAggregatesFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const IntNullableWithAggregatesFilter({
+    this.equals,
+    this.$in,
+    this.notIn,
+    this.lt,
+    this.lte,
+    this.gt,
+    this.gte,
+    this.not,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1
+      .PrismaUnion<int, _i1.PrismaUnion<_i1.Reference<int>, _i1.PrismaNull>>?
+      equals;
+
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? $in;
+
+  final _i1.PrismaUnion<Iterable<int>, _i1.PrismaNull>? notIn;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? lte;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gt;
+
+  final _i1.PrismaUnion<int, _i1.Reference<int>>? gte;
+
+  final _i1.PrismaUnion<
+      int,
+      _i1.PrismaUnion<_i2.NestedIntNullableWithAggregatesFilter,
+          _i1.PrismaNull>>? not;
+
+  final _i2.NestedIntNullableFilter? $count;
+
+  final _i2.NestedFloatNullableFilter? $avg;
+
+  final _i2.NestedIntNullableFilter? $sum;
+
+  final _i2.NestedIntNullableFilter? $min;
+
+  final _i2.NestedIntNullableFilter? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'equals': equals,
+        'in': $in,
+        'notIn': notIn,
+        'lt': lt,
+        'lte': lte,
+        'gt': gt,
+        'gte': gte,
+        'not': not,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
 class ProductsScalarWhereWithAggregatesInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const ProductsScalarWhereWithAggregatesInput({
@@ -27552,6 +27866,7 @@ class ProductsScalarWhereWithAggregatesInput
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final _i1.PrismaUnion<_i2.ProductsScalarWhereWithAggregatesInput,
@@ -27586,6 +27901,9 @@ class ProductsScalarWhereWithAggregatesInput
 
   final _i1.PrismaUnion<_i2.DecimalWithAggregatesFilter, _i1.Decimal>? rate;
 
+  final _i1.PrismaUnion<_i2.IntNullableWithAggregatesFilter,
+      _i1.PrismaUnion<int, _i1.PrismaNull>>? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'AND': AND,
@@ -27601,6 +27919,7 @@ class ProductsScalarWhereWithAggregatesInput
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27617,6 +27936,7 @@ class ProductsCountAggregateOutputTypeSelect
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.$all,
   });
 
@@ -27640,6 +27960,8 @@ class ProductsCountAggregateOutputTypeSelect
 
   final bool? rate;
 
+  final bool? nutritionId;
+
   final bool? $all;
 
   @override
@@ -27654,6 +27976,7 @@ class ProductsCountAggregateOutputTypeSelect
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         '_all': $all,
       };
 }
@@ -27677,6 +28000,7 @@ class ProductsAvgAggregateOutputTypeSelect
     this.categoryId,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final bool? productId;
@@ -27691,6 +28015,8 @@ class ProductsAvgAggregateOutputTypeSelect
 
   final bool? rate;
 
+  final bool? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27699,6 +28025,7 @@ class ProductsAvgAggregateOutputTypeSelect
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27721,6 +28048,7 @@ class ProductsSumAggregateOutputTypeSelect
     this.categoryId,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final bool? productId;
@@ -27735,6 +28063,8 @@ class ProductsSumAggregateOutputTypeSelect
 
   final bool? rate;
 
+  final bool? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27743,6 +28073,7 @@ class ProductsSumAggregateOutputTypeSelect
         'category_id': categoryId,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27769,6 +28100,7 @@ class ProductsMinAggregateOutputTypeSelect
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final bool? productId;
@@ -27791,6 +28123,8 @@ class ProductsMinAggregateOutputTypeSelect
 
   final bool? rate;
 
+  final bool? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27803,6 +28137,7 @@ class ProductsMinAggregateOutputTypeSelect
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27829,6 +28164,7 @@ class ProductsMaxAggregateOutputTypeSelect
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
   });
 
   final bool? productId;
@@ -27851,6 +28187,8 @@ class ProductsMaxAggregateOutputTypeSelect
 
   final bool? rate;
 
+  final bool? nutritionId;
+
   @override
   Map<String, dynamic> toJson() => {
         'product_id': productId,
@@ -27863,6 +28201,7 @@ class ProductsMaxAggregateOutputTypeSelect
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
       };
 }
 
@@ -27889,6 +28228,7 @@ class ProductsGroupByOutputTypeSelect
     this.productDetails,
     this.discountPercentage,
     this.rate,
+    this.nutritionId,
     this.$count,
     this.$avg,
     this.$sum,
@@ -27916,6 +28256,8 @@ class ProductsGroupByOutputTypeSelect
 
   final bool? rate;
 
+  final bool? nutritionId;
+
   final _i1.PrismaUnion<bool, _i2.ProductsGroupByOutputTypeCountArgs>? $count;
 
   final _i1.PrismaUnion<bool, _i2.ProductsGroupByOutputTypeAvgArgs>? $avg;
@@ -27938,6 +28280,7 @@ class ProductsGroupByOutputTypeSelect
         'product_details': productDetails,
         'discount_percentage': discountPercentage,
         'rate': rate,
+        'nutrition_id': nutritionId,
         '_count': $count,
         '_avg': $avg,
         '_sum': $sum,

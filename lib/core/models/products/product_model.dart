@@ -6,7 +6,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product_model.g.dart';
 
-/// Represents a model for a product in the grocery application.
 @JsonSerializable()
 class ProductModel {
   ProductModel({
@@ -23,47 +22,32 @@ class ProductModel {
     this.productDetails,
   });
 
-  /// Creates a [ProductModel] instance from a JSON map.
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
 
-  /// The unique identifier for the product.
   final int? productId;
 
-  /// The name of the product.
   final String? name;
 
-  /// The quantity of the product available in stock.
   final int? quantityInStock;
 
-  /// A brief description of the product.
   final String? description;
 
-  /// The unit price of the product.
   final double? unitPrice;
 
-  /// The average rating of the product.
   final double? rate;
 
-  /// The URL of the product image.
   final String? imageUrl;
 
-  /// Additional details about the product.
   final String? productDetails;
 
-  /// The percentage of discount applied to the product.
   final double? discountPercentage;
 
-  /// The category to which the product belongs.
   final CategoryModel? category;
 
-  /// The list of nutrition information associated with the product.
-  final List<NutritionsModel>? nutritions;
+  final NutritionsModel? nutritions;
 
-
-  /// Converts this [ProductModel] instance to a JSON map.
   Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 
-  /// Converts this [ProductModel] instance to a simplified JSON map.
   Map<String, dynamic> simpleModelToJson() => _$SimpleProductModelToJson(this);
 }

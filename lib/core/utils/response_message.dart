@@ -72,6 +72,11 @@ abstract class ResponseMessages {
       'Please make sure that your product ID is valid';
   static const String outOfStock = 'This product is out of stock';
 
+  static const String productNotFound = 'Product not found';
+  static const String productUpdated = 'Product updated successfully';
+  static const String productCreated = 'Product created successfully';
+  static const String productDeleted = 'Product deleted successfully';
+
   // Payment Management
   static const String invalidPaymentMethod = 'Invalid payment method';
 

@@ -1,12 +1,10 @@
 import 'package:dart_frog/dart_frog.dart';
-import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
-import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/core/utils/functions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:groceries_app_backend/feature/banners/repo/banners_repo.dart';
-import 'package:groceries_app_backend/feature/upload_image/repo/upload_image_repo.dart';
 
 Future<Response> onRequest(RequestContext context) {
   return _getResponse(context);
@@ -43,8 +41,9 @@ Future<Response> _addBanner(RequestContext context) async {
     final image = (await context.request.json()
         as Map<String, dynamic>)['image'] as String;
 
-    final imageResult = await _uploadImage(
+    final imageResult = await uploadImage(
       encodedImage: image,
+      imageName: _bannerName,
     );
     if (imageResult.isLeft()) {
       return imageResult.asFailure().failureResponse;
@@ -65,16 +64,5 @@ Future<Response> _addBanner(RequestContext context) async {
   }
 }
 
-Future<Either<Failure, String>> _uploadImage({
-  required String encodedImage,
-}) async {
-  final uploadImageRepo = instance<UploadImageRepository>();
-  final data = await uploadImageRepo.uploadImage(
-    imageName: _bannerName,
-    encodedImage: encodedImage,
-  );
-
-  return data;
-}
 
 String get _bannerName => 'banner${DateTime.now().millisecondsSinceEpoch}';

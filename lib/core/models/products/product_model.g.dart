@@ -18,9 +18,9 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       category: json['category'] == null
           ? null
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
-      nutritions: (json['nutritions'] as List<dynamic>?)
-          ?.map((e) => NutritionsModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      nutritions: json['nutritions'] == null
+          ? null
+          : NutritionsModel.fromJson(json['nutritions'] as Map<String, dynamic>),
       productDetails: json['productDetails'] as String?,
     );
 

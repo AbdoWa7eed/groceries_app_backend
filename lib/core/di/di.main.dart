@@ -97,7 +97,7 @@ void initProductsResources() {
   if (!instance.isRegistered<ProductsRepository>()) {
     instance
       ..registerLazySingleton<ProductsRepository>(
-        () => ProductRepoImpl(instance<ProductsDataSource>()),
+        () => ProductsRepositoryImpl(instance<ProductsDataSource>()),
       )
       ..registerLazySingleton<ProductsDataSource>(
         () => ProductsDataSourceImpl(instance<PrismaClient>()),

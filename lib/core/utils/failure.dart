@@ -15,7 +15,7 @@ class Failure implements Exception {
           );
         case 'P2009':
           return Failure.badRequest(
-            message: ResponseMessages.fieldDoesNotExist,
+            message: '${ResponseMessages.fieldDoesNotExist}: ${error.message}}',
           );
         default:
           return Failure.badRequest(
