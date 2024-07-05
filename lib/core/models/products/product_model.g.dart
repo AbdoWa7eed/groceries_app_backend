@@ -20,7 +20,9 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
           : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
       nutritions: json['nutritions'] == null
           ? null
-          : NutritionsModel.fromJson(json['nutritions'] as Map<String, dynamic>),
+          : NutritionsModel.fromJson(
+              json['nutritions'] as Map<String, dynamic>,
+            ),
       productDetails: json['productDetails'] as String?,
     );
 

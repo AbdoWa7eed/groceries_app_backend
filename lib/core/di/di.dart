@@ -8,6 +8,7 @@ import 'package:groceries_app_backend/core/services/redis_service.dart';
 import 'package:groceries_app_backend/core/services/sms_service.dart';
 import 'package:groceries_app_backend/core/services/storage_service.dart';
 import 'package:groceries_app_backend/core/utils/constants.dart';
+import 'package:groceries_app_backend/feature/banners/data/cache_data_source.dart';
 import 'package:groceries_app_backend/feature/banners/data/data_source.dart';
 import 'package:groceries_app_backend/feature/banners/repo/banners_repo.dart';
 import 'package:groceries_app_backend/feature/banners/repo/banners_repo_impl.dart';
@@ -26,7 +27,7 @@ import 'package:groceries_app_backend/feature/nutritions/repo/nutritions_repo_im
 import 'package:groceries_app_backend/feature/orders/data/data_source.dart';
 import 'package:groceries_app_backend/feature/orders/repo/orders_repo.dart';
 import 'package:groceries_app_backend/feature/orders/repo/orders_repo_impl.dart';
-import 'package:groceries_app_backend/feature/otp/data/local_data_source.dart';
+import 'package:groceries_app_backend/feature/otp/data/cache_data_source.dart';
 import 'package:groceries_app_backend/feature/otp/data/remote_data_source.dart';
 import 'package:groceries_app_backend/feature/otp/repo/otp_repo.dart';
 import 'package:groceries_app_backend/feature/otp/repo/otp_repo_impl.dart';

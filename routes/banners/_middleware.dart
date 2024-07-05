@@ -25,4 +25,3 @@ Handler middleware(Handler handler) {
 bool isPostMethod(RequestContext context) {
   return context.request.method == HttpMethod.post;
 }
-

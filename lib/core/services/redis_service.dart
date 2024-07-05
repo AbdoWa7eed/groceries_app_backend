@@ -10,16 +10,16 @@ class RedisService {
 
   Future<void> save({
     required String key,
-    required Map<String, dynamic> valueAsJson,
+    required dynamic valueAsJson,
   }) async {
     final jsonString = jsonEncode(valueAsJson);
     await _command.send_object(['SET', key, jsonString]);
   }
 
-  Future<Map<String, dynamic>?> get({required String key}) async {
+  Future<dynamic> get({required String key}) async {
     final value = await _command.send_object(['GET', key]) as String?;
 
-    return value != null ? jsonDecode(value) as Map<String, dynamic>? : null;
+    return value != null ? jsonDecode(value) : null;
   }
 
   Future<void> delete({required String key}) async {

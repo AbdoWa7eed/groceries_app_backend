@@ -20,6 +20,8 @@ Future<void> init() async {
       () => JwtService(instance<DotEnv>()),
     );
   }
+
+  await initRedis();
 }
 
 void initUserResources() {
@@ -37,10 +39,10 @@ void initUserResources() {
 }
 
 Future<void> initOTPResources() async {
-  if (!instance.isRegistered<OTPLocalDataSource>()) {
+  if (!instance.isRegistered<OTPCacheDataSource>()) {
     instance
-      ..registerLazySingleton<OTPLocalDataSource>(
-        () => OTPLocalDataSourceImpl(instance<RedisService>()),
+      ..registerLazySingleton<OTPCacheDataSource>(
+        () => OTPCacheDataSourceImpl(instance<RedisService>()),
       )
       ..registerLazySingleton<OTPRemoteDataSource>(
         () => OTPRemoteDataSourceImpl(instance<SMSService>()),
@@ -54,12 +56,10 @@ Future<void> initOTPResources() async {
     instance.registerLazySingleton<OTPRepository>(
       () => OTPRepositoryImpl(
         instance<OTPRemoteDataSource>(),
-        instance<OTPLocalDataSource>(),
+        instance<OTPCacheDataSource>(),
       ),
     );
   }
-
-  await initRedis();
 }
 
 Future<void> initRedis() async {
@@ -133,10 +133,19 @@ void initBannersResources() {
   if (!instance.isRegistered<BannersRepository>()) {
     instance
       ..registerLazySingleton<BannersRepository>(
-        () => BannersRepositoryImpl(instance<BannersDataSource>()),
+        () => BannersRepositoryImpl(
+          instance<BannersDataSource>(),
+          instance<BannersCacheDataSource>(),
+        ),
       )
       ..registerLazySingleton<BannersDataSource>(
         () => BannersDataSourceImpl(instance<PrismaClient>()),
+      )
+      ..registerLazySingleton<BannersCacheDataSource>(
+        () => BannersCacheDataSourceImpl(
+          instance<RedisService>(),
+          instance<DotEnv>(),
+        ),
       );
   }
 }

@@ -5,7 +5,7 @@ import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:groceries_app_backend/feature/otp/model/otp_model.dart';
 
-abstract class OTPLocalDataSource {
+abstract class OTPCacheDataSource {
   Future<void> saveMessage({required OTPMessageModel messageModel});
 
   Future<bool> verifyCode({
@@ -14,8 +14,8 @@ abstract class OTPLocalDataSource {
   });
 }
 
-class OTPLocalDataSourceImpl extends OTPLocalDataSource {
-  OTPLocalDataSourceImpl(this._redisService);
+class OTPCacheDataSourceImpl extends OTPCacheDataSource {
+  OTPCacheDataSourceImpl(this._redisService);
 
   final RedisService _redisService;
   @override
@@ -32,7 +32,8 @@ class OTPLocalDataSourceImpl extends OTPLocalDataSource {
     required String verificationId,
     required String code,
   }) async {
-    final jsonData = await _redisService.get(key: verificationId);
+    final jsonData =
+        await _redisService.get(key: verificationId) as Map<String, dynamic>?;
 
     if (jsonData == null) {
       throw Failure.unauthorized(

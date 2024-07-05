@@ -18,4 +18,5 @@ abstract class Constants {
   static const String userId = 'userId';
   static const String role = 'role';
   static const String issuedAt = 'issued at';
+  static const String bannersKey = 'BANNERS_CACHE_KEY';
 }

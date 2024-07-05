@@ -8,7 +8,9 @@ abstract class CategoriesRepository {
     required CategorySearchInput searchInput,
   });
 
-  Future<Either<Failure, CategoryModel>> addCategory(CategoryModel categoryModel);
+  Future<Either<Failure, CategoryModel>> addCategory(
+    CategoryModel categoryModel,
+  );
 
   Future<Either<Failure, CategoryModel>> deleteCategory(int categoryId);
 }
