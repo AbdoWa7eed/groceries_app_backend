@@ -70,7 +70,8 @@ abstract class ResponseMessages {
   static const String invalidProductId = 'There is no product with this ID';
   static const String checkProductId =
       'Please make sure that your product ID is valid';
-  static const String outOfStock = 'This product is out of stock';
+  static const String outOfStock =
+      'A product is out of stock order cannot be created';
 
   static const String productNotFound = 'Product not found';
   static const String productUpdated = 'Product updated successfully';
@@ -136,7 +137,6 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
   static const String categoryAdded = 'Category added successfully';
   static const String categoryRemoved = 'Category removed successfully';
   static const String resolveCategoryIdError = "Couldn't Resolve category ID";
-
 
   // Nutritions
   static const String nutritionAdded = 'Nutrition added successfully';

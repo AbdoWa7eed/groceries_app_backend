@@ -15,10 +15,8 @@ class OrdersRepositoryImpl extends OrdersRepository {
     OrderInputModel orderInputModel,
   ) async {
     try {
-      final order = await _orderDataSource.placeOrder(
-        paymentMethod: orderInputModel.paymentMethod,
-        userId: orderInputModel.userId,
-      );
+      final order = await _orderDataSource
+          .placeOrder(orderInputModel.toOrderCreateInput());
       return Right(order.toOrderModel());
     } on Failure catch (failure) {
       return Left(failure);

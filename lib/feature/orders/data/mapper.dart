@@ -1,6 +1,8 @@
 import 'package:groceries_app_backend/core/models/mapper/mapper.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
+import 'package:groceries_app_backend/core/utils/enums.dart';
+import 'package:groceries_app_backend/feature/orders/models/order_input_model.dart';
 import 'package:groceries_app_backend/feature/orders/models/order_model.dart';
 import 'package:orm/orm.dart';
 
@@ -45,6 +47,55 @@ extension CartItemsToCreateOrderItemInputModelMapper on Carts {
               [],
         ),
       ),
+    );
+  }
+}
+
+extension OrderInputModelToOrderCreateInputMapper on OrderInputModel {
+  OrdersCreateInput toOrderCreateInput() {
+    return OrdersCreateInput(
+      totalPrice: Decimal.one,
+      orderDate: DateTime.now(),
+      orderStatus: OrderStatusCreateNestedOneWithoutOrdersInput(
+        connectOrCreate: OrderStatusCreateOrConnectWithoutOrdersInput(
+          create: PrismaUnion.$1(
+            OrderStatusCreateWithoutOrdersInput(
+              name: OrderStatusEnum.pending.name,
+            ),
+          ),
+          where: OrderStatusWhereUniqueInput(
+            name: OrderStatusEnum.pending.name,
+          ),
+        ),
+      ),
+      paymentMethods: PaymentMethodsCreateNestedOneWithoutOrdersInput(
+        connect: PaymentMethodsWhereUniqueInput(
+          methodName: paymentMethod,
+        ),
+      ),
+      users: UsersCreateNestedOneWithoutOrdersInput(
+        connect: UsersWhereUniqueInput(userId: userId),
+      ),
+    );
+  }
+}
+
+extension OrdersCreateInputCopyWithMapper on OrdersCreateInput {
+  OrdersCreateInput copyWith({
+    DateTime? orderDate,
+    OrderStatusCreateNestedOneWithoutOrdersInput? orderStatus,
+    PaymentMethodsCreateNestedOneWithoutOrdersInput? paymentMethods,
+    UsersCreateNestedOneWithoutOrdersInput? users,
+    Decimal? totalPrice,
+    OrderItemsCreateNestedManyWithoutOrdersInput? orderItems,
+  }) {
+    return OrdersCreateInput(
+      orderDate: orderDate ?? this.orderDate,
+      orderItems: orderItems ?? this.orderItems,
+      totalPrice: totalPrice ?? this.totalPrice,
+      orderStatus: orderStatus ?? this.orderStatus,
+      paymentMethods: paymentMethods ?? this.paymentMethods,
+      users: users ?? this.users,
     );
   }
 }

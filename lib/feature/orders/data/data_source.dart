@@ -9,10 +9,7 @@ import 'package:groceries_app_backend/feature/orders/data/mapper.dart';
 import 'package:orm/orm.dart';
 
 abstract class OrdersDataSource {
-  Future<Orders> placeOrder({
-    required int userId,
-    required String paymentMethod,
-  });
+  Future<Orders> placeOrder(OrdersCreateInput orderCreateInput);
   Future<List<Orders>> getOrders(int userId);
 
   Future<Orders> cancelOrder(int orderId, int userId);
@@ -25,11 +22,11 @@ class OrdersDataSourceImpl extends OrdersDataSource {
   final PrismaClient _client;
 
   @override
-  Future<Orders> placeOrder({
-    required int userId,
-    required String paymentMethod,
-  }) async {
-    final cart = await _getUserCart(userId);
+  Future<Orders> placeOrder(OrdersCreateInput orderCreateInput) async {
+    final cart =
+        await _getUserCart(orderCreateInput.users.connect?.userId ?? 0);
+
+    await _updateProductQuantities(cart.cartItems?.toList() ?? []);
 
     final totalPrice = _getPriceFromProducts(cart.cartItems?.toList() ?? []);
 
@@ -46,34 +43,12 @@ class OrdersDataSourceImpl extends OrdersDataSource {
         ),
       ),
       data: PrismaUnion.$1(
-        OrdersCreateInput(
-          orderDate: DateTime.now(),
-          orderStatus: OrderStatusCreateNestedOneWithoutOrdersInput(
-            connectOrCreate: OrderStatusCreateOrConnectWithoutOrdersInput(
-              create: PrismaUnion.$1(
-                OrderStatusCreateWithoutOrdersInput(
-                  name: OrderStatusEnum.pending.name,
-                ),
-              ),
-              where: OrderStatusWhereUniqueInput(
-                name: OrderStatusEnum.pending.name,
-              ),
-            ),
-          ),
-          paymentMethods: PaymentMethodsCreateNestedOneWithoutOrdersInput(
-            connect: PaymentMethodsWhereUniqueInput(
-              methodName: paymentMethod,
-            ),
-          ),
-          orderItems: cart.toOrderItemsCreateInput(),
-          users: UsersCreateNestedOneWithoutOrdersInput(
-            connect: UsersWhereUniqueInput(userId: userId),
-          ),
+        orderCreateInput.copyWith(
           totalPrice: Decimal.parse(totalPrice.toString()),
+          orderItems: cart.toOrderItemsCreateInput(),
         ),
       ),
     );
-
     return order;
   }
 
@@ -85,6 +60,43 @@ class OrdersDataSourceImpl extends OrdersDataSource {
     }
 
     return totalPrice;
+  }
+
+  Future<void> _updateProductQuantities(List<CartItems> cartItems) async {
+    final updates = <int, ProductsUpdateInput>{};
+
+    for (final item in cartItems) {
+      final productId = item.products?.productId;
+
+      if (productId == null) {
+        throw Failure.badRequest(message: ResponseMessages.productNotFound);
+      }
+
+      final product = await _client.products.findUnique(
+        where: ProductsWhereUniqueInput(productId: productId),
+        select: const ProductsSelect(quantityInStock: true),
+      );
+
+      final currentStock = product?.quantityInStock ?? 0;
+      final orderedQuantity = item.quantity ?? 0;
+
+      final newStockQuantity = currentStock - orderedQuantity;
+
+      if (newStockQuantity < 0) {
+        throw Failure.badRequest(message: ResponseMessages.outOfStock);
+      }
+
+      updates[productId] = ProductsUpdateInput(
+        quantityInStock: PrismaUnion.$1(newStockQuantity),
+      );
+    }
+
+    for (final productId in updates.keys) {
+      await _client.products.update(
+        where: ProductsWhereUniqueInput(productId: productId),
+        data: PrismaUnion.$1(updates[productId]!),
+      );
+    }
   }
 
   Future<Carts> _getUserCart(int userId) async {
@@ -153,7 +165,34 @@ class OrdersDataSourceImpl extends OrdersDataSource {
     final updatedOrder =
         await updateOrderStatus(orderId, OrderStatusEnum.cancelled.name);
 
+    await _restoreProductQuantities(order.orderItems?.toList() ?? []);
+
     return updatedOrder;
+  }
+
+  Future<void> _restoreProductQuantities(List<OrderItems> orderItems) async {
+    for (final item in orderItems) {
+      final productId = item.products?.productId;
+      final cancelledQuantity = item.quantity ?? 0;
+
+      final product = await _client.products.findUnique(
+        where: ProductsWhereUniqueInput(productId: productId),
+        select: const ProductsSelect(quantityInStock: true),
+      );
+
+      final currentStock = product?.quantityInStock ?? 0;
+
+      final newStockQuantity = currentStock + cancelledQuantity;
+
+      await _client.products.update(
+        where: ProductsWhereUniqueInput(productId: productId),
+        data: PrismaUnion.$1(
+          ProductsUpdateInput(
+            quantityInStock: PrismaUnion.$1(newStockQuantity),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -227,6 +266,13 @@ class OrdersDataSourceImpl extends OrdersDataSource {
       ),
       include: const OrdersInclude(
         orderStatus: PrismaUnion.$1(true),
+        orderItems: PrismaUnion.$2(
+          OrdersOrderItemsArgs(
+            include: OrderItemsInclude(
+              products: PrismaUnion.$1(true),
+            ),
+          ),
+        ),
       ),
     );
 
