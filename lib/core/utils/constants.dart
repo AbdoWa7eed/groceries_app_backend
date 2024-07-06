@@ -19,4 +19,6 @@ abstract class Constants {
   static const String role = 'role';
   static const String issuedAt = 'issued at';
   static const String bannersKey = 'BANNERS_CACHE_KEY';
+  static const String exclusiveOffersKey = 'EXCLUSIVE_OFFERS_CACHE_KEY';
+  static const String bestSellingKey = 'BESTSELLING_CACHE_KEY';
 }

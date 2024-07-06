@@ -27,34 +27,33 @@ extension ProductMapper on Products {
   }
 }
 
-extension ProductSearchInputMapper on ProductSearchInput? {
+extension ProductSearchInputMapper on ProductSearchInput {
   ProductsWhereInput toProductWhereInput() {
     return ProductsWhereInput(
-      categoryId:
-          this?.categoryId != null ? PrismaUnion.$2(this!.categoryId!) : null,
-      categories: this?.categoryName != null
+      categoryId: categoryId != null ? PrismaUnion.$2(categoryId!) : null,
+      categories: categoryName != null
           ? PrismaUnion.$2(
               CategoriesWhereInput(
-                name: PrismaUnion.$2(this!.categoryName!),
+                name: PrismaUnion.$2(categoryName!),
               ),
             )
           : null,
-      OR: this?.searchText != null
+      OR: searchText != null
           ? <ProductsWhereInput>[
               ProductsWhereInput(
                 name: PrismaUnion.$1(
-                  StringFilter(contains: PrismaUnion.$1(this!.searchText!)),
+                  StringFilter(contains: PrismaUnion.$1(searchText!)),
                 ),
               ),
               ProductsWhereInput(
                 description: PrismaUnion.$1(
-                  StringFilter(contains: PrismaUnion.$1(this!.searchText!)),
+                  StringFilter(contains: PrismaUnion.$1(searchText!)),
                 ),
               ),
               ProductsWhereInput(
                 productDetails: PrismaUnion.$1(
                   StringNullableFilter(
-                    contains: PrismaUnion.$1(this!.searchText!),
+                    contains: PrismaUnion.$1(searchText!),
                   ),
                 ),
               ),

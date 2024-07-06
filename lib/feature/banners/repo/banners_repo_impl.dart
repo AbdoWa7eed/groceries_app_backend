@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/banners/data/cache_data_source.dart';
@@ -13,15 +15,24 @@ class BannersRepositoryImpl extends BannersRepository {
   final BannersCacheDataSource _bannerCacheDataSource;
   @override
   Future<Either<Failure, List<BannerModel>>> getBanners() async {
+    var isCacheError = false;
     try {
       final cachedBanners = await _bannerCacheDataSource.getBanners();
-      if (cachedBanners.isNotEmpty) {
+      if (cachedBanners != null) {
         return Right(cachedBanners);
       }
+    } catch (error) {
+      isCacheError = true;
+    }
+
+    try {
       final banners = await _bannerDataSource.getBanners();
       final bannerModels =
           banners.map((banner) => banner.toBannerModel()).toList();
-      await _bannerCacheDataSource.saveBanners(bannerModels);
+
+      if (!isCacheError) {
+        await _bannerCacheDataSource.saveBanners(bannerModels);
+      }
       return Right(bannerModels);
     } catch (error) {
       return Left(Failure.fromException(error));
@@ -33,9 +44,17 @@ class BannersRepositoryImpl extends BannersRepository {
     try {
       final banner =
           (await _bannerDataSource.addBanner(imageUrl)).toBannerModel();
-      final cachedBanners = await _bannerCacheDataSource.getBanners();
-      cachedBanners.add(banner);
-      await _bannerCacheDataSource.saveBanners(cachedBanners);
+
+      try {
+        final banners = await _bannerCacheDataSource.getBanners();
+        if (banners != null) {
+          banners.add(banner);
+          await _bannerCacheDataSource.saveBanners(banners);
+        }
+      } catch (error) {
+        log('CACHE ERROR : $error');
+      }
+
       return Right(banner);
     } catch (error) {
       return Left(Failure.fromException(error));
@@ -45,11 +64,18 @@ class BannersRepositoryImpl extends BannersRepository {
   @override
   Future<Either<Failure, BannerModel>> deleteBanner(int bannerId) async {
     try {
+      final banner = await _bannerCacheDataSource.getBanners();
+      if (banner != null) {
+        banner.removeWhere((banner) => banner.id == bannerId);
+        await _bannerCacheDataSource.saveBanners(banner);
+      }
+    } catch (error) {
+      return Left(Failure.fromException(error));
+    }
+
+    try {
       final banner =
           (await _bannerDataSource.deleteBanner(bannerId)).toBannerModel();
-      final cachedBanners = await _bannerCacheDataSource.getBanners();
-      cachedBanners.removeWhere((element) => element.id == bannerId);
-      await _bannerCacheDataSource.saveBanners(cachedBanners);
       return Right(banner);
     } on Failure catch (failure) {
       return Left(failure);

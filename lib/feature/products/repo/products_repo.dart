@@ -27,4 +27,8 @@ abstract class ProductsRepository {
   Future<Either<Failure, ProductModel>> deleteProduct({
     required int productId,
   });
+
+  Future<Either<Failure, List<ProductModel>>> getBestSelling();
+
+  Future<Either<Failure, List<ProductModel>>> getExclusiveOffers();
 }

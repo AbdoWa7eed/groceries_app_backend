@@ -14,6 +14,8 @@ abstract class CategoriesDataSource {
   Future<Categories> addCategory(CategoriesCreateInput categoryInput);
 
   Future<Categories> deleteCategory(int categoryId);
+
+  
 }
 
 class CategoriesDataSourceImpl extends CategoriesDataSource {

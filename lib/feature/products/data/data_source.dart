@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, one_member_abstracts
 
-import 'dart:developer';
-
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
@@ -26,6 +24,10 @@ abstract class ProductsDataSource {
   });
 
   Future<Products> deleteProduct(int productId);
+
+  Future<List<Products>> getBestSelling();
+
+  Future<List<Products>> getExclusiveOffers();
 }
 
 class ProductsDataSourceImpl extends ProductsDataSource {
@@ -63,7 +65,6 @@ class ProductsDataSourceImpl extends ProductsDataSource {
 
   @override
   Future<Products> addProduct(ProductsCreateInput data) async {
-    log('HELLO');
     final product = await _client.products.create(
       data: PrismaUnion.$1(data),
       include: const ProductsInclude(
@@ -100,5 +101,50 @@ class ProductsDataSourceImpl extends ProductsDataSource {
       ),
     );
     return product!;
+  }
+
+  @override
+  Future<List<Products>> getBestSelling() async {
+    final products = await _client.products.findMany(
+      include: const ProductsInclude(
+        orderItems: PrismaUnion.$1(true),
+      ),
+      where: const ProductsWhereInput(
+        orderItems: OrderItemsListRelationFilter(
+          some: OrderItemsWhereInput(
+            orders: PrismaUnion.$1(
+              OrdersRelationFilter(
+                isNot: OrdersWhereInput(
+                  status: PrismaUnion.$2(4),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      orderBy: const PrismaUnion.$2(
+        ProductsOrderByWithRelationInput(
+          orderItems: OrderItemsOrderByRelationAggregateInput(
+            $count: SortOrder.desc,
+          ),
+        ),
+      ),
+    );
+    return products.toList();
+  }
+
+  @override
+  Future<List<Products>> getExclusiveOffers() async {
+    final products = await _client.products.findMany(
+      orderBy: const PrismaUnion.$2(
+        ProductsOrderByWithRelationInput(
+          discountPercentage: PrismaUnion.$1(
+            SortOrder.desc,
+          ),
+        ),
+      ),
+    );
+
+    return products.toList();
   }
 }

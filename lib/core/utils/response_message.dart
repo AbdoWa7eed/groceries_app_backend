@@ -143,4 +143,7 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
   static const String nutritionRemoved = 'Nutrition removed successfully';
   static const String nutritionUpdated = 'Nutrition updated successfully';
   static const String resolveNutritionIdError = "Couldn't Resolve nutrition ID";
+
+  // Cache Error
+  static const String cacheNotInitialized = 'Cache not initialized';
 }

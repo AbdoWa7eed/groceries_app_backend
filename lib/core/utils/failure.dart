@@ -112,6 +112,15 @@ class Failure implements Exception {
     );
   }
 
+  factory Failure.cacheError({
+    required String message,
+  }) {
+    return Failure(
+      statusCode: HttpStatus.internalServerError,
+      message: message,
+    );
+  }
+
   ///error code
   final int statusCode;
 

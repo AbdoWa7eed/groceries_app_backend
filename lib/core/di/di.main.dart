@@ -63,13 +63,19 @@ Future<void> initOTPResources() async {
 }
 
 Future<void> initRedis() async {
-  final command =
-      await RedisConnection().connect(Constants.localhost, Constants.cachePort);
+  if (!instance.isRegistered<RedisService>()) {
+    try {
+      final command = await RedisConnection()
+          .connect(Constants.localhost, Constants.cachePort);
 
-  if (!instance.isRegistered<Command>()) {
-    instance
-      ..registerLazySingleton<Command>(() => command)
-      ..registerLazySingleton<RedisService>(() => RedisService(command));
+      if (!instance.isRegistered<Command>()) {
+        instance
+          ..registerLazySingleton<Command>(() => command)
+          ..registerLazySingleton<RedisService>(() => RedisService(command));
+      }
+    } catch (error) {
+      log('CACHE SERVER ERROR : $error');
+    }
   }
 }
 
@@ -97,11 +103,27 @@ void initProductsResources() {
   if (!instance.isRegistered<ProductsRepository>()) {
     instance
       ..registerLazySingleton<ProductsRepository>(
-        () => ProductsRepositoryImpl(instance<ProductsDataSource>()),
+        () => ProductsRepositoryImpl(
+          instance<ProductsDataSource>(),
+          instance<ProductsCacheDataSource>(),
+        ),
       )
       ..registerLazySingleton<ProductsDataSource>(
         () => ProductsDataSourceImpl(instance<PrismaClient>()),
       );
+
+    if (instance.isRegistered<RedisService>()) {
+      instance.registerLazySingleton<ProductsCacheDataSource>(
+        () => ProductsCacheDataSourceImpl(
+          instance<RedisService>(),
+          instance<DotEnv>(),
+        ),
+      );
+    } else {
+      instance.registerLazySingleton<ProductsCacheDataSource>(
+        DefaultProductsCacheDataSource.new,
+      );
+    }
   }
 }
 
@@ -140,13 +162,20 @@ void initBannersResources() {
       )
       ..registerLazySingleton<BannersDataSource>(
         () => BannersDataSourceImpl(instance<PrismaClient>()),
-      )
-      ..registerLazySingleton<BannersCacheDataSource>(
+      );
+
+    if (instance.isRegistered<RedisService>()) {
+      instance.registerLazySingleton<BannersCacheDataSource>(
         () => BannersCacheDataSourceImpl(
           instance<RedisService>(),
           instance<DotEnv>(),
         ),
       );
+    } else {
+      instance.registerLazySingleton<BannersCacheDataSource>(
+        DefaultBannersCacheDataSource.new,
+      );
+    }
   }
 }
 

@@ -18,7 +18,6 @@ class RedisService {
 
   Future<dynamic> get({required String key}) async {
     final value = await _command.send_object(['GET', key]) as String?;
-
     return value != null ? jsonDecode(value) : null;
   }
 

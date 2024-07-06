@@ -13,7 +13,7 @@ model banners {
 }
 
 model cart_items {
-  quantity   Int
+  quantity   Int      @db.UnsignedInt
   cart_id    Int
   product_id Int
   carts      carts    @relation(fields: [cart_id], references: [cart_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_carts1")
@@ -53,16 +53,16 @@ model favorites {
 
 model nutritions {
   nutrition_id  Int        @id @default(autoincrement())
-  calories      Int        @db.SmallInt
-  protein       Int        @db.SmallInt
-  carbohydrates Int        @db.SmallInt
+  calories      Int        @db.UnsignedSmallInt
+  protein       Int        @db.UnsignedSmallInt
+  carbohydrates Int        @db.UnsignedSmallInt
   products      products[]
 }
 
 model order_items {
   order_id   Int
   product_id Int
-  quantity   Int      @db.SmallInt
+  quantity   Int      @db.UnsignedSmallInt
   orders     orders   @relation(fields: [order_id], references: [order_id], onDelete: NoAction, map: "fk_order_items_orders")
   products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_order_items_products1")
 
