@@ -32,6 +32,7 @@ class OTPRepositoryImpl extends OTPRepository {
   Future<Either<Failure, bool>> verifyCode({
     required String code,
     required String verificationId,
+    required int userId,
   }) async {
     try {
       final data = await _localDataSource.verifyCode(
@@ -39,7 +40,12 @@ class OTPRepositoryImpl extends OTPRepository {
         code: code,
       );
 
-      return Right(data);
+      await _remoteDataSource.updateUserPhoneNumber(
+        phoneNumber: data,
+        userId: userId,
+      );
+
+      return const Right(true);
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {

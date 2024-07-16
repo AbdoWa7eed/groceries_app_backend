@@ -10,6 +10,7 @@ part 'otp_model.g.dart';
 class OTPMessageModel {
   const OTPMessageModel({
     required this.code,
+    required this.phoneNumber,
     required this.verificationID,
     required this.createdAt,
     required this.expireIn,
@@ -20,6 +21,7 @@ class OTPMessageModel {
 
   final String code;
   final String verificationID;
+  final String phoneNumber;
   final DateTime createdAt;
   final DateTime expireIn;
 

@@ -45,7 +45,10 @@ Future<void> initOTPResources() async {
         () => OTPCacheDataSourceImpl(instance<RedisService>()),
       )
       ..registerLazySingleton<OTPRemoteDataSource>(
-        () => OTPRemoteDataSourceImpl(instance<SMSService>()),
+        () => OTPRemoteDataSourceImpl(
+          instance<SMSService>(),
+          instance<PrismaClient>(),
+        ),
       )
       ..registerLazySingleton<SMSService>(
         () => SMSService(instance<DotEnv>()),

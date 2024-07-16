@@ -22,8 +22,11 @@ Future<Response> _verifyCode(RequestContext context) async {
     final verificationId = dataJson['verificationId'] as String;
     final code = dataJson['code'] as String;
     final otpRepo = instance<OTPRepository>();
-    final data =
-        await otpRepo.verifyCode(code: code, verificationId: verificationId);
+    final data = await otpRepo.verifyCode(
+      code: code,
+      verificationId: verificationId,
+      userId: context.read<int>(),
+    );
     if (data.isRight()) {
       return ResponseHelper.ok(
         message: ResponseMessages.numberVerified,

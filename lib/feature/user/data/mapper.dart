@@ -32,7 +32,7 @@ extension UserModelToOrmInput on UserModel {
       password: password!.hashValue(),
       userRoles: UserRolesCreateNestedOneWithoutUsersInput(
         connect: UserRolesWhereUniqueInput(
-          role: role ?? UserRolesEnum.user.toString(),
+          role: role ?? UserRolesEnum.user.name,
         ),
       ),
       address: address != null

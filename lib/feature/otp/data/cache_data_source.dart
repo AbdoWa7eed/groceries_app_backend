@@ -8,7 +8,7 @@ import 'package:groceries_app_backend/feature/otp/model/otp_model.dart';
 abstract class OTPCacheDataSource {
   Future<void> saveMessage({required OTPMessageModel messageModel});
 
-  Future<bool> verifyCode({
+  Future<String> verifyCode({
     required String verificationId,
     required String code,
   });
@@ -28,7 +28,7 @@ class OTPCacheDataSourceImpl extends OTPCacheDataSource {
   }
 
   @override
-  Future<bool> verifyCode({
+  Future<String> verifyCode({
     required String verificationId,
     required String code,
   }) async {
@@ -45,7 +45,7 @@ class OTPCacheDataSourceImpl extends OTPCacheDataSource {
     if (DateTime.now().compareTo(message.expireIn) <= 0) {
       if (message.code == code) {
         await _redisService.delete(key: verificationId);
-        return true;
+        return message.phoneNumber;
       }
     } else {
       await _redisService.delete(key: verificationId);

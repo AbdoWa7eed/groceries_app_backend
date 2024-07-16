@@ -11,5 +11,6 @@ abstract class OTPRepository {
   Future<Either<Failure, bool>> verifyCode({
     required String code,
     required String verificationId,
+    required int userId,
   });
 }

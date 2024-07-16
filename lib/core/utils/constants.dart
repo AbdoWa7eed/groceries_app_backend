@@ -5,7 +5,7 @@ abstract class Constants {
   static const String jwtAccessSecret = 'JWT_ACCESS_SECRET';
   static const String jwtRefreshSecret = 'JWT_REFRESH_SECRET';
   static const String smsServiceUrl =
-      'https://8gnj39.api.infobip.com/sms/2/text/advanced';
+      'https://e1p8nr.api.infobip.com/sms/2/text/advanced';
   static const String smsServiceApiKey = 'SMS_SERVICE_API_KEY';
   static const String messageCacheBox = 'MESSAGE_CACHE_BOX';
   static const String applicationJson = 'application/json';

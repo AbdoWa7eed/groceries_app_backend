@@ -34,7 +34,7 @@ class SMSService {
                   'to': phoneNumber,
                 },
               ],
-              'from': 'e-commerce app',
+              'from': 'Nectar app at ${DateTime.now().toIso8601String()}',
               'text': "Here's your otp code $code valid for 4 minutes",
             }
           ],
