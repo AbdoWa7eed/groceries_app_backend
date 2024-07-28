@@ -58,4 +58,18 @@ class UserRepositoryImpl implements UserRepository {
       return Left(Failure.fromException(error));
     }
   }
+
+  @override
+  Future<Either<Failure, UserModel>> getUserData({required int userId}) async {
+    try {
+      final user = await _dataSource.getUserData(
+        userId: userId,
+      );
+      return Right(user.toUserModel());
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (error) {
+      return Left(Failure.fromException(error));
+    }
+  }
 }

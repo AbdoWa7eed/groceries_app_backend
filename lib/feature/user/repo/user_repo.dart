@@ -14,4 +14,7 @@ abstract class UserRepository {
   Future<Either<Failure, UserModel>> createUser(UserModel userModel);
 
   Future<Either<Failure, UserModel>> updateUserData(UserModel userModel);
+
+  Future<Either<Failure, UserModel>> getUserData({required int userId});
+
 }

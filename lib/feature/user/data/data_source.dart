@@ -20,6 +20,10 @@ abstract class UserDataSource {
     required int userId,
     required UsersUpdateInput usersUpdateInput,
   });
+
+  Future<Users> getUserData({
+    required int userId,
+  });
 }
 
 ///Data Source Implementation
@@ -87,10 +91,8 @@ class UserDataSourceImpl implements UserDataSource {
     required int userId,
     required UsersUpdateInput usersUpdateInput,
   }) async {
-
-    if(usersUpdateInput.phoneNumber != null){
-
-      if(!usersUpdateInput.phoneNumber!.$1.isValidPhoneNumber()){
+    if (usersUpdateInput.phoneNumber != null) {
+      if (!usersUpdateInput.phoneNumber!.$1.isValidPhoneNumber()) {
         throw Failure.badRequest(
           message: ResponseMessages.invalidPhoneNumber,
         );
@@ -107,6 +109,18 @@ class UserDataSourceImpl implements UserDataSource {
         message: ResponseMessages.userNotFound,
       );
     }
+
+    return user;
+  }
+
+  @override
+  Future<Users> getUserData({
+    required int userId,
+  }) async {
+    final user = await _client.users.findUniqueOrThrow(
+      include: const UsersInclude(userRoles: PrismaUnion.$1(true)),
+      where: UsersWhereUniqueInput(userId: userId),
+    );
 
     return user;
   }
