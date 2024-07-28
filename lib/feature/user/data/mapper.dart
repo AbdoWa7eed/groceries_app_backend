@@ -53,15 +53,9 @@ extension UserModelToUpdateInput on UserModel {
     return UsersUpdateInput(
       userName: username != null ? PrismaUnion.$1(username!) : null,
       email: username != null ? PrismaUnion.$1(email!) : null,
-      phoneNumber: phoneNumber != null
-          ? PrismaUnion.$1(phoneNumber!)
-          : const PrismaUnion.$2(PrismaUnion.$2(PrismaNull())),
-      address: address != null
-          ? PrismaUnion.$1(address!)
-          : const PrismaUnion.$2(PrismaUnion.$2(PrismaNull())),
-      imageUrl: imageUrl != null
-          ? PrismaUnion.$1(imageUrl!)
-          : const PrismaUnion.$2(PrismaUnion.$2(PrismaNull())),
+      phoneNumber: phoneNumber != null ? PrismaUnion.$1(phoneNumber!) : null,
+      address: address != null ? PrismaUnion.$1(address!) : null,
+      imageUrl: imageUrl != null ? PrismaUnion.$1(imageUrl!) : null,
     );
   }
 }

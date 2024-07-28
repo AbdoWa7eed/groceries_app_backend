@@ -23,6 +23,8 @@ class OrdersDataSourceImpl extends OrdersDataSource {
 
   @override
   Future<Orders> placeOrder(OrdersCreateInput orderCreateInput) async {
+    await _checkUserPhoneAndAddress(
+        orderCreateInput.users.connect?.userId ?? 0);
     final cart =
         await _getUserCart(orderCreateInput.users.connect?.userId ?? 0);
 
@@ -50,6 +52,24 @@ class OrdersDataSourceImpl extends OrdersDataSource {
       ),
     );
     return order;
+  }
+
+  Future<void> _checkUserPhoneAndAddress(int userId) async {
+    final user = await _client.users.findUnique(
+      where: UsersWhereUniqueInput(userId: userId),
+    );
+
+    if (user?.phoneNumber == null) {
+      throw Failure.badRequest(
+        message: ResponseMessages.youShouldHavePhoneNumber,
+      );
+    }
+
+    if (user?.address == null) {
+      throw Failure.badRequest(
+        message: ResponseMessages.youShouldHaveAddress,
+      );
+    }
   }
 
   double _getPriceFromProducts(List<CartItems> cartItems) {

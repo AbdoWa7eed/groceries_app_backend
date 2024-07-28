@@ -26,7 +26,7 @@ Future<Response> _sendOTPMessage(RequestContext context) async {
       return ResponseHelper.ok(
         message: ResponseMessages.codeSent,
         data: {
-          'VerificationId': data.asRight(),
+          'verificationId': data.asRight(),
         },
       );
     }

@@ -36,6 +36,12 @@ extension Validations on String? {
     ).hasMatch(this!);
   }
 
+   bool isValidPhoneNumber() {
+    return RegExp(
+      r'^(\+20)1([0-2]|5)\d{8}$',
+    ).hasMatch(this!);
+  }
+
   bool isValidPaymentMethod() {
     return PaymentMethodEnum.values.map((e) => e.name).contains(this);
   }

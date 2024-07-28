@@ -28,6 +28,7 @@ abstract class ResponseMessages {
   static const String wrongCode = 'Wrong message code';
   static const String errorWhileSendingOTP =
       'Error while sending the message. Please try again.';
+  static const String invalidPhoneNumber = 'Invalid phone number';    
 
   // Request and Query Validation
   static const String methodNotAllowed = "Method isn't allowed";
@@ -91,6 +92,12 @@ abstract class ResponseMessages {
   static const String orderStatusUpdated = 'Order status updated successfully';
   static const String cannotUpdateOrderStatus =
       'Cannot update delivered or cancelled orders';
+
+  static const String youShouldHavePhoneNumber =
+      'You should have a phone number to place an order';   
+
+  static const String youShouldHaveAddress =
+      'You should have an address to place an order';     
 
   // Admin Actions
   static const String onlyAdminsAllowed =

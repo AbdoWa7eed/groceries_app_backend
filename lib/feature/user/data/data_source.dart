@@ -87,6 +87,15 @@ class UserDataSourceImpl implements UserDataSource {
     required int userId,
     required UsersUpdateInput usersUpdateInput,
   }) async {
+
+    if(usersUpdateInput.phoneNumber != null){
+
+      if(!usersUpdateInput.phoneNumber!.$1.isValidPhoneNumber()){
+        throw Failure.badRequest(
+          message: ResponseMessages.invalidPhoneNumber,
+        );
+      }
+    }
     final user = await _client.users.update(
       data: PrismaUnion.$1(usersUpdateInput),
       include: const UsersInclude(userRoles: PrismaUnion.$1(true)),
