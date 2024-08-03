@@ -13,6 +13,7 @@ abstract class ProductsRepository {
 
   Future<Either<Failure, ProductModel>> getProductDetails({
     required int productId,
+    required int userId,
   });
 
   Future<Either<Failure, ProductModel>> addProduct({

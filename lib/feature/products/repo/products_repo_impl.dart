@@ -39,9 +39,11 @@ class ProductsRepositoryImpl extends ProductsRepository {
   @override
   Future<Either<Failure, ProductModel>> getProductDetails({
     required int productId,
+    required int userId,
   }) async {
     try {
-      final product = await _dataSource.getProductDetails(productId);
+      final product = await _dataSource.getProductDetails(
+          productId: productId, userId: userId);
       return Right(product.toProductModel());
     } on Failure catch (failure) {
       return Left(failure);

@@ -17,6 +17,7 @@ class ProductModel {
     required this.rate,
     required this.imageUrl,
     required this.discountPercentage,
+    this.isFavorite,
     this.category,
     this.nutritions,
     this.productDetails,
@@ -42,6 +43,8 @@ class ProductModel {
   final String? productDetails;
 
   final double? discountPercentage;
+
+  final bool? isFavorite;
 
   final CategoryModel? category;
 

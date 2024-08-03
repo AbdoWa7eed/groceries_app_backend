@@ -36,6 +36,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'rate': instance.rate,
       'imageUrl': instance.imageUrl,
       'productDetails': instance.productDetails,
+      'isFavorite': instance.isFavorite,
       'discountPercentage': instance.discountPercentage,
       'category': instance.category,
       'nutritions': instance.nutritions,

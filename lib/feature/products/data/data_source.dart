@@ -14,7 +14,10 @@ abstract class ProductsDataSource {
     required ProductsWhereInput? searchInput,
   });
 
-  Future<Products> getProductDetails(int productId);
+  Future<Products> getProductDetails({
+    required int productId,
+    required int userId,
+  });
 
   Future<Products> addProduct(ProductsCreateInput data);
 
@@ -46,13 +49,23 @@ class ProductsDataSourceImpl extends ProductsDataSource {
   }
 
   @override
-  Future<Products> getProductDetails(int productId) async {
+  Future<Products> getProductDetails({
+    required int productId,
+    required int userId,
+  }) async {
     final product = await _client.products.findUnique(
       where: ProductsWhereUniqueInput(productId: productId),
-      include: const ProductsInclude(
-        categories: PrismaUnion.$1(true),
-        nutritions: PrismaUnion.$1(true),
-        reviews: PrismaUnion.$1(true),
+      include: ProductsInclude(
+        favorites: PrismaUnion.$2(
+          ProductsFavoritesArgs(
+            where: FavoritesWhereInput(
+              userId: PrismaUnion.$2(userId),
+            ),
+          ),
+        ),
+        categories: const PrismaUnion.$1(true),
+        nutritions: const PrismaUnion.$1(true),
+        reviews: const PrismaUnion.$1(true),
       ),
     );
     if (product == null) {
@@ -136,6 +149,13 @@ class ProductsDataSourceImpl extends ProductsDataSource {
   @override
   Future<List<Products>> getExclusiveOffers() async {
     final products = await _client.products.findMany(
+      where: ProductsWhereInput(
+        discountPercentage: PrismaUnion.$1(
+          DecimalNullableFilter(
+            not: PrismaUnion.$1(Decimal.fromInt(0)),
+          ),
+        ),
+      ),
       orderBy: const PrismaUnion.$2(
         ProductsOrderByWithRelationInput(
           discountPercentage: PrismaUnion.$1(

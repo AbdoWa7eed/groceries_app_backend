@@ -19,6 +19,7 @@ extension ProductMapper on Products {
       description: description,
       unitPrice: unitPrice?.toDouble(),
       imageUrl: imageUrl,
+      isFavorite: favorites?.isNotEmpty ?? false,
       category: categories.toCategoryModel(),
       nutritions: nutritions?.toNutritionModel(),
       productDetails: productDetails,

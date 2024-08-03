@@ -16,7 +16,6 @@ abstract class CartDataSource {
   Future<Carts?> getUserCart({required int userId});
 }
 
-
 class CartDataSourceImpl extends CartDataSource {
   CartDataSourceImpl(this._client);
 
@@ -25,7 +24,6 @@ class CartDataSourceImpl extends CartDataSource {
   Future<CartItems> addToCart(CartItemsCreateInput cartItemsCreateInput) async {
     final productId = cartItemsCreateInput.products.connect?.productId;
     final userId = cartItemsCreateInput.carts.connectOrCreate?.where.userId;
-
 
     final item = await _findCartItem(productId!, userId!);
 
