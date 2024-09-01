@@ -14,6 +14,7 @@ Future<Response> _getResponse(RequestContext context) async {
   return switch (context.request.method) {
     HttpMethod.get => await _getCart(context),
     HttpMethod.post => await _addToCart(context),
+    HttpMethod.put => await _updateItemQuantity(context),
     HttpMethod.delete => await _removeFromCart(context),
     _ => ResponseHelper.methodNotAllowed(),
   };
@@ -66,6 +67,27 @@ Future<Response> _removeFromCart(RequestContext context) async {
     if (result.isRight()) {
       return ResponseHelper.ok(
         message: ResponseMessages.removedFromCart,
+        data: result.asRight().toJson(),
+      );
+    }
+
+    return result.asFailure().failureResponse;
+  } catch (error) {
+    return ResponseHelper.badRequest(
+      message: ResponseMessages.checkRequestBody,
+    );
+  }
+}
+
+Future<Response> _updateItemQuantity(RequestContext context) async {
+  try {
+    final cartRepo = instance<CartRepository>();
+    final cartInputModel = await _createInputModel(context);
+    final result = await cartRepo.updateItemQuantity(cartInputModel);
+
+    if (result.isRight()) {
+      return ResponseHelper.ok(
+        message: ResponseMessages.cartItemUpdated,
         data: result.asRight().toJson(),
       );
     }

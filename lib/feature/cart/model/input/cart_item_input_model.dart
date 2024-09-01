@@ -7,7 +7,7 @@ class CartItemInputModel {
   /// Constructor for creating a [CartItemInputModel] instance.
   CartItemInputModel({
     required this.productId,
-    this.quantity,
+    required this.quantity,
     this.userId,
   });
 

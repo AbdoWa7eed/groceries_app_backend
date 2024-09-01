@@ -11,8 +11,17 @@ abstract class CartRepository {
     CartItemInputModel cartItemInput,
   );
 
+  Future<Either<Failure, void>> addAllToCart(
+    List<CartItemInputModel> cartItemsInput,
+  );
+
   /// Removes an item from the user's shopping cart.
   Future<Either<Failure, CartItemModel>> removeFromCart(
+    CartItemInputModel cartItemInputModel,
+  );
+
+  /// Removes an item from the user's shopping cart.
+  Future<Either<Failure, CartItemModel>> updateItemQuantity(
     CartItemInputModel cartItemInputModel,
   );
 

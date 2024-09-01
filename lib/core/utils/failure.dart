@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:orm/orm.dart';
@@ -10,9 +11,7 @@ class Failure implements Exception {
     if (error is PrismaClientKnownRequestError) {
       switch (error.code) {
         case 'P2002':
-          return Failure.conflict(
-            message: ResponseMessages.uniqueConstraintViolation,
-          );
+          return Failure.conflict(message: ResponseMessages.valueAlreadyInUse);
         case 'P2009':
           return Failure.badRequest(
             message: '${ResponseMessages.fieldDoesNotExist}: ${error.message}}',

@@ -66,6 +66,7 @@ abstract class ResponseMessages {
   static const String cartItemAlreadyAdded = 'Item already added before';
   static const String invalidCartItem = "Cart item doesn't exist";
   static const String emptyCart = 'Cart is empty';
+  static const String addedAllToCart = 'Products Added To Cart Successfully';
 
   // Product Management
   static const String invalidProductId = 'There is no product with this ID';
@@ -124,7 +125,7 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
   static const String invalidRating = 'Rating must be between 1 and 5';
 
   // Prisma Error Messages
-  static const String uniqueConstraintViolation = 'Unique constraint violation';
+  static const String valueAlreadyInUse = 'This value already added or in use';
   static const String fieldDoesNotExist = 'Field does not exist';
   static const String otherKnownRequestError = 'Request error';
   static const String unknownRequestError = 'Unknown request error';

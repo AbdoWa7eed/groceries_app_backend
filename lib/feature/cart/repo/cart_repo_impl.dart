@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:groceries_app_backend/feature/cart/data/data_source.dart';
 import 'package:groceries_app_backend/feature/cart/data/mapper.dart';
 import 'package:groceries_app_backend/feature/cart/model/cart_item/cart_item_model.dart';
@@ -49,6 +50,40 @@ class CartRepositoryImpl extends CartRepository {
         productId: cartItemInputModel.productId,
         userId: cartItemInputModel.userId!,
       );
+      return Right(cartItem.toCartItemModel());
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (error) {
+      return Left(Failure.fromException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addAllToCart(
+      List<CartItemInputModel> cartItemsInput) async {
+    try {
+      final cartItemsCreateInputs =
+          cartItemsInput.map((e) => e.toCartItemsCreateInput()).toList();
+      final result = await _cartDataSource.addAllToCart(cartItemsCreateInputs);
+      if (result == 0) {
+        return Left(
+          Failure.badRequest(message: ResponseMessages.cartItemAlreadyAdded),
+        );
+      }
+      return const Right(0);
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (error) {
+      return Left(Failure.fromException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CartItemModel>> updateItemQuantity(
+      CartItemInputModel cartItemInputModel) async {
+    try {
+      final cartItem =
+          await _cartDataSource.updateItemQuantity(cartItemInputModel);
       return Right(cartItem.toCartItemModel());
     } on Failure catch (failure) {
       return Left(failure);

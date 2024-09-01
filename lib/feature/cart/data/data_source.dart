@@ -3,15 +3,20 @@ import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.da
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
+import 'package:groceries_app_backend/feature/cart/model/input/cart_item_input_model.dart';
 import 'package:orm/orm.dart';
 
 abstract class CartDataSource {
   Future<CartItems> addToCart(CartItemsCreateInput cartItemsCreateInput);
 
+  Future<int> addAllToCart(List<CartItemsCreateInput> cartItemsCreateInput);
+
   Future<CartItems> removeFromCart({
     required int productId,
     required int userId,
   });
+
+  Future<CartItems> updateItemQuantity(CartItemInputModel model);
 
   Future<Carts?> getUserCart({required int userId});
 }
@@ -20,31 +25,57 @@ class CartDataSourceImpl extends CartDataSource {
   CartDataSourceImpl(this._client);
 
   final PrismaClient _client;
+
   @override
-  Future<CartItems> addToCart(CartItemsCreateInput cartItemsCreateInput) async {
-    final productId = cartItemsCreateInput.products.connect?.productId;
-    final userId = cartItemsCreateInput.carts.connectOrCreate?.where.userId;
+  Future<int> addAllToCart(
+    List<CartItemsCreateInput> cartItemsCreateInput,
+  ) async {
+    final userId = cartItemsCreateInput[0].carts.connectOrCreate!.where.userId!;
+    var cart = await getUserCart(
+      userId: userId,
+    );
+    cart ??= await _createUserCart(userId);
+    final models = cartItemsCreateInput
+        .map(
+          (e) => CartItemsCreateManyInput(
+            quantity: e.quantity,
+            cartId: cart!.cartId!,
+            productId: e.products.connect?.productId ?? 0,
+          ),
+        )
+        .toList();
 
-    final item = await _findCartItem(productId!, userId!);
+    final result = await _client.cartItems.createMany(
+      data: PrismaUnion.$2(models),
+      skipDuplicates: true,
+    );
+    return result.count ?? 0;
+  }
 
-    if (item != null) {
-      final updatedCartItem = await _updateCartItem(
-        quantity: cartItemsCreateInput.quantity,
-        cartId: item.cartId!,
-        productId: productId,
-      );
-      return updatedCartItem;
-    }
-
-    final cartItem = await _client.cartItems.create(
-      data: PrismaUnion.$1(cartItemsCreateInput),
-      include: const CartItemsInclude(
-        carts: PrismaUnion.$1(true),
-        products: PrismaUnion.$1(true),
+  Future<Carts> _createUserCart(int userId) async {
+    return await _client.carts.create(
+      data: PrismaUnion.$2(
+        CartsUncheckedCreateInput(
+          userId: userId,
+        ),
       ),
     );
+  }
 
-    return cartItem;
+  @override
+  Future<CartItems> addToCart(CartItemsCreateInput cartItemsCreateInput) async {
+    try {
+      final cartItem = await _client.cartItems.create(
+        data: PrismaUnion.$1(cartItemsCreateInput),
+        include: const CartItemsInclude(
+          carts: PrismaUnion.$1(true),
+          products: PrismaUnion.$1(true),
+        ),
+      );
+      return cartItem;
+    } catch (error) {
+      throw Failure.badRequest(message: ResponseMessages.cartItemAlreadyAdded);
+    }
   }
 
   @override
@@ -52,14 +83,10 @@ class CartDataSourceImpl extends CartDataSource {
     required int productId,
     required int userId,
   }) async {
-    final item = await _findCartItem(productId, userId);
-
-    if (item == null) {
-      throw Failure.badRequest(
-        message: ResponseMessages.invalidCartItem,
-      );
+    final cart = await getUserCart(userId: userId);
+    if (cart == null) {
+      throw Failure.badRequest(message: ResponseMessages.emptyCart);
     }
-
     final deletedItem = await _client.cartItems.delete(
       include: const CartItemsInclude(
         carts: PrismaUnion.$1(true),
@@ -67,30 +94,30 @@ class CartDataSourceImpl extends CartDataSource {
       ),
       where: CartItemsWhereUniqueInput(
         cartIdProductId: CartItemsCartIdProductIdCompoundUniqueInput(
-          cartId: item.cartId!,
-          productId: item.productId!,
+          productId: productId,
+          cartId: cart.cartId!,
         ),
       ),
     );
-
     return deletedItem!;
   }
 
-  Future<CartItems> _updateCartItem({
-    required int quantity,
-    required int cartId,
-    required int productId,
-  }) async {
+  @override
+  Future<CartItems> updateItemQuantity(CartItemInputModel model) async {
+    final cart = await getUserCart(userId: model.userId!);
+    if (cart == null) {
+      throw Failure.badRequest(message: ResponseMessages.emptyCart);
+    }
     final newItem = await _client.cartItems.update(
       data: PrismaUnion.$1(
         CartItemsUpdateInput(
-          quantity: PrismaUnion.$1(quantity),
+          quantity: PrismaUnion.$1(model.quantity!),
         ),
       ),
       where: CartItemsWhereUniqueInput(
         cartIdProductId: CartItemsCartIdProductIdCompoundUniqueInput(
-          cartId: cartId,
-          productId: productId,
+          cartId: cart.cartId!,
+          productId: model.productId,
         ),
       ),
       include: const CartItemsInclude(
@@ -99,21 +126,6 @@ class CartDataSourceImpl extends CartDataSource {
     );
 
     return newItem!;
-  }
-
-  Future<CartItems?> _findCartItem(int productId, int userId) async {
-    final item = await _client.cartItems.findFirst(
-      where: CartItemsWhereInput(
-        productId: PrismaUnion.$2(productId),
-        carts: PrismaUnion.$2(
-          CartsWhereInput(
-            userId: PrismaUnion.$2(userId),
-          ),
-        ),
-      ),
-    );
-
-    return item;
   }
 
   @override
