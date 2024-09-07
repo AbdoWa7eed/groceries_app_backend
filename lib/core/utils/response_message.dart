@@ -25,10 +25,16 @@ abstract class ResponseMessages {
   static const String codeSent =
       'Code has been sent to your number. Valid for 5 minutes.';
   static const String wrongMessageId = "This message doesn't exist.";
-  static const String wrongCode = 'Wrong message code';
+  static const String wrongCode = 'Wrong verification code.';
   static const String errorWhileSendingOTP =
       'Error while sending the message. Please try again.';
   static const String invalidPhoneNumber = 'Invalid phone number';
+
+  // Reset Password
+  static const String passwordChanged = 'Password changed successfully';
+  static const String verificationCodeSent =
+      'Verification code sent successfully';
+  static const String emailVerified = 'Email verified successfully';
 
   // Request and Query Validation
   static const String methodNotAllowed = "Method isn't allowed";

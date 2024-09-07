@@ -43,7 +43,9 @@ class ProductsRepositoryImpl extends ProductsRepository {
   }) async {
     try {
       final product = await _dataSource.getProductDetails(
-          productId: productId, userId: userId);
+        productId: productId,
+        userId: userId,
+      );
       return Right(product.toProductModel());
     } on Failure catch (failure) {
       return Left(failure);

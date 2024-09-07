@@ -71,7 +71,7 @@ class Failure implements Exception {
     );
   }
 
-  ///internalServerError
+  ///forbidden
   factory Failure.forbidden({
     required String message,
   }) {
@@ -101,7 +101,7 @@ class Failure implements Exception {
     );
   }
 
-  ///badRequest
+  ///unauthorized
   factory Failure.unauthorized({
     required String message,
   }) {

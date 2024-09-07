@@ -5,10 +5,10 @@ import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.d
 import 'package:groceries_app_backend/core/services/sms_service.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
+import 'package:groceries_app_backend/core/utils/otp_generator.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:groceries_app_backend/feature/otp/model/otp_model.dart';
 import 'package:orm/orm.dart';
-import 'package:otp/otp.dart';
 
 // ignore: one_member_abstracts
 abstract class OTPRemoteDataSource {
@@ -34,11 +34,8 @@ class OTPRemoteDataSourceImpl extends OTPRemoteDataSource {
         );
       }
 
-    final secret = (OTP.randomSecret() + phoneNumber).hashValue();
-    final code = OTP.generateHOTPCodeString(
-      secret,
-      DateTime.now().millisecondsSinceEpoch,
-    );
+    final secret = OTPGenerator.generateSecret(phoneNumber);
+    final code = OTPGenerator.generateOTP(secret);
 
     final response = await _smsService.sendSms(
       verificationID: secret,

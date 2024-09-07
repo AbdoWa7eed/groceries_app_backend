@@ -36,15 +36,18 @@ Future<Response> _addAllToCart(RequestContext context) async {
 }
 
 Future<List<CartItemInputModel>> _createInputModel(
-    RequestContext context) async {
+  RequestContext context,
+) async {
   final body = await context.request.json() as Map<String, dynamic>;
   final userId = context.read<int>();
   final list = body['items'] as List;
   final jsonList = list.map((e) => e as Map<String, dynamic>).toList();
   final models = jsonList
-      .map((e) => CartItemInputModel.fromJson(e).copyWith(
-            userId: userId,
-          ))
+      .map(
+        (e) => CartItemInputModel.fromJson(e).copyWith(
+          userId: userId,
+        ),
+      )
       .toList();
   return models;
 }

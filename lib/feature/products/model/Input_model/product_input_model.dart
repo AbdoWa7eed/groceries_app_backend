@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product_input_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class ProductInputModel {
   ProductInputModel({
     required this.name,

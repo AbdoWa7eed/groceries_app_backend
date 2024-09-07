@@ -21,4 +21,7 @@ abstract class Constants {
   static const String bannersKey = 'BANNERS_CACHE_KEY';
   static const String exclusiveOffersKey = 'EXCLUSIVE_OFFERS_CACHE_KEY';
   static const String bestSellingKey = 'BESTSELLING_CACHE_KEY';
+  static const String mailSender = 'MAIL_SENDER';
+  static const String emailServiceUrl = 'https://e1p8nr.api.infobip.com/email/3/send';
+  static const String multipart = 'multipart/form-data';
 }

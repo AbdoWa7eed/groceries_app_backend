@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'category_search_input.g.dart';
 
 ///
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class CategorySearchInput {
   /// Creates a new instance of [CategorySearchInput].
   CategorySearchInput({required this.size, required this.skip});

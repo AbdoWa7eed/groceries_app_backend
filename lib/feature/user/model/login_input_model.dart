@@ -4,7 +4,7 @@ part 'login_input_model.g.dart';
 
 /// Represents the input model for the login operation.
 /// This model includes fields for email and password.
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class LoginInputModel {
   /// Creates an instance of [LoginInputModel]
   /// with the provided email and password.

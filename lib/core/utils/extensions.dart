@@ -3,6 +3,7 @@
 import 'package:bcrypt/bcrypt.dart';
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/enums.dart';
+import 'package:otp/otp.dart';
 
 ///Hash String
 extension HashStringValue on String {
@@ -54,4 +55,20 @@ extension Validations on String? {
 extension EitherX<Failure, R> on Either<Failure, R> {
   R asRight() => (this as Right<Failure, R>).value;
   Failure asFailure() => (this as Left<Failure, R>).value;
+}
+
+
+extension GenerateOTPExtension on OTP? {
+
+  static String generateSecret(String value) {
+    return  (OTP.randomSecret() + value).hashValue();
+  }
+
+  static String generateOTPCodeString(String secret) {
+    final code = OTP.generateHOTPCodeString(
+      secret,
+      DateTime.now().millisecondsSinceEpoch,
+    );
+    return code;
+  }
 }

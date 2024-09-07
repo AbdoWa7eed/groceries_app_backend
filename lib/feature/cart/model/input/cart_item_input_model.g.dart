@@ -8,6 +8,7 @@ part of 'cart_item_input_model.dart';
 
 CartItemInputModel _$CartItemInputModelFromJson(Map<String, dynamic> json) =>
     CartItemInputModel(
-      productId: json['productId'] as int,
-      quantity: json['quantity'] as int? ?? 1,
+      productId: (json['productId'] as num).toInt(),
+      quantity: (json['quantity'] as num?)?.toInt(),
+      userId: (json['userId'] as num?)?.toInt(),
     );

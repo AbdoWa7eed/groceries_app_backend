@@ -60,7 +60,8 @@ class CartRepositoryImpl extends CartRepository {
 
   @override
   Future<Either<Failure, void>> addAllToCart(
-      List<CartItemInputModel> cartItemsInput) async {
+    List<CartItemInputModel> cartItemsInput,
+  ) async {
     try {
       final cartItemsCreateInputs =
           cartItemsInput.map((e) => e.toCartItemsCreateInput()).toList();
@@ -70,7 +71,7 @@ class CartRepositoryImpl extends CartRepository {
           Failure.badRequest(message: ResponseMessages.cartItemAlreadyAdded),
         );
       }
-      return const Right(0);
+      return const Right(null);
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {
@@ -80,7 +81,8 @@ class CartRepositoryImpl extends CartRepository {
 
   @override
   Future<Either<Failure, CartItemModel>> updateItemQuantity(
-      CartItemInputModel cartItemInputModel) async {
+    CartItemInputModel cartItemInputModel,
+  ) async {
     try {
       final cartItem =
           await _cartDataSource.updateItemQuantity(cartItemInputModel);

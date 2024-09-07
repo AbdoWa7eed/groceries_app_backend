@@ -24,7 +24,8 @@ class OrdersDataSourceImpl extends OrdersDataSource {
   @override
   Future<Orders> placeOrder(OrdersCreateInput orderCreateInput) async {
     await _checkUserPhoneAndAddress(
-        orderCreateInput.users.connect?.userId ?? 0);
+      orderCreateInput.users.connect?.userId ?? 0,
+    );
     final cart =
         await _getUserCart(orderCreateInput.users.connect?.userId ?? 0);
 

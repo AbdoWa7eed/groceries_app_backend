@@ -8,6 +8,9 @@ const _authenticationUrl = [
   'user/login',
   'user/register',
   'user/refresh-token',
+  'password/',
+  'password/reset',
+  'password/verify-email',
 ];
 
 Handler middleware(Handler handler) {

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'cart_item_input_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class CartItemInputModel {
   /// Constructor for creating a [CartItemInputModel] instance.
   CartItemInputModel({

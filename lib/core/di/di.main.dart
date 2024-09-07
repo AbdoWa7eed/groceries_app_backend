@@ -229,3 +229,26 @@ void initNutritionResources() {
       );
   }
 }
+
+void initResetPasswordResources() {
+  if (!instance.isRegistered<ResetPasswordRepository>()) {
+    instance
+      ..registerLazySingleton<EmailSenderService>(
+        () => EmailSenderService(instance<DotEnv>()),
+      )
+      ..registerLazySingleton<ResetPasswordRemoteDataSource>(
+        () => ResetPasswordRemoteDataSourceImpl(
+          instance<PrismaClient>(),
+          instance<EmailSenderService>(),
+        ),
+      )
+      ..registerLazySingleton<ResetPasswordCacheDataSource>(
+        () => ResetPasswordCacheDataSourceImpl(
+          instance<RedisService>(),
+        ),
+      )
+      ..registerLazySingleton<ResetPasswordRepository>(
+        () => ResetPasswordRepoImpl(instance(), instance()),
+      );
+  }
+}

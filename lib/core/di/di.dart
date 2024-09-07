@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:dotenv/dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
+import 'package:groceries_app_backend/core/services/email_sender_service.dart';
 import 'package:groceries_app_backend/core/services/jwt_service.dart';
 import 'package:groceries_app_backend/core/services/redis_service.dart';
 import 'package:groceries_app_backend/core/services/sms_service.dart';
@@ -37,6 +38,10 @@ import 'package:groceries_app_backend/feature/products/data/cache_data_source.da
 import 'package:groceries_app_backend/feature/products/data/data_source.dart';
 import 'package:groceries_app_backend/feature/products/repo/products_repo.dart';
 import 'package:groceries_app_backend/feature/products/repo/products_repo_impl.dart';
+import 'package:groceries_app_backend/feature/reset_password/data/cache_data_source.dart';
+import 'package:groceries_app_backend/feature/reset_password/data/remote_data_source.dart';
+import 'package:groceries_app_backend/feature/reset_password/repo/reset_password_repo.dart';
+import 'package:groceries_app_backend/feature/reset_password/repo/reset_password_repo_impl.dart';
 import 'package:groceries_app_backend/feature/reviews/data/data_source.dart';
 import 'package:groceries_app_backend/feature/reviews/repo/reviews_repo.dart';
 import 'package:groceries_app_backend/feature/reviews/repo/reviews_repo_impl.dart';

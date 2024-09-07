@@ -13,7 +13,7 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
           : DateTime.parse(json['orderDate'] as String),
       userId: (json['userId'] as num?)?.toInt(),
       status: json['status'] as String?,
-      paymentMethod: json['paymentMethodId'] as String?,
+      paymentMethod: json['paymentMethod'] as String?,
       totalPrice: (json['totalPrice'] as num?)?.toDouble(),
       orderItems: (json['orderItems'] as List<dynamic>?)
               ?.map((e) => OrderItemModel.fromJson(e as Map<String, dynamic>))
@@ -37,13 +37,14 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
           instance.orderItems.map((orderItem) => orderItem?.toJson()).toList(),
     };
 
-OrderItemModel _$OrderItemFromJson(Map<String, dynamic> json) => OrderItemModel(
+OrderItemModel _$OrderItemModelFromJson(Map<String, dynamic> json) =>
+    OrderItemModel(
       orderId: (json['orderId'] as num).toInt(),
       product: ProductModel.fromJson(json['product'] as Map<String, dynamic>),
       quantity: (json['quantity'] as num).toInt(),
     );
 
-Map<String, dynamic> _$OrderItemToJson(OrderItemModel instance) =>
+Map<String, dynamic> _$OrderItemModelToJson(OrderItemModel instance) =>
     <String, dynamic>{
       'orderId': instance.orderId,
       'product': instance.product?.simpleModelToJson(),

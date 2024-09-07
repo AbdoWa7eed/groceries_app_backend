@@ -2,9 +2,7 @@ import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'product_search_input.g.dart';
 
-@JsonSerializable()
-
-///
+@JsonSerializable(createToJson: false)
 class ProductSearchInput {
   /// Creates a new instance of [ProductSearchInput].
   ProductSearchInput({
