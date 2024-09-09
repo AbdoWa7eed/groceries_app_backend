@@ -18,7 +18,6 @@ class ReviewInputModel {
   final String? reviewDescription;
   final int? productId;
   final int? userId;
-  @JsonKey(includeFromJson: false)
   final DateTime? reviewDate;
 
   Map<String, dynamic> toJson() => _$ReviewInputModelToJson(this);

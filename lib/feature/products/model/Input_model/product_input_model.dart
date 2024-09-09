@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product_input_model.g.dart';
 
-@JsonSerializable(createFactory: false)
+@JsonSerializable(createToJson: false)
 class ProductInputModel {
   ProductInputModel({
     required this.name,
@@ -17,7 +17,7 @@ class ProductInputModel {
   });
 
   factory ProductInputModel.fromJson(Map<String, dynamic> json) =>
-      _$ProductUpdateModelFromJson(json);
+      _$ProductInputModelFromJson(json);
 
   final String? name;
 

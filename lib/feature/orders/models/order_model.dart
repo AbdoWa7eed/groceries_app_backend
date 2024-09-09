@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'order_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class OrderModel {
   OrderModel({
     required this.orderId,
@@ -14,10 +14,10 @@ class OrderModel {
     required this.totalPrice,
     required this.orderItems,
     required this.shippingDate,
+    required this.paymentStatus,
+    required this.shippingAddress,
   });
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) =>
-      _$OrderModelFromJson(json);
   final int? orderId;
   final DateTime? orderDate;
   final DateTime? shippingDate;
@@ -25,8 +25,12 @@ class OrderModel {
   final String? status;
   final String? paymentMethod;
   final double? totalPrice;
-  final List<OrderItemModel?> orderItems;
+  final List<OrderItemModel> orderItems;
+  final String? shippingAddress;
+  final String? paymentStatus;
+
   Map<String, dynamic> toJson() => _$OrderModelToJson(this);
+
 }
 
 @JsonSerializable()
@@ -42,5 +46,6 @@ class OrderItemModel {
   final int? orderId;
   final ProductModel? product;
   final int? quantity;
+
   Map<String, dynamic> toJson() => _$OrderItemModelToJson(this);
 }

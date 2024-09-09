@@ -18,4 +18,10 @@ abstract class OrdersRepository {
     required int orderId,
     required String status,
   });
+
+  Future<Either<Failure, OrderModel>> setOrderPaidStatus({
+    required int orderId,
+    required String paymentLink
+  });
+
 }

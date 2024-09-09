@@ -27,6 +27,13 @@ enum PaymentMethodEnum {
   paymob,
 }
 
+enum PaymentStatusEnum {
+  pending,
+  paid,
+}
+extension PaymentStatusName on PaymentStatusEnum {
+  String get name => toString().substring(toString().indexOf('.') + 1);
+}
 extension PaymentMethodEnumName on PaymentMethodEnum {
   String get name => toString().substring(toString().indexOf('.') + 1);
 }

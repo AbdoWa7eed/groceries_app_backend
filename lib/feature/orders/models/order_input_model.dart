@@ -1,28 +1,30 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'order_input_model.g.dart';
+@JsonSerializable(createToJson: false)
 class OrderInputModel {
   const OrderInputModel({
     required this.userId,
     required this.paymentMethod,
+    required this.shippingAddress,
   });
 
-  factory OrderInputModel.fromJson(Map<String, dynamic> json) =>
-      OrderInputModel(
-        userId: (json['userId'] ?? 0) as int,
-        paymentMethod: json['paymentMethod'] as String,
-      );
-  final int userId;
+  factory OrderInputModel.fromJson(Map<String , dynamic> json)
+    => _$OrderInputModelFromJson(json);
+  final int? userId;
   final String paymentMethod;
+  final String shippingAddress;
 
-  Map<String, dynamic> toJson() => {
-        'paymentMethod': paymentMethod,
-      };
 
   OrderInputModel copyWith({
     int? userId,
     String? paymentMethod,
+    String? shippingAddress,
+    String? paymentStatus
   }) {
     return OrderInputModel(
       userId: userId ?? this.userId,
       paymentMethod: paymentMethod ?? this.paymentMethod,
+      shippingAddress: shippingAddress ?? this.shippingAddress,
     );
   }
 }

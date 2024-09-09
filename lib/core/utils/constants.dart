@@ -24,4 +24,11 @@ abstract class Constants {
   static const String mailSender = 'MAIL_SENDER';
   static const String emailServiceUrl = 'https://e1p8nr.api.infobip.com/email/3/send';
   static const String multipart = 'multipart/form-data';
+  static const String paymentBaseUrl = 'https://accept.paymob.com/api';
+  static const String authTokenEndpoint = '$paymentBaseUrl/auth/tokens';
+  static const String paymentLinkEndpoint = '$paymentBaseUrl/ecommerce/payment-links';
+  static const String cardIntegrationId = 'CARD_INTEGRATION_ID';
+  static const String paymentAPIKey = 'PAYMENT_API_KEY';
+
+
 }

@@ -11,6 +11,8 @@ extension OrdersToOrderModelMapper on Orders {
     return OrderModel(
       orderId: orderId,
       orderDate: orderDate,
+      paymentStatus: paymentStatus?.status,
+      shippingAddress: shippingAddress,
       userId: userId,
       status: orderStatus?.name,
       paymentMethod: paymentMethods?.methodName,
@@ -55,6 +57,11 @@ extension OrderInputModelToOrderCreateInputMapper on OrderInputModel {
   OrdersCreateInput toOrderCreateInput() {
     return OrdersCreateInput(
       totalPrice: Decimal.one,
+      shippingAddress: shippingAddress,
+      paymentStatus: PaymentStatusCreateNestedOneWithoutOrdersInput(
+          connect: PaymentStatusWhereUniqueInput(
+        status: PaymentStatusEnum.pending.name,
+      )),
       orderDate: DateTime.now(),
       orderStatus: OrderStatusCreateNestedOneWithoutOrdersInput(
         connectOrCreate: OrderStatusCreateOrConnectWithoutOrdersInput(
@@ -80,6 +87,7 @@ extension OrderInputModelToOrderCreateInputMapper on OrderInputModel {
   }
 }
 
+
 extension OrdersCreateInputCopyWithMapper on OrdersCreateInput {
   OrdersCreateInput copyWith({
     DateTime? orderDate,
@@ -88,9 +96,13 @@ extension OrdersCreateInputCopyWithMapper on OrdersCreateInput {
     UsersCreateNestedOneWithoutOrdersInput? users,
     Decimal? totalPrice,
     OrderItemsCreateNestedManyWithoutOrdersInput? orderItems,
+    String? shippingAddress,
+    PaymentStatusCreateNestedOneWithoutOrdersInput? paymentStatus,
   }) {
     return OrdersCreateInput(
       orderDate: orderDate ?? this.orderDate,
+      shippingAddress: shippingAddress ?? this.shippingAddress,
+      paymentStatus: paymentStatus ?? this.paymentStatus,
       orderItems: orderItems ?? this.orderItems,
       totalPrice: totalPrice ?? this.totalPrice,
       orderStatus: orderStatus ?? this.orderStatus,

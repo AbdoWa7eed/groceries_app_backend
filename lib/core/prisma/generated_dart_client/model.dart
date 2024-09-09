@@ -93,18 +93,55 @@ class PaymentMethods {
       };
 }
 
+class PaymentStatus {
+  const PaymentStatus({
+    this.paymentStatusId,
+    this.status,
+    this.orders,
+    this.$count,
+  });
+
+  factory PaymentStatus.fromJson(Map json) => PaymentStatus(
+        paymentStatusId: json['payment_status_id'],
+        status: json['status'],
+        orders: (json['orders'] as Iterable?)
+            ?.map((json) => _i1.Orders.fromJson(json)),
+        $count: json['_count'] is Map
+            ? _i2.PaymentStatusCountOutputType.fromJson(json['_count'])
+            : null,
+      );
+
+  final int? paymentStatusId;
+
+  final String? status;
+
+  final Iterable<_i1.Orders>? orders;
+
+  final _i2.PaymentStatusCountOutputType? $count;
+
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        'orders': orders?.map((e) => e.toJson()),
+        '_count': $count?.toJson(),
+      };
+}
+
 class Orders {
   const Orders({
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
     this.$count,
   });
@@ -121,9 +158,11 @@ class Orders {
           String value => DateTime.parse(value),
           _ => json['shipping_date']
         },
+        shippingAddress: json['shipping_address'],
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
+        paymentStatusId: json['payment_status_id'],
         totalPrice: json['total_price'],
         orderItems: (json['order_items'] as Iterable?)
             ?.map((json) => _i1.OrderItems.fromJson(json)),
@@ -132,6 +171,9 @@ class Orders {
             : null,
         paymentMethods: json['payment_methods'] is Map
             ? _i1.PaymentMethods.fromJson(json['payment_methods'])
+            : null,
+        paymentStatus: json['payment_status'] is Map
+            ? _i1.PaymentStatus.fromJson(json['payment_status'])
             : null,
         users: json['users'] is Map ? _i1.Users.fromJson(json['users']) : null,
         $count: json['_count'] is Map
@@ -145,11 +187,15 @@ class Orders {
 
   final DateTime? shippingDate;
 
+  final String? shippingAddress;
+
   final int? userId;
 
   final int? status;
 
   final int? paymentMethodId;
+
+  final int? paymentStatusId;
 
   final _i3.Decimal? totalPrice;
 
@@ -159,6 +205,8 @@ class Orders {
 
   final _i1.PaymentMethods? paymentMethods;
 
+  final _i1.PaymentStatus? paymentStatus;
+
   final _i1.Users? users;
 
   final _i2.OrdersCountOutputType? $count;
@@ -167,13 +215,16 @@ class Orders {
         'order_id': orderId,
         'order_date': orderDate?.toIso8601String(),
         'shipping_date': shippingDate?.toIso8601String(),
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems?.map((e) => e.toJson()),
         'order_status': orderStatus?.toJson(),
         'payment_methods': paymentMethods?.toJson(),
+        'payment_status': paymentStatus?.toJson(),
         'users': users?.toJson(),
         '_count': $count?.toJson(),
       };

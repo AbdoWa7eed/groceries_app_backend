@@ -1373,6 +1373,17 @@ class PaymentMethodsCountOutputType {
   Map<String, dynamic> toJson() => {'orders': orders};
 }
 
+class PaymentStatusCountOutputType {
+  const PaymentStatusCountOutputType({this.orders});
+
+  factory PaymentStatusCountOutputType.fromJson(Map json) =>
+      PaymentStatusCountOutputType(orders: json['orders']);
+
+  final int? orders;
+
+  Map<String, dynamic> toJson() => {'orders': orders};
+}
+
 class OrdersCountOutputType {
   const OrdersCountOutputType({this.orderItems});
 
@@ -2249,6 +2260,60 @@ class PaymentMethodsRelationFilter
       };
 }
 
+class PaymentStatusWhereInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusWhereInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.paymentStatusId,
+    this.status,
+    this.orders,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentStatusWhereInput,
+      Iterable<_i2.PaymentStatusWhereInput>>? AND;
+
+  final Iterable<_i2.PaymentStatusWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.PaymentStatusWhereInput,
+      Iterable<_i2.PaymentStatusWhereInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentStatusId;
+
+  final _i1.PrismaUnion<_i2.StringFilter, String>? status;
+
+  final _i2.OrdersListRelationFilter? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        'orders': orders,
+      };
+}
+
+class PaymentStatusRelationFilter
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusRelationFilter({
+    this.$is,
+    this.isNot,
+  });
+
+  final _i2.PaymentStatusWhereInput? $is;
+
+  final _i2.PaymentStatusWhereInput? isNot;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'is': $is,
+        'isNot': isNot,
+      };
+}
+
 class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersWhereInput({
     this.AND,
@@ -2257,13 +2322,16 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
   });
 
@@ -2282,11 +2350,15 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
       _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<_i2.StringFilter, String>? shippingAddress;
+
   final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? status;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentStatusId;
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? totalPrice;
 
@@ -2299,6 +2371,9 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<_i2.PaymentMethodsRelationFilter,
       _i2.PaymentMethodsWhereInput>? paymentMethods;
 
+  final _i1.PrismaUnion<_i2.PaymentStatusRelationFilter,
+      _i2.PaymentStatusWhereInput>? paymentStatus;
+
   final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
 
   @override
@@ -2309,13 +2384,16 @@ class OrdersWhereInput implements _i1.JsonConvertible<Map<String, dynamic>> {
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -3831,19 +3909,44 @@ class PaymentMethodsOrderByWithRelationInput
       };
 }
 
+class PaymentStatusOrderByWithRelationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusOrderByWithRelationInput({
+    this.paymentStatusId,
+    this.status,
+    this.orders,
+  });
+
+  final _i2.SortOrder? paymentStatusId;
+
+  final _i2.SortOrder? status;
+
+  final _i2.OrdersOrderByRelationAggregateInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        'orders': orders,
+      };
+}
+
 class OrdersOrderByWithRelationInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersOrderByWithRelationInput({
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
   });
 
@@ -3853,11 +3956,15 @@ class OrdersOrderByWithRelationInput
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? shippingDate;
 
+  final _i2.SortOrder? shippingAddress;
+
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? status;
 
   final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? paymentStatusId;
 
   final _i2.SortOrder? totalPrice;
 
@@ -3867,6 +3974,8 @@ class OrdersOrderByWithRelationInput
 
   final _i2.PaymentMethodsOrderByWithRelationInput? paymentMethods;
 
+  final _i2.PaymentStatusOrderByWithRelationInput? paymentStatus;
+
   final _i2.UsersOrderByWithRelationInput? users;
 
   @override
@@ -3874,13 +3983,16 @@ class OrdersOrderByWithRelationInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -4052,13 +4164,16 @@ class OrdersWhereUniqueInput
     this.NOT,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
   });
 
@@ -4077,11 +4192,15 @@ class OrdersWhereUniqueInput
   final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
       _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<_i2.StringFilter, String>? shippingAddress;
+
   final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? status;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentStatusId;
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? totalPrice;
 
@@ -4094,6 +4213,9 @@ class OrdersWhereUniqueInput
   final _i1.PrismaUnion<_i2.PaymentMethodsRelationFilter,
       _i2.PaymentMethodsWhereInput>? paymentMethods;
 
+  final _i1.PrismaUnion<_i2.PaymentStatusRelationFilter,
+      _i2.PaymentStatusWhereInput>? paymentStatus;
+
   final _i1.PrismaUnion<_i2.UsersRelationFilter, _i2.UsersWhereInput>? users;
 
   @override
@@ -4104,13 +4226,16 @@ class OrdersWhereUniqueInput
         'NOT': NOT,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -4119,9 +4244,11 @@ enum OrdersScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
   orderId<int>('order_id', 'orders'),
   orderDate<DateTime>('order_date', 'orders'),
   shippingDate<DateTime>('shipping_date', 'orders'),
+  shippingAddress<String>('shipping_address', 'orders'),
   userId<int>('user_id', 'orders'),
   status<int>('status', 'orders'),
   paymentMethodId<int>('payment_method_id', 'orders'),
+  paymentStatusId<int>('payment_status_id', 'orders'),
   totalPrice<_i1.Decimal>('total_price', 'orders');
 
   const OrdersScalar(
@@ -4376,6 +4503,130 @@ class OrdersPaymentMethodsArgs
   final _i2.PaymentMethodsSelect? select;
 
   final _i2.PaymentMethodsInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'select': select,
+        'include': include,
+      };
+}
+
+class PaymentStatusOrdersArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusOrdersArgs({
+    this.where,
+    this.orderBy,
+    this.cursor,
+    this.take,
+    this.skip,
+    this.distinct,
+    this.select,
+    this.include,
+  });
+
+  final _i2.OrdersWhereInput? where;
+
+  final _i1.PrismaUnion<Iterable<_i2.OrdersOrderByWithRelationInput>,
+      _i2.OrdersOrderByWithRelationInput>? orderBy;
+
+  final _i2.OrdersWhereUniqueInput? cursor;
+
+  final int? take;
+
+  final int? skip;
+
+  final _i1.PrismaUnion<_i2.OrdersScalar, Iterable<_i2.OrdersScalar>>? distinct;
+
+  final _i2.OrdersSelect? select;
+
+  final _i2.OrdersInclude? include;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'orderBy': orderBy,
+        'cursor': cursor,
+        'take': take,
+        'skip': skip,
+        'distinct': distinct,
+        'select': select,
+        'include': include,
+      };
+}
+
+class PaymentStatusCountOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCountOutputTypeSelect({this.orders});
+
+  final bool? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {'orders': orders};
+}
+
+class PaymentStatusCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCountArgs({this.select});
+
+  final _i2.PaymentStatusCountOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class PaymentStatusSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusSelect({
+    this.paymentStatusId,
+    this.status,
+    this.orders,
+    this.$count,
+  });
+
+  final bool? paymentStatusId;
+
+  final bool? status;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusOrdersArgs>? orders;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        'orders': orders,
+        '_count': $count,
+      };
+}
+
+class PaymentStatusInclude
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusInclude({
+    this.orders,
+    this.$count,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusOrdersArgs>? orders;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusCountArgs>? $count;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'orders': orders,
+        '_count': $count,
+      };
+}
+
+class OrdersPaymentStatusArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersPaymentStatusArgs({
+    this.select,
+    this.include,
+  });
+
+  final _i2.PaymentStatusSelect? select;
+
+  final _i2.PaymentStatusInclude? include;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -5065,6 +5316,7 @@ class OrdersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
     this.$count,
   });
@@ -5075,6 +5327,8 @@ class OrdersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
 
+  final _i1.PrismaUnion<bool, _i2.OrdersPaymentStatusArgs>? paymentStatus;
+
   final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
 
   final _i1.PrismaUnion<bool, _i2.OrdersCountArgs>? $count;
@@ -5084,6 +5338,7 @@ class OrdersInclude implements _i1.JsonConvertible<Map<String, dynamic>> {
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
         '_count': $count,
       };
@@ -5147,13 +5402,16 @@ class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
     this.$count,
   });
@@ -5164,11 +5422,15 @@ class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final bool? shippingDate;
 
+  final bool? shippingAddress;
+
   final bool? userId;
 
   final bool? status;
 
   final bool? paymentMethodId;
+
+  final bool? paymentStatusId;
 
   final bool? totalPrice;
 
@@ -5177,6 +5439,8 @@ class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i1.PrismaUnion<bool, _i2.OrdersOrderStatusArgs>? orderStatus;
 
   final _i1.PrismaUnion<bool, _i2.OrdersPaymentMethodsArgs>? paymentMethods;
+
+  final _i1.PrismaUnion<bool, _i2.OrdersPaymentStatusArgs>? paymentStatus;
 
   final _i1.PrismaUnion<bool, _i2.OrdersUsersArgs>? users;
 
@@ -5187,13 +5451,16 @@ class OrdersSelect implements _i1.JsonConvertible<Map<String, dynamic>> {
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
         '_count': $count,
       };
@@ -6508,6 +6775,112 @@ class PaymentMethodsCreateNestedOneWithoutOrdersInput
       };
 }
 
+class PaymentStatusCreateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCreateWithoutOrdersInput({required this.status});
+
+  final String status;
+
+  @override
+  Map<String, dynamic> toJson() => {'status': status};
+}
+
+class PaymentStatusUncheckedCreateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUncheckedCreateWithoutOrdersInput({
+    this.paymentStatusId,
+    required this.status,
+  });
+
+  final int? paymentStatusId;
+
+  final String status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusWhereUniqueInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusWhereUniqueInput({
+    this.paymentStatusId,
+    this.status,
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.orders,
+  });
+
+  final int? paymentStatusId;
+
+  final String? status;
+
+  final _i1.PrismaUnion<_i2.PaymentStatusWhereInput,
+      Iterable<_i2.PaymentStatusWhereInput>>? AND;
+
+  final Iterable<_i2.PaymentStatusWhereInput>? OR;
+
+  final _i1.PrismaUnion<_i2.PaymentStatusWhereInput,
+      Iterable<_i2.PaymentStatusWhereInput>>? NOT;
+
+  final _i2.OrdersListRelationFilter? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'orders': orders,
+      };
+}
+
+class PaymentStatusCreateOrConnectWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCreateOrConnectWithoutOrdersInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.PaymentStatusWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.PaymentStatusCreateWithoutOrdersInput,
+      _i2.PaymentStatusUncheckedCreateWithoutOrdersInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class PaymentStatusCreateNestedOneWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCreateNestedOneWithoutOrdersInput({
+    this.create,
+    this.connectOrCreate,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentStatusCreateWithoutOrdersInput,
+      _i2.PaymentStatusUncheckedCreateWithoutOrdersInput>? create;
+
+  final _i2.PaymentStatusCreateOrConnectWithoutOrdersInput? connectOrCreate;
+
+  final _i2.PaymentStatusWhereUniqueInput? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'connect': connect,
+      };
+}
+
 class NutritionsCreateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NutritionsCreateWithoutProductsInput({
@@ -7342,8 +7715,10 @@ class OrdersUncheckedCreateWithoutUsersInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.status,
     required this.paymentMethodId,
+    required this.paymentStatusId,
     required this.totalPrice,
     this.orderItems,
   });
@@ -7354,9 +7729,13 @@ class OrdersUncheckedCreateWithoutUsersInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int status;
 
   final int paymentMethodId;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -7367,8 +7746,10 @@ class OrdersUncheckedCreateWithoutUsersInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -7399,8 +7780,10 @@ class OrdersCreateManyUsersInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.status,
     required this.paymentMethodId,
+    required this.paymentStatusId,
     required this.totalPrice,
   });
 
@@ -7410,9 +7793,13 @@ class OrdersCreateManyUsersInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int status;
 
   final int paymentMethodId;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -7421,8 +7808,10 @@ class OrdersCreateManyUsersInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -8121,15 +8510,19 @@ class OrdersCreateWithoutUsersInput
   const OrdersCreateWithoutUsersInput({
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.totalPrice,
     this.orderItems,
     required this.orderStatus,
     required this.paymentMethods,
+    required this.paymentStatus,
   });
 
   final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final String shippingAddress;
 
   final _i1.Decimal totalPrice;
 
@@ -8139,14 +8532,18 @@ class OrdersCreateWithoutUsersInput
 
   final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
 
+  final _i2.PaymentStatusCreateNestedOneWithoutOrdersInput paymentStatus;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
       };
 }
 
@@ -9258,9 +9655,11 @@ class OrdersCreateWithoutOrderItemsInput
   const OrdersCreateWithoutOrderItemsInput({
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.totalPrice,
     required this.orderStatus,
     required this.paymentMethods,
+    required this.paymentStatus,
     required this.users,
   });
 
@@ -9268,11 +9667,15 @@ class OrdersCreateWithoutOrderItemsInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final _i1.Decimal totalPrice;
 
   final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
 
   final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
+
+  final _i2.PaymentStatusCreateNestedOneWithoutOrdersInput paymentStatus;
 
   final _i2.UsersCreateNestedOneWithoutOrdersInput users;
 
@@ -9280,9 +9683,11 @@ class OrdersCreateWithoutOrderItemsInput
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -9293,9 +9698,11 @@ class OrdersUncheckedCreateWithoutOrderItemsInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.userId,
     required this.status,
     required this.paymentMethodId,
+    required this.paymentStatusId,
     required this.totalPrice,
   });
 
@@ -9305,11 +9712,15 @@ class OrdersUncheckedCreateWithoutOrderItemsInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int userId;
 
   final int status;
 
   final int paymentMethodId;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -9318,9 +9729,11 @@ class OrdersUncheckedCreateWithoutOrderItemsInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -10471,6 +10884,112 @@ class PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput
       };
 }
 
+class PaymentStatusUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUpdateWithoutOrdersInput({this.status});
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? status;
+
+  @override
+  Map<String, dynamic> toJson() => {'status': status};
+}
+
+class PaymentStatusUncheckedUpdateWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUncheckedUpdateWithoutOrdersInput({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusUpsertWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUpsertWithoutOrdersInput({
+    required this.update,
+    required this.create,
+    this.where,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentStatusUpdateWithoutOrdersInput,
+      _i2.PaymentStatusUncheckedUpdateWithoutOrdersInput> update;
+
+  final _i1.PrismaUnion<_i2.PaymentStatusCreateWithoutOrdersInput,
+      _i2.PaymentStatusUncheckedCreateWithoutOrdersInput> create;
+
+  final _i2.PaymentStatusWhereInput? where;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'update': update,
+        'create': create,
+        'where': where,
+      };
+}
+
+class PaymentStatusUpdateToOneWithWhereWithoutOrdersInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUpdateToOneWithWhereWithoutOrdersInput({
+    this.where,
+    required this.data,
+  });
+
+  final _i2.PaymentStatusWhereInput? where;
+
+  final _i1.PrismaUnion<_i2.PaymentStatusUpdateWithoutOrdersInput,
+      _i2.PaymentStatusUncheckedUpdateWithoutOrdersInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class PaymentStatusUpdateOneRequiredWithoutOrdersNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUpdateOneRequiredWithoutOrdersNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.connect,
+    this.update,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentStatusCreateWithoutOrdersInput,
+      _i2.PaymentStatusUncheckedCreateWithoutOrdersInput>? create;
+
+  final _i2.PaymentStatusCreateOrConnectWithoutOrdersInput? connectOrCreate;
+
+  final _i2.PaymentStatusUpsertWithoutOrdersInput? upsert;
+
+  final _i2.PaymentStatusWhereUniqueInput? connect;
+
+  final _i1.PrismaUnion<
+      _i2.PaymentStatusUpdateToOneWithWhereWithoutOrdersInput,
+      _i1.PrismaUnion<_i2.PaymentStatusUpdateWithoutOrdersInput,
+          _i2.PaymentStatusUncheckedUpdateWithoutOrdersInput>>? update;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'connect': connect,
+        'update': update,
+      };
+}
+
 class NutritionsUpdateWithoutProductsInput
     implements _i1.JsonConvertible<Map<String, dynamic>> {
   const NutritionsUpdateWithoutProductsInput({
@@ -11481,8 +12000,10 @@ class OrdersUncheckedUpdateWithoutUsersInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
   });
@@ -11497,10 +12018,16 @@ class OrdersUncheckedUpdateWithoutUsersInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
       paymentMethodId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -11512,8 +12039,10 @@ class OrdersUncheckedUpdateWithoutUsersInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -11547,9 +12076,11 @@ class OrdersScalarWhereInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -11568,11 +12099,15 @@ class OrdersScalarWhereInput
   final _i1.PrismaUnion<_i2.DateTimeNullableFilter,
       _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<_i2.StringFilter, String>? shippingAddress;
+
   final _i1.PrismaUnion<_i2.IntFilter, int>? userId;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? status;
 
   final _i1.PrismaUnion<_i2.IntFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.IntFilter, int>? paymentStatusId;
 
   final _i1.PrismaUnion<_i2.DecimalFilter, _i1.Decimal>? totalPrice;
 
@@ -11584,9 +12119,11 @@ class OrdersScalarWhereInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -11596,6 +12133,7 @@ class OrdersUpdateManyMutationInput
   const OrdersUpdateManyMutationInput({
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.totalPrice,
   });
 
@@ -11607,6 +12145,9 @@ class OrdersUpdateManyMutationInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
 
@@ -11614,6 +12155,7 @@ class OrdersUpdateManyMutationInput
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
       };
 }
@@ -11624,8 +12166,10 @@ class OrdersUncheckedUpdateManyWithoutUsersInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -11639,10 +12183,16 @@ class OrdersUncheckedUpdateManyWithoutUsersInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
       paymentMethodId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -11652,8 +12202,10 @@ class OrdersUncheckedUpdateManyWithoutUsersInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -12838,10 +13390,12 @@ class OrdersUpdateWithoutUsersInput
   const OrdersUpdateWithoutUsersInput({
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
   });
 
   final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
@@ -12851,6 +13405,9 @@ class OrdersUpdateWithoutUsersInput
       DateTime,
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -12862,14 +13419,19 @@ class OrdersUpdateWithoutUsersInput
   final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
       paymentMethods;
 
+  final _i2.PaymentStatusUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentStatus;
+
   @override
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
       };
 }
 
@@ -14583,9 +15145,11 @@ class OrdersUpdateWithoutOrderItemsInput
   const OrdersUpdateWithoutOrderItemsInput({
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.totalPrice,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
   });
 
@@ -14597,6 +15161,9 @@ class OrdersUpdateWithoutOrderItemsInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
 
@@ -14605,15 +15172,20 @@ class OrdersUpdateWithoutOrderItemsInput
   final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
       paymentMethods;
 
+  final _i2.PaymentStatusUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentStatus;
+
   final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
 
   @override
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -14624,9 +15196,11 @@ class OrdersUncheckedUpdateWithoutOrderItemsInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -14640,12 +15214,18 @@ class OrdersUncheckedUpdateWithoutOrderItemsInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
       paymentMethodId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -14655,9 +15235,11 @@ class OrdersUncheckedUpdateWithoutOrderItemsInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -22234,9 +22816,11 @@ class OrdersCreateWithoutOrderStatusInput
   const OrdersCreateWithoutOrderStatusInput({
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.totalPrice,
     this.orderItems,
     required this.paymentMethods,
+    required this.paymentStatus,
     required this.users,
   });
 
@@ -22244,11 +22828,15 @@ class OrdersCreateWithoutOrderStatusInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final _i1.Decimal totalPrice;
 
   final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
 
   final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
+
+  final _i2.PaymentStatusCreateNestedOneWithoutOrdersInput paymentStatus;
 
   final _i2.UsersCreateNestedOneWithoutOrdersInput users;
 
@@ -22256,9 +22844,11 @@ class OrdersCreateWithoutOrderStatusInput
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -22269,8 +22859,10 @@ class OrdersUncheckedCreateWithoutOrderStatusInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.userId,
     required this.paymentMethodId,
+    required this.paymentStatusId,
     required this.totalPrice,
     this.orderItems,
   });
@@ -22281,9 +22873,13 @@ class OrdersUncheckedCreateWithoutOrderStatusInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int userId;
 
   final int paymentMethodId;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -22294,8 +22890,10 @@ class OrdersUncheckedCreateWithoutOrderStatusInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -22326,8 +22924,10 @@ class OrdersCreateManyOrderStatusInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.userId,
     required this.paymentMethodId,
+    required this.paymentStatusId,
     required this.totalPrice,
   });
 
@@ -22337,9 +22937,13 @@ class OrdersCreateManyOrderStatusInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int userId;
 
   final int paymentMethodId;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -22348,8 +22952,10 @@ class OrdersCreateManyOrderStatusInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -22506,9 +23112,11 @@ class OrdersUpdateWithoutOrderStatusInput
   const OrdersUpdateWithoutOrderStatusInput({
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.totalPrice,
     this.orderItems,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
   });
 
@@ -22520,6 +23128,9 @@ class OrdersUpdateWithoutOrderStatusInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
 
@@ -22528,15 +23139,20 @@ class OrdersUpdateWithoutOrderStatusInput
   final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
       paymentMethods;
 
+  final _i2.PaymentStatusUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentStatus;
+
   final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
 
   @override
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -22547,8 +23163,10 @@ class OrdersUncheckedUpdateWithoutOrderStatusInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
   });
@@ -22563,10 +23181,16 @@ class OrdersUncheckedUpdateWithoutOrderStatusInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
       paymentMethodId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -22578,8 +23202,10 @@ class OrdersUncheckedUpdateWithoutOrderStatusInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -22634,8 +23260,10 @@ class OrdersUncheckedUpdateManyWithoutOrderStatusInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -22649,10 +23277,16 @@ class OrdersUncheckedUpdateManyWithoutOrderStatusInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
       paymentMethodId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -22662,8 +23296,10 @@ class OrdersUncheckedUpdateManyWithoutOrderStatusInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -23488,16 +24124,20 @@ class OrdersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersCreateInput({
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.totalPrice,
     this.orderItems,
     required this.orderStatus,
     required this.paymentMethods,
+    required this.paymentStatus,
     required this.users,
   });
 
   final DateTime orderDate;
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final String shippingAddress;
 
   final _i1.Decimal totalPrice;
 
@@ -23507,16 +24147,20 @@ class OrdersCreateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
 
   final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
 
+  final _i2.PaymentStatusCreateNestedOneWithoutOrdersInput paymentStatus;
+
   final _i2.UsersCreateNestedOneWithoutOrdersInput users;
 
   @override
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -23527,9 +24171,11 @@ class OrdersUncheckedCreateInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.userId,
     required this.status,
     required this.paymentMethodId,
+    required this.paymentStatusId,
     required this.totalPrice,
     this.orderItems,
   });
@@ -23540,11 +24186,15 @@ class OrdersUncheckedCreateInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int userId;
 
   final int status;
 
   final int paymentMethodId;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -23555,9 +24205,11 @@ class OrdersUncheckedCreateInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -23569,9 +24221,11 @@ class OrdersCreateManyInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.userId,
     required this.status,
     required this.paymentMethodId,
+    required this.paymentStatusId,
     required this.totalPrice,
   });
 
@@ -23581,11 +24235,15 @@ class OrdersCreateManyInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int userId;
 
   final int status;
 
   final int paymentMethodId;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -23594,9 +24252,11 @@ class OrdersCreateManyInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -23605,10 +24265,12 @@ class OrdersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   const OrdersUpdateInput({
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
     this.paymentMethods,
+    this.paymentStatus,
     this.users,
   });
 
@@ -23620,6 +24282,9 @@ class OrdersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
 
@@ -23630,16 +24295,21 @@ class OrdersUpdateInput implements _i1.JsonConvertible<Map<String, dynamic>> {
   final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
       paymentMethods;
 
+  final _i2.PaymentStatusUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentStatus;
+
   final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
 
   @override
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
         'payment_methods': paymentMethods,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -23650,9 +24320,11 @@ class OrdersUncheckedUpdateInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
   });
@@ -23667,12 +24339,18 @@ class OrdersUncheckedUpdateInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
       paymentMethodId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -23684,9 +24362,11 @@ class OrdersUncheckedUpdateInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -23698,9 +24378,11 @@ class OrdersUncheckedUpdateManyInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -23714,12 +24396,18 @@ class OrdersUncheckedUpdateManyInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
       paymentMethodId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -23729,9 +24417,11 @@ class OrdersUncheckedUpdateManyInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -23741,9 +24431,11 @@ class OrdersCountAggregateOutputType {
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.$all,
   });
@@ -23753,9 +24445,11 @@ class OrdersCountAggregateOutputType {
         orderId: json['order_id'],
         orderDate: json['order_date'],
         shippingDate: json['shipping_date'],
+        shippingAddress: json['shipping_address'],
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
+        paymentStatusId: json['payment_status_id'],
         totalPrice: json['total_price'],
         $all: json['_all'],
       );
@@ -23766,11 +24460,15 @@ class OrdersCountAggregateOutputType {
 
   final int? shippingDate;
 
+  final int? shippingAddress;
+
   final int? userId;
 
   final int? status;
 
   final int? paymentMethodId;
+
+  final int? paymentStatusId;
 
   final int? totalPrice;
 
@@ -23780,9 +24478,11 @@ class OrdersCountAggregateOutputType {
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         '_all': $all,
       };
@@ -23794,6 +24494,7 @@ class OrdersAvgAggregateOutputType {
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -23803,6 +24504,7 @@ class OrdersAvgAggregateOutputType {
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
+        paymentStatusId: json['payment_status_id'],
         totalPrice: json['total_price'],
       );
 
@@ -23814,6 +24516,8 @@ class OrdersAvgAggregateOutputType {
 
   final double? paymentMethodId;
 
+  final double? paymentStatusId;
+
   final _i1.Decimal? totalPrice;
 
   Map<String, dynamic> toJson() => {
@@ -23821,6 +24525,7 @@ class OrdersAvgAggregateOutputType {
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -23831,6 +24536,7 @@ class OrdersSumAggregateOutputType {
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -23840,6 +24546,7 @@ class OrdersSumAggregateOutputType {
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
+        paymentStatusId: json['payment_status_id'],
         totalPrice: json['total_price'],
       );
 
@@ -23851,6 +24558,8 @@ class OrdersSumAggregateOutputType {
 
   final int? paymentMethodId;
 
+  final int? paymentStatusId;
+
   final _i1.Decimal? totalPrice;
 
   Map<String, dynamic> toJson() => {
@@ -23858,6 +24567,7 @@ class OrdersSumAggregateOutputType {
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -23867,9 +24577,11 @@ class OrdersMinAggregateOutputType {
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -23886,9 +24598,11 @@ class OrdersMinAggregateOutputType {
           String value => DateTime.parse(value),
           _ => json['shipping_date']
         },
+        shippingAddress: json['shipping_address'],
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
+        paymentStatusId: json['payment_status_id'],
         totalPrice: json['total_price'],
       );
 
@@ -23898,11 +24612,15 @@ class OrdersMinAggregateOutputType {
 
   final DateTime? shippingDate;
 
+  final String? shippingAddress;
+
   final int? userId;
 
   final int? status;
 
   final int? paymentMethodId;
+
+  final int? paymentStatusId;
 
   final _i1.Decimal? totalPrice;
 
@@ -23910,9 +24628,11 @@ class OrdersMinAggregateOutputType {
         'order_id': orderId,
         'order_date': orderDate?.toIso8601String(),
         'shipping_date': shippingDate?.toIso8601String(),
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -23922,9 +24642,11 @@ class OrdersMaxAggregateOutputType {
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -23941,9 +24663,11 @@ class OrdersMaxAggregateOutputType {
           String value => DateTime.parse(value),
           _ => json['shipping_date']
         },
+        shippingAddress: json['shipping_address'],
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
+        paymentStatusId: json['payment_status_id'],
         totalPrice: json['total_price'],
       );
 
@@ -23953,11 +24677,15 @@ class OrdersMaxAggregateOutputType {
 
   final DateTime? shippingDate;
 
+  final String? shippingAddress;
+
   final int? userId;
 
   final int? status;
 
   final int? paymentMethodId;
+
+  final int? paymentStatusId;
 
   final _i1.Decimal? totalPrice;
 
@@ -23965,9 +24693,11 @@ class OrdersMaxAggregateOutputType {
         'order_id': orderId,
         'order_date': orderDate?.toIso8601String(),
         'shipping_date': shippingDate?.toIso8601String(),
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -23977,9 +24707,11 @@ class OrdersGroupByOutputType {
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.$count,
     this.$avg,
@@ -24000,9 +24732,11 @@ class OrdersGroupByOutputType {
           String value => DateTime.parse(value),
           _ => json['shipping_date']
         },
+        shippingAddress: json['shipping_address'],
         userId: json['user_id'],
         status: json['status'],
         paymentMethodId: json['payment_method_id'],
+        paymentStatusId: json['payment_status_id'],
         totalPrice: json['total_price'],
         $count: json['_count'] is Map
             ? _i2.OrdersCountAggregateOutputType.fromJson(json['_count'])
@@ -24027,11 +24761,15 @@ class OrdersGroupByOutputType {
 
   final DateTime? shippingDate;
 
+  final String? shippingAddress;
+
   final int? userId;
 
   final int? status;
 
   final int? paymentMethodId;
+
+  final int? paymentStatusId;
 
   final _i1.Decimal? totalPrice;
 
@@ -24049,9 +24787,11 @@ class OrdersGroupByOutputType {
         'order_id': orderId,
         'order_date': orderDate?.toIso8601String(),
         'shipping_date': shippingDate?.toIso8601String(),
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         '_count': $count?.toJson(),
         '_avg': $avg?.toJson(),
@@ -24067,9 +24807,11 @@ class OrdersCountOrderByAggregateInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24079,11 +24821,15 @@ class OrdersCountOrderByAggregateInput
 
   final _i2.SortOrder? shippingDate;
 
+  final _i2.SortOrder? shippingAddress;
+
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? status;
 
   final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? paymentStatusId;
 
   final _i2.SortOrder? totalPrice;
 
@@ -24092,9 +24838,11 @@ class OrdersCountOrderByAggregateInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24106,6 +24854,7 @@ class OrdersAvgOrderByAggregateInput
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24117,6 +24866,8 @@ class OrdersAvgOrderByAggregateInput
 
   final _i2.SortOrder? paymentMethodId;
 
+  final _i2.SortOrder? paymentStatusId;
+
   final _i2.SortOrder? totalPrice;
 
   @override
@@ -24125,6 +24876,7 @@ class OrdersAvgOrderByAggregateInput
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24135,9 +24887,11 @@ class OrdersMaxOrderByAggregateInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24147,11 +24901,15 @@ class OrdersMaxOrderByAggregateInput
 
   final _i2.SortOrder? shippingDate;
 
+  final _i2.SortOrder? shippingAddress;
+
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? status;
 
   final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? paymentStatusId;
 
   final _i2.SortOrder? totalPrice;
 
@@ -24160,9 +24918,11 @@ class OrdersMaxOrderByAggregateInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24173,9 +24933,11 @@ class OrdersMinOrderByAggregateInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24185,11 +24947,15 @@ class OrdersMinOrderByAggregateInput
 
   final _i2.SortOrder? shippingDate;
 
+  final _i2.SortOrder? shippingAddress;
+
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? status;
 
   final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? paymentStatusId;
 
   final _i2.SortOrder? totalPrice;
 
@@ -24198,9 +24964,11 @@ class OrdersMinOrderByAggregateInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24212,6 +24980,7 @@ class OrdersSumOrderByAggregateInput
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24223,6 +24992,8 @@ class OrdersSumOrderByAggregateInput
 
   final _i2.SortOrder? paymentMethodId;
 
+  final _i2.SortOrder? paymentStatusId;
+
   final _i2.SortOrder? totalPrice;
 
   @override
@@ -24231,6 +25002,7 @@ class OrdersSumOrderByAggregateInput
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24241,9 +25013,11 @@ class OrdersOrderByWithAggregationInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.$count,
     this.$avg,
@@ -24258,11 +25032,15 @@ class OrdersOrderByWithAggregationInput
 
   final _i1.PrismaUnion<_i2.SortOrder, _i2.SortOrderInput>? shippingDate;
 
+  final _i2.SortOrder? shippingAddress;
+
   final _i2.SortOrder? userId;
 
   final _i2.SortOrder? status;
 
   final _i2.SortOrder? paymentMethodId;
+
+  final _i2.SortOrder? paymentStatusId;
 
   final _i2.SortOrder? totalPrice;
 
@@ -24281,9 +25059,11 @@ class OrdersOrderByWithAggregationInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         '_count': $count,
         '_avg': $avg,
@@ -24652,9 +25432,11 @@ class OrdersScalarWhereWithAggregatesInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24673,11 +25455,16 @@ class OrdersScalarWhereWithAggregatesInput
   final _i1.PrismaUnion<_i2.DateTimeNullableWithAggregatesFilter,
       _i1.PrismaUnion<DateTime, _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>?
+      shippingAddress;
+
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? userId;
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? status;
 
   final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? paymentMethodId;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? paymentStatusId;
 
   final _i1.PrismaUnion<_i2.DecimalWithAggregatesFilter, _i1.Decimal>?
       totalPrice;
@@ -24690,9 +25477,11 @@ class OrdersScalarWhereWithAggregatesInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24703,9 +25492,11 @@ class OrdersCountAggregateOutputTypeSelect
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.$all,
   });
@@ -24716,11 +25507,15 @@ class OrdersCountAggregateOutputTypeSelect
 
   final bool? shippingDate;
 
+  final bool? shippingAddress;
+
   final bool? userId;
 
   final bool? status;
 
   final bool? paymentMethodId;
+
+  final bool? paymentStatusId;
 
   final bool? totalPrice;
 
@@ -24731,9 +25526,11 @@ class OrdersCountAggregateOutputTypeSelect
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         '_all': $all,
       };
@@ -24756,6 +25553,7 @@ class OrdersAvgAggregateOutputTypeSelect
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24767,6 +25565,8 @@ class OrdersAvgAggregateOutputTypeSelect
 
   final bool? paymentMethodId;
 
+  final bool? paymentStatusId;
+
   final bool? totalPrice;
 
   @override
@@ -24775,6 +25575,7 @@ class OrdersAvgAggregateOutputTypeSelect
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24796,6 +25597,7 @@ class OrdersSumAggregateOutputTypeSelect
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24807,6 +25609,8 @@ class OrdersSumAggregateOutputTypeSelect
 
   final bool? paymentMethodId;
 
+  final bool? paymentStatusId;
+
   final bool? totalPrice;
 
   @override
@@ -24815,6 +25619,7 @@ class OrdersSumAggregateOutputTypeSelect
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24835,9 +25640,11 @@ class OrdersMinAggregateOutputTypeSelect
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24847,11 +25654,15 @@ class OrdersMinAggregateOutputTypeSelect
 
   final bool? shippingDate;
 
+  final bool? shippingAddress;
+
   final bool? userId;
 
   final bool? status;
 
   final bool? paymentMethodId;
+
+  final bool? paymentStatusId;
 
   final bool? totalPrice;
 
@@ -24860,9 +25671,11 @@ class OrdersMinAggregateOutputTypeSelect
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24883,9 +25696,11 @@ class OrdersMaxAggregateOutputTypeSelect
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -24895,11 +25710,15 @@ class OrdersMaxAggregateOutputTypeSelect
 
   final bool? shippingDate;
 
+  final bool? shippingAddress;
+
   final bool? userId;
 
   final bool? status;
 
   final bool? paymentMethodId;
+
+  final bool? paymentStatusId;
 
   final bool? totalPrice;
 
@@ -24908,9 +25727,11 @@ class OrdersMaxAggregateOutputTypeSelect
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -24931,9 +25752,11 @@ class OrdersGroupByOutputTypeSelect
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
     this.paymentMethodId,
+    this.paymentStatusId,
     this.totalPrice,
     this.$count,
     this.$avg,
@@ -24948,11 +25771,15 @@ class OrdersGroupByOutputTypeSelect
 
   final bool? shippingDate;
 
+  final bool? shippingAddress;
+
   final bool? userId;
 
   final bool? status;
 
   final bool? paymentMethodId;
+
+  final bool? paymentStatusId;
 
   final bool? totalPrice;
 
@@ -24971,9 +25798,11 @@ class OrdersGroupByOutputTypeSelect
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
         'payment_method_id': paymentMethodId,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         '_count': $count,
         '_avg': $avg,
@@ -25130,9 +25959,11 @@ class OrdersCreateWithoutPaymentMethodsInput
   const OrdersCreateWithoutPaymentMethodsInput({
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.totalPrice,
     this.orderItems,
     required this.orderStatus,
+    required this.paymentStatus,
     required this.users,
   });
 
@@ -25140,11 +25971,15 @@ class OrdersCreateWithoutPaymentMethodsInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final _i1.Decimal totalPrice;
 
   final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
 
   final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
+
+  final _i2.PaymentStatusCreateNestedOneWithoutOrdersInput paymentStatus;
 
   final _i2.UsersCreateNestedOneWithoutOrdersInput users;
 
@@ -25152,9 +25987,11 @@ class OrdersCreateWithoutPaymentMethodsInput
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -25165,8 +26002,10 @@ class OrdersUncheckedCreateWithoutPaymentMethodsInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.userId,
     required this.status,
+    required this.paymentStatusId,
     required this.totalPrice,
     this.orderItems,
   });
@@ -25177,9 +26016,13 @@ class OrdersUncheckedCreateWithoutPaymentMethodsInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int userId;
 
   final int status;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -25190,8 +26033,10 @@ class OrdersUncheckedCreateWithoutPaymentMethodsInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -25222,8 +26067,10 @@ class OrdersCreateManyPaymentMethodsInput
     this.orderId,
     required this.orderDate,
     this.shippingDate,
+    required this.shippingAddress,
     required this.userId,
     required this.status,
+    required this.paymentStatusId,
     required this.totalPrice,
   });
 
@@ -25233,9 +26080,13 @@ class OrdersCreateManyPaymentMethodsInput
 
   final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
 
+  final String shippingAddress;
+
   final int userId;
 
   final int status;
+
+  final int paymentStatusId;
 
   final _i1.Decimal totalPrice;
 
@@ -25244,8 +26095,10 @@ class OrdersCreateManyPaymentMethodsInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -25406,9 +26259,11 @@ class OrdersUpdateWithoutPaymentMethodsInput
   const OrdersUpdateWithoutPaymentMethodsInput({
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.totalPrice,
     this.orderItems,
     this.orderStatus,
+    this.paymentStatus,
     this.users,
   });
 
@@ -25420,6 +26275,9 @@ class OrdersUpdateWithoutPaymentMethodsInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
 
@@ -25427,15 +26285,20 @@ class OrdersUpdateWithoutPaymentMethodsInput
 
   final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
 
+  final _i2.PaymentStatusUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentStatus;
+
   final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
 
   @override
   Map<String, dynamic> toJson() => {
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'total_price': totalPrice,
         'order_items': orderItems,
         'order_status': orderStatus,
+        'payment_status': paymentStatus,
         'users': users,
       };
 }
@@ -25446,8 +26309,10 @@ class OrdersUncheckedUpdateWithoutPaymentMethodsInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
+    this.paymentStatusId,
     this.totalPrice,
     this.orderItems,
   });
@@ -25462,9 +26327,15 @@ class OrdersUncheckedUpdateWithoutPaymentMethodsInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -25476,8 +26347,10 @@ class OrdersUncheckedUpdateWithoutPaymentMethodsInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
         'order_items': orderItems,
       };
@@ -25532,8 +26405,10 @@ class OrdersUncheckedUpdateManyWithoutPaymentMethodsInput
     this.orderId,
     this.orderDate,
     this.shippingDate,
+    this.shippingAddress,
     this.userId,
     this.status,
+    this.paymentStatusId,
     this.totalPrice,
   });
 
@@ -25547,9 +26422,15 @@ class OrdersUncheckedUpdateManyWithoutPaymentMethodsInput
       _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
           _i1.PrismaNull>>? shippingDate;
 
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
 
   final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
 
   final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
       totalPrice;
@@ -25559,8 +26440,10 @@ class OrdersUncheckedUpdateManyWithoutPaymentMethodsInput
         'order_id': orderId,
         'order_date': orderDate,
         'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
         'user_id': userId,
         'status': status,
+        'payment_status_id': paymentStatusId,
         'total_price': totalPrice,
       };
 }
@@ -32374,6 +33257,1348 @@ class AggregateUsersSelect
   final _i1.PrismaUnion<bool, _i2.AggregateUsersMinArgs>? $min;
 
   final _i1.PrismaUnion<bool, _i2.AggregateUsersMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+enum PaymentStatusScalar<T> implements _i1.PrismaEnum, _i1.Reference<T> {
+  paymentStatusId<int>('payment_status_id', 'payment_status'),
+  status<String>('status', 'payment_status');
+
+  const PaymentStatusScalar(
+    this.name,
+    this.model,
+  );
+
+  @override
+  final String name;
+
+  @override
+  final String model;
+}
+
+class OrdersCreateWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateWithoutPaymentStatusInput({
+    required this.orderDate,
+    this.shippingDate,
+    required this.shippingAddress,
+    required this.totalPrice,
+    this.orderItems,
+    required this.orderStatus,
+    required this.paymentMethods,
+    required this.users,
+  });
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final String shippingAddress;
+
+  final _i1.Decimal totalPrice;
+
+  final _i2.OrderItemsCreateNestedManyWithoutOrdersInput? orderItems;
+
+  final _i2.OrderStatusCreateNestedOneWithoutOrdersInput orderStatus;
+
+  final _i2.PaymentMethodsCreateNestedOneWithoutOrdersInput paymentMethods;
+
+  final _i2.UsersCreateNestedOneWithoutOrdersInput users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+        'users': users,
+      };
+}
+
+class OrdersUncheckedCreateWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedCreateWithoutPaymentStatusInput({
+    this.orderId,
+    required this.orderDate,
+    this.shippingDate,
+    required this.shippingAddress,
+    required this.userId,
+    required this.status,
+    required this.paymentMethodId,
+    required this.totalPrice,
+    this.orderItems,
+  });
+
+  final int? orderId;
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final String shippingAddress;
+
+  final int userId;
+
+  final int status;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
+
+  final _i2.OrderItemsUncheckedCreateNestedManyWithoutOrdersInput? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+      };
+}
+
+class OrdersCreateOrConnectWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateOrConnectWithoutPaymentStatusInput({
+    required this.where,
+    required this.create,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutPaymentStatusInput,
+      _i2.OrdersUncheckedCreateWithoutPaymentStatusInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'create': create,
+      };
+}
+
+class OrdersCreateManyPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateManyPaymentStatusInput({
+    this.orderId,
+    required this.orderDate,
+    this.shippingDate,
+    required this.shippingAddress,
+    required this.userId,
+    required this.status,
+    required this.paymentMethodId,
+    required this.totalPrice,
+  });
+
+  final int? orderId;
+
+  final DateTime orderDate;
+
+  final _i1.PrismaUnion<DateTime, _i1.PrismaNull>? shippingDate;
+
+  final String shippingAddress;
+
+  final int userId;
+
+  final int status;
+
+  final int paymentMethodId;
+
+  final _i1.Decimal totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersCreateManyPaymentStatusInputEnvelope
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateManyPaymentStatusInputEnvelope({
+    required this.data,
+    this.skipDuplicates,
+  });
+
+  final _i1.PrismaUnion<_i2.OrdersCreateManyPaymentStatusInput,
+      Iterable<_i2.OrdersCreateManyPaymentStatusInput>> data;
+
+  final bool? skipDuplicates;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'data': data,
+        'skipDuplicates': skipDuplicates,
+      };
+}
+
+class OrdersCreateNestedManyWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersCreateNestedManyWithoutPaymentStatusInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentStatusInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentStatusInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentStatusInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentStatusInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput>>?
+      connectOrCreate;
+
+  final _i2.OrdersCreateManyPaymentStatusInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class PaymentStatusCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCreateInput({
+    required this.status,
+    this.orders,
+  });
+
+  final String status;
+
+  final _i2.OrdersCreateNestedManyWithoutPaymentStatusInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'status': status,
+        'orders': orders,
+      };
+}
+
+class OrdersUncheckedCreateNestedManyWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedCreateNestedManyWithoutPaymentStatusInput({
+    this.create,
+    this.connectOrCreate,
+    this.createMany,
+    this.connect,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentStatusInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentStatusInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentStatusInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentStatusInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput>>?
+      connectOrCreate;
+
+  final _i2.OrdersCreateManyPaymentStatusInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'createMany': createMany,
+        'connect': connect,
+      };
+}
+
+class PaymentStatusUncheckedCreateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUncheckedCreateInput({
+    this.paymentStatusId,
+    required this.status,
+    this.orders,
+  });
+
+  final int? paymentStatusId;
+
+  final String status;
+
+  final _i2.OrdersUncheckedCreateNestedManyWithoutPaymentStatusInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        'orders': orders,
+      };
+}
+
+class PaymentStatusCreateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCreateManyInput({
+    this.paymentStatusId,
+    required this.status,
+  });
+
+  final int? paymentStatusId;
+
+  final String status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class OrdersUpdateWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateWithoutPaymentStatusInput({
+    this.orderDate,
+    this.shippingDate,
+    this.shippingAddress,
+    this.totalPrice,
+    this.orderItems,
+    this.orderStatus,
+    this.paymentMethods,
+    this.users,
+  });
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  final _i2.OrderItemsUpdateManyWithoutOrdersNestedInput? orderItems;
+
+  final _i2.OrderStatusUpdateOneRequiredWithoutOrdersNestedInput? orderStatus;
+
+  final _i2.PaymentMethodsUpdateOneRequiredWithoutOrdersNestedInput?
+      paymentMethods;
+
+  final _i2.UsersUpdateOneRequiredWithoutOrdersNestedInput? users;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+        'order_status': orderStatus,
+        'payment_methods': paymentMethods,
+        'users': users,
+      };
+}
+
+class OrdersUncheckedUpdateWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateWithoutPaymentStatusInput({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.shippingAddress,
+    this.userId,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+    this.orderItems,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  final _i2.OrderItemsUncheckedUpdateManyWithoutOrdersNestedInput? orderItems;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+        'order_items': orderItems,
+      };
+}
+
+class OrdersUpsertWithWhereUniqueWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpsertWithWhereUniqueWithoutPaymentStatusInput({
+    required this.where,
+    required this.update,
+    required this.create,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutPaymentStatusInput,
+      _i2.OrdersUncheckedUpdateWithoutPaymentStatusInput> update;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateWithoutPaymentStatusInput,
+      _i2.OrdersUncheckedCreateWithoutPaymentStatusInput> create;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'update': update,
+        'create': create,
+      };
+}
+
+class OrdersUpdateWithWhereUniqueWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateWithWhereUniqueWithoutPaymentStatusInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrdersWhereUniqueInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateWithoutPaymentStatusInput,
+      _i2.OrdersUncheckedUpdateWithoutPaymentStatusInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrdersUncheckedUpdateManyWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateManyWithoutPaymentStatusInput({
+    this.orderId,
+    this.orderDate,
+    this.shippingDate,
+    this.shippingAddress,
+    this.userId,
+    this.status,
+    this.paymentMethodId,
+    this.totalPrice,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? orderId;
+
+  final _i1.PrismaUnion<DateTime, _i2.DateTimeFieldUpdateOperationsInput>?
+      orderDate;
+
+  final _i1.PrismaUnion<
+      DateTime,
+      _i1.PrismaUnion<_i2.NullableDateTimeFieldUpdateOperationsInput,
+          _i1.PrismaNull>>? shippingDate;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>?
+      shippingAddress;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? userId;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>? status;
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentMethodId;
+
+  final _i1.PrismaUnion<_i1.Decimal, _i2.DecimalFieldUpdateOperationsInput>?
+      totalPrice;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'order_id': orderId,
+        'order_date': orderDate,
+        'shipping_date': shippingDate,
+        'shipping_address': shippingAddress,
+        'user_id': userId,
+        'status': status,
+        'payment_method_id': paymentMethodId,
+        'total_price': totalPrice,
+      };
+}
+
+class OrdersUpdateManyWithWhereWithoutPaymentStatusInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateManyWithWhereWithoutPaymentStatusInput({
+    required this.where,
+    required this.data,
+  });
+
+  final _i2.OrdersScalarWhereInput where;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyMutationInput,
+      _i2.OrdersUncheckedUpdateManyWithoutPaymentStatusInput> data;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'where': where,
+        'data': data,
+      };
+}
+
+class OrdersUpdateManyWithoutPaymentStatusNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUpdateManyWithoutPaymentStatusNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentStatusInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentStatusInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentStatusInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentStatusInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpsertWithWhereUniqueWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutPaymentStatusInput>>?
+      upsert;
+
+  final _i2.OrdersCreateManyPaymentStatusInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpdateWithWhereUniqueWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutPaymentStatusInput>>?
+      update;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersUpdateManyWithWhereWithoutPaymentStatusInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class PaymentStatusUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUpdateInput({
+    this.status,
+    this.orders,
+  });
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? status;
+
+  final _i2.OrdersUpdateManyWithoutPaymentStatusNestedInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'status': status,
+        'orders': orders,
+      };
+}
+
+class OrdersUncheckedUpdateManyWithoutPaymentStatusNestedInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const OrdersUncheckedUpdateManyWithoutPaymentStatusNestedInput({
+    this.create,
+    this.connectOrCreate,
+    this.upsert,
+    this.createMany,
+    this.set,
+    this.disconnect,
+    this.delete,
+    this.connect,
+    this.update,
+    this.updateMany,
+    this.deleteMany,
+  });
+
+  final _i1.PrismaUnion<
+          _i2.OrdersCreateWithoutPaymentStatusInput,
+          _i1.PrismaUnion<
+              Iterable<_i2.OrdersCreateWithoutPaymentStatusInput>,
+              _i1.PrismaUnion<
+                  _i2.OrdersUncheckedCreateWithoutPaymentStatusInput,
+                  Iterable<
+                      _i2.OrdersUncheckedCreateWithoutPaymentStatusInput>>>>?
+      create;
+
+  final _i1.PrismaUnion<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersCreateOrConnectWithoutPaymentStatusInput>>?
+      connectOrCreate;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpsertWithWhereUniqueWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersUpsertWithWhereUniqueWithoutPaymentStatusInput>>?
+      upsert;
+
+  final _i2.OrdersCreateManyPaymentStatusInputEnvelope? createMany;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? set;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? disconnect;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? delete;
+
+  final _i1.PrismaUnion<_i2.OrdersWhereUniqueInput,
+      Iterable<_i2.OrdersWhereUniqueInput>>? connect;
+
+  final _i1.PrismaUnion<
+          _i2.OrdersUpdateWithWhereUniqueWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersUpdateWithWhereUniqueWithoutPaymentStatusInput>>?
+      update;
+
+  final _i1.PrismaUnion<_i2.OrdersUpdateManyWithWhereWithoutPaymentStatusInput,
+          Iterable<_i2.OrdersUpdateManyWithWhereWithoutPaymentStatusInput>>?
+      updateMany;
+
+  final _i1.PrismaUnion<_i2.OrdersScalarWhereInput,
+      Iterable<_i2.OrdersScalarWhereInput>>? deleteMany;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'create': create,
+        'connectOrCreate': connectOrCreate,
+        'upsert': upsert,
+        'createMany': createMany,
+        'set': set,
+        'disconnect': disconnect,
+        'delete': delete,
+        'connect': connect,
+        'update': update,
+        'updateMany': updateMany,
+        'deleteMany': deleteMany,
+      };
+}
+
+class PaymentStatusUncheckedUpdateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUncheckedUpdateInput({
+    this.paymentStatusId,
+    this.status,
+    this.orders,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? status;
+
+  final _i2.OrdersUncheckedUpdateManyWithoutPaymentStatusNestedInput? orders;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        'orders': orders,
+      };
+}
+
+class PaymentStatusUpdateManyMutationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUpdateManyMutationInput({this.status});
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? status;
+
+  @override
+  Map<String, dynamic> toJson() => {'status': status};
+}
+
+class PaymentStatusUncheckedUpdateManyInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusUncheckedUpdateManyInput({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final _i1.PrismaUnion<int, _i2.IntFieldUpdateOperationsInput>?
+      paymentStatusId;
+
+  final _i1.PrismaUnion<String, _i2.StringFieldUpdateOperationsInput>? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusCountAggregateOutputType {
+  const PaymentStatusCountAggregateOutputType({
+    this.paymentStatusId,
+    this.status,
+    this.$all,
+  });
+
+  factory PaymentStatusCountAggregateOutputType.fromJson(Map json) =>
+      PaymentStatusCountAggregateOutputType(
+        paymentStatusId: json['payment_status_id'],
+        status: json['status'],
+        $all: json['_all'],
+      );
+
+  final int? paymentStatusId;
+
+  final int? status;
+
+  final int? $all;
+
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        '_all': $all,
+      };
+}
+
+class PaymentStatusAvgAggregateOutputType {
+  const PaymentStatusAvgAggregateOutputType({this.paymentStatusId});
+
+  factory PaymentStatusAvgAggregateOutputType.fromJson(Map json) =>
+      PaymentStatusAvgAggregateOutputType(
+          paymentStatusId: json['payment_status_id']);
+
+  final double? paymentStatusId;
+
+  Map<String, dynamic> toJson() => {'payment_status_id': paymentStatusId};
+}
+
+class PaymentStatusSumAggregateOutputType {
+  const PaymentStatusSumAggregateOutputType({this.paymentStatusId});
+
+  factory PaymentStatusSumAggregateOutputType.fromJson(Map json) =>
+      PaymentStatusSumAggregateOutputType(
+          paymentStatusId: json['payment_status_id']);
+
+  final int? paymentStatusId;
+
+  Map<String, dynamic> toJson() => {'payment_status_id': paymentStatusId};
+}
+
+class PaymentStatusMinAggregateOutputType {
+  const PaymentStatusMinAggregateOutputType({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  factory PaymentStatusMinAggregateOutputType.fromJson(Map json) =>
+      PaymentStatusMinAggregateOutputType(
+        paymentStatusId: json['payment_status_id'],
+        status: json['status'],
+      );
+
+  final int? paymentStatusId;
+
+  final String? status;
+
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusMaxAggregateOutputType {
+  const PaymentStatusMaxAggregateOutputType({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  factory PaymentStatusMaxAggregateOutputType.fromJson(Map json) =>
+      PaymentStatusMaxAggregateOutputType(
+        paymentStatusId: json['payment_status_id'],
+        status: json['status'],
+      );
+
+  final int? paymentStatusId;
+
+  final String? status;
+
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusGroupByOutputType {
+  const PaymentStatusGroupByOutputType({
+    this.paymentStatusId,
+    this.status,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory PaymentStatusGroupByOutputType.fromJson(Map json) =>
+      PaymentStatusGroupByOutputType(
+        paymentStatusId: json['payment_status_id'],
+        status: json['status'],
+        $count: json['_count'] is Map
+            ? _i2.PaymentStatusCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.PaymentStatusAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.PaymentStatusSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.PaymentStatusMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.PaymentStatusMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final int? paymentStatusId;
+
+  final String? status;
+
+  final _i2.PaymentStatusCountAggregateOutputType? $count;
+
+  final _i2.PaymentStatusAvgAggregateOutputType? $avg;
+
+  final _i2.PaymentStatusSumAggregateOutputType? $sum;
+
+  final _i2.PaymentStatusMinAggregateOutputType? $min;
+
+  final _i2.PaymentStatusMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class PaymentStatusCountOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCountOrderByAggregateInput({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final _i2.SortOrder? paymentStatusId;
+
+  final _i2.SortOrder? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusAvgOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusAvgOrderByAggregateInput({this.paymentStatusId});
+
+  final _i2.SortOrder? paymentStatusId;
+
+  @override
+  Map<String, dynamic> toJson() => {'payment_status_id': paymentStatusId};
+}
+
+class PaymentStatusMaxOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusMaxOrderByAggregateInput({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final _i2.SortOrder? paymentStatusId;
+
+  final _i2.SortOrder? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusMinOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusMinOrderByAggregateInput({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final _i2.SortOrder? paymentStatusId;
+
+  final _i2.SortOrder? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusSumOrderByAggregateInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusSumOrderByAggregateInput({this.paymentStatusId});
+
+  final _i2.SortOrder? paymentStatusId;
+
+  @override
+  Map<String, dynamic> toJson() => {'payment_status_id': paymentStatusId};
+}
+
+class PaymentStatusOrderByWithAggregationInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusOrderByWithAggregationInput({
+    this.paymentStatusId,
+    this.status,
+    this.$count,
+    this.$avg,
+    this.$max,
+    this.$min,
+    this.$sum,
+  });
+
+  final _i2.SortOrder? paymentStatusId;
+
+  final _i2.SortOrder? status;
+
+  final _i2.PaymentStatusCountOrderByAggregateInput? $count;
+
+  final _i2.PaymentStatusAvgOrderByAggregateInput? $avg;
+
+  final _i2.PaymentStatusMaxOrderByAggregateInput? $max;
+
+  final _i2.PaymentStatusMinOrderByAggregateInput? $min;
+
+  final _i2.PaymentStatusSumOrderByAggregateInput? $sum;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        '_count': $count,
+        '_avg': $avg,
+        '_max': $max,
+        '_min': $min,
+        '_sum': $sum,
+      };
+}
+
+class PaymentStatusScalarWhereWithAggregatesInput
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusScalarWhereWithAggregatesInput({
+    this.AND,
+    this.OR,
+    this.NOT,
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final _i1.PrismaUnion<_i2.PaymentStatusScalarWhereWithAggregatesInput,
+      Iterable<_i2.PaymentStatusScalarWhereWithAggregatesInput>>? AND;
+
+  final Iterable<_i2.PaymentStatusScalarWhereWithAggregatesInput>? OR;
+
+  final _i1.PrismaUnion<_i2.PaymentStatusScalarWhereWithAggregatesInput,
+      Iterable<_i2.PaymentStatusScalarWhereWithAggregatesInput>>? NOT;
+
+  final _i1.PrismaUnion<_i2.IntWithAggregatesFilter, int>? paymentStatusId;
+
+  final _i1.PrismaUnion<_i2.StringWithAggregatesFilter, String>? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'AND': AND,
+        'OR': OR,
+        'NOT': NOT,
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusCountAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusCountAggregateOutputTypeSelect({
+    this.paymentStatusId,
+    this.status,
+    this.$all,
+  });
+
+  final bool? paymentStatusId;
+
+  final bool? status;
+
+  final bool? $all;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        '_all': $all,
+      };
+}
+
+class PaymentStatusGroupByOutputTypeCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusGroupByOutputTypeCountArgs({this.select});
+
+  final _i2.PaymentStatusCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class PaymentStatusAvgAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusAvgAggregateOutputTypeSelect({this.paymentStatusId});
+
+  final bool? paymentStatusId;
+
+  @override
+  Map<String, dynamic> toJson() => {'payment_status_id': paymentStatusId};
+}
+
+class PaymentStatusGroupByOutputTypeAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusGroupByOutputTypeAvgArgs({this.select});
+
+  final _i2.PaymentStatusAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class PaymentStatusSumAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusSumAggregateOutputTypeSelect({this.paymentStatusId});
+
+  final bool? paymentStatusId;
+
+  @override
+  Map<String, dynamic> toJson() => {'payment_status_id': paymentStatusId};
+}
+
+class PaymentStatusGroupByOutputTypeSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusGroupByOutputTypeSumArgs({this.select});
+
+  final _i2.PaymentStatusSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class PaymentStatusMinAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusMinAggregateOutputTypeSelect({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final bool? paymentStatusId;
+
+  final bool? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusGroupByOutputTypeMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusGroupByOutputTypeMinArgs({this.select});
+
+  final _i2.PaymentStatusMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class PaymentStatusMaxAggregateOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusMaxAggregateOutputTypeSelect({
+    this.paymentStatusId,
+    this.status,
+  });
+
+  final bool? paymentStatusId;
+
+  final bool? status;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+      };
+}
+
+class PaymentStatusGroupByOutputTypeMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusGroupByOutputTypeMaxArgs({this.select});
+
+  final _i2.PaymentStatusMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class PaymentStatusGroupByOutputTypeSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const PaymentStatusGroupByOutputTypeSelect({
+    this.paymentStatusId,
+    this.status,
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final bool? paymentStatusId;
+
+  final bool? status;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusGroupByOutputTypeCountArgs>?
+      $count;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusGroupByOutputTypeAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusGroupByOutputTypeSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusGroupByOutputTypeMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.PaymentStatusGroupByOutputTypeMaxArgs>? $max;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'payment_status_id': paymentStatusId,
+        'status': status,
+        '_count': $count,
+        '_avg': $avg,
+        '_sum': $sum,
+        '_min': $min,
+        '_max': $max,
+      };
+}
+
+class AggregatePaymentStatus {
+  const AggregatePaymentStatus({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  factory AggregatePaymentStatus.fromJson(Map json) => AggregatePaymentStatus(
+        $count: json['_count'] is Map
+            ? _i2.PaymentStatusCountAggregateOutputType.fromJson(json['_count'])
+            : null,
+        $avg: json['_avg'] is Map
+            ? _i2.PaymentStatusAvgAggregateOutputType.fromJson(json['_avg'])
+            : null,
+        $sum: json['_sum'] is Map
+            ? _i2.PaymentStatusSumAggregateOutputType.fromJson(json['_sum'])
+            : null,
+        $min: json['_min'] is Map
+            ? _i2.PaymentStatusMinAggregateOutputType.fromJson(json['_min'])
+            : null,
+        $max: json['_max'] is Map
+            ? _i2.PaymentStatusMaxAggregateOutputType.fromJson(json['_max'])
+            : null,
+      );
+
+  final _i2.PaymentStatusCountAggregateOutputType? $count;
+
+  final _i2.PaymentStatusAvgAggregateOutputType? $avg;
+
+  final _i2.PaymentStatusSumAggregateOutputType? $sum;
+
+  final _i2.PaymentStatusMinAggregateOutputType? $min;
+
+  final _i2.PaymentStatusMaxAggregateOutputType? $max;
+
+  Map<String, dynamic> toJson() => {
+        '_count': $count?.toJson(),
+        '_avg': $avg?.toJson(),
+        '_sum': $sum?.toJson(),
+        '_min': $min?.toJson(),
+        '_max': $max?.toJson(),
+      };
+}
+
+class AggregatePaymentStatusCountArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregatePaymentStatusCountArgs({this.select});
+
+  final _i2.PaymentStatusCountAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregatePaymentStatusAvgArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregatePaymentStatusAvgArgs({this.select});
+
+  final _i2.PaymentStatusAvgAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregatePaymentStatusSumArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregatePaymentStatusSumArgs({this.select});
+
+  final _i2.PaymentStatusSumAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregatePaymentStatusMinArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregatePaymentStatusMinArgs({this.select});
+
+  final _i2.PaymentStatusMinAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregatePaymentStatusMaxArgs
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregatePaymentStatusMaxArgs({this.select});
+
+  final _i2.PaymentStatusMaxAggregateOutputTypeSelect? select;
+
+  @override
+  Map<String, dynamic> toJson() => {'select': select};
+}
+
+class AggregatePaymentStatusSelect
+    implements _i1.JsonConvertible<Map<String, dynamic>> {
+  const AggregatePaymentStatusSelect({
+    this.$count,
+    this.$avg,
+    this.$sum,
+    this.$min,
+    this.$max,
+  });
+
+  final _i1.PrismaUnion<bool, _i2.AggregatePaymentStatusCountArgs>? $count;
+
+  final _i1.PrismaUnion<bool, _i2.AggregatePaymentStatusAvgArgs>? $avg;
+
+  final _i1.PrismaUnion<bool, _i2.AggregatePaymentStatusSumArgs>? $sum;
+
+  final _i1.PrismaUnion<bool, _i2.AggregatePaymentStatusMinArgs>? $min;
+
+  final _i1.PrismaUnion<bool, _i2.AggregatePaymentStatusMaxArgs>? $max;
 
   @override
   Map<String, dynamic> toJson() => {

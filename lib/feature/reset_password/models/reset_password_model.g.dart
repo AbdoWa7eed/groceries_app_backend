@@ -12,8 +12,8 @@ ResetPasswordModel _$ResetPasswordModelFromJson(Map<String, dynamic> json) =>
       code: json['code'] as String,
       verificationId: json['verificationId'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
-      isVerified: json['isVerified'] as bool,
       expireIn: DateTime.parse(json['expireIn'] as String),
+      isVerified: json['isVerified'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ResetPasswordModelToJson(ResetPasswordModel instance) =>

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:bcrypt/bcrypt.dart';
+import 'package:dart_frog/dart_frog.dart';
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/enums.dart';
 import 'package:otp/otp.dart';
@@ -37,7 +38,7 @@ extension Validations on String? {
     ).hasMatch(this!);
   }
 
-   bool isValidPhoneNumber() {
+  bool isValidPhoneNumber() {
     return RegExp(
       r'^(\+20)1([0-2]|5)\d{8}$',
     ).hasMatch(this!);
@@ -47,6 +48,10 @@ extension Validations on String? {
     return PaymentMethodEnum.values.map((e) => e.name).contains(this);
   }
 
+  bool isValidPaymentStatus() {
+    return PaymentStatusEnum.values.map((e) => e.name).contains(this);
+  }
+
   bool isValidOrderStatus() {
     return OrderStatusEnum.values.map((e) => e.name).contains(this);
   }
@@ -54,14 +59,13 @@ extension Validations on String? {
 
 extension EitherX<Failure, R> on Either<Failure, R> {
   R asRight() => (this as Right<Failure, R>).value;
+
   Failure asFailure() => (this as Left<Failure, R>).value;
 }
 
-
 extension GenerateOTPExtension on OTP? {
-
   static String generateSecret(String value) {
-    return  (OTP.randomSecret() + value).hashValue();
+    return (OTP.randomSecret() + value).hashValue();
   }
 
   static String generateOTPCodeString(String secret) {

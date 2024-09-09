@@ -78,9 +78,6 @@ abstract class ResponseMessages {
   static const String invalidProductId = 'There is no product with this ID';
   static const String checkProductId =
       'Please make sure that your product ID is valid';
-  static const String outOfStock =
-      'A product is out of stock order cannot be created';
-
   static const String productNotFound = 'Product not found';
   static const String productUpdated = 'Product updated successfully';
   static const String productCreated = 'Product created successfully';
@@ -93,6 +90,8 @@ abstract class ResponseMessages {
   static const String orderCreated = 'Order created successfully';
   static const String orderNotFound = 'Order not found';
   static const String orderCanceled = 'Order canceled successfully';
+  static const String outOfStock = 'Order failed due to insufficient stock';
+  static const invalidPaymentStatus = 'Payment status is invalid';
   static const String orderAlreadyDelivered = 'Order already delivered';
   static const String orderAlreadyCancelled = 'Order already cancelled';
   static const String invalidOrderStatus = 'Invalid order status';
@@ -160,4 +159,13 @@ Your password must be a minimum of 8 characters, at least one uppercase letter, 
 
   // Cache Error
   static const String cacheNotInitialized = 'Cache not initialized';
+
+  // Payment
+  static const String transactionFailed =
+      "We couldn't complete the payment process";
+  static const String wrongOrderId = 'Wrong order id';
+  static const String notPaid = 'Order is not paid';
+  static const String orderPaymentConfirmed = 'Order Payment Confirmed';
+  static const String invalidPaymentBody =
+      'Check the payment link in request body';
 }

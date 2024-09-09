@@ -198,10 +198,19 @@ void initOrdersResources() {
   if (!instance.isRegistered<OrdersRepository>()) {
     instance
       ..registerLazySingleton<OrdersRepository>(
-        () => OrdersRepositoryImpl(instance<OrdersDataSource>()),
+        () => OrdersRepositoryImpl(instance(), instance()),
       )
       ..registerLazySingleton<OrdersDataSource>(
-        () => OrdersDataSourceImpl(instance<PrismaClient>()),
+        () => OrdersDataSourceImpl(instance()),
+      )
+      ..registerLazySingleton<PaymentDataSource>(
+        () => PaymentDataSourceImpl(
+          instance(),
+          instance(),
+        ),
+      )
+      ..registerLazySingleton<PaymobService>(
+        () => PaymobService(instance()),
       );
   }
 }

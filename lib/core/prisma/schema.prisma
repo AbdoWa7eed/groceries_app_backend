@@ -81,18 +81,22 @@ model orders {
   order_id          Int             @id @default(autoincrement())
   order_date        DateTime        @db.DateTime(0)
   shipping_date     DateTime?       @db.DateTime(0)
+  shipping_address  String          @db.VarChar(255)
   user_id           Int
   status            Int
   payment_method_id Int
+  payment_status_id Int
   total_price       Decimal         @db.Decimal(4, 2)
   order_items       order_items[]
   order_status      order_status    @relation(fields: [status], references: [status_id], onDelete: NoAction, map: "fk_orders_order_status1")
   payment_methods   payment_methods @relation(fields: [payment_method_id], references: [payment_method_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_methods1")
+  payment_status    payment_status  @relation(fields: [payment_status_id], references: [payment_status_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_status")
   users             users           @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_orders_users1")
 
   @@index([status], map: "fk_orders_order_status1_idx")
   @@index([payment_method_id], map: "fk_orders_payment_methods1_idx")
   @@index([user_id], map: "fk_orders_users1_idx")
+  @@index([payment_status_id], map: "fk_orders_payment_status_idx")
 }
 
 model payment_methods {
@@ -161,4 +165,10 @@ model users {
   user_roles   user_roles  @relation(fields: [role_id], references: [role_id], onDelete: Cascade, map: "fk_users_user_role1")
 
   @@index([role_id], map: "fk_users_user_role1_idx")
+}
+
+model payment_status {
+  payment_status_id Int      @id @default(autoincrement())
+  status            String   @unique(map: "status_UNIQUE") @db.VarChar(45)
+  orders            orders[]
 }

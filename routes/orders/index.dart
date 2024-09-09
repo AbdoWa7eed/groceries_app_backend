@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
@@ -15,7 +13,7 @@ Future<Response> onRequest(RequestContext context) {
 Future<Response> _getResponse(RequestContext context) async {
   return switch (context.request.method) {
     HttpMethod.get => await _getOrders(context),
-    HttpMethod.post => await _createOrder(context),
+    HttpMethod.post => await _placeOrder(context),
     _ => ResponseHelper.methodNotAllowed(),
   };
 }
@@ -38,14 +36,12 @@ Future<Response> _getOrders(RequestContext context) async {
   }
 }
 
-Future<Response> _createOrder(RequestContext context) async {
+Future<Response> _placeOrder(RequestContext context) async {
   try {
     final dataJson = await context.request.json() as Map<String, dynamic>;
-    log('lol');
     final inputModel = OrderInputModel.fromJson(dataJson).copyWith(
       userId: context.read<int>(),
     );
-    log('lol');
     final orderRepo = instance<OrdersRepository>();
     final data = await orderRepo.placeOrder(inputModel);
     if (data.isRight()) {

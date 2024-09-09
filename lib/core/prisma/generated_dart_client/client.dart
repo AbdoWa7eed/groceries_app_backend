@@ -6483,6 +6483,472 @@ class UsersDelegate {
   }
 }
 
+class PaymentStatusDelegate {
+  const PaymentStatusDelegate._(this._client);
+
+  final PrismaClient _client;
+
+  _i1.ActionClient<_i2.PaymentStatus?> findUnique({
+    required _i3.PaymentStatusWhereUniqueInput where,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.findUnique,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus?>(
+      action: 'findUniquepayment_status',
+      result: result,
+      factory: (e) => e != null ? _i2.PaymentStatus.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.PaymentStatus> findUniqueOrThrow({
+    required _i3.PaymentStatusWhereUniqueInput where,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.findUniqueOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus>(
+      action: 'findUniquepayment_statusOrThrow',
+      result: result,
+      factory: (e) => _i2.PaymentStatus.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.PaymentStatus?> findFirst({
+    _i3.PaymentStatusWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.PaymentStatusOrderByWithRelationInput>,
+            _i3.PaymentStatusOrderByWithRelationInput>?
+        orderBy,
+    _i3.PaymentStatusWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.PaymentStatusScalar, Iterable<_i3.PaymentStatusScalar>>?
+        distinct,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.findFirst,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus?>(
+      action: 'findFirstpayment_status',
+      result: result,
+      factory: (e) => e != null ? _i2.PaymentStatus.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i2.PaymentStatus> findFirstOrThrow({
+    _i3.PaymentStatusWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.PaymentStatusOrderByWithRelationInput>,
+            _i3.PaymentStatusOrderByWithRelationInput>?
+        orderBy,
+    _i3.PaymentStatusWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.PaymentStatusScalar, Iterable<_i3.PaymentStatusScalar>>?
+        distinct,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.findFirstOrThrow,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus>(
+      action: 'findFirstpayment_statusOrThrow',
+      result: result,
+      factory: (e) => _i2.PaymentStatus.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i2.PaymentStatus>> findMany({
+    _i3.PaymentStatusWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.PaymentStatusOrderByWithRelationInput>,
+            _i3.PaymentStatusOrderByWithRelationInput>?
+        orderBy,
+    _i3.PaymentStatusWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i1.PrismaUnion<_i3.PaymentStatusScalar, Iterable<_i3.PaymentStatusScalar>>?
+        distinct,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'distinct': distinct,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.findMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i2.PaymentStatus>>(
+      action: 'findManypayment_status',
+      result: result,
+      factory: (values) =>
+          (values as Iterable).map((e) => _i2.PaymentStatus.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i2.PaymentStatus> create({
+    required _i1.PrismaUnion<_i3.PaymentStatusCreateInput,
+            _i3.PaymentStatusUncheckedCreateInput>
+        data,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.createOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus>(
+      action: 'createOnepayment_status',
+      result: result,
+      factory: (e) => _i2.PaymentStatus.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> createMany({
+    required _i1.PrismaUnion<_i3.PaymentStatusCreateManyInput,
+            Iterable<_i3.PaymentStatusCreateManyInput>>
+        data,
+    bool? skipDuplicates,
+  }) {
+    final args = {
+      'data': data,
+      'skipDuplicates': skipDuplicates,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.createMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'createManypayment_status',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.PaymentStatus?> update({
+    required _i1.PrismaUnion<_i3.PaymentStatusUpdateInput,
+            _i3.PaymentStatusUncheckedUpdateInput>
+        data,
+    required _i3.PaymentStatusWhereUniqueInput where,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.updateOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus?>(
+      action: 'updateOnepayment_status',
+      result: result,
+      factory: (e) => e != null ? _i2.PaymentStatus.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> updateMany({
+    required _i1.PrismaUnion<_i3.PaymentStatusUpdateManyMutationInput,
+            _i3.PaymentStatusUncheckedUpdateManyInput>
+        data,
+    _i3.PaymentStatusWhereInput? where,
+  }) {
+    final args = {
+      'data': data,
+      'where': where,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.updateMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'updateManypayment_status',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.PaymentStatus> upsert({
+    required _i3.PaymentStatusWhereUniqueInput where,
+    required _i1.PrismaUnion<_i3.PaymentStatusCreateInput,
+            _i3.PaymentStatusUncheckedCreateInput>
+        create,
+    required _i1.PrismaUnion<_i3.PaymentStatusUpdateInput,
+            _i3.PaymentStatusUncheckedUpdateInput>
+        update,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'create': create,
+      'update': update,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.upsertOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus>(
+      action: 'upsertOnepayment_status',
+      result: result,
+      factory: (e) => _i2.PaymentStatus.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<_i2.PaymentStatus?> delete({
+    required _i3.PaymentStatusWhereUniqueInput where,
+    _i3.PaymentStatusSelect? select,
+    _i3.PaymentStatusInclude? include,
+  }) {
+    final args = {
+      'where': where,
+      'select': select,
+      'include': include,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.deleteOne,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i2.PaymentStatus?>(
+      action: 'deleteOnepayment_status',
+      result: result,
+      factory: (e) => e != null ? _i2.PaymentStatus.fromJson(e) : null,
+    );
+  }
+
+  _i1.ActionClient<_i3.AffectedRowsOutput> deleteMany(
+      {_i3.PaymentStatusWhereInput? where}) {
+    final args = {'where': where};
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.deleteMany,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AffectedRowsOutput>(
+      action: 'deleteManypayment_status',
+      result: result,
+      factory: (e) => _i3.AffectedRowsOutput.fromJson(e),
+    );
+  }
+
+  _i1.ActionClient<Iterable<_i3.PaymentStatusGroupByOutputType>> groupBy({
+    _i3.PaymentStatusWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.PaymentStatusOrderByWithAggregationInput>,
+            _i3.PaymentStatusOrderByWithAggregationInput>?
+        orderBy,
+    required _i1
+        .PrismaUnion<Iterable<_i3.PaymentStatusScalar>, _i3.PaymentStatusScalar>
+        by,
+    _i3.PaymentStatusScalarWhereWithAggregatesInput? having,
+    int? take,
+    int? skip,
+    _i3.PaymentStatusGroupByOutputTypeSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'by': _i1.JsonQuery.groupBySerializer(by),
+      'having': having,
+      'take': take,
+      'skip': skip,
+      'select': select ?? _i1.JsonQuery.groupBySelectSerializer(by),
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.groupBy,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<Iterable<_i3.PaymentStatusGroupByOutputType>>(
+      action: 'groupBypayment_status',
+      result: result,
+      factory: (values) => (values as Iterable)
+          .map((e) => _i3.PaymentStatusGroupByOutputType.fromJson(e)),
+    );
+  }
+
+  _i1.ActionClient<_i3.AggregatePaymentStatus> aggregate({
+    _i3.PaymentStatusWhereInput? where,
+    _i1.PrismaUnion<Iterable<_i3.PaymentStatusOrderByWithRelationInput>,
+            _i3.PaymentStatusOrderByWithRelationInput>?
+        orderBy,
+    _i3.PaymentStatusWhereUniqueInput? cursor,
+    int? take,
+    int? skip,
+    _i3.AggregatePaymentStatusSelect? select,
+  }) {
+    final args = {
+      'where': where,
+      'orderBy': orderBy,
+      'cursor': cursor,
+      'take': take,
+      'skip': skip,
+      'select': select,
+    };
+    final query = _i1.serializeJsonQuery(
+      args: args,
+      modelName: 'payment_status',
+      action: _i1.JsonQueryAction.aggregate,
+      datamodel: PrismaClient.datamodel,
+    );
+    final result = _client.$engine.request(
+      query,
+      headers: _client.$transaction.headers,
+      transaction: _client.$transaction.transaction,
+    );
+    return _i1.ActionClient<_i3.AggregatePaymentStatus>(
+      action: 'aggregatepayment_status',
+      result: result,
+      factory: (e) => _i3.AggregatePaymentStatus.fromJson(e),
+    );
+  }
+}
+
 class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
   PrismaClient({
     super.datasourceUrl,
@@ -7117,6 +7583,19 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'isUpdatedAt': false,
           },
           {
+            'name': 'shipping_address',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
             'name': 'user_id',
             'kind': 'scalar',
             'isList': false,
@@ -7144,6 +7623,19 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
           },
           {
             'name': 'payment_method_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': true,
+            'hasDefaultValue': false,
+            'type': 'Int',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'payment_status_id',
             'kind': 'scalar',
             'isList': false,
             'isRequired': true,
@@ -7214,6 +7706,23 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
             'relationName': 'ordersTopayment_methods',
             'relationFromFields': ['payment_method_id'],
             'relationToFields': ['payment_method_id'],
+            'relationOnDelete': 'NoAction',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'payment_status',
+            'kind': 'object',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'payment_status',
+            'relationName': 'ordersTopayment_status',
+            'relationFromFields': ['payment_status_id'],
+            'relationToFields': ['payment_status_id'],
             'relationOnDelete': 'NoAction',
             'isGenerated': false,
             'isUpdatedAt': false,
@@ -7939,8 +8448,397 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
         'uniqueIndexes': [],
         'isGenerated': false,
       },
+      {
+        'name': 'payment_status',
+        'dbName': null,
+        'fields': [
+          {
+            'name': 'payment_status_id',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': true,
+            'isReadOnly': false,
+            'hasDefaultValue': true,
+            'type': 'Int',
+            'default': {
+              'name': 'autoincrement',
+              'args': [],
+            },
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'status',
+            'kind': 'scalar',
+            'isList': false,
+            'isRequired': true,
+            'isUnique': true,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'String',
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+          {
+            'name': 'orders',
+            'kind': 'object',
+            'isList': true,
+            'isRequired': true,
+            'isUnique': false,
+            'isId': false,
+            'isReadOnly': false,
+            'hasDefaultValue': false,
+            'type': 'orders',
+            'relationName': 'ordersTopayment_status',
+            'relationFromFields': [],
+            'relationToFields': [],
+            'isGenerated': false,
+            'isUpdatedAt': false,
+          },
+        ],
+        'primaryKey': null,
+        'uniqueFields': [],
+        'uniqueIndexes': [],
+        'isGenerated': false,
+      },
     ],
     'types': [],
+    'indexes': [
+      {
+        'model': 'banners',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'banner_id'}
+        ],
+      },
+      {
+        'model': 'cart_items',
+        'type': 'id',
+        'isDefinedOnField': false,
+        'fields': [
+          {'name': 'cart_id'},
+          {'name': 'product_id'},
+        ],
+      },
+      {
+        'model': 'cart_items',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_cart_items_carts1_idx',
+        'fields': [
+          {'name': 'cart_id'}
+        ],
+      },
+      {
+        'model': 'cart_items',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_cart_items_products1_idx',
+        'fields': [
+          {'name': 'product_id'}
+        ],
+      },
+      {
+        'model': 'carts',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'cart_id'}
+        ],
+      },
+      {
+        'model': 'carts',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'dbName': 'user_id_UNIQUE',
+        'fields': [
+          {'name': 'user_id'}
+        ],
+      },
+      {
+        'model': 'carts',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_carts_users1_idx',
+        'fields': [
+          {'name': 'user_id'}
+        ],
+      },
+      {
+        'model': 'categories',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'category_id'}
+        ],
+      },
+      {
+        'model': 'favorites',
+        'type': 'id',
+        'isDefinedOnField': false,
+        'fields': [
+          {'name': 'user_id'},
+          {'name': 'product_id'},
+        ],
+      },
+      {
+        'model': 'favorites',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_favorites_products1_idx',
+        'fields': [
+          {'name': 'product_id'}
+        ],
+      },
+      {
+        'model': 'favorites',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_favorites_users1_idx',
+        'fields': [
+          {'name': 'user_id'}
+        ],
+      },
+      {
+        'model': 'nutritions',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'nutrition_id'}
+        ],
+      },
+      {
+        'model': 'order_items',
+        'type': 'id',
+        'isDefinedOnField': false,
+        'fields': [
+          {'name': 'order_id'},
+          {'name': 'product_id'},
+        ],
+      },
+      {
+        'model': 'order_items',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_order_items_orders_idx',
+        'fields': [
+          {'name': 'order_id'}
+        ],
+      },
+      {
+        'model': 'order_items',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_order_items_products1_idx',
+        'fields': [
+          {'name': 'product_id'}
+        ],
+      },
+      {
+        'model': 'order_status',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'status_id'}
+        ],
+      },
+      {
+        'model': 'order_status',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'dbName': 'name_UNIQUE',
+        'fields': [
+          {'name': 'name'}
+        ],
+      },
+      {
+        'model': 'orders',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'order_id'}
+        ],
+      },
+      {
+        'model': 'orders',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_orders_order_status1_idx',
+        'fields': [
+          {'name': 'status'}
+        ],
+      },
+      {
+        'model': 'orders',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_orders_payment_methods1_idx',
+        'fields': [
+          {'name': 'payment_method_id'}
+        ],
+      },
+      {
+        'model': 'orders',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_orders_users1_idx',
+        'fields': [
+          {'name': 'user_id'}
+        ],
+      },
+      {
+        'model': 'orders',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_orders_payment_status_idx',
+        'fields': [
+          {'name': 'payment_status_id'}
+        ],
+      },
+      {
+        'model': 'payment_methods',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'payment_method_id'}
+        ],
+      },
+      {
+        'model': 'payment_methods',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'dbName': 'method_name_UNIQUE',
+        'fields': [
+          {'name': 'method_name'}
+        ],
+      },
+      {
+        'model': 'products',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'product_id'}
+        ],
+      },
+      {
+        'model': 'products',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_products_Categoires1_idx',
+        'fields': [
+          {'name': 'category_id'}
+        ],
+      },
+      {
+        'model': 'products',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_nutrition_id',
+        'fields': [
+          {'name': 'nutrition_id'}
+        ],
+      },
+      {
+        'model': 'reviews',
+        'type': 'id',
+        'isDefinedOnField': false,
+        'fields': [
+          {'name': 'user_id'},
+          {'name': 'product_id'},
+        ],
+      },
+      {
+        'model': 'reviews',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_reviews_products1_idx',
+        'fields': [
+          {'name': 'product_id'}
+        ],
+      },
+      {
+        'model': 'reviews',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_reviews_users1_idx',
+        'fields': [
+          {'name': 'user_id'}
+        ],
+      },
+      {
+        'model': 'user_roles',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'role_id'}
+        ],
+      },
+      {
+        'model': 'user_roles',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'dbName': 'role_UNIQUE',
+        'fields': [
+          {'name': 'role'}
+        ],
+      },
+      {
+        'model': 'users',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'user_id'}
+        ],
+      },
+      {
+        'model': 'users',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'dbName': 'idx_email',
+        'fields': [
+          {'name': 'email'}
+        ],
+      },
+      {
+        'model': 'users',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'dbName': 'phone_number_UNIQUE',
+        'fields': [
+          {'name': 'phone_number'}
+        ],
+      },
+      {
+        'model': 'users',
+        'type': 'normal',
+        'isDefinedOnField': false,
+        'dbName': 'fk_users_user_role1_idx',
+        'fields': [
+          {'name': 'role_id'}
+        ],
+      },
+      {
+        'model': 'payment_status',
+        'type': 'id',
+        'isDefinedOnField': true,
+        'fields': [
+          {'name': 'payment_status_id'}
+        ],
+      },
+      {
+        'model': 'payment_status',
+        'type': 'unique',
+        'isDefinedOnField': true,
+        'dbName': 'status_UNIQUE',
+        'fields': [
+          {'name': 'status'}
+        ],
+      },
+    ],
   });
 
   _i1.Engine? _engine;
@@ -7969,7 +8867,7 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
   @override
   get $engine => _engine ??= _i5.BinaryEngine(
         schema:
-            'generator client {\n  provider = "dart run orm"\n}\n\ndatasource db {\n  provider = "mysql"\n  url      = env("DATABASE_URL")\n}\n\nmodel banners {\n  banner_id Int    @id @default(autoincrement())\n  image_url String @db.VarChar(255)\n}\n\nmodel cart_items {\n  quantity   Int      @db.UnsignedInt\n  cart_id    Int\n  product_id Int\n  carts      carts    @relation(fields: [cart_id], references: [cart_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_carts1")\n  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_products1")\n\n  @@id([cart_id, product_id])\n  @@index([cart_id], map: "fk_cart_items_carts1_idx")\n  @@index([product_id], map: "fk_cart_items_products1_idx")\n}\n\nmodel carts {\n  cart_id    Int          @id @default(autoincrement())\n  user_id    Int          @unique(map: "user_id_UNIQUE")\n  cart_items cart_items[]\n  users      users        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_carts_users1")\n\n  @@index([user_id], map: "fk_carts_users1_idx")\n}\n\nmodel categories {\n  category_id Int        @id @default(autoincrement())\n  name        String     @db.VarChar(45)\n  image_url   String?    @db.VarChar(255)\n  products    products[]\n}\n\nmodel favorites {\n  user_id    Int\n  product_id Int\n  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_favorites_products1")\n  users      users    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_favorites_users1")\n\n  @@id([user_id, product_id])\n  @@index([product_id], map: "fk_favorites_products1_idx")\n  @@index([user_id], map: "fk_favorites_users1_idx")\n}\n\nmodel nutritions {\n  nutrition_id  Int        @id @default(autoincrement())\n  calories      Int        @db.UnsignedSmallInt\n  protein       Int        @db.UnsignedSmallInt\n  carbohydrates Int        @db.UnsignedSmallInt\n  products      products[]\n}\n\nmodel order_items {\n  order_id   Int\n  product_id Int\n  quantity   Int      @db.UnsignedSmallInt\n  orders     orders   @relation(fields: [order_id], references: [order_id], onDelete: NoAction, map: "fk_order_items_orders")\n  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_order_items_products1")\n\n  @@id([order_id, product_id])\n  @@index([order_id], map: "fk_order_items_orders_idx")\n  @@index([product_id], map: "fk_order_items_products1_idx")\n}\n\nmodel order_status {\n  status_id Int      @id @default(autoincrement())\n  name      String   @unique(map: "name_UNIQUE") @db.VarChar(45)\n  orders    orders[]\n}\n\nmodel orders {\n  order_id          Int             @id @default(autoincrement())\n  order_date        DateTime        @db.DateTime(0)\n  shipping_date     DateTime?       @db.DateTime(0)\n  user_id           Int\n  status            Int\n  payment_method_id Int\n  total_price       Decimal         @db.Decimal(4, 2)\n  order_items       order_items[]\n  order_status      order_status    @relation(fields: [status], references: [status_id], onDelete: NoAction, map: "fk_orders_order_status1")\n  payment_methods   payment_methods @relation(fields: [payment_method_id], references: [payment_method_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_methods1")\n  users             users           @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_orders_users1")\n\n  @@index([status], map: "fk_orders_order_status1_idx")\n  @@index([payment_method_id], map: "fk_orders_payment_methods1_idx")\n  @@index([user_id], map: "fk_orders_users1_idx")\n}\n\nmodel payment_methods {\n  payment_method_id Int      @id @default(autoincrement())\n  method_name       String   @unique(map: "method_name_UNIQUE") @db.VarChar(45)\n  orders            orders[]\n}\n\nmodel products {\n  product_id          Int           @id @default(autoincrement())\n  name                String        @db.VarChar(45)\n  quantity_in_stock   Int           @db.SmallInt\n  description         String        @db.VarChar(255)\n  unit_price          Decimal       @db.Decimal(4, 2)\n  image_url           String?       @db.VarChar(255)\n  category_id         Int\n  product_details     String?       @db.Text\n  discount_percentage Decimal?      @default(0.00) @db.Decimal(5, 2)\n  rate                Decimal       @default(0.0) @db.Decimal(2, 1)\n  nutrition_id        Int?\n  cart_items          cart_items[]\n  favorites           favorites[]\n  order_items         order_items[]\n  nutritions          nutritions?   @relation(fields: [nutrition_id], references: [nutrition_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_nutrition_id")\n  categories          categories    @relation(fields: [category_id], references: [category_id], onDelete: NoAction, map: "fk_products_Categoires1")\n  reviews             reviews[]\n\n  @@index([category_id], map: "fk_products_Categoires1_idx")\n  @@index([nutrition_id], map: "fk_nutrition_id")\n}\n\nmodel reviews {\n  user_id            Int\n  product_id         Int\n  rating             Decimal  @db.Decimal(2, 1)\n  review_date        DateTime @db.DateTime(0)\n  review_description String?  @db.Text\n  products           products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_reviews_products1")\n  users              users    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_reviews_users1")\n\n  @@id([user_id, product_id])\n  @@index([product_id], map: "fk_reviews_products1_idx")\n  @@index([user_id], map: "fk_reviews_users1_idx")\n}\n\nmodel user_roles {\n  role_id Int     @id @default(autoincrement())\n  role    String  @unique(map: "role_UNIQUE") @db.VarChar(10)\n  users   users[]\n}\n\nmodel users {\n  user_id      Int         @id @default(autoincrement())\n  user_name    String      @db.VarChar(100)\n  email        String      @unique(map: "idx_email") @db.VarChar(255)\n  password     String      @db.VarChar(255)\n  address      String?     @db.VarChar(255)\n  phone_number String?     @unique(map: "phone_number_UNIQUE") @db.VarChar(15)\n  image_url    String?     @db.VarChar(255)\n  is_deleted   Boolean     @default(false)\n  role_id      Int         @default(1)\n  carts        carts?\n  favorites    favorites[]\n  orders       orders[]\n  reviews      reviews[]\n  user_roles   user_roles  @relation(fields: [role_id], references: [role_id], onDelete: Cascade, map: "fk_users_user_role1")\n\n  @@index([role_id], map: "fk_users_user_role1_idx")\n}\n',
+            'generator client {\n  provider = "dart run orm"\n}\n\ndatasource db {\n  provider = "mysql"\n  url      = env("DATABASE_URL")\n}\n\nmodel banners {\n  banner_id Int    @id @default(autoincrement())\n  image_url String @db.VarChar(255)\n}\n\nmodel cart_items {\n  quantity   Int      @db.UnsignedInt\n  cart_id    Int\n  product_id Int\n  carts      carts    @relation(fields: [cart_id], references: [cart_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_carts1")\n  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_cart_items_products1")\n\n  @@id([cart_id, product_id])\n  @@index([cart_id], map: "fk_cart_items_carts1_idx")\n  @@index([product_id], map: "fk_cart_items_products1_idx")\n}\n\nmodel carts {\n  cart_id    Int          @id @default(autoincrement())\n  user_id    Int          @unique(map: "user_id_UNIQUE")\n  cart_items cart_items[]\n  users      users        @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_carts_users1")\n\n  @@index([user_id], map: "fk_carts_users1_idx")\n}\n\nmodel categories {\n  category_id Int        @id @default(autoincrement())\n  name        String     @db.VarChar(45)\n  image_url   String?    @db.VarChar(255)\n  products    products[]\n}\n\nmodel favorites {\n  user_id    Int\n  product_id Int\n  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_favorites_products1")\n  users      users    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_favorites_users1")\n\n  @@id([user_id, product_id])\n  @@index([product_id], map: "fk_favorites_products1_idx")\n  @@index([user_id], map: "fk_favorites_users1_idx")\n}\n\nmodel nutritions {\n  nutrition_id  Int        @id @default(autoincrement())\n  calories      Int        @db.UnsignedSmallInt\n  protein       Int        @db.UnsignedSmallInt\n  carbohydrates Int        @db.UnsignedSmallInt\n  products      products[]\n}\n\nmodel order_items {\n  order_id   Int\n  product_id Int\n  quantity   Int      @db.UnsignedSmallInt\n  orders     orders   @relation(fields: [order_id], references: [order_id], onDelete: NoAction, map: "fk_order_items_orders")\n  products   products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_order_items_products1")\n\n  @@id([order_id, product_id])\n  @@index([order_id], map: "fk_order_items_orders_idx")\n  @@index([product_id], map: "fk_order_items_products1_idx")\n}\n\nmodel order_status {\n  status_id Int      @id @default(autoincrement())\n  name      String   @unique(map: "name_UNIQUE") @db.VarChar(45)\n  orders    orders[]\n}\n\nmodel orders {\n  order_id          Int             @id @default(autoincrement())\n  order_date        DateTime        @db.DateTime(0)\n  shipping_date     DateTime?       @db.DateTime(0)\n  shipping_address  String          @db.VarChar(255)\n  user_id           Int\n  status            Int\n  payment_method_id Int\n  payment_status_id Int\n  total_price       Decimal         @db.Decimal(4, 2)\n  order_items       order_items[]\n  order_status      order_status    @relation(fields: [status], references: [status_id], onDelete: NoAction, map: "fk_orders_order_status1")\n  payment_methods   payment_methods @relation(fields: [payment_method_id], references: [payment_method_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_methods1")\n  payment_status    payment_status  @relation(fields: [payment_status_id], references: [payment_status_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_orders_payment_status")\n  users             users           @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_orders_users1")\n\n  @@index([status], map: "fk_orders_order_status1_idx")\n  @@index([payment_method_id], map: "fk_orders_payment_methods1_idx")\n  @@index([user_id], map: "fk_orders_users1_idx")\n  @@index([payment_status_id], map: "fk_orders_payment_status_idx")\n}\n\nmodel payment_methods {\n  payment_method_id Int      @id @default(autoincrement())\n  method_name       String   @unique(map: "method_name_UNIQUE") @db.VarChar(45)\n  orders            orders[]\n}\n\nmodel products {\n  product_id          Int           @id @default(autoincrement())\n  name                String        @db.VarChar(45)\n  quantity_in_stock   Int           @db.SmallInt\n  description         String        @db.VarChar(255)\n  unit_price          Decimal       @db.Decimal(4, 2)\n  image_url           String?       @db.VarChar(255)\n  category_id         Int\n  product_details     String?       @db.Text\n  discount_percentage Decimal?      @default(0.00) @db.Decimal(5, 2)\n  rate                Decimal       @default(0.0) @db.Decimal(2, 1)\n  nutrition_id        Int?\n  cart_items          cart_items[]\n  favorites           favorites[]\n  order_items         order_items[]\n  nutritions          nutritions?   @relation(fields: [nutrition_id], references: [nutrition_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_nutrition_id")\n  categories          categories    @relation(fields: [category_id], references: [category_id], onDelete: NoAction, map: "fk_products_Categoires1")\n  reviews             reviews[]\n\n  @@index([category_id], map: "fk_products_Categoires1_idx")\n  @@index([nutrition_id], map: "fk_nutrition_id")\n}\n\nmodel reviews {\n  user_id            Int\n  product_id         Int\n  rating             Decimal  @db.Decimal(2, 1)\n  review_date        DateTime @db.DateTime(0)\n  review_description String?  @db.Text\n  products           products @relation(fields: [product_id], references: [product_id], onDelete: NoAction, map: "fk_reviews_products1")\n  users              users    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "fk_reviews_users1")\n\n  @@id([user_id, product_id])\n  @@index([product_id], map: "fk_reviews_products1_idx")\n  @@index([user_id], map: "fk_reviews_users1_idx")\n}\n\nmodel user_roles {\n  role_id Int     @id @default(autoincrement())\n  role    String  @unique(map: "role_UNIQUE") @db.VarChar(10)\n  users   users[]\n}\n\nmodel users {\n  user_id      Int         @id @default(autoincrement())\n  user_name    String      @db.VarChar(100)\n  email        String      @unique(map: "idx_email") @db.VarChar(255)\n  password     String      @db.VarChar(255)\n  address      String?     @db.VarChar(255)\n  phone_number String?     @unique(map: "phone_number_UNIQUE") @db.VarChar(15)\n  image_url    String?     @db.VarChar(255)\n  is_deleted   Boolean     @default(false)\n  role_id      Int         @default(1)\n  carts        carts?\n  favorites    favorites[]\n  orders       orders[]\n  reviews      reviews[]\n  user_roles   user_roles  @relation(fields: [role_id], references: [role_id], onDelete: Cascade, map: "fk_users_user_role1")\n\n  @@index([role_id], map: "fk_users_user_role1_idx")\n}\n\nmodel payment_status {\n  payment_status_id Int      @id @default(autoincrement())\n  status            String   @unique(map: "status_UNIQUE") @db.VarChar(45)\n  orders            orders[]\n}\n',
         datasources: const {
           'db': _i1.Datasource(
             _i1.DatasourceType.environment,
@@ -8009,4 +8907,6 @@ class PrismaClient extends _i1.BasePrismaClient<PrismaClient> {
   UserRolesDelegate get userRoles => UserRolesDelegate._(this);
 
   UsersDelegate get users => UsersDelegate._(this);
+
+  PaymentStatusDelegate get paymentStatus => PaymentStatusDelegate._(this);
 }

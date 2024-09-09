@@ -8,6 +8,6 @@ part of 'category_search_input.dart';
 
 CategorySearchInput _$CategorySearchInputFromJson(Map<String, dynamic> json) =>
     CategorySearchInput(
-      size: (json['size'] as String?)?.toInt(),
-      skip: (json['skip'] as String?)?.toInt(),
+      size: (json['size'] as num?)?.toInt(),
+      skip: (json['skip'] as num?)?.toInt(),
     );
