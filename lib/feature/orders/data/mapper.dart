@@ -61,7 +61,7 @@ extension OrderInputModelToOrderCreateInputMapper on OrderInputModel {
       paymentStatus: PaymentStatusCreateNestedOneWithoutOrdersInput(
           connect: PaymentStatusWhereUniqueInput(
         status: PaymentStatusEnum.pending.name,
-      )),
+      ),),
       orderDate: DateTime.now(),
       orderStatus: OrderStatusCreateNestedOneWithoutOrdersInput(
         connectOrCreate: OrderStatusCreateOrConnectWithoutOrdersInput(

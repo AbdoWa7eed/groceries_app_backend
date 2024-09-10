@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:bcrypt/bcrypt.dart';
-import 'package:dart_frog/dart_frog.dart';
 import 'package:dartz/dartz.dart';
 import 'package:groceries_app_backend/core/utils/enums.dart';
 import 'package:otp/otp.dart';

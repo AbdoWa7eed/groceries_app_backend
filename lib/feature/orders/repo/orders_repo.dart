@@ -21,7 +21,7 @@ abstract class OrdersRepository {
 
   Future<Either<Failure, OrderModel>> setOrderPaidStatus({
     required int orderId,
-    required String paymentLink
+    required String paymentLink,
   });
 
 }

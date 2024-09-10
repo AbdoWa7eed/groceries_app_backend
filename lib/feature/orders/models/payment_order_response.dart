@@ -27,7 +27,7 @@ class PaymentOrderResponse extends OrderModel {
         shippingDate: order.shippingDate,
         paymentStatus: order.paymentStatus,
         shippingAddress: order.shippingAddress,
-        paymentLink: paymentLink);
+        paymentLink: paymentLink,);
   }
 
   final String paymentLink;

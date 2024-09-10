@@ -27,7 +27,7 @@ class PaymobService {
       Uri.parse(Constants.authTokenEndpoint),
       headers: {
         HttpHeaders.acceptHeader: Constants.applicationJson,
-        HttpHeaders.contentTypeHeader: Constants.applicationJson
+        HttpHeaders.contentTypeHeader: Constants.applicationJson,
       },
       body: jsonEncode({
         'api_key': _env[Constants.paymentAPIKey]!,

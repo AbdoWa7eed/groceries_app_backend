@@ -7,17 +7,10 @@ part of 'reset_password_input_model.dart';
 // **************************************************************************
 
 ResetPasswordInputModel _$ResetPasswordInputModelFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     ResetPasswordInputModel(
       email: json['email'] as String,
       password: json['password'] as String?,
       verificationId: json['verificationId'] as String,
     );
-
-Map<String, dynamic> _$ResetPasswordInputModelToJson(
-        ResetPasswordInputModel instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-      'verificationId': instance.verificationId,
-    };

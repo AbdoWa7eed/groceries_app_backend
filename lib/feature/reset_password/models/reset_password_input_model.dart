@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'reset_password_input_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson:false)
 class ResetPasswordInputModel {
   ResetPasswordInputModel({
     required this.email,
