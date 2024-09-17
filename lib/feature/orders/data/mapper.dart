@@ -57,7 +57,7 @@ extension OrderInputModelToOrderCreateInputMapper on OrderInputModel {
   OrdersCreateInput toOrderCreateInput() {
     return OrdersCreateInput(
       totalPrice: Decimal.one,
-      shippingAddress: shippingAddress,
+      shippingAddress: shippingAddress ?? const PrismaNull().toString(),
       paymentStatus: PaymentStatusCreateNestedOneWithoutOrdersInput(
           connect: PaymentStatusWhereUniqueInput(
         status: PaymentStatusEnum.pending.name,

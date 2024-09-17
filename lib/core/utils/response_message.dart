@@ -100,10 +100,10 @@ abstract class ResponseMessages {
       'Cannot update delivered or cancelled orders';
 
   static const String youShouldHavePhoneNumber =
-      'You should have a phone number to place an order';
+      'You should add your phone number to place an order';
 
   static const String youShouldHaveAddress =
-      'You should have an address to place an order';
+      'You should add your address to place an order';
 
   // Admin Actions
   static const String onlyAdminsAllowed =

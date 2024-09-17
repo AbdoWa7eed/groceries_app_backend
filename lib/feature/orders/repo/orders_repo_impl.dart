@@ -43,7 +43,10 @@ class OrdersRepositoryImpl extends OrdersRepository {
   Future<Either<Failure, List<OrderModel>>> getOrders(int userId) async {
     try {
       final orders = await _orderDataSource.getOrders(userId);
-      return Right(orders.map((e) => e.toOrderModel()).toList());
+      final ordersModels = orders.map((e) => e.toOrderModel()).toList();
+      return Right(
+        await _paymentDataSource.getOrdersWithPaymentLinks(ordersModels),
+      );
     } on Failure catch (failure) {
       return Left(failure);
     } catch (e) {
@@ -61,7 +64,11 @@ class OrdersRepositoryImpl extends OrdersRepository {
         orderId,
         userId,
       );
-      return Right(order.toOrderModel());
+      final model = order.toOrderModel();
+      if (model.paymentMethod?.toLowerCase() != PaymentMethodEnum.cash.name) {
+        await _paymentDataSource.deletePaymentData(order.orderId!);
+      }
+      return Right(model);
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {

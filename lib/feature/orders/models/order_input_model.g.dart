@@ -10,5 +10,5 @@ OrderInputModel _$OrderInputModelFromJson(Map<String, dynamic> json) =>
     OrderInputModel(
       userId: (json['userId'] as num?)?.toInt(),
       paymentMethod: json['paymentMethod'] as String,
-      shippingAddress: json['shippingAddress'] as String,
+      shippingAddress: json['shippingAddress'] as String?,
     );

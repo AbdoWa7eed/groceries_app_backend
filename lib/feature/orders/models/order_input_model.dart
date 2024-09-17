@@ -13,7 +13,7 @@ class OrderInputModel {
       _$OrderInputModelFromJson(json);
   final int? userId;
   final String paymentMethod;
-  final String shippingAddress;
+  final String? shippingAddress;
 
   OrderInputModel copyWith({
     int? userId,

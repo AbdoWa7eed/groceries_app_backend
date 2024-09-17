@@ -28,10 +28,16 @@ class OrdersDataSourceImpl extends OrdersDataSource {
   @override
   Future<Orders> placeOrder(OrdersCreateInput orderCreateInput) async {
     final userId = orderCreateInput.users.connect?.userId ?? 0;
+    OrdersCreateInput? model;
+    if(orderCreateInput.shippingAddress == const PrismaNull().toString()){
+      model = orderCreateInput.copyWith(
+        shippingAddress: await _getUserAddress(userId),
+      );
+    }
     await _checkUserPhone(userId);
     final cart = await _getUserCart(userId);
     final totalPrice = _calculateTotalPrice(cart.cartItems?.toList() ?? []);
-    return _createOrder(orderCreateInput, totalPrice, cart);
+    return _createOrder(model ?? orderCreateInput, totalPrice, cart);
   }
 
   Future<Orders> _createOrder(
@@ -66,6 +72,18 @@ class OrdersDataSourceImpl extends OrdersDataSource {
         message: ResponseMessages.youShouldHavePhoneNumber,
       );
     }
+  }
+
+  Future<String> _getUserAddress(int userId) async {
+    final user = await _client.users.findUniqueOrThrow(
+      where: UsersWhereUniqueInput(userId: userId),
+    );
+    if (user.address == null) {
+      throw Failure.badRequest(
+        message: ResponseMessages.youShouldHaveAddress,
+      );
+    }
+    return user.address!;
   }
 
   double _calculateTotalPrice(List<CartItems> cartItems) {
