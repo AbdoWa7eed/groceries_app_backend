@@ -25,9 +25,10 @@ class OrdersRepositoryImpl extends OrdersRepository {
           .placeOrder(orderInputModel.toOrderCreateInput());
       final orderModel = order.toOrderModel();
       if (orderInputModel.paymentMethod != PaymentMethodEnum.cash.name) {
-        final paymentLink = await _paymentDataSource.createPaymentLink(
+        final paymentLink = await _createPaymentLink(
           orderId: orderModel.orderId!,
           price: orderModel.totalPrice!,
+          userId: orderInputModel.userId!,
         );
         return Right(PaymentOrderResponse.fromOrder(orderModel, paymentLink));
       }
@@ -36,6 +37,23 @@ class OrdersRepositoryImpl extends OrdersRepository {
       return Left(failure);
     } catch (error) {
       return Left(Failure.fromException(error));
+    }
+  }
+
+  Future<String> _createPaymentLink({
+    required int orderId,
+    required double price,
+    required int userId,
+  }) async {
+    try {
+      final paymentLink = await _paymentDataSource.createPaymentLink(
+        orderId: orderId,
+        price: price,
+      );
+      return paymentLink;
+    } catch (error) {
+      await _orderDataSource.cancelOrder(orderId, userId);
+      rethrow;
     }
   }
 

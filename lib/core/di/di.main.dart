@@ -15,13 +15,14 @@ Future<void> init() async {
     );
   }
 
+  await initRedis();
+
   if (!instance.isRegistered<JwtService>()) {
     instance.registerLazySingleton<JwtService>(
-      () => JwtService(instance<DotEnv>()),
+      () => JwtService(instance<DotEnv>(), instance<RedisService>()),
     );
   }
 
-  await initRedis();
 }
 
 void initUserResources() {

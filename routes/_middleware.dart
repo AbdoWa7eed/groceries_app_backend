@@ -4,7 +4,7 @@ import 'package:groceries_app_backend/core/helpers/response_helper.dart';
 import 'package:groceries_app_backend/core/services/jwt_service.dart';
 import 'package:groceries_app_backend/core/utils/constants.dart';
 
-const _authenticationUrl = [
+const _authRoutes = [
   'user/login',
   'user/register',
   'user/refresh-token',
@@ -16,49 +16,48 @@ const _authenticationUrl = [
 Handler middleware(Handler handler) {
   return (context) async {
     if (_isAuthorizationRequest(context)) {
-      final response = await handler(context);
-      return response;
+      return handler(context);
     }
 
-    final token = instance<JwtService>()
-        .getTokenFromHeaders(headers: context.request.headers);
+    final jwtService = instance<JwtService>();
+    final token = jwtService.getTokenFromHeaders(
+      headers: context.request.headers,
+    );
 
-    if (_isVerifiedUser(token)) {
-      final response = handler
-          .use(_getUserIdMiddleware(token!))
-          .use(_getUserRoleMiddleware(token))
-          .call(context);
-      return response;
+    if (token == null || !await _isVerifiedUser(token)) {
+      return ResponseHelper.unAuthorized();
     }
 
-    return ResponseHelper.unAuthorized();
+    return handler
+        .use(_injectUserId(token))
+        .use(_injectUserRole(token))
+        .call(context);
   };
 }
 
-Middleware _getUserIdMiddleware(String token) {
+Middleware _injectUserId(String token) {
   return provider<int>((context) {
-    final id = instance<JwtService>().userDataFromToken(token)[Constants.userId]
-        as int;
-    return id;
+    final jwtService = instance<JwtService>();
+    final userId = jwtService.userDataFromToken(token)[Constants.userId] as int;
+    return userId;
   });
 }
 
-Middleware _getUserRoleMiddleware(String token) {
+Middleware _injectUserRole(String token) {
   return provider<String>((context) {
-    final role = instance<JwtService>().userDataFromToken(token)[Constants.role]
-        as String;
+    final jwtService = instance<JwtService>();
+    final role = jwtService.userDataFromToken(token)[Constants.role] as String;
     return role;
   });
 }
 
-bool _isVerifiedUser(String? token) {
-  final jwt = instance<JwtService>();
-  if (token != null) {
-    return jwt.verifyAccessToken(token);
-  }
-  return false;
+Future<bool> _isVerifiedUser(String token) async {
+  final jwtService = instance<JwtService>();
+  final result = await jwtService.verifyAccessToken(token);
+  return result;
 }
 
 bool _isAuthorizationRequest(RequestContext context) {
-  return _authenticationUrl.contains(context.request.url.toString());
+  final requestUrl = context.request.url.toString();
+  return _authRoutes.any(requestUrl.startsWith);
 }

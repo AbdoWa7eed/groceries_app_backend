@@ -19,6 +19,7 @@ abstract class ResponseMessages {
       "It's not allowed to create an admin user.";
   static const String cannotUpdateAdminUser =
       "It's not allowed to update a user to admin.";
+  static const String userLoggedOut = 'User Logged out';
 
   // Verification and OTP
   static const String numberVerified = 'Your number has been verified';
