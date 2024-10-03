@@ -3,8 +3,8 @@ import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
-import 'package:groceries_app_backend/feature/reset_password/models/reset_password_input_model.dart';
-import 'package:groceries_app_backend/feature/reset_password/repo/reset_password_repo.dart';
+import 'package:groceries_app_backend/feature/user/model/change_password_model.dart';
+import 'package:groceries_app_backend/feature/user/repo/user_repo.dart';
 
 Future<Response> onRequest(RequestContext context) {
   return _getResponse(context);
@@ -12,20 +12,22 @@ Future<Response> onRequest(RequestContext context) {
 
 Future<Response> _getResponse(RequestContext context) async {
   return switch (context.request.method) {
-    HttpMethod.post => await _resetPassword(context),
+    HttpMethod.post => await _changePassword(context),
     _ => ResponseHelper.methodNotAllowed(),
   };
 }
 
-Future<Response> _resetPassword(RequestContext context) async {
+Future<Response> _changePassword(RequestContext context) async {
   try {
-    final dataJson = await context.request.json() as Map<String, dynamic>;
-    final resetModel = ResetPasswordInputModel.fromJson(dataJson);
-    final otpRepo = instance<ResetPasswordRepository>();
-    final data = await otpRepo.resetPassword(resetModel);
+    final json = await context.request.json() as Map<String, dynamic>;
+    final model = ChangePasswordModel.fromJson(json);
+    final userRepo = instance<UserRepository>();
+    final data = await userRepo
+        .changePassword(model.copyWith(userId: context.read<int>()));
     if (data.isRight()) {
+      final userModel = data.asRight();
       return ResponseHelper.ok(
-        message: ResponseMessages.passwordChanged,
+        data: userModel.toJson(),
       );
     }
     return data.asFailure().failureResponse;

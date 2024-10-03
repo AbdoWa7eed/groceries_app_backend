@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:groceries_app_backend/core/models/mapper/user_mapper.dart';
+import 'package:groceries_app_backend/core/models/user/user_model.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/user/data/data_source.dart';
-import 'package:groceries_app_backend/feature/user/data/mapper.dart';
+import 'package:groceries_app_backend/feature/user/model/change_password_model.dart';
 import 'package:groceries_app_backend/feature/user/model/login_input_model.dart';
-import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 import 'package:groceries_app_backend/feature/user/repo/user_repo.dart';
 
 ///User repo implementation
@@ -64,6 +65,24 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final user = await _dataSource.getUserData(
         userId: userId,
+      );
+      return Right(user.toUserModel());
+    } on Failure catch (failure) {
+      return Left(failure);
+    } catch (error) {
+      return Left(Failure.fromException(error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> changePassword(
+    ChangePasswordModel model,
+  ) async {
+    try {
+      final user = await _dataSource.changePassword(
+        newPassword: model.newPassword,
+        oldPassword: model.oldPassword,
+        userId: model.userId!,
       );
       return Right(user.toUserModel());
     } on Failure catch (failure) {

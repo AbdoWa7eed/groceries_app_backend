@@ -5,7 +5,6 @@ part 'reset_password_input_model.g.dart';
 @JsonSerializable(createToJson:false)
 class ResetPasswordInputModel {
   ResetPasswordInputModel({
-    required this.email,
     required this.password,
     required this.verificationId,
   });
@@ -13,7 +12,6 @@ class ResetPasswordInputModel {
   factory ResetPasswordInputModel.fromJson(Map<String, dynamic> json) =>
       _$ResetPasswordInputModelFromJson(json);
 
-  final String email;
-  final String? password;
+  final String password;
   final String verificationId;
 }

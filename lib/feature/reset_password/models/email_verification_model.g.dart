@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'reset_password_input_model.dart';
+part of 'email_verification_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ResetPasswordInputModel _$ResetPasswordInputModelFromJson(
-  Map<String, dynamic> json,
-) =>
-    ResetPasswordInputModel(
-      password: json['password'] as String,
+EmailVerificationModel _$EmailVerificationModelFromJson(
+    Map<String, dynamic> json,
+    ) =>
+    EmailVerificationModel(
+      code: json['code'] as String,
       verificationId: json['verificationId'] as String,
     );

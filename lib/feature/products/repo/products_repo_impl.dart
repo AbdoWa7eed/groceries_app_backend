@@ -3,7 +3,7 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:groceries_app_backend/core/models/mapper/mapper.dart';
+import 'package:groceries_app_backend/core/models/mapper/product_mapper.dart';
 import 'package:groceries_app_backend/core/models/products/product_model.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/products/data/cache_data_source.dart';

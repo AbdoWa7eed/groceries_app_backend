@@ -1,4 +1,4 @@
-import 'package:groceries_app_backend/feature/user/model/user_model.dart';
+import 'package:groceries_app_backend/core/models/user/user_model.dart';
 
 part 'reviews_model.g.dart';
 

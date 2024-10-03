@@ -1,7 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:groceries_app_backend/core/models/mapper/user_mapper.dart';
+import 'package:groceries_app_backend/core/models/user/user_model.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/feature/reset_password/data/cache_data_source.dart';
 import 'package:groceries_app_backend/feature/reset_password/data/remote_data_source.dart';
+import 'package:groceries_app_backend/feature/reset_password/models/email_verification_model.dart';
 import 'package:groceries_app_backend/feature/reset_password/models/reset_password_input_model.dart';
 import 'package:groceries_app_backend/feature/reset_password/repo/reset_password_repo.dart';
 
@@ -25,14 +28,11 @@ class ResetPasswordRepoImpl implements ResetPasswordRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> verifyCode({
-    required String verificationId,
-    required String code,
-  }) async {
+  Future<Either<Failure, bool>> verifyCode(EmailVerificationModel model) async {
     try {
       final isVerified = await _localDataSource.verifyCode(
-        verificationId: verificationId,
-        code: code,
+        verificationId: model.verificationId,
+        code: model.code,
       );
       return Right(isVerified);
     } on Failure catch (failure) {
@@ -43,14 +43,18 @@ class ResetPasswordRepoImpl implements ResetPasswordRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> resetPassword(
+  Future<Either<Failure, UserModel>> resetPassword(
     ResetPasswordInputModel input,
   ) async {
     try {
-      final isVerified = await _localDataSource.checkIfVerifiedThenDelete(
+      final model = await _localDataSource.checkIfVerifiedThenDelete(
         verificationId: input.verificationId,
       );
-      return Right(isVerified);
+      final user = await _remoteDataSource.resetPassword(
+        email: model.email,
+        password: input.password,
+      );
+      return Right(user.toUserModel());
     } on Failure catch (failure) {
       return Left(failure);
     } catch (error) {

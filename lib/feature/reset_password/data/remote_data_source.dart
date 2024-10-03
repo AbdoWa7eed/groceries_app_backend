@@ -1,4 +1,5 @@
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/client.dart';
+import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
 import 'package:groceries_app_backend/core/services/email_sender_service.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
@@ -11,7 +12,7 @@ import 'package:orm/orm.dart';
 abstract class ResetPasswordRemoteDataSource {
   Future<ResetPasswordModel> sendVerificationCode({required String email});
 
-  Future<void> resetPassword({
+  Future<Users> resetPassword({
     required String email,
     required String password,
   });
@@ -61,7 +62,7 @@ class ResetPasswordRemoteDataSourceImpl
   }
 
   @override
-  Future<void> resetPassword({
+  Future<Users> resetPassword({
     required String email,
     required String password,
   }) async {
@@ -71,13 +72,17 @@ class ResetPasswordRemoteDataSourceImpl
     if (user == null) {
       throw Failure.badRequest(message: ResponseMessages.userNotFound);
     }
-    await _client.users.update(
-      where: UsersWhereUniqueInput(email: email),
+
+    final updatedUser = await _client.users.update(
       data: PrismaUnion.$1(
         UsersUpdateInput(
           password: PrismaUnion.$1(password.hashValue()),
         ),
       ),
+      include: const UsersInclude(userRoles: PrismaUnion.$1(true)),
+      where: UsersWhereUniqueInput(email: email),
     );
+
+    return updatedUser!;
   }
 }

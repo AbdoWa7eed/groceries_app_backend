@@ -1,8 +1,8 @@
+import 'package:groceries_app_backend/core/models/mapper/user_mapper.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
 import 'package:groceries_app_backend/feature/reviews/model/review_input_model.dart';
 import 'package:groceries_app_backend/feature/reviews/model/reviews_model.dart';
-import 'package:groceries_app_backend/feature/user/data/mapper.dart';
 import 'package:orm/orm.dart';
 
 extension ReviewsToReviewModelMapper on Reviews {

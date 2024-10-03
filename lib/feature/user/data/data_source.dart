@@ -24,6 +24,12 @@ abstract class UserDataSource {
   Future<Users> getUserData({
     required int userId,
   });
+
+  Future<Users> changePassword({
+    required String newPassword,
+    required String oldPassword,
+    required int userId,
+  });
 }
 
 ///Data Source Implementation
@@ -31,6 +37,7 @@ class UserDataSourceImpl implements UserDataSource {
   UserDataSourceImpl(this._client);
 
   final PrismaClient _client;
+
   @override
   Future<Users> userFromCredentials({
     required String email,
@@ -41,7 +48,7 @@ class UserDataSourceImpl implements UserDataSource {
       where: UsersWhereUniqueInput(email: email),
     );
 
-    if (user == null) {
+    if (user == null || !password.checkHash(user.password!)) {
       throw Failure.unauthorized(
         message: ResponseMessages.wrongCredentials,
       );
@@ -50,11 +57,6 @@ class UserDataSourceImpl implements UserDataSource {
     if (user.isDeleted ?? false) {
       throw Failure.notFound(
         message: ResponseMessages.userNotFound,
-      );
-    }
-    if (!password.checkHash(user.password!)) {
-      throw Failure.unauthorized(
-        message: ResponseMessages.wrongCredentials,
       );
     }
     return user;
@@ -123,5 +125,37 @@ class UserDataSourceImpl implements UserDataSource {
     );
 
     return user;
+  }
+
+  @override
+  Future<Users> changePassword({
+    required String newPassword,
+    required String oldPassword,
+    required int userId,
+  }) async {
+    final user = await _client.users.findUniqueOrThrow(
+      include: const UsersInclude(userRoles: PrismaUnion.$1(true)),
+      where: UsersWhereUniqueInput(userId: userId),
+    );
+    if (!oldPassword.checkHash(user.password!)) {
+      throw Failure.unauthorized(
+        message: ResponseMessages.wrongPassword,
+      );
+    }
+
+    if (!newPassword.isValidPassword()) {
+      throw Failure.badRequest(
+        message: ResponseMessages.weakPassword,
+      );
+    }
+
+    final updatedUser = await _client.users.update(
+      data: PrismaUnion.$1(
+        UsersUpdateInput(password: PrismaUnion.$1(newPassword.hashValue())),
+      ),
+      where: UsersWhereUniqueInput(userId: userId),
+    );
+
+    return updatedUser!;
   }
 }

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
+import 'package:groceries_app_backend/core/models/user/user_model.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:groceries_app_backend/core/utils/functions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
-import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 import 'package:groceries_app_backend/feature/user/repo/user_repo.dart';
 
 Future<Response> onRequest(RequestContext context) {
@@ -24,7 +24,7 @@ Future<Response> _updateUserData(RequestContext context) async {
   try {
     final jsonData = context.read<Map<String, dynamic>>();
     final userId = context.read<int>();
-    final userModel = UserModel.fromJson(jsonData).copyWith(
+    var userModel = UserModel.fromJson(jsonData).copyWith(
       userId: userId,
     );
     final image = jsonData['image'] as String?;
@@ -37,7 +37,7 @@ Future<Response> _updateUserData(RequestContext context) async {
       if (imageResult.isLeft()) {
         return imageResult.asFailure().failureResponse;
       }
-      userModel.copyWith(imageUrl: imageResult.asRight());
+      userModel = userModel.copyWith(imageUrl: imageResult.asRight());
     }
 
     final userRepo = instance<UserRepository>();
@@ -46,9 +46,7 @@ Future<Response> _updateUserData(RequestContext context) async {
       final user = data.asRight();
       return ResponseHelper.ok(
         message: ResponseMessages.phoneNumberUpdated,
-        data: {
-          'user': user.toJson(),
-        },
+        data: user.toJson(),
       );
     }
     return data.asFailure().failureResponse;

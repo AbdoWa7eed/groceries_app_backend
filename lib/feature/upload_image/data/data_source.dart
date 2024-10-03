@@ -32,10 +32,10 @@ class UploadImageDataSourceImpl extends UploadImageDataSource {
       );
     }
 
-    return _getImageUrl(response.name!, response.bucket!);
+    return _getImageUrl(response.name!);
   }
 
-  String _getImageUrl(String imageName, String bucketName) {
-    return '${Constants.storageUrl}$bucketName/$imageName';
+  String _getImageUrl(String imageName) {
+    return '${Constants.storageUrl}${Constants.bucketName}/$imageName';
   }
 }

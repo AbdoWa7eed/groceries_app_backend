@@ -1,8 +1,8 @@
+import 'package:groceries_app_backend/core/models/user/user_model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
 import 'package:groceries_app_backend/core/utils/enums.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
-import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 import 'package:orm/orm.dart';
 
 ///Convert Users to UserModel

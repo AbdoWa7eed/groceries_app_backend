@@ -13,7 +13,9 @@ abstract class ResetPasswordCacheDataSource {
     required String code,
   });
 
-  Future<bool> checkIfVerifiedThenDelete({required String verificationId});
+  Future<ResetPasswordModel> checkIfVerifiedThenDelete({
+    required String verificationId,
+  });
 }
 
 class ResetPasswordCacheDataSourceImpl implements ResetPasswordCacheDataSource {
@@ -57,16 +59,18 @@ class ResetPasswordCacheDataSourceImpl implements ResetPasswordCacheDataSource {
   }
 
   @override
-  Future<bool> checkIfVerifiedThenDelete({
+  Future<ResetPasswordModel> checkIfVerifiedThenDelete({
     required String verificationId,
   }) async {
     final model = await _getModel(verificationId);
 
-    if (model.isVerified == true) {
+    if (model.isVerified) {
       await _redisService.delete(key: verificationId);
-      return true;
+      return model;
     }
-    return false;
+    throw Failure.unauthorized(
+      message: ResponseMessages.emailNotVerified,
+    );
   }
 
   Future<ResetPasswordModel> _getModel(String verificationId) async {

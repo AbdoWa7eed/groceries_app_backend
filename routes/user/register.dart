@@ -1,11 +1,11 @@
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
+import 'package:groceries_app_backend/core/models/user/user_model.dart';
 import 'package:groceries_app_backend/core/services/jwt_service.dart';
 import 'package:groceries_app_backend/core/utils/enums.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
-import 'package:groceries_app_backend/feature/user/model/user_model.dart';
 import 'package:groceries_app_backend/feature/user/repo/user_repo.dart';
 
 Future<Response> onRequest(RequestContext context) {

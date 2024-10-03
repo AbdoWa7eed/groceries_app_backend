@@ -1,4 +1,4 @@
-import 'package:groceries_app_backend/core/models/mapper/mapper.dart';
+import 'package:groceries_app_backend/core/models/mapper/product_mapper.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/model.dart';
 import 'package:groceries_app_backend/core/prisma/generated_dart_client/prisma.dart';
 import 'package:groceries_app_backend/core/utils/enums.dart';

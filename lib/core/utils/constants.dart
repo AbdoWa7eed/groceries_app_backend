@@ -12,8 +12,7 @@ abstract class Constants {
   static const String localhost = '127.0.0.1';
   static const int cachePort = 6379;
   static const String bucketName = 'images-app-bucket';
-  static const String productsBucketName = 'products-bucket';
-  static const String storageUrl = 'https://storage.cloud.google.com/';
+  static const String storageUrl = 'https://storage.googleapis.com/';
   static const String keysPath = 'keys.json';
   static const String userId = 'userId';
   static const String role = 'role';

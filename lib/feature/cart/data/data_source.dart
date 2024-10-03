@@ -130,7 +130,7 @@ class CartDataSourceImpl extends CartDataSource {
 
   @override
   Future<Carts?> getUserCart({required int userId}) async {
-    final carts = await _client.carts.findUnique(
+    final cart = await _client.carts.findUnique(
       where: CartsWhereUniqueInput(
         userId: userId,
       ),
@@ -145,6 +145,18 @@ class CartDataSourceImpl extends CartDataSource {
       ),
     );
 
-    return carts;
+    if (cart == null) {
+      return await _client.carts.create(
+        data: PrismaUnion.$1(
+          CartsCreateInput(
+            users: UsersCreateNestedOneWithoutCartsInput(
+              connect: UsersWhereUniqueInput(userId: userId),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return cart;
   }
 }

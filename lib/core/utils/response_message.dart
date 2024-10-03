@@ -4,6 +4,7 @@
 abstract class ResponseMessages {
   // Authentication and User Account
   static const String wrongCredentials = "Email or password isn't correct";
+  static const String wrongPassword = "Your password isn't correct";
   static const String userCreationFailed = "Couldn't create your account";
   static const String loggedIn = 'Logged in successfully';
   static const String userCreated = 'User created successfully';
@@ -30,12 +31,14 @@ abstract class ResponseMessages {
   static const String errorWhileSendingOTP =
       'Error while sending the message. Please try again.';
   static const String invalidPhoneNumber = 'Invalid phone number';
+  static const String phoneNumberExists = 'Phone Number Already exists';
 
   // Reset Password
   static const String passwordChanged = 'Password changed successfully';
   static const String verificationCodeSent =
       'Verification code sent successfully';
   static const String emailVerified = 'Email verified successfully';
+  static const String emailNotVerified = 'Email is not verified';
 
   // Request and Query Validation
   static const String methodNotAllowed = "Method isn't allowed";

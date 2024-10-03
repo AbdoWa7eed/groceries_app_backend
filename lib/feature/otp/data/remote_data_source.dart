@@ -25,14 +25,24 @@ class OTPRemoteDataSourceImpl extends OTPRemoteDataSource {
 
   final SMSService _smsService;
   final PrismaClient _client;
+
   @override
   Future<OTPMessageModel> sendOtpMessage({required String phoneNumber}) async {
+    if (!phoneNumber.isValidPhoneNumber()) {
+      throw Failure.badRequest(
+        message: ResponseMessages.invalidPhoneNumber,
+      );
+    }
 
-    if(phoneNumber.isValidPhoneNumber()){
-        throw Failure.badRequest(
-          message: ResponseMessages.invalidPhoneNumber,
-        );
-      }
+    final user = await _client.users.findUnique(
+      where: UsersWhereUniqueInput(
+        phoneNumber: phoneNumber,
+      ),
+    );
+
+    if(user != null){
+      throw Failure.forbidden(message: ResponseMessages.phoneNumberExists);
+    }
 
     final secret = OTPGenerator.generateSecret(phoneNumber);
     final code = OTPGenerator.generateOTP(secret);
