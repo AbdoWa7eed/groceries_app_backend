@@ -1,6 +1,8 @@
 import 'package:dart_frog/dart_frog.dart';
 import 'package:groceries_app_backend/core/di/di.dart';
 import 'package:groceries_app_backend/core/helpers/response_helper.dart';
+import 'package:groceries_app_backend/core/models/user/user_model.dart';
+import 'package:groceries_app_backend/core/services/jwt_service.dart';
 import 'package:groceries_app_backend/core/utils/extensions.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
 import 'package:groceries_app_backend/feature/reset_password/models/reset_password_input_model.dart';
@@ -24,9 +26,7 @@ Future<Response> _resetPassword(RequestContext context) async {
     final otpRepo = instance<ResetPasswordRepository>();
     final data = await otpRepo.resetPassword(resetModel);
     if (data.isRight()) {
-      return ResponseHelper.ok(
-        message: ResponseMessages.passwordChanged,
-      );
+      return _generateSuccessResponse(data.asRight());
     }
     return data.asFailure().failureResponse;
   } catch (error) {
@@ -35,3 +35,24 @@ Future<Response> _resetPassword(RequestContext context) async {
     );
   }
 }
+
+Response _generateSuccessResponse(UserModel userModel) {
+  final jwt = instance<JwtService>();
+  final accessToken = jwt.generateAccessToken(
+    userId: userModel.userId!,
+    role: userModel.role!,
+  );
+  final refreshToken = jwt.generateRefreshToken(
+    userId: userModel.userId!,
+    role: userModel.role!,
+  );
+  return ResponseHelper.ok(
+    message: ResponseMessages.passwordChanged,
+    data: {
+      'user': userModel.toJson(),
+      'accessToken': accessToken,
+      'refreshToken': refreshToken,
+    },
+  );
+}
+
