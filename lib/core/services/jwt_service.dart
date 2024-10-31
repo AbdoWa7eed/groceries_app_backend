@@ -19,7 +19,7 @@ class JwtService {
   String generateAccessToken({required int userId, required String role}) {
     final jwt = JWT(_setPayload(userId, role));
     final token =
-        jwt.sign(SecretKey(_secret), expiresIn: const Duration(days: 7));
+        jwt.sign(SecretKey(_secret), expiresIn: const Duration(hours: 1));
     return token;
   }
 

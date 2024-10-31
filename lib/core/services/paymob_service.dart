@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dotenv/dotenv.dart';
+import 'package:groceries_app_backend/core/models/payment_model.dart';
 import 'package:groceries_app_backend/core/utils/constants.dart';
 import 'package:groceries_app_backend/core/utils/failure.dart';
 import 'package:groceries_app_backend/core/utils/response_message.dart';
@@ -11,7 +12,7 @@ class PaymobService {
 
   final DotEnv _env;
 
-  Future<String> createPaymentLink({
+  Future<PaymentModel> createPaymentLink({
     required double price,
   }) async {
     final token = await _getAuthToken();
@@ -19,7 +20,7 @@ class PaymobService {
       token: token,
       priceInCents: (price * 100).toStringAsFixed(2),
     );
-    return link;
+    return PaymentModel(paymentLink: link, token: token);
   }
 
   Future<String> _getAuthToken() async {
@@ -57,7 +58,7 @@ class PaymobService {
       body: jsonEncode({
         'amount_cents': priceInCents,
         'payment_methods': [_env[Constants.cardIntegrationId]!],
-        'is_live' : 'false',
+        'is_live': 'false',
       }),
     );
 
@@ -70,33 +71,35 @@ class PaymobService {
     });
   }
 
-  Future<bool> isPaymentDone({required String paymentLink}) async {
+  Future<bool> isPaymentDone(PaymentModel model) async {
     final response = await http.get(
-      Uri.parse(paymentLink),
+      Uri.parse(
+        '${Constants.paymentLinkEndpoint}?client_url=${Uri.encodeComponent(
+          model.paymentLink,
+        )}',
+      ),
       headers: {
-        HttpHeaders.acceptHeader: Constants.applicationJson,
+        HttpHeaders.acceptHeader: 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer ${model.token}'
       },
     );
-
-    final contentType = response.headers[HttpHeaders.contentTypeHeader];
-
-    if(contentType != null && contentType.contains('application/json')){
-      return _handleResponse(response, (responseBody) {
-        if (responseBody.containsKey('paid')) {
-          return responseBody['paid'] as bool? ?? false;
+    return _handleResponse(response, (responseBody) {
+      if (responseBody.containsKey('results')) {
+        final result = responseBody['results'] as List?;
+        if (result?.firstOrNull == null) {
+          throw Failure.forbidden(message: ResponseMessages.unknownError);
         }
-        throw Failure.forbidden(message: ResponseMessages.notPaid);
-      });
-    }
-    throw Failure.forbidden(message: ResponseMessages.notPaid);
-
-
+        final model = result!.first as Map<String, dynamic>;
+        return model['paid_at'] != null;
+      }
+      throw Failure.forbidden(message: ResponseMessages.unknownError);
+    });
   }
 
   Future<T> _handleResponse<T>(
-      http.Response response,
-      T Function(Map<String, dynamic>) onSuccess,
-      ) async {
+    http.Response response,
+    T Function(Map<String, dynamic>) onSuccess,
+  ) async {
     final responseBody = jsonDecode(response.body) as Map<String, dynamic>;
     if (response.statusCode == 200 || response.statusCode == 201) {
       return onSuccess(responseBody);

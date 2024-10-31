@@ -29,7 +29,7 @@ class OrdersDataSourceImpl extends OrdersDataSource {
   Future<Orders> placeOrder(OrdersCreateInput orderCreateInput) async {
     final userId = orderCreateInput.users.connect?.userId ?? 0;
     OrdersCreateInput? model;
-    if(orderCreateInput.shippingAddress == const PrismaNull().toString()){
+    if (orderCreateInput.shippingAddress == const PrismaNull().toString()) {
       model = orderCreateInput.copyWith(
         shippingAddress: await _getUserAddress(userId),
       );
@@ -88,8 +88,11 @@ class OrdersDataSourceImpl extends OrdersDataSource {
 
   double _calculateTotalPrice(List<CartItems> cartItems) {
     return cartItems.fold(0, (total, item) {
-      return total +
-          (item.products?.unitPrice?.toDouble() ?? 0) * (item.quantity ?? 0);
+      final productPrice = item.products?.unitPrice?.toDouble() ?? 0;
+      final discount = item.products?.discountPercentage?.toDouble() ?? 0;
+      var price =   productPrice -  (productPrice * (discount /100));
+      price = double.parse(price.toStringAsFixed(2));
+      return total + (price * (item.quantity ?? 0));
     });
   }
 

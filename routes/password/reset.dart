@@ -55,4 +55,3 @@ Response _generateSuccessResponse(UserModel userModel) {
     },
   );
 }
-
