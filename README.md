@@ -5,55 +5,16 @@
 A comprehensive backend solution for a Groceries Mobile Application, providing robust API endpoints and services.
 
 ## 🌟 Backend Features and API Services
+- 🔐 User Authentication & Account Management
 
-### 🔐 User Authentication & Account Management
-  - User registration with email and phone verification
-  - Password reset and recovery mechanisms
-  - JWT token-based authentication
-  - Role-based access control
-
-### 🛡️ User Profile Management
-- Create, update, and manage user profiles
-- Profile information storage and retrieval
-- Secure personal data management
-- Profile image upload and storage with Google Cloud Storage
-
-### 🛒 Cart and Order Management
-- Dynamic cart creation and manipulation
-- Order placement and tracking
-- Persistent cart storage
-- Order history and status tracking
-- Detailed order information management
-
-### 🔍 Product Discovery Services
-- Advanced product search capabilities
-- Product categorization
-- Filtering and sorting mechanisms
-- Featured and recommended products endpoints
-- Product detail retrieval
-
-### ⭐ Favorites Management
-- Add and remove items from favorites
-- Retrieve user-specific favorite products
-
-### 📍 Location and Delivery Services
-- Geolocation support
-- Store and process user location data
-
-### 💬 Review and Rating System
-- Create, update, and delete product reviews
-- Retrieve product-specific reviews
-- User-specific review management
-
-### 💳 Payment Processing
-- Paymob payment gateway integration
-- Secure transaction handling
-- Payment status tracking
-- Order payment reconciliation
-
-### 🔎 Search Functionality
-- Full-text search across products
-- Category-based search filtering
+- 🛡️ User Profile Management
+- 🛒 Cart and Order Management
+- 🔍 Product Discovery Services
+- ⭐ Favorites Management
+- 📍 Location and Delivery Services
+- 💬 Review and Rating System
+- 💳 Payment Processing
+- 🔎 Search Functionality
 
 ## 🛠️ Technologies and Frameworks
 - **Backend Framework**: Dart Frog
@@ -188,4 +149,9 @@ We welcome contributions! Fork the repository, make your changes, and submit a p
 - [Prisma ORM Documentation](https://prisma.pub/)
 
 ---
+
+## 📊 Database Schema
+Below is the database schema for the Groceries App, showing the relationships between different tables.
+![image](https://github.com/user-attachments/assets/dd644d4a-28c1-465d-8a4e-dd690ee38f5b)
+
 🚀 **Empowering Grocery Shopping with Robust Backend Services!** 🛒
