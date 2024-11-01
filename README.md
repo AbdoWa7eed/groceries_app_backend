@@ -167,14 +167,17 @@ dart_frog dev --hostname <your_hostname> --port <your_port>
 By following these steps, you will successfully regenerate the Prisma client for the project.
 
 
-
-
 ## 🛡️ Security Measures
 - JWT authentication
 - Password hashing with bcrypt
 - Input validation
 - HTTPS enforcement
 - Secure environment variable management
+
+  
+## <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/Postman.svg" alt="Postman Icon" width="20" height="20">  Postman Collection
+
+This collection includes all the necessary API endpoints for the Groceries App backend. You can import it into Postman to test and explore the API. [Click here to access the collection](https://www.postman.com/universal-satellite-394662/workspace/groceries/collection/22556989-330bed72-6ae6-4af0-ab69-270743b7af6a?action=share&creator=22556989).
 
 
 ## 🤝 Contributing
